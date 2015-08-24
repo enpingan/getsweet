@@ -49,5 +49,14 @@ bower.json
 # Ignore pow environment settings
 .powenv
 
-# Ignore Spree
+# Ignore public/upload assets
+/public/assets
+/public/pictures
 /public/spree/*
+/uploads
+
+# Ignore DS_store
+.DS_Store
+
+# Ignore db setup
+/config/database.yml
