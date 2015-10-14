@@ -17,6 +17,7 @@ class Vendor < ActiveRecord::Base
   has_many :users, class_name: 'Spree::User', foreign_key: :vendor_id, primary_key: :id
   has_many :products, class_name: 'Spree::Product', foreign_key: :vendor_id, primary_key: :id
   has_many :orders, class_name: 'Spree::Order', foreign_key: :vendor_id, primary_key: :id
+  has_many :spree_roles, through: :users, foreign_key: :vendor_id
   has_many :invoices
   has_many :customers
   has_one :address

@@ -15,4 +15,6 @@ class Customer < ActiveRecord::Base
 
   has_many :users, class_name: 'Spree::User', foreign_key: :customer_id, primary_key: :id
   has_many :orders, class_name: 'Spree::Order', foreign_key: :customer_id, primary_key: :id
+
+  has_many :spree_roles, through: :users, foreign_key: :customer_id
 end
