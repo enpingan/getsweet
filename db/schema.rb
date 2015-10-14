@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150823175335) do
+ActiveRecord::Schema.define(version: 20151014170729) do
 
   create_table "alchemy_attachments", force: :cascade do |t|
     t.string   "name"
@@ -281,6 +281,15 @@ ActiveRecord::Schema.define(version: 20150823175335) do
   add_index "alchemy_sites", ["host", "public"], name: "alchemy_sites_public_hosts_idx"
   add_index "alchemy_sites", ["host"], name: "index_alchemy_sites_on_host"
 
+  create_table "customers", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.integer  "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "customers", ["account_id"], name: "index_customers_on_account_id"
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -544,6 +553,8 @@ ActiveRecord::Schema.define(version: 20150823175335) do
     t.integer  "canceler_id"
     t.integer  "store_id"
     t.integer  "state_lock_version",                                         default: 0,       null: false
+    t.integer  "vendor_id"
+    t.integer  "customer_id"
   end
 
   add_index "spree_orders", ["approver_id"], name: "index_spree_orders_on_approver_id"
@@ -1195,6 +1206,12 @@ ActiveRecord::Schema.define(version: 20150823175335) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "phone"
+    t.string   "user_type"
+    t.integer  "vendor_id"
+    t.integer  "customer_id"
   end
 
   add_index "spree_users", ["deleted_at"], name: "index_spree_users_on_deleted_at"
@@ -1270,5 +1287,14 @@ ActiveRecord::Schema.define(version: 20150823175335) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+
+  create_table "vendors", force: :cascade do |t|
+    t.string   "name",                            null: false
+    t.datetime "order_cutoff_time",               null: false
+    t.decimal  "delivery_minimum",  default: 0.0
+    t.integer  "payment_terms"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
 
 end

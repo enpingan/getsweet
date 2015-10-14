@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   #end
 
   mount Alchemy::Engine, at: '/'
+
+  resources :vendors, only: [:index]
 end

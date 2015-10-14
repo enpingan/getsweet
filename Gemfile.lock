@@ -157,6 +157,9 @@ GEM
       spinner.rb
       turbolinks (~> 2.5)
       tvdeyen-handles_sortable_columns (~> 0.1.5)
+    annotate (2.6.10)
+      activerecord (>= 3.2, <= 4.3)
+      rake (~> 10.4)
     arel (6.0.3)
     autoprefixer-rails (5.2.1.2)
       execjs
@@ -164,6 +167,10 @@ GEM
     awesome_nested_set (3.0.2)
       activerecord (>= 4.0.0, < 5)
     bcrypt (3.1.10)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.5.1)
@@ -183,6 +190,7 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.7)
       climate_control (>= 0.0.3, < 1.0)
+    coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -263,6 +271,7 @@ GEM
     magiclabs-userstamp (2.1.0)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    method_source (0.8.2)
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.8.0)
@@ -292,6 +301,12 @@ GEM
     premailer-rails (1.8.2)
       actionmailer (>= 3, < 5)
       premailer (~> 1.7, >= 1.7.9)
+    pry (0.10.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     rabl (0.9.4.pre1)
       activesupport (>= 2.3.14)
     rack (1.6.4)
@@ -352,6 +367,7 @@ GEM
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
+    slop (3.6.0)
     spinner.rb (0.3.0)
     spring (1.3.6)
     sprockets (2.12.4)
@@ -407,10 +423,14 @@ PLATFORMS
 
 DEPENDENCIES
   alchemy_spree!
+  annotate
+  better_errors
+  binding_of_caller
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
+  pry-rails
   rails (= 4.2.3)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
