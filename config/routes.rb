@@ -10,5 +10,5 @@ Rails.application.routes.draw do
 
   # mount Alchemy::Engine, at: '/'
 
-  resources :vendors, only: [:index]
+  resources :vendors, only: [:index, :show]
 end

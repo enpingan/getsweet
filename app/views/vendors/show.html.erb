@@ -1,0 +1,13 @@
+<h1 class="vendor-heading"> <%= @vendor.name %></h1>
+<h3> Product Guide </h3>
+
+<% @products.each do |product| %>
+    <ul class="product-list-item">
+      <li><%= product.name %></li>
+      <li>SKU #</li>
+      <li>Pack/Size: </li>
+      <li>Lead Time: </li>
+      <li>$<%= product.price %></li>
+      <li>- <input type="text" placeholder="QTY"></input>+</li>
+    </ul>
+<% end %>
