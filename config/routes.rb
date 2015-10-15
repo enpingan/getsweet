@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   # mount Alchemy::Engine, at: '/'
 
   resources :vendors, only: [:index, :show] do
-    resources :orders, only: [:index, :show]
+    resources :orders
   end
 end
