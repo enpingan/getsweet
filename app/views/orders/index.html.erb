@@ -1,1 +1,51 @@
+<h1> <%= @vendor.name %> </h1>
+
 <h1>Orders Overview</h1>
+<section class="orders-overview-filters">
+  <ul>
+    <li>Filter by [Customer]</li>
+    <li>Search [Customer]</li>
+    <li>Select Delivery [Date]</li>
+  </ul>
+</section>
+<section class="all-orders">
+  <ul>
+    <li>Customer
+      <ul>
+        <% @orders.each do |order|%>
+          <li> <%= order.customer.name %> </li>
+        <% end %>
+      </ul>
+    </li>
+    <li>Order #
+      <ul>
+        <% @orders.each do |order|%>
+          <li> <%= order.id %> </li>
+        <% end %>
+      </ul></li>
+    <li>Total Items
+      <ul>
+        <% @orders.each do |order|%>
+          <li> order.item_total </li>
+        <% end %>
+      </ul></li>
+    <li>Total
+      <ul>
+        <% @orders.each do |order|%>
+          <li>  order.total </li>
+        <% end %>
+      </ul></li>
+    <li>Status
+      <ul>
+        <% @orders.each do |order|%>
+          <li> order.status </li>
+        <% end %>
+      </ul></li>
+    <li>Approve
+      <ul>
+        <% @orders.each do |order|%>
+          <li> order.check_box</li>
+        <% end %>
+      </ul></li>
+  </ul>
+</section>
