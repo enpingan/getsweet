@@ -1,1 +1,4 @@
-<h1><%= @vendors.first.name %></h1>
+<h1>Vendor Index</h1>
+<% @vendors.each do |vendor| %>
+  <h3><a href="<%=vendor_url(vendor.id)%>"><%= vendor.name %></a></h3>
+<% end %>

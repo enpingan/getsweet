@@ -1,4 +1,7 @@
 <h1 class="vendor-heading"> <%= @vendor.name %></h1>
+<h4><a href="<%= vendor_orders_url(@vendor) %>">View Orders</a></h4>
+
+
 <h3> Product Guide </h3>
 
 <% @products.each do |product| %>
