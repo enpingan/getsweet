@@ -22,4 +22,8 @@ class Vendor < ActiveRecord::Base
   has_many :customers
   has_one :address
 
+
+  extend FriendlyId
+		friendly_id :name, use: [:slugged, :finders]
+
 end
