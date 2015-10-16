@@ -4,21 +4,37 @@
 
 <h3> Product Guide </h3>
 
-<% @products.each do |product| %>
-
-  <ul class="product-list-item">
-    <li>
-      <% if product.images.present? %>
-        <%= image_tag product.images.first.attachment.url(:mini) %>
-      <% else %>
-         No IMG
-      <% end %>
-    </li>
-    <li><%= product.name %></li>
-    <li>SKU #</li>
-    <li>Pack/Size: </li>
-    <li>Lead Time: </li>
-    <li>$<%= product.price %></li>
-    <li>- <input type="text" placeholder="QTY"></input>+</li>
-  </ul>
-<% end %>
+<table>
+  <colgroup span="7"></colgroup>
+  <tr>
+    <th></th>
+    <th>Product Name</th>
+    <th>SKU #</th>
+    <th>Pack/Size</th>
+    <th>Lead Time</th>
+    <th>Price</th>
+    <th>Quantity</th>
+  </tr>
+  <% @products.each do |product| %>
+    <tr>
+      <td>
+        <% if product.images.present? %>
+          <%= image_tag product.images.first.attachment.url(:mini) %>
+        <% else %>
+           No IMG
+        <% end %>
+      </td>
+      <td><%= product.name %></td>
+      <td>sku</td>
+      <td>pack/size</td>
+      <td>lead time</td>
+      <td>$<%= product.price %></td>
+      <td> - <input type="text" placeholder="QTY"></input> + </td>
+    </tr>
+  <% end %>
+  <tfoot>
+    <tr>
+      <td><button class="add-to-order">Add to Order</button></td>
+    </tr>
+  </tfoot>
+</table>
