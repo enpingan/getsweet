@@ -8,44 +8,26 @@
     <li>Select Delivery [Date dropdown]</li>
   </ul>
 </section>
-<section class="all-orders">
-  <ul>
-    <li>Customer
-      <ul>
-        <% @orders.each do |order|%>
-          <li> <%= order.customer.name %> </li>
-        <% end %>
-      </ul>
-    </li>
-    <li>Order #
-      <ul>
-        <% @orders.each do |order|%>
-          <li> <a href="<%= vendor_order_url(order.id, order.vendor_id) %>"><%= order.id %></a></li>
-        <% end %>
-      </ul></li>
-    <li>Total Items
-      <ul>
-        <% @orders.each do |order|%>
-          <li> order.item_total </li>
-        <% end %>
-      </ul></li>
-    <li>Total
-      <ul>
-        <% @orders.each do |order|%>
-          <li>  order.total </li>
-        <% end %>
-      </ul></li>
-    <li>Status
-      <ul>
-        <% @orders.each do |order|%>
-          <li> order.status </li>
-        <% end %>
-      </ul></li>
-    <li>Approve
-      <ul>
-        <% @orders.each do |order|%>
-          <li> order.check_box</li>
-        <% end %>
-      </ul></li>
-  </ul>
-</section>
+
+<table class="orders-overview">
+  <colgroup span="6"></colgroup>
+  <tr>
+    <th>Customer</th>
+    <th>Order #</th>
+    <th>Total Items</th>
+    <th>Total</th>
+    <th>Status</th>
+    <th>Approve</th>
+  </tr>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.customer.name %></td>
+      <td><a href="<%= vendor_order_url(order.id, order.vendor_id) %>"><%= order.id %></a></td>
+      <td>order.item_total</td>
+      <td>order.total</td>
+      <td>order.status</td>
+      <td>order.approved</td>
+    </tr>
+  <% end %>
+
+</table>
