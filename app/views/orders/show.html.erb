@@ -3,15 +3,27 @@
 <h1> Customer: <%= @order.customer.name %> </h1>
 <h3> Order #<%= @order.id %> </h3>
 
-<section class="product-category">
-  <h4 class="category-title">Category name</h4>
-  <ul>
-    <li>Product</li>
-    <li>SKU #</li>
-    <li>Pack/Size</li>
-    <li>Quantity</li>
-    <li>Price</li>
-    <li>Total</li>
-    <li>Out of Stock</li>
-  </ul>
-</section>
+<table class="single-order">
+  <colgroup span="7"></colgroup>
+  <tr>
+    <th>Product</th>
+    <th>SKU #</th>
+    <th>Pack/Size</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+    <th>Out of Stock</th>
+  </tr>
+  <% @order.products.each do |product| %>
+    <tr>
+      <td><%= product.name %></td>
+      <td>product.sku</td>
+      <td>product.pack_size</td>
+      <td> - <input type="text" placeholder="QTY"></input> + </td>
+      <td>product.price</td>
+      <td> total </td>
+      <td> <input type="checkbox"></td>
+    </tr>
+  <% end %>
+
+</table>
