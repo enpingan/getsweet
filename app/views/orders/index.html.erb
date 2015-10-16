@@ -23,8 +23,8 @@
     <tr>
       <td><%= order.customer.name %></td>
       <td><a href="<%= vendor_order_url(order.id, order.vendor_id) %>"><%= order.id %></a></td>
-      <td>order.item_total</td>
-      <td>order.total</td>
+      <td><%=order.item_count%></td>
+      <td><%=order.total%></td>
       <td>order.status</td>
       <td>
         <!-- remove quotes and change to order.status when set up -->

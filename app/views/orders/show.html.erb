@@ -19,9 +19,9 @@
       <td><%= line_item.product.name %></td>
       <td><%=line_item.variant.sku %></td>
       <td>product.pack_size</td>
+      <td><%= number_to_currency(line_item.price) %></td>
       <td> - <input type="text" value="<%=line_item.quantity%>" placeholder="QTY"></input> + </td>
-      <td>product.price</td>
-      <td> total </td>
+      <td> <%= number_to_currency(line_item.pre_tax_amount) %> </td>
       <td> <input type="checkbox"></td>
     </tr>
   <% end %>

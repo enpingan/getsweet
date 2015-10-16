@@ -25,14 +25,20 @@ Alchemy::Seeder.seed!
 10.times do
 
   v = Vendor.create(name: Faker::Company.name, order_cutoff_time: '5PM')
+
   Spree::User.create(email: Faker::Internet.email, firstname: Faker::Name.first_name,
     lastname: Faker::Name.last_name, vendor_id: v.id)
 
   10.times do
+
     prod = Spree::Product.create(name: Faker::Food.ingredient, price: rand(2.0...100.0),
       shipping_category_id: 2, vendor_id: v.id)
-    Spree::Variant.create(is_master: true, product_id: prod.id, sku: rand(1000000000..9999999999),
-      stock_items_count: 1000)
+    variant = Spree::Variant.last
+    variant.is_master = true
+    variant.product_id = prod.id
+    variant.sku = rand(1000000000..9999999999)
+    variant.stock_items_count = 1000
+    variant.save
   end
 
 end
@@ -46,10 +52,10 @@ variants = Spree::Variant.all.select {|variant| variant.stock_items_count == 100
     lastname: Faker::Name.last_name, customer_id: c.id)
 end
 
-10.times do
+50.times do
   order = Spree::Order.create(customer_id: Customer.all.sample.id, vendor_id: Vendor.all.sample.id)
 
   5.times do
-    Spree::LineItem.create(order_id: order.id, variant_id: variants.sample.id, quantity: rand(1..10))
+    Spree::LineItem.create(order_id: order.id, variant_id: Spree::Variant.all.sample.id) #, quantity: rand(1..10))
   end
 end
