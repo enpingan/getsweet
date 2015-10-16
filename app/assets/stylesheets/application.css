@@ -13,3 +13,38 @@
  *= require_tree .
  *= require_self
  */
+
+table {
+  border-spacing: 0;
+}
+
+td, th {
+  width: 200px;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+tr {
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+tr:nth-child(odd){
+  background-color: #eee;
+}
+
+.add-to-order {
+  background: orange;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+.add-to-order:hover{
+  cursor: pointer;
+  background: indigo;
+}
