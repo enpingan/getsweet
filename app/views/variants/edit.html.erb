@@ -5,7 +5,7 @@
   <h1>Edit <input type="text" name=product[name] value="<%= @product.name %>"></h1>
 
   <% if @product.variants.empty? %>
-    <h3>SKU #<%= @product.master.sku %></h3>
+    <h3>SKU # <input type="text" name="" value="<%= @product.master.sku %>"></h3>
   <% end %>
 
   <h5>Manufacturer: <input type="text" name="" value=""></h5>
@@ -42,9 +42,6 @@
   </div>
 
   <section class="product-bottom group">
-    <label>Meta Tags
-      <input type="text" name=product[meta_tags] value="">
-    </label>
 
     <table class="single-order">
       <colgroup span="4"></colgroup>
@@ -81,7 +78,8 @@
       <% end %>
     </table>
 
+    <button class="add-to-order">Update Product</button>
+
   </section>
 
-  <button class="add-to-order">Update Product</button>
 </form>
