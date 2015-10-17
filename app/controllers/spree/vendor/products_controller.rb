@@ -1,4 +1,8 @@
-class ProductsController < ApplicationController
+module Spree
+  module Vendor
+	
+	
+	class ProductsController < ApplicationController
   def index
     @vendor = Vendor.find(params[:vendor_id])
     @products = @vendor.products
@@ -30,4 +34,10 @@ def product_params #need to add all permitable attributes, just name and price f
   params.require(:product).permit(:name, :price)
 end
 
+end
+
+
+  # /. Vendor
+  end 
+# /. Spree
 end

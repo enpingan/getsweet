@@ -1,3 +1,6 @@
+module Spree
+	module Manage
+
 class OrdersController < ApplicationController
   def index
     @vendor = Vendor.find(params[:vendor_id])
@@ -41,4 +44,10 @@ class OrdersController < ApplicationController
   def order_params
     self.params.require(:spree_order).permit(:customer_id) #this makes sense from the vendor side
   end
+end
+
+
+	# /. Vendor
+	end
+# /. Spree
 end

@@ -1,3 +1,7 @@
+module Spree
+  module Vendor
+
+
 class VendorsController < ApplicationController
   def index
     @vendors = Vendor.all
@@ -8,4 +12,9 @@ class VendorsController < ApplicationController
     @vendor = Vendor.friendly.find(params[:id])
     @products = @vendor.products
   end
+end
+
+  # /. Vendor
+  end 
+# /. Spree
 end
