@@ -25,7 +25,7 @@
       <td><a href="<%= vendor_order_url(order.vendor_id, order.id) %>"><%= order.number %></a></td>
       <td><%=order.item_count%></td>
       <td><%=number_to_currency(order.total)%></td>
-      <td>order.status</td>
+      <td><%= order.state %></td>
       <td>
         <!-- remove quotes and change to order.status when set up -->
         <% if 'Action Req' == 'Action Req' %>
