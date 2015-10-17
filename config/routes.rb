@@ -10,8 +10,12 @@ Rails.application.routes.draw do
 
   # mount Alchemy::Engine, at: '/'
 
-  resources :vendors, only: [:index, :show] do
-    resources :orders
-    resources :products
-  end
+	Spree::Core::Engine.add_routes do
+ 		namespace :manage do
+ 			#resources :vendors, only: [:index, :show] do
+    		resources :orders
+    		resources :products
+  		#end
+		end
+	end
 end

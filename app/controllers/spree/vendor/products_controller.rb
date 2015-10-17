@@ -1,4 +1,8 @@
-class ProductsController < ApplicationController
+module Spree
+  module Vendor
+	
+	
+	class ProductsController < ApplicationController
   def index
     @vendor = Vendor.find(params[:vendor_id])
     @products = @vendor.products
@@ -9,4 +13,10 @@ class ProductsController < ApplicationController
     @product = Spree::Product.find(params[:id])
   end
 
+end
+
+
+  # /. Vendor
+  end 
+# /. Spree
 end

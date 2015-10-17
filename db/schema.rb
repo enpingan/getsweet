@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016175314) do
+ActiveRecord::Schema.define(version: 20151017213200) do
 
   create_table "alchemy_attachments", force: :cascade do |t|
     t.string   "name"
@@ -281,15 +281,6 @@ ActiveRecord::Schema.define(version: 20151016175314) do
   add_index "alchemy_sites", ["host", "public"], name: "alchemy_sites_public_hosts_idx"
   add_index "alchemy_sites", ["host"], name: "index_alchemy_sites_on_host"
 
-  create_table "customers", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "customers", ["account_id"], name: "index_customers_on_account_id"
-
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -418,6 +409,15 @@ ActiveRecord::Schema.define(version: 20151016175314) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  create_table "spree_customers", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.integer  "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "spree_customers", ["account_id"], name: "index_spree_customers_on_account_id"
 
   create_table "spree_gateways", force: :cascade do |t|
     t.string   "type"
@@ -1245,6 +1245,16 @@ ActiveRecord::Schema.define(version: 20151016175314) do
   add_index "spree_variants", ["tax_category_id"], name: "index_spree_variants_on_tax_category_id"
   add_index "spree_variants", ["track_inventory"], name: "index_spree_variants_on_track_inventory"
 
+  create_table "spree_vendors", force: :cascade do |t|
+    t.string   "name",                            null: false
+    t.datetime "order_cutoff_time",               null: false
+    t.decimal  "delivery_minimum",  default: 0.0
+    t.integer  "payment_terms"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "slug"
+  end
+
   create_table "spree_zone_members", force: :cascade do |t|
     t.integer  "zoneable_id"
     t.string   "zoneable_type"
@@ -1288,15 +1298,5 @@ ActiveRecord::Schema.define(version: 20151016175314) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
-
-  create_table "vendors", force: :cascade do |t|
-    t.string   "name",                            null: false
-    t.datetime "order_cutoff_time",               null: false
-    t.decimal  "delivery_minimum",  default: 0.0
-    t.integer  "payment_terms"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.string   "slug"
-  end
 
 end

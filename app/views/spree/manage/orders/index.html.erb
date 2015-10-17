@@ -21,8 +21,17 @@
   </tr>
   <% @orders.each do |order| %>
     <tr>
-      <td><%= order.customer.name %></td>
-      <td><a href="<%= vendor_order_url(order.vendor_id, order.id) %>"><%= order.number %></a></td>
+      <td>
+				<% if order.customer %>
+					<%= order.customer.name %>
+				<% else %>
+					TBD <!-- NEED TO UPDATE -->
+				<% end %>
+			</td>
+      <td>
+				<% if nil %><a href="<%= vendor_order_url(order.vendor_id, order.id) %>"><%= order.number %></a> <% end %>
+				<a href="<%= manage_order_url(order) %>"><%= order.number %></a>
+			</td>
       <td><%=order.item_count%></td>
       <td><%=number_to_currency(order.total)%></td>
       <td><%= order.state %></td>
