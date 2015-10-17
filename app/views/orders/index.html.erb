@@ -22,7 +22,7 @@
   <% @orders.each do |order| %>
     <tr>
       <td><%= order.customer.name %></td>
-      <td><a href="<%= vendor_order_url(order.id, order.vendor_id) %>"><%= order.id %></a></td>
+      <td><a href="<%= vendor_order_url(order.vendor_id, order.id) %>"><%= order.number %></a></td>
       <td><%=order.item_count%></td>
       <td><%=number_to_currency(order.total)%></td>
       <td>order.status</td>
