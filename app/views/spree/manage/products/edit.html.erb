@@ -1,8 +1,8 @@
-<form action="<%= vendor_product_url(@product.vendor_id, @product.id) %>" method="post">
+<form action="" method="post">
   <input type="hidden" name="_method" value="patch">
   <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
 
-  <h1>Edit <input type="text" name=product[name] value="<%= @product.name %>"></h1>
+  <h1>Edit <input type="text" name="" value="<%= @product.name %>"></h1>
 
   <% if @product.variants.empty? %>
     <h3>SKU #<%= @product.master.sku %></h3>

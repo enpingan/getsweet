@@ -1,7 +1,7 @@
 module Spree
   module Manage
-	
-	
+
+
 	class ProductsController < ApplicationController
   def index
     #@vendor = Vendor.find(params[:vendor_id])
@@ -15,10 +15,31 @@ module Spree
     @product = Spree::Product.find(params[:id])
   end
 
+  def edit
+    @product = Spree::Product.find(params[:id])
+    render :edit
+  end
+
+  def update
+    @product = Spree::Product.find(params[:id])
+
+    if @product.update(product_params)
+      redirect_to manage_product_url
+    else
+      render :edit
+    end
+  end
+
+  protected
+
+  def product_params  #Add more permissions
+    params.require(:product).permit(:name)
+  end
+
 end
 
 
   # /. Vendor
-  end 
+  end
 # /. Spree
 end
