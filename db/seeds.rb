@@ -11,17 +11,6 @@ Spree::Core::Engine.load_seed if defined?(Spree::Core)
 Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 Alchemy::Seeder.seed!
 
-# Faker::Name.name
-# Faker::Name.first_name
-# Faker::Internet.email
-# Faker::Internet.password(10, 20)
-# Faker::Commerce.product_name
-# Faker::Commerce.price
-# Faker::Company.name
-# Faker::Lorem.word
-# Faker::Lorem.sentence
-# Faker::Lorem.paragraph
-
 10.times do
 
   v = Vendor.create(name: Faker::Company.name, order_cutoff_time: '5PM')
