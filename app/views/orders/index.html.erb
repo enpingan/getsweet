@@ -17,20 +17,25 @@
     <th>Total Items</th>
     <th>Total</th>
     <th>Status</th>
-    <th>Approve</th>
+    <th>Approve <input type="checkbox">Select All</input></th>
   </tr>
   <% @orders.each do |order| %>
     <tr>
       <td><%= order.customer.name %></td>
       <td><a href="<%= vendor_order_url(order.id, order.vendor_id) %>"><%= order.id %></a></td>
-      <td>order.item_total</td>
-      <td>order.total</td>
+      <td><%=order.item_count%></td>
+      <td><%=order.total%></td>
       <td>order.status</td>
-      <td>order.approved</td>
+      <td>
+        <!-- remove quotes and change to order.status when set up -->
+        <% if 'Action Req' == 'Action Req' %>
+          <input type="checkbox"></input>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 
 </table>
 
-<input type="checkbox">Approve All</input>
+
 <button class="add-to-order">Confirm Orders</button>

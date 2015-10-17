@@ -25,10 +25,10 @@
         <% end %>
       </td>
       <td><%= product.name %></td>
-      <td>sku</td>
+      <td><%=Spree::Variant.find_by_product_id(product.id).sku %></td>
       <td>pack/size</td>
       <td>lead time</td>
-      <td>$<%= product.price %></td>
+      <td><%= number_to_currency(product.price) %></td>
       <td> - <input type="text" placeholder="QTY"></input> + </td>
     </tr>
   <% end %>
