@@ -14,6 +14,12 @@
  *= require_self
  */
 
+.group::after{
+  content: "";
+  display: block;
+  clear: both;
+}
+
 table {
   border-spacing: 0;
 }
@@ -47,4 +53,38 @@ tr:nth-child(odd){
 .add-to-order:hover{
   cursor: pointer;
   background: indigo;
+}
+
+.product-left{
+  float:left;
+  width:35%;
+  min-width: 300px;
+}
+
+.product-right{
+  padding: 20px;
+  float:left;
+  width:35%;
+  min-width: 300px;
+  border: 1px solid #aaa;
+}
+
+.product-bottom {
+  margin-top: 30px;
+}
+
+.dietary-restrictions{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.dietary-restrictions > li {
+  float:left;
+  list-style: none;
+  padding: 5px;
+  background: indigo;
+  color: #fff;
+  margin: 10px;
 }

@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 
   resources :vendors, only: [:index, :show] do
     resources :orders
+    resources :products
   end
 end
