@@ -1,0 +1,60 @@
+<h1> <%= @product.name %></h1>
+
+<% if @product.variants.empty? %>
+  <h3>SKU # <%= @product.master.sku %></h3>
+<% end %>
+
+<h5>Manufacturer: </h5>
+
+<a href="<%= vendor_products_url(@product.vendor_id) %>">Back to Catalog</a>
+<div class="group">
+  <div class="product-left">
+    <img src="", alt="Image not Available">
+
+    <ul class="allergans">
+      <% 5.times do %>
+        <li>add allergans to @product model</li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="product-right">
+    <p class="product-description">This is the @product description. Not sure
+      if there is a field in the DB for this yet, still have to check. But this
+      is where it would go.
+    </p>
+    <ul class="dietary-restrictions">
+      <% 3.times do %>
+        <li>V</li>
+      <% end %>
+    </ul>
+
+  </div>
+</div>
+
+
+
+
+
+<section class="product-bottom group">
+  <table class="single-order">
+    <colgroup span="4"></colgroup>
+    <tr>
+      <th>SKU</th>
+      <th>Pack/Size</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+    <% @product.variants_including_master.each do |variant| %>
+      <tr>
+        <td><%=variant.sku %></td>
+        <td>variant.pack_size</td>
+        <td><%= number_to_currency(variant.price) %></td>
+        <td> - <input type="text" value="" placeholder="QTY"></input> + </td>
+      </tr>
+    <% end %>
+
+
+  </table>
+  <button class="add-to-order">Add to Order</button>
+</section>

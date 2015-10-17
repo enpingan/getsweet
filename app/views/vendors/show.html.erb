@@ -1,40 +1,5 @@
 <h1 class="vendor-heading"> <%= @vendor.name %></h1>
 <h4><a href="<%= vendor_orders_url(@vendor) %>">View Orders</a></h4>
+<h4><a href="<%= vendor_products_url(@vendor) %>">Product Catalog</a></h4>
 
-
-<h3> Product Guide </h3>
-
-<table>
-  <colgroup span="7"></colgroup>
-  <tr>
-    <th></th>
-    <th>Product Name</th>
-    <th>SKU #</th>
-    <th>Pack/Size</th>
-    <th>Lead Time</th>
-    <th>Price</th>
-    <th>Quantity</th>
-  </tr>
-  <% @products.each do |product| %>
-    <tr>
-      <td>
-        <% if product.images.present? %>
-          <%= image_tag product.images.first.attachment.url(:mini) %>
-        <% else %>
-           No IMG
-        <% end %>
-      </td>
-      <td><%= product.name %></td>
-      <td><%=Spree::Variant.find_by_product_id(product.id).sku %></td>
-      <td>pack/size</td>
-      <td>lead time</td>
-      <td><%= number_to_currency(product.price) %></td>
-      <td> - <input type="text" placeholder="QTY"></input> + </td>
-    </tr>
-  <% end %>
-  <tfoot>
-    <tr>
-      <td><button class="add-to-order">Add to Order</button></td>
-    </tr>
-  </tfoot>
-</table>
+<h3> Overview Page </h3>
