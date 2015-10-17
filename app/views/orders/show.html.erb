@@ -16,7 +16,7 @@
   </tr>
   <% @order.line_items.each do |line_item| %>
     <tr>
-      <td><%= line_item.product.name %></td>
+      <td><a href="<%= vendor_product_url(@order.vendor_id, line_item.product.id) %>"><%= line_item.product.name %></a></td>
       <td><%=line_item.variant.sku %></td>
       <td>product.pack_size</td>
       <td><%= number_to_currency(line_item.price) %></td>
