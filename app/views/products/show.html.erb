@@ -45,22 +45,15 @@
       <th>Price</th>
       <th>Quantity</th>
     </tr>
-    <tr>
-      <td><%=@product.master.sku %></td>
-      <td>@product.master.pack_size</td>
-      <td><%= number_to_currency(@product.master.price) %></td>
-      <td> - <input type="text" value="" placeholder="QTY"></input> + </td>
-    </tr>
-    <% unless @product.variants.empty? %>
-      <% @product.variants.each do |variant| %>
-        <tr>
-          <td><%=variant.sku %></td>
-          <td>variant.pack_size</td>
-          <td><%= number_to_currency(variant.price) %></td>
-          <td> - <input type="text" value="" placeholder="QTY"></input> + </td>
-        </tr>
-      <% end %>
+    <% @product.variants_including_master.each do |variant| %>
+      <tr>
+        <td><%=variant.sku %></td>
+        <td>variant.pack_size</td>
+        <td><%= number_to_currency(variant.price) %></td>
+        <td> - <input type="text" value="" placeholder="QTY"></input> + </td>
+      </tr>
     <% end %>
+
 
   </table>
   <button class="add-to-order">Add to Order</button>
