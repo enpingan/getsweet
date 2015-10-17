@@ -22,6 +22,7 @@ Alchemy::Seeder.seed!
 
     prod = Spree::Product.create(name: Faker::Food.ingredient, price: rand(2.0...100.0),
       shipping_category_id: 2, vendor_id: v.id)
+		prod.available_on=DateTime.yesterday
     variant = Spree::Variant.last
     variant.is_master = true
     variant.product_id = prod.id
