@@ -1,0 +1,85 @@
+<form action="<%= vendor_product_url(@product.vendor_id, @product.id) %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+
+  <h1>Edit <input type="text" name=product[name] value="<%= @product.name %>"></h1>
+
+  <% if @product.variants.empty? %>
+    <h3>SKU # <input type="text" name="" value="<%= @product.master.sku %>"></h3>
+  <% end %>
+
+  <h5>Manufacturer: <input type="text" name="" value=""></h5>
+
+  <div class="group">
+    <div class="product-left">
+      <img src="", alt="Image not Available">
+      <a href="#">Upload New Image</a>
+
+      <div class="allergans">
+        <label><input type="checkbox" name="" value="">Nuts</label><br>
+        <label><input type="checkbox" name="" value="">Dairy</label><br>
+        <label><input type="checkbox" name="" value="">Seafood</label><br>
+        <label><input type="checkbox" name="" value="">Gluten</label><br>
+        <label><input type="checkbox" name="" value=""></label><br>
+        <label><input type="checkbox" name="" value=""></label><br>
+        <label><input type="checkbox" name="" value=""></label><br>
+      </div>
+    </div>
+
+    <div class="product-right">
+      <textarea class="product-description" name="">This is the @product description. Not sure
+        if there is a field in the DB for this yet, still have to check. But this
+        is where it would go.
+      </textarea>
+
+      <ul class="dietary-restrictions">
+        <label><input type="checkbox" name="" value=""></label>Gluten Free<br>
+        <label><input type="checkbox" name="" value=""></label>Vegetarian<br>
+        <label><input type="checkbox" name="" value=""></label>Vegan<br>
+      </ul>
+
+    </div>
+  </div>
+
+  <section class="product-bottom group">
+
+    <table class="single-order">
+      <colgroup span="4"></colgroup>
+      <tr>
+        <th>SKU</th>
+        <th>Pack/Size</th>
+        <th>Price</th>
+      </tr>
+      <% @product.variants_including_master.each do |variant| %>
+        <tr>
+          <td><input type="text" name=variant[sku] value="<%=variant.sku %>"></td>
+          <td><input type="text" name=variant[pack_size] value=""</td>
+          <td>$<input type="text" name=variant[price] value="<%= variant.price %>"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <label><input type="checkbox" name="" value=""></label>Promotional<br>
+            <label>Start Date<select name="">
+              <option value="value1">Date 1</option>
+              <option value="value2">Date 2</option>
+              <option value="value3">Date 3</option>
+            </select></label>
+          </td>
+          <td>
+            <label>Promo Price: $<input type="text" name="" value="<%= variant.price %>"></label><br>
+            <label>End Date<select name="">
+              <option value="value1">Date 1</option>
+              <option value="value2">Date 2</option>
+              <option value="value3">Date 3</option>
+            </select></label>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <button class="add-to-order">Update Product</button>
+
+  </section>
+
+</form>
