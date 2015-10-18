@@ -1,0 +1,37 @@
+<h1>Orders Overview</h1>
+
+<% if @orders %>
+
+  <table class="orders-overview">
+    <colgroup span="6"></colgroup>
+    <tr>
+      <th>Vendor</th>
+      <th>Order #</th>
+      <th>Total Items</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.vendor.name %></td>
+        <td>
+  				<a href="<%= order_url(order) %>"><%= order.number %></a>
+  			</td>
+        <td><%=order.item_count%></td>
+        <td><%=number_to_currency(order.total)%></td>
+        <td><%= order.state %></td>
+        <td>
+          <!-- change to appropriate order.state -->
+          <% if order.state == 'cart' %>
+            <a href="<%= edit_order_url(order) %>">Edit</a>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+  </table>
+
+<% else %>
+  <h1 class="no-orders">You do not have any orders.</h1>
+<% end %>
