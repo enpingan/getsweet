@@ -1,12 +1,14 @@
 module Spree
   module Manage
 
+	class ProductsController < Spree::Manage::BaseController
 
-	class ProductsController < ApplicationController
   def index
     #@vendor = Vendor.find(params[:vendor_id])
     #@products = @vendor.products
     @vendor = Vendor.first
+		@current_order = current_order
+
     @products = Spree::Product.all
     render :index
   end

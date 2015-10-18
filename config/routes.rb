@@ -19,9 +19,9 @@ Rails.application.routes.draw do
     		end
   		#end
 
+			get '/', to: 'root#index'#, as: :admin
 
 		end
 
-		get '/manage', to: 'manage/root#index'#, as: :admin
 	end
 end

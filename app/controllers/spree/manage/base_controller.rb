@@ -1,6 +1,11 @@
 module Spree
   module Manage
     class BaseController < Spree::BaseController
+ 	   include Spree::Core::ControllerHelpers::Order
+
+      layout '/spree/layouts/manage'
+      helper 'spree/manage/navigation'
+      helper 'spree/manage/tables'
 			
 			#before_action :authorize_admin
 

@@ -10,8 +10,6 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
  */
 
 .group::after{
@@ -41,6 +39,18 @@ tr {
 
 tr:nth-child(odd){
   background-color: #eee;
+}
+
+.add-prod-to-order {
+  background: orange;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.add-prod-to-order:hover{
+  cursor: pointer;
+  background: indigo;
 }
 
 .add-to-order {
