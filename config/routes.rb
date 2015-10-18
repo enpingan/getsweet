@@ -14,7 +14,9 @@ Rails.application.routes.draw do
  		namespace :manage do
  			#resources :vendors, only: [:index, :show] do
     		resources :orders
-    		resources :products
+    		resources :products do
+    		  resources :variants
+    		end
   		#end
 		end
 	end

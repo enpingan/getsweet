@@ -11,6 +11,14 @@ module Spree
     render :index
   end
 
+  def new
+    @product = Spree::Product.new
+    
+  end
+
+  def create
+  end
+
   def show
     @product = Spree::Product.find(params[:id])
   end
