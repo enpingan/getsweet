@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     		  resources :variants
     		end
   		#end
+
+
 		end
+
+		get '/manage', to: 'manage/root#index'#, as: :admin
 	end
 end
