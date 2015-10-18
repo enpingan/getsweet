@@ -50,6 +50,9 @@
         <td> - <input type="text" value="" placeholder="QTY"></input> + </td>
       </tr>
     <% end %>
+    <tr>
+      <td><a href="<%= new_manage_product_variant_url(@product.id) %>">Add New Variant</a></td>
+    </tr>
   </table>
 
   <button class="add-to-order">Add to Order</button>

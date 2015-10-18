@@ -1,5 +1,4 @@
-<form action="" method="post">
-  <input type="hidden" name="_method" value="patch">
+<form action="<%= manage_products_url %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
 
   <h1>New Product <input type="text" name="" placeholder="Product Name"></h1>
@@ -41,42 +40,6 @@
     <label>Meta Tags
       <input type="text" name=product[meta_tags] value="">
     </label>
-
-    <table class="single-order">
-      <colgroup span="4"></colgroup>
-      <tr>
-        <th>SKU</th>
-        <th>Pack/Size</th>
-        <th>Price</th>
-      </tr>
-
-        <tr>
-          <td><input type="text" name=variant[sku] placeholder="SKU#"></td>
-          <td><input type="text" name=variant[pack_size] placeholder="Pack/Size"</td>
-          <td>$<input type="text" name=variant[price] placeholder="Price (USD)"></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <label><input type="checkbox" name="" value=""></label>Promotional<br>
-            <label>Start Date<select name="">
-              <option value="value1">Date 1</option>
-              <option value="value2">Date 2</option>
-              <option value="value3">Date 3</option>
-            </select></label>
-          </td>
-          <td>
-            <label>Promo Price: $<input type="text" name="" placeholder="Price (USD)"></label><br>
-            <label>End Date<select name="">
-              <option value="value1">Date 1</option>
-              <option value="value2">Date 2</option>
-              <option value="value3">Date 3</option>
-            </select></label>
-          </td>
-        </tr>
-      
-    </table>
-
   </section>
 
   <button class="add-to-order">Save Product</button>

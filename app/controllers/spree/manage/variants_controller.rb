@@ -8,11 +8,14 @@ module Spree
       end
 
       def new
+        @variant = Spree::Variant.new
+        @product = Spree::Product.find(params[:product_id])
       end
 
       def create
         @variant = Spee::Variant.new(variant_params)
-        @variant.product_id = Spree::Product.find(params[:product_id])
+        @product = Spree::Product.find(params[:product_id])
+        @variant.product_id = @product.id
 
         if @variant.save
           redirect_to manage_product_url(@variant.product_id)
@@ -35,7 +38,7 @@ module Spree
       def update
         @variant = Spree::Variant.find(params[:id])
         @product = @variant.product
-        
+
         if @variant.update(variant_params)
           redirect_to manage_product_url(@variant.product_id)
         else
