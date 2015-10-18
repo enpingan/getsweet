@@ -9,6 +9,7 @@ module Spree
     def show
       @vendor = Vendor.friendly.find(params[:id])
       @products = @vendor.products
+      # @products = @vendor.products.select {|product| product.promotional == true}
     end
   end
 end
