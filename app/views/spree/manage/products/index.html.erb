@@ -23,10 +23,10 @@
         <% if product.images.present? %>
           <%= image_tag product.images.first.attachment.url(:mini) %>
         <% else %>
-           No IMG 
+           No IMG
         <% end %>
       </td>
-      <td><%= product.name %></td>
+      <td><a href="<%= manage_product_url(product.id) %>"><%= product.name %></a></td>
       <td><%=Spree::Variant.find_by_product_id(product.id).sku %></td>
       <td>pack/size</td>
       <td>lead time</td>

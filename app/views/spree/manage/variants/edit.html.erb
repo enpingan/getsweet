@@ -1,0 +1,79 @@
+<form action="<%= manage_product_variant_url(@variant.product_id, @variant.id) %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+
+  <h1><%= @product.name %></h1>
+
+  <% if @product.variants.empty? %>
+    <h3>SKU # <%= @product.master.sku %></h3>
+  <% end %>
+
+  <h5>Manufacturer: </h5>
+
+  <div class="group">
+    <div class="product-left">
+      <img src="", alt="Image not Available">
+
+
+      <div class="allergans">
+        <% 5.times do %>
+          <li>add allergans to @product model</li>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="product-right">
+      <p class="product-description">This is the @product description. Not sure
+        if there is a field in the DB for this yet, still have to check. But this
+        is where it would go.
+      </p>
+
+      <ul class="dietary-restrictions">
+        <% 3.times do %>
+          <li>V</li>
+        <% end %>
+      </ul>
+
+    </div>
+  </div>
+
+  <section class="product-bottom group">
+
+    <table class="single-order">
+      <colgroup span="4"></colgroup>
+      <tr>
+        <th>SKU</th>
+        <th>Pack/Size</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+        <td><input type="text" name=variant[sku] value="<%=@variant.sku %>"></td>
+        <td><input type="text" name=variant[pack_size] value=""</td>
+        <td>$<input type="text" name=variant[price] value="<%= @variant.price %>"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <label><input type="checkbox" name="" value=""></label>Promotional<br>
+          <label>Start Date<select name="">
+            <option value="value1">Date 1</option>
+            <option value="value2">Date 2</option>
+            <option value="value3">Date 3</option>
+          </select></label>
+        </td>
+        <td>
+          <label>Promo Price: $<input type="text" name="" value="<%= @variant.price %>"></label><br>
+          <label>End Date<select name="">
+            <option value="value1">Date 1</option>
+            <option value="value2">Date 2</option>
+            <option value="value3">Date 3</option>
+          </select></label>
+        </td>
+      </tr>
+    </table>
+
+    <button class="add-to-order">Update Variant</button>
+
+  </section>
+
+</form>

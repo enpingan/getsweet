@@ -28,12 +28,14 @@ module Spree
 
       def edit
         @variant = Spree::Variant.find(params[:id])
+        @product = @variant.product
         render :edit
       end
 
       def update
         @variant = Spree::Variant.find(params[:id])
-
+        @product = @variant.product
+        
         if @variant.update(variant_params)
           redirect_to manage_product_url(@variant.product_id)
         else
