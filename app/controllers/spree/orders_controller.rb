@@ -1,5 +1,7 @@
 module Spree
   class OrdersController < ApplicationController
+    before_action :authorize_customer
+
     def index
       @orders = Spree::Order.all
       # @orders = Customer.find(current_spree_user.customer_id).orders

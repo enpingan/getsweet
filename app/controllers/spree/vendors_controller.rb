@@ -1,6 +1,7 @@
 module Spree
 
   class VendorsController < ApplicationController
+    before_action :authorize_customer, only: [:show]
     def index
       @vendors = Vendor.all
       render :index

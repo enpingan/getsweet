@@ -7,4 +7,12 @@ class ApplicationController < ActionController::Base
 	include Spree::Core::ControllerHelpers
   include Spree::Core::ControllerHelpers::Store
   helper Spree::Core::Engine.helpers
+
+  private
+
+  def authorize_customer
+    if current_spree_user.nil? || current_spree_user.spree_roles.none? {|role| role.name == 'customer'}
+      redirect_to new_spree_user_session_url
+    end
+  end
 end
