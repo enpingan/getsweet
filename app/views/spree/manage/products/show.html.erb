@@ -51,10 +51,10 @@
       </tr>
     <% end %>
     <tr>
-      <td><a href="<%= new_manage_product_variant_url(@product.id) %>">Add New Variant</a></td>
+      <td><a href="<%= new_manage_product_variant_url(@product) %>">Add New Variant</a></td>
     </tr>
   </table>
 
   <button class="add-to-order">Add to Order</button>
-  <a href="<%= edit_manage_product_url(@product.id) %>">Edit Product</a>
+  <a href="<%= edit_manage_product_url(@product) %>">Edit Product</a>
 </section>

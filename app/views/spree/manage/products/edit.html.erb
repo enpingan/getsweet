@@ -59,11 +59,11 @@
           <td><%=variant.sku %></td>
           <td>variant.pack_size</td>
           <td><%= number_to_currency(variant.price) %></td>
-          <td><a href="<%=edit_manage_product_variant_url(@product.id, variant.id)%>">Edit Variant</a></td>
+          <td><a href="<%=edit_manage_product_variant_url(@product, variant)%>">Edit Variant</a></td>
         </tr>
       <% end %>
       <tr>
-        <td><a href="<%= new_manage_product_variant_url(@product.id) %>">Add New Variant</a></td>
+        <td><a href="<%= new_manage_product_variant_url(@product) %>">Add New Variant</a></td>
       </tr>
     </table>
 

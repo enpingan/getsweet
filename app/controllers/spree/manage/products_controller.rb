@@ -15,23 +15,23 @@ module Spree
 
   def new
     @product = Spree::Product.new
-    
+
   end
 
   def create
   end
 
   def show
-    @product = Spree::Product.find(params[:id])
+    @product = Spree::Product.friendly.find(params[:id])
   end
 
   def edit
-    @product = Spree::Product.find(params[:id])
+    @product = Spree::Product.friendly.find(params[:id])
     render :edit
   end
 
   def update
-    @product = Spree::Product.find(params[:id])
+    @product = Spree::Product.friendly.find(params[:id])
 
     if @product.update(product_params)
       redirect_to manage_product_url

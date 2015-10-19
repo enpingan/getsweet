@@ -3,22 +3,22 @@ module Spree
 
     class VariantsController < ApplicationController
       def index
-        @variants = Spree::Product.find(params[:product_id]).variants_including_master
+        @variants = Spree::Product.friendly.find(params[:product_id]).variants_including_master
         render :index
       end
 
       def new
         @variant = Spree::Variant.new
-        @product = Spree::Product.find(params[:product_id])
+        @product = Spree::Product.friendly.find(params[:product_id])
       end
 
       def create
         @variant = Spee::Variant.new(variant_params)
-        @product = Spree::Product.find(params[:product_id])
+        @product = Spree::Product.friendly.find(params[:product_id])
         @variant.product_id = @product.id
 
         if @variant.save
-          redirect_to manage_product_url(@variant.product_id)
+          redirect_to manage_product_url(@variant.product)
         else
           render :new
         end
@@ -40,7 +40,7 @@ module Spree
         @product = @variant.product
 
         if @variant.update(variant_params)
-          redirect_to manage_product_url(@variant.product_id)
+          redirect_to manage_product_url(@variant.product)
         else
           render :edit
         end
