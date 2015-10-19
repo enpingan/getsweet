@@ -1,0 +1,62 @@
+<h1> <%= @order.vendor.name %> </h1>
+<h4><a href="<%= orders_url %>">Back to All Orders</a></h4>
+<h1> Vendor: <%= @order.vendor.name %> </h1>
+<h3> Order #<%= @order.id %> </h3>
+<h4>Order status: <%= @order.state %></h4>
+
+<div data-hook="outside_cart_form">
+	<%= form_for @order, url: spree.update_cart_path, html: { id: 'update-cart' } do |order_form| %>
+		<div data-hook="inside_cart_form">
+
+			<div data-hook="cart_items" class="table-responsive">
+
+				<table class="single-order">
+				  <!-- <colgroup span="7"></colgroup> -->
+				  <thead>
+				    <tr class="active" data-hook="cart_items_headers">
+				      <th class="cart-item-description-header" colspan="2"><%= Spree.t(:item) %></th>
+							<th>SKU #</th>
+				 	 		<th>Pack/Size</th>
+   					  <th class="cart-item-price-header"><%= Spree.t(:price) %></th>
+   					  <th class="cart-item-quantity-header"><%= Spree.t(:qty) %></th>
+     					<th class="cart-item-total-header"><%= Spree.t(:total) %></th>
+    					<th>Out of Stock</th>
+     					<th class="cart-item-delete-header"></th>
+    				</tr>
+  				</thead>
+
+					<tbody id="line_items" data-hook>
+						<%= render partial: 'line_item', collection: order_form.object.line_items, locals: { order_form: order_form } %>
+					</tbody>
+
+					<% if @order.adjustments.nonzero.exists? || @order.line_item_adjustments.nonzero.exists? || @order.shipment_adjustments.nonzero.exists? || @order.shipments.any? %>
+				    <tr class="cart-subtotal">
+    			  	<td colspan="4" align='right'><h5><%= Spree.t(:cart_subtotal, count: @order.line_items.sum(:quantity)) %></h5></td>
+      				<td colspan><h5><%= order_form.object.display_item_total %></h5></td>
+      				<td></td>
+    				</tr>
+    				<%= render "spree/orders/adjustments" %>
+  				<% end %>
+  				<tr class="warning cart-total">
+    				<td colspan="4" align='right'><h5><%= Spree.t(:total) %></h5></td>
+    				<td class="lead" colspan><%= order_form.object.display_total %></td>
+    				<td></td>
+  				</tr>
+				</table>
+
+        <div class="links col-md-6 navbar-form pull-right text-right" data-hook="cart_buttons">
+          <div class="form-group">
+            <%= button_tag class: 'btn btn-primary add-to-order', id: 'update-button' do %>
+             <%= Spree.t(:update) %>
+            <% end %>
+            <%= button_tag class: 'btn btn-lg btn-success add-to-order', id: 'checkout-link', name: 'checkout' do %>
+              <%#= Spree.t(:checkout) %>
+              <%= "Approve Order"%>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+</div>
