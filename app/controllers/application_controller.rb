@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
   private
 
   def authorize_customer
-    if current_spree_user.nil? || current_spree_user.has_spree_role?('customer')
-      redirect_to new_spree_user_session_url
+    if current_spree_user.nil? || !current_spree_user.has_spree_role?('customer')
+      redirect_to login_url
     end
   end
 end
