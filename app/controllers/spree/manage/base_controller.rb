@@ -25,8 +25,13 @@ module Spree
           authorize! action, record
        	end
 
+        def current_vendor
+          return nil if current_spree_user.nil?
+          current_spree_user.vendor
+        end
+
         def authorize_vendor
-          
+
           if current_spree_user.nil? || !current_spree_user.has_spree_role?('vendor')
             redirect_to login_url
           end

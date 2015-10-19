@@ -5,7 +5,7 @@
 <input type="text" placeholder="Product name or sku"></input>
 <button class=search>Search</button>
 
-<h3> Product Guide </h3>
+<h3> Product Guide, <%= @products.count %> Items Available </h3>
 Current order: <%#= @current_order.number %> <!-- DEBUG -->
 <table>
   <colgroup span="7"></colgroup>
@@ -20,10 +20,7 @@ Current order: <%#= @current_order.number %> <!-- DEBUG -->
     <th></th>
   </tr>
   <% @products.each do |product| %>
-		<%# DEBUG PURPOSES TO LIMIT NUMBER OF PRODUCTS SHOWN %>
-		<% if product.id > 2 then %>
-	  	<% break %>
-		<% end %>
+	
 
 		<%# SETTING THE INDEX TO PRODUCT.MASTER.ID BELOW BUT WILL NEED TO DETERMINE HOW TO CONSIDER VARIANTS IN THIS CATALOG VIEW %>
 	 <%= form_for :order, url: populate_manage_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>

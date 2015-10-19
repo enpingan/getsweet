@@ -1,7 +1,9 @@
 module Spree
   module Manage
 
-    class VariantsController < ApplicationController
+    class VariantsController < Spree::Manage::BaseController
+      before_action :ensure_vendor
+
       def index
         @variants = Spree::Product.friendly.find(params[:product_id]).variants_including_master
         render :index
@@ -53,6 +55,11 @@ module Spree
 
       def variant_params
         params.require(:variants).permit(:sku, :price)
+      end
+
+      def ensure_vendor
+        @product = Spree::Product.friendly.find(params[:product_id])
+        redirect_to login_url unless current_vendor.id == @product.vendor_id
       end
     end
 

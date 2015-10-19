@@ -2,26 +2,23 @@ module Spree
 	module Manage
 
 class OrdersController < Spree::Manage::BaseController
-	
+
 	respond_to :js
 
-  def index
-		# REMOVING VENDOR ID FIND FOR NOW, WILL EVENTUALLY BE BASED ON THE USER WHO IS LOGGED IN SO WE WILL UPDATE THIS WITH THE AUTH COMPONENT
-    #@vendor = Vendor.find(params[:vendor_id])
-    #@orders = @vendor.orders
-    
-		# temporary
-		@orders = Spree::Order.all
-		@vendor = Spree::Vendor.first
+	before_action :ensure_vendor, only: [:show, :edit, :update, :destroy]
 
+  def index
+		@vendor = current_vendor
+		@orders = @vendor.orders
     render :index
   end
 
   def new
+		@order = current_vendor.orders.new
   end
 
   def create
-    @order = Spree::Order.new(order_params)
+    @order = current_vendor.orders.new(order_params)
 
     if @order.save!
       redirect_to :vendor_orders_url
@@ -83,6 +80,11 @@ class OrdersController < Spree::Manage::BaseController
 
   def order_params
     self.params.require(:spree_order).permit(:customer_id) #this makes sense from the vendor side
+  end
+
+	def ensure_vendor
+    @order = Spree::Order.friendly.find(params[:id])
+    redirect_to login_url unless current_vendor.id == @order.vendor_id
   end
 end
 
