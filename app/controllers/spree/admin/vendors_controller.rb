@@ -16,7 +16,7 @@ module Spree
 
       def create
 
-        @vendor = Spree.vendor_class.new(vendor_params)
+        @vendor = Spree::Vendor.new(vendor_params)
         if @vendor.save
 
           flash.now[:success] = flash_message_for(@vendor, :successfully_created)
@@ -39,11 +39,7 @@ module Spree
 			private
 
       def vendor_params
-        params.require(:vendor).permit(permitted_vendor_attributes #|
-                                     #[:spree_role_ids,
-                                      #ship_address_attributes: permitted_address_attributes,
-                                      #bill_address_attributes: permitted_address_attributes]
-				)
+        params.require(:vendor).permit([:name, :order_cutoff_time, :delivery_minimum, :payment_terms, :slug])
       end
 		end
 	end

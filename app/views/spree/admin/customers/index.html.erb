@@ -9,6 +9,8 @@
 <% end %>
 
 <% if nil %>
+<!-- ============== -->
+<!-- REMOVING SEARCH TEMPORARILY -->
 <% content_for :table_filter_title do %>
   <%= Spree.t(:search) %>
 <% end %>
@@ -47,15 +49,19 @@
     <% end %>
   </div>
 <% end %>
+<!-- ============== -->
 <% end %>
 
 <table class="table" id="listing_users" data-hook>
   <thead>
     <tr data-hook="admin_customers_index_headers">
-      <th>
+      <!--
+			<th>
         <%#= sort_link @search,:name, "Vendor", {}, {:title => 'vendors_name_title'} %>
-        <%= "Customer" %>
-      </th>
+      </th
+			-->
+			<th><%= Spree.t(:name) %></th>
+			<th><%= "Account ID" %></th>
       <th data-hook="admin_customers_index_header_actions" class="actions"></th>
     </tr>
   </thead>
@@ -63,6 +69,7 @@
     <% @customers.each do |customer|%>
       <tr id="<%= spree_dom_id customer %>" data-hook="admin_customers_index_rows">
         <td class='user_email'><%=link_to customer.name, edit_admin_customer_url(customer) %></td>
+				<td><%= customer.account_id  %></td>
         <td data-hook="admin_vendors_index_row_actions" class="actions actions-2 text-right">
           <%= link_to_edit customer, :no_text => true %>
           <%= link_to_delete customer, :no_text => true %>
@@ -72,4 +79,4 @@
   </tbody>
 </table>
 
-<%#= paginate @vendors %>
+<%#= paginate @customers %>
