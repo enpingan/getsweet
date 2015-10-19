@@ -14,7 +14,18 @@ Rails.application.routes.draw do
  		namespace :manage do
  			#resources :vendors, only: [:index, :show] do
     		resources :orders
-    		resources :products do
+				resources :orders, :except => [:index, :new, :create, :destroy] do
+					post :populate, :on => :collection
+  			end 	
+			
+				populate_redirect = redirect do |params, request|
+			  	request.flash[:error] = Spree.t(:populate_get_error)
+    			request.referer || '/cart'
+  			end 
+
+  			get '/orders/populate', :to => populate_redirect
+    		
+				resources :products do
     		  resources :variants
     		end
   		#end
