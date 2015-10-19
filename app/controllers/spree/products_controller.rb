@@ -1,8 +1,10 @@
 module Spree
   class ProductsController < ApplicationController
     def index
-      @vendor = Vendor.friendly.find(params[:vendor_id])
-      @products = @vendor.products
+      #@vendor = Spree::Vendor.friendly.find(params[:vendor_id])
+      #@products = @vendor.products
+      @products = Spree::Product.all
+      @vendor = Spree::Vendor.first
       render :index
     end
 
