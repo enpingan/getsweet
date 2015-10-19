@@ -16,7 +16,7 @@ module Spree
 
       def create
 
-        @customer = Spree.customer_class.new(customer_params)
+        @customer = Spree::Customer.new(customer_params)
         if @customer.save
 
           flash.now[:success] = flash_message_for(@customer, :successfully_created)
@@ -39,11 +39,7 @@ module Spree
 			private
 
       def customer_params
-        params.require(:customer).permit(permitted_customer_attributes #|
-                                     #[:spree_role_ids,
-                                      #ship_address_attributes: permitted_address_attributes,
-                                      #bill_address_attributes: permitted_address_attributes]
-				)
+				params.require(:customer).permit([:name, :account_id])
       end
 		end
 	end

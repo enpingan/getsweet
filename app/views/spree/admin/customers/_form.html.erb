@@ -1,0 +1,29 @@
+<div data-hook="admin_tax_rate_form_fields">
+  <div class="panel panel-default" data-hook="tax_rates">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        <%#= Spree.t(:general_settings) %>
+        <%= "Account Information" %>
+      </h1>
+    </div>
+
+    <div class="panel-body">
+      <div class="col-md-6">
+        <div data-hook="name" class="form-group">
+          <%= f.label :name, Spree.t(:name) %>
+          <%= f.text_field :name, :class => 'form-control' %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div data-hook="zone" class="form-group">
+          <%= f.label :account_id, "Account ID" %>
+          <%= f.text_field :account_id, :class => 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%#= render 'spree/admin/shared/calculator_fields', :f => f %>
