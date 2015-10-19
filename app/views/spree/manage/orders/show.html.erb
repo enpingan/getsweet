@@ -1,7 +1,9 @@
-<h1> <%= @order.vendor.name %> </h1>
+<!-- NEED TO REMOVE BELOW IF STATEMENTS FOR VENDOR NAME AND CUSTOMER NAME BEFORE GOING LIVE -->
+
+<h1> <%= @order.vendor.name if @order.vendor %> </h1>
 <h4><a href="<%= manage_orders_url %>">Back to All Orders</a></h4>
-<h1> Customer: <%= @order.customer.name %> </h1>
-<h3> Order #<%= @order.id %> </h3>
+<h1> Customer: <%= @order.customer.name if @order.customer %> </h1>
+<h3> Order #<%= @order.number %> </h3>
 <h4>Order status: <%= @order.state %></h4>
 
 <div data-hook="outside_cart_form">

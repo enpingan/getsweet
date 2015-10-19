@@ -1,11 +1,12 @@
+<%#= form_for :order, url: populate_manage_orders_path(format: 'js'), remote: true do |f| %>
+
 <h1 class="vendor-heading"> <%= @vendor.name %></h1>
 
 <input type="text" placeholder="Product name or sku"></input>
 <button class=search>Search</button>
 
-
 <h3> Product Guide </h3>
-
+Current order: <%= @current_order.number %> <!-- DEBUG -->
 <table>
   <colgroup span="7"></colgroup>
   <tr>
@@ -16,8 +17,17 @@
     <th>Lead Time</th>
     <th>Price</th>
     <th>Quantity</th>
+    <th></th>
   </tr>
   <% @products.each do |product| %>
+		<%# DEBUG PURPOSES TO LIMIT NUMBER OF PRODUCTS SHOWN %>
+		<% if product.id > 2 then %>
+	  	<% break %>
+		<% end %>
+
+		<%# SETTING THE INDEX TO PRODUCT.MASTER.ID BELOW BUT WILL NEED TO DETERMINE HOW TO CONSIDER VARIANTS IN THIS CATALOG VIEW %>
+	 <%= form_for :order, url: populate_manage_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
+
     <tr>
       <td>
         <% if product.images.present? %>
@@ -35,15 +45,25 @@
         <div class="cart-item-quantity count-block" data-hook="cart_item_quantity">
           <span href="#" class="minus count-buttons">-</span>
             <div class="count">
-              <%#= item_form.object.quantity %>
+							<%= number_field_tag :quantity, 1, :class => 'title form-control', :min => 1 %>
             </div>
-            <input type="text" placeholder="QTY"></input>
-            <%#= item_form.number_field :quantity, :min => 0, :class => "line_item_quantity hide", :size => 5 %>
             <span href="#" class="plus count-buttons">+</span>
         </div>
       </td>
-
+			<td>
+        <div class="add-to-cart">
+          <br/>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <%= button_tag :class => 'add-prod-to-order btn btn-success', :id => 'add-to-cart-button', :type => :submit do %>
+                <%= Spree.t(:add_to_cart) %>
+              <% end %>
+            </span>
+          </div>
+				</td>
     </tr>
+	 <!-- /. form_for -->
+	 <% end %>
   <% end %>
   <tfoot>
     <tr>
@@ -62,42 +82,4 @@
   </tfoot>
 </table>
 
-
-<% if nil %>
-<!-- obsolete -->
-<table>
-  <colgroup span="7"></colgroup>
-  <tr>
-    <th></th>
-    <th>Product Name</th>
-    <th>SKU #</th>
-    <th>Pack/Size</th>
-    <th>Lead Time</th>
-    <th>Price</th>
-    <th>Quantity</th>
-  </tr>
-  <% @products.each do |product| %>
-    <tr>
-      <td>
-        <% if product.images.present? %>
-          <%= image_tag product.images.first.attachment.url(:mini) %>
-        <% else %>
-           No IMG
-        <% end %>
-      </td>
-      <td><a href="<%= vendor_product_url(product.vendor_id, product.id) %>"><%= product.name %></a></td>
-      <td><%=Spree::Variant.find_by_product_id(product.id).sku %></td>
-      <td>pack/size</td>
-      <td>lead time</td>
-      <td><%= number_to_currency(product.price) %></td>
-      <td> - <input type="text" placeholder="QTY"></input> + </td>
-    </tr>
-  <% end %>
-  <tfoot>
-    <tr>
-      <td><button class="add-to-order">Add to Order</button></td>
-    </tr>
-  </tfoot>
-</table>
-
-<% end %>
+<%# end %>
