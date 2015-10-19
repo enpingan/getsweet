@@ -39,5 +39,47 @@ Rails.application.routes.draw do
 
 		end
 
+		namespace :admin do
+
+	    resources :customers do
+ 	    	collection do
+  	      get :search
+      	end 
+=begin
+      	resources :customer_images do
+        	collection do
+          	post :update_positions
+        	end 
+      	end 
+
+      	resources :customer_logos do
+        	collection do
+        		post :update_positions
+        	end 
+      	end	
+=end
+			end
+
+	    resources :vendors do
+ 	    	collection do
+  	      get :search
+      	end 
+=begin
+      	resources :vendor_images do
+        	collection do
+          	post :update_positions
+        	end 
+      	end 
+
+      	resources :vendor_logos do
+        	collection do
+        		post :update_positions
+        	end 
+      	end	
+=end
+			end
+
+		end
+
 	end
 end
