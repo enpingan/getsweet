@@ -1,0 +1,9 @@
+<!-- insert_after 'div[data-hook="admin_user_form_roles"]' --> 
+<%= f.field_container :vendor_id, class: ['form-group'] do %>
+	<%= f.label :vendor_id, "Vendor ID" %>
+	<%= f.number_field :vendor_id, :class => 'form-control' %>
+<% end %>
+<%= f.field_container :customer_id, class: ['form-group'] do %>
+	<%= f.label :customer_id, "Customer ID" %>
+	<%= f.number_field :customer_id, :class => 'form-control' %>
+<% end %>
