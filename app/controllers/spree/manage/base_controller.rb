@@ -33,7 +33,7 @@ module Spree
         def authorize_vendor
 
           if current_spree_user.nil? || !current_spree_user.has_spree_role?('vendor')
-            redirect_to login_url
+            redirect_to root_url
           end
         end
 

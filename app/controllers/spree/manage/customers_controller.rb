@@ -5,7 +5,9 @@ module Spree
 
       def index
         # This is just temporary until the customers are connected to the vendor
-        @customers = Spree::Customer.all
+        # @customers = Spree::Customer.all
+        @vendor = current_spree_user.vendor
+        @customers = @vendor.customers
       end
 
       def show

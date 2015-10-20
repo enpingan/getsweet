@@ -55,7 +55,7 @@ module Spree
 
   def ensure_vendor
     @product = Spree::Product.friendly.find(params[:id])
-    redirect_to login_url unless current_vendor.id == @product.vendor_id
+    redirect_to root_url unless current_vendor.id == @product.vendor_id
   end
 
 end
