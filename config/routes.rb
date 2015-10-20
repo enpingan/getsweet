@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
  		namespace :manage do
  			#resources :vendors, only: [:index, :show] do
+      resources :customers
     		resources :orders
 				resources :orders, :except => [:index, :new, :create, :destroy] do
 					post :populate, :on => :collection
@@ -34,6 +35,8 @@ Rails.application.routes.draw do
 				resources :products do
     		  resources :variants
     		end
+
+
   		#end
 
 			get '/', to: 'root#index'#, as: :admin

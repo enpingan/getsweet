@@ -1,0 +1,9 @@
+<h1> <%= current_spree_user.vendor.name %> Customer List</h1>
+
+<ul class="customer-list">
+  <% @customers.each do |customer| %>
+    <li>
+      <a href="<%= manage_customer_url(customer) %>"><%= customer.name %></a>
+    </li>
+  <% end %>
+</ul>
