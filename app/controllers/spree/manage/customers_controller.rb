@@ -10,7 +10,7 @@ module Spree
 
       def show
         @customer = Spree::Customer.find(params[:id])
-        @address = @customer.addresses.first
+        # @address = @customer.addresses.first
         render :show
       end
 

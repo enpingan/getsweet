@@ -2,14 +2,15 @@
 
 <section class="customer-top group">
   <ul class="customer-right">
-    <li>Current Balance:</li>
+    <li>Current Balance: </li>
     <li>Past Due Balance:</li>
+    <li>Payment Terms: </li>
     <li><a href="">Orders</a></li>
     <li><a href="">Invoices</a></li>
   </ul>
 
   <ul class="contact-left">
-    <li>Primary Contact: <%= #{@customer.users.first.firstname @customer.users.first.lastname} %></li>
+    <li>Primary Contact: <%#= #{@customer.users.first.firstname @customer.users.first.lastname} %></li>
     <li>Primary Phone: <%#= @customer.phone %></li>
     <li>Primary Email: <%#= @customer.email %></li>
     <li>Customer Address: </li>
@@ -22,6 +23,6 @@
         <li> State<%#= @address.state_name %></li>
         <li> Zip Code<%#= @address.zipcode %></li>
       </ul>
-    <li></li>
   </ul>
 </section>
+<a href="<%= new_manage_customer_url %>" class="btn-new-contact">Add New Contact</a>

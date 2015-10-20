@@ -98,3 +98,16 @@ tr:nth-child(odd){
   color: #fff;
   margin: 10px;
 }
+
+.customer-right {
+  float: right;
+}
+
+.customer-left {
+  float:left;
+}
+
+.customer-left, .customer-right {
+  width: 50%;
+  min-width: 300px;
+}

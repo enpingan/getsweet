@@ -19,5 +19,7 @@ module Spree
 	  has_many :orders, class_name: 'Spree::Order', foreign_key: :customer_id, primary_key: :id
 
 	  has_many :spree_roles, through: :users, foreign_key: :customer_id
+
+		has_many :addresses, class_name: 'Spree::Address', foreign_key: :address_id, primary_key: :id
 	end
 end
