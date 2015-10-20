@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   # root 'alchemy/pages#show'
+  root to: 'static_pages#root'
 
   mount Spree::Core::Engine, at: '/'
 
@@ -21,15 +22,15 @@ Rails.application.routes.draw do
     		resources :orders
 				resources :orders, :except => [:index, :new, :create, :destroy] do
 					post :populate, :on => :collection
-  			end 	
-			
+  			end
+
 				populate_redirect = redirect do |params, request|
 			  	request.flash[:error] = Spree.t(:populate_get_error)
     			request.referer || '/cart'
-  			end 
+  			end
 
   			get '/orders/populate', :to => populate_redirect
-    		
+
 				resources :products do
     		  resources :variants
     		end
@@ -44,38 +45,38 @@ Rails.application.routes.draw do
 	    resources :customers do
  	    	collection do
   	      get :search
-      	end 
+      	end
 =begin
       	resources :customer_images do
         	collection do
           	post :update_positions
-        	end 
-      	end 
+        	end
+      	end
 
       	resources :customer_logos do
         	collection do
         		post :update_positions
-        	end 
-      	end	
+        	end
+      	end
 =end
 			end
 
 	    resources :vendors do
  	    	collection do
   	      get :search
-      	end 
+      	end
 =begin
       	resources :vendor_images do
         	collection do
           	post :update_positions
-        	end 
-      	end 
+        	end
+      	end
 
       	resources :vendor_logos do
         	collection do
         		post :update_positions
-        	end 
-      	end	
+        	end
+      	end
 =end
 			end
 

@@ -1,0 +1,70 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body, html, img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  vertical-align: inherit;
+  box-sizing: inherit;
+  display: block;
+}
+
+body, html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+ div.root-page {
+   min-height: 100%;
+   background-color: indigo;
+   color: orange;
+ }
+
+ .splash-logo, .login-form-container {
+   display: block;
+   width: 80%;
+   max-width: 500px;
+   min-width: 300px;
+   margin: 0 auto;
+   padding: 50px 0 30px;
+ }
+
+ .login-form-container input {
+   font-size: 1.2em;
+   padding: 10px;
+   width: 100%;
+   margin: 40px auto;
+   min-width: 200px;
+   display: block;
+ }
+
+ .btn-login{
+   display: block;
+   background: #F57E20;
+   color: #fff;
+   font-size: 16px;
+   padding: 10px 20px;
+   margin: 20px auto;
+ }
