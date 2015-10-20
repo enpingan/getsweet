@@ -421,6 +421,16 @@ ActiveRecord::Schema.define(version: 20151021232432) do
   add_index "spree_customers", ["account_id"], name: "index_spree_customers_on_account_id"
   add_index "spree_customers", ["ship_address_id"], name: "index_spree_customers_on_ship_address_id"
 
+  create_table "spree_customers_vendors", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.integer  "vendor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spree_customers_vendors", ["customer_id"], name: "index_spree_customers_vendors_on_customer_id"
+  add_index "spree_customers_vendors", ["vendor_id"], name: "index_spree_customers_vendors_on_vendor_id"
+
   create_table "spree_gateways", force: :cascade do |t|
     t.string   "type"
     t.string   "name"

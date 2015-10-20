@@ -20,7 +20,7 @@ module Spree
 	  has_many :orders, class_name: 'Spree::Order', foreign_key: :vendor_id, primary_key: :id
 	  has_many :spree_roles, through: :users, foreign_key: :vendor_id
 	  has_many :invoices
-	  has_many :customers
+	  has_and_belongs_to_many :customers, join_table: :spree_customers_vendors
 	  has_one :address
 
 

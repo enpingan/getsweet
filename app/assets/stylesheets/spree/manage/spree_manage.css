@@ -110,4 +110,5 @@ tr:nth-child(odd){
 .customer-left, .customer-right {
   width: 50%;
   min-width: 300px;
+  display: block;
 }

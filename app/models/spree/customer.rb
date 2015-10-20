@@ -24,6 +24,6 @@ module Spree
     alias_attribute :shipping_address, :ship_address
 		accepts_nested_attributes_for :ship_address
 
-		#has_many :addresses, class_name: 'Spree::Address', foreign_key: :address_id, primary_key: :id
+		has_and_belongs_to_many :vendors, join_table: :spree_customers_vendors
 	end
 end
