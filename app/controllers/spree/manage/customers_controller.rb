@@ -3,6 +3,8 @@ module Spree
 
     class CustomersController < Spree::Manage::BaseController
 
+      before_action :ensure_vendor, only: [:show, :edit, :update, :destroy]
+
       def index
         # This is just temporary until the customers are connected to the vendor
         # @customers = Spree::Customer.all
@@ -64,7 +66,6 @@ module Spree
       def destroy
       end
 
-
 			protected
 
 				def customer_params
@@ -73,6 +74,14 @@ module Spree
 						:account_id, 
 						ship_address_attributes: [ :id, :firstname, :lastname, :phone, :address1, :address2, :city, :country_id, :state_name, :zipcode, :state_id  ])
   			end
+      
+			private
+
+      	def ensure_vendor
+        	@customer = Spree::Customer.find(params[:id])
+        	redirect_to root_url unless @customer.vendors.include?(current_vendor)
+      	end
+
     end
 
   end
