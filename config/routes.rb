@@ -52,6 +52,12 @@ Rails.application.routes.draw do
  	    	collection do
   	      get :search
       	end
+
+      resources :orders do
+        member do
+          patch :delivery_update
+        end
+      end
 =begin
       	resources :customer_images do
         	collection do
