@@ -7,12 +7,12 @@ module Spree
         respond_with(@collection) do |format|
           format.html
           format.json { render :json => json_data }
-        end 
-      end 
+        end
+      end
 
       def show
         redirect_to edit_admin_vendor_path(@vendor)
-      end 
+      end
 
       def create
 
@@ -23,23 +23,23 @@ module Spree
           render :edit
         else
           render :new
-        end 
-      end 
+        end
+      end
 
       def update
-        if @vendor.update_attributes(vendor_params)
+        if @vendor.update(vendor_params)
           flash.now[:success] = Spree.t(:account_updated)
-        end 
+        end
 
         render :edit
-      end 
+      end
 
 			protected
 
 			private
 
       def vendor_params
-        params.require(:vendor).permit([:name, :order_cutoff_time, :delivery_minimum, :payment_terms, :slug])
+        params.require(:vendor).permit(:name, :order_cutoff_time, :delivery_minimum, :payment_terms, :slug)
       end
 		end
 	end

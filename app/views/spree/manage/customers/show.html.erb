@@ -5,8 +5,9 @@
     <li>Account ID: <%= @customer.account_id %> </li>
     <li>Current Balance: </li>
     <li>Past Due Balance:</li>
-    <li>Payment Terms: </li>
-    <li><a href="">Orders</a></li>
+    <!-- temporary terms -->
+    <li>Payment Terms: <%= @vendor.payment_terms %> Days</li>
+    <li><a href=" <%= manage_orders_url %>">Orders</a></li>
     <li><a href="">Invoices</a></li>
   </ul>
 

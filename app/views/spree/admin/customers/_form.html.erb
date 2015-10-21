@@ -13,6 +13,10 @@
           <%= f.label :name, Spree.t(:name) %>
           <%= f.text_field :name, :class => 'form-control' %>
         </div>
+        <div data-hook="email" class="form-group">
+          <%= f.label :email, Spree.t(:email) %>
+          <%= f.text_field :email, :class => 'form-control' %>
+        </div>
       </div>
 
       <div class="col-md-6">

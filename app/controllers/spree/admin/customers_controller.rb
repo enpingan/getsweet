@@ -7,12 +7,12 @@ module Spree
         respond_with(@collection) do |format|
           format.html
           format.json { render :json => json_data }
-        end 
-      end 
+        end
+      end
 
       def show
         redirect_to edit_admin_customer_path(@customer)
-      end 
+      end
 
       def create
 
@@ -23,23 +23,23 @@ module Spree
           render :edit
         else
           render :new
-        end 
-      end 
+        end
+      end
 
       def update
-        if @customer.update_attributes(customer_params)
+        if @customer.update(customer_params)
           flash.now[:success] = Spree.t(:account_updated)
-        end 
+        end
 
         render :edit
-      end 
+      end
 
 			protected
 
 			private
 
       def customer_params
-				params.require(:customer).permit([:name, :account_id])
+				params.require(:customer).permit(:name, :account_id, :email)
       end
 		end
 	end
