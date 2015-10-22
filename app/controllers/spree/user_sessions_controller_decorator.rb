@@ -4,7 +4,7 @@ Spree::UserSessionsController.class_eval do
     if spree_current_user.has_spree_role?("admin")
       admin_path
     elsif spree_current_user.has_spree_role?("vendor")
-      manage_products_url
+      manage_url
     elsif spree_current_user.has_spree_role?("customer")
       vendors_url
     else
