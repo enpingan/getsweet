@@ -20,6 +20,10 @@ module Spree
 
 	  has_many :spree_roles, through: :users, foreign_key: :customer_id
 
-		has_many :addresses, class_name: 'Spree::Address', foreign_key: :address_id, primary_key: :id
+    belongs_to :ship_address, foreign_key: :ship_address_id, class_name: 'Spree::Address'
+    alias_attribute :shipping_address, :ship_address
+		accepts_nested_attributes_for :ship_address
+
+		#has_many :addresses, class_name: 'Spree::Address', foreign_key: :address_id, primary_key: :id
 	end
 end

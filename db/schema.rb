@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151017213200) do
+ActiveRecord::Schema.define(version: 20151021232432) do
 
   create_table "alchemy_attachments", force: :cascade do |t|
     t.string   "name"
@@ -411,13 +411,15 @@ ActiveRecord::Schema.define(version: 20151017213200) do
   end
 
   create_table "spree_customers", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",            null: false
+    t.integer  "account_id",      null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "ship_address_id"
   end
 
   add_index "spree_customers", ["account_id"], name: "index_spree_customers_on_account_id"
+  add_index "spree_customers", ["ship_address_id"], name: "index_spree_customers_on_ship_address_id"
 
   create_table "spree_gateways", force: :cascade do |t|
     t.string   "type"

@@ -2,6 +2,7 @@
 
 <section class="customer-top group">
   <ul class="customer-right">
+    <li>Account ID: <%= @customer.account_id %> </li>
     <li>Current Balance: </li>
     <li>Past Due Balance:</li>
     <li>Payment Terms: </li>
@@ -9,20 +10,24 @@
     <li><a href="">Invoices</a></li>
   </ul>
 
+	<% if @customer.ship_address %>
   <ul class="contact-left">
-    <li>Primary Contact: <%#= #{@customer.users.first.firstname @customer.users.first.lastname} %></li>
+    <li>Primary Contact: <%= "#{@customer.ship_address.firstname} #{@customer.ship_address.lastname}" %></li>
     <li>Primary Phone: <%#= @customer.phone %></li>
     <li>Primary Email: <%#= @customer.email %></li>
     <li>Customer Address: </li>
       <ul class="address">
-        <li>address line 1<%#= @address.address1 %></li>
-        <%# if @address.address2 %>
-          <!-- <li><%#= @address.address2 %></li> -->
-        <%# end %>
-        <li> City<%#= @address.city %></li>
-        <li> State<%#= @address.state_name %></li>
-        <li> Zip Code<%#= @address.zipcode %></li>
+        <li><%= @customer.ship_address.address1 %></li>
+        <% if @customer.ship_address.address2 %>
+          <li><%= @customer.ship_address.address2 %></li>
+        <% end %>
+        <li> <%= @customer.ship_address.city %></li>
+        <li> <%= @customer.ship_address.state_name %></li>
+        <li> <%= @customer.ship_address.zipcode %></li>
       </ul>
   </ul>
+	<% else %>
+		No address found.
+	<% end %>
 </section>
-<a href="<%= new_manage_customer_url %>" class="btn-new-contact">Add New Contact</a>
+<a href="<%= edit_manage_customer_url %>" class="btn-new-contact">Edit contact</a>

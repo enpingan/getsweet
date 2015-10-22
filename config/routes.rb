@@ -19,7 +19,10 @@ Rails.application.routes.draw do
 
  		namespace :manage do
  			#resources :vendors, only: [:index, :show] do
-      resources :customers
+      resources :customers do
+				resources :ship_addresses
+			end
+
     		resources :orders
 				resources :orders, :except => [:index, :new, :create, :destroy] do
 					post :populate, :on => :collection

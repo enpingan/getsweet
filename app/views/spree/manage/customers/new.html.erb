@@ -1,5 +1,38 @@
-<h1>New Contact</h1>
+<h1>New Customer</h1>
 
-<form action="<%= spree_user_registration_url %>" method="post">
+<%#= ---=== KNOWN ISSUE: New customer does not work correctly due to routing / association issues related to customer/address relatiponship ===--- %>
+<%#= https://trello.com/c/YOpuCQuQ/16-manage-customers-new-functionality-does-not-work-no-route-matches-post %>
 
-</form>
+<%= form_for @customer, url: spree.new_manage_customer_url do |f| %>
+  <% if @customer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+
+      <ul>
+      <% @customer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :account_id %><br />
+    <%= f.number_field :account_id %>
+  </div>
+
+  <%= f.fields_for :ship_address do |sa_form| %>
+
+    <%= render partial: 'spree/admin/shared/address_form', locals: { f: sa_form, type: 'shipping' } %>
+
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

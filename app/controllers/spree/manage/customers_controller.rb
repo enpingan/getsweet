@@ -10,20 +10,30 @@ module Spree
 
       def show
         @customer = Spree::Customer.find(params[:id])
-        # @address = @customer.addresses.first
         render :show
       end
 
+
+			# 10/21 - KNOWN ISSUE PREVENTING CREATION OF NEW CUSTOMER FROM VENDOR MANAGE PORTAL
+			# https://trello.com/c/YOpuCQuQ/16-manage-customers-new-functionality-does-not-work-no-route-matches-post
       def new
         @customer = Spree::Customer.new
+
+				country_id = Address.default.country.id
+        @customer.build_ship_address(country_id: country_id) if @customer.ship_address.nil?
+        @customer.ship_address.country_id = country_id if @customer.ship_address.country.nil?
+
+			  respond_to do |format|
+      		format.html # new.html.erb
+      		format.json { render json: @customer }
+  			end
       end
 
       def create
-        @customer = Spree::Customer.new(customer_params)
-        # @customer.vendor = current_spree_user.vendor
+        @customer = Spree::Customer.create(customer_params[:customer])
 
         if @customer.save
-          redirect_to manage_customer_url(customer)
+          redirect_to manage_customers_url(@customer)
         else
           render :new
         end
@@ -31,6 +41,11 @@ module Spree
 
       def edit
         @customer = Spree::Customer.find(params[:id])
+
+				country_id = Address.default.country.id
+				@customer.build_ship_address(country_id: country_id) if @customer.ship_address.nil?
+				@customer.ship_address.country_id = country_id if @customer.ship_address.country.nil?
+
         render :edit
       end
 
@@ -38,7 +53,7 @@ module Spree
         @customer = Spree::Customer.find(params[:id])
 
         if @customer.update(customer_params)
-          redirect_to manage_customer_url(customer)
+          redirect_to manage_customer_url(@customer)
         else
           render :edit
         end
@@ -47,6 +62,15 @@ module Spree
       def destroy
       end
 
+
+			protected
+
+				def customer_params
+    			params.require(:customer).permit(
+						:name, 
+						:account_id, 
+						ship_address_attributes: [ :id, :firstname, :lastname, :phone, :address1, :address2, :city, :country_id, :state_name, :zipcode, :state_id  ])
+  			end
     end
 
   end
