@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021232432) do
+ActiveRecord::Schema.define(version: 20151022153706) do
 
   create_table "alchemy_attachments", force: :cascade do |t|
     t.string   "name"
@@ -567,6 +567,8 @@ ActiveRecord::Schema.define(version: 20151021232432) do
     t.integer  "state_lock_version",                                         default: 0,       null: false
     t.integer  "vendor_id"
     t.integer  "customer_id"
+    t.datetime "delivery_date"
+    t.boolean  "is_delivery?",                                               default: true
   end
 
   add_index "spree_orders", ["approver_id"], name: "index_spree_orders_on_approver_id"
