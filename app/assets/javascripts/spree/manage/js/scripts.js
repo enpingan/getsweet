@@ -3,20 +3,20 @@ $( window ).resize(function() {
     if ($(window).width() > 991 && $('.app_ui-wrapper .app_ui-block').hasClass('active')){
     	$('.app_ui-wrapper .app_ui-block').removeClass('active');
     	$('.app_ui-wrapper aside').removeClass('active-tablet');
-    	if(!$('.app_ui-wrapper aside').hasClass('active-tablet')){
-			$('#accordion h3').removeClass('active');
-			$('#accordion div.accordion-block').hide(300);
-		}
+    	if (!$('.app_ui-wrapper aside').hasClass('active-tablet')){
+  			$('#accordion h3').removeClass('active');
+  			$('#accordion div.accordion-block').hide(300);
+  		}
     } else if($(window).width() > 767 && $(window).width() < 992){
     	$('.app_ui-wrapper aside').addClass('active');
     	$('.app_ui-wrapper .app_ui-block').addClass('active');
     	$('aside.active-tablet').removeClass('active-tablet');
-    	if(!$('.app_ui-wrapper aside').hasClass('active-tablet')){
-			$('#accordion h3').removeClass('active');
-			$('#accordion div.accordion-block').hide(300);
-		}
+      	if (!$('.app_ui-wrapper aside').hasClass('active-tablet')){
+  			$('#accordion h3').removeClass('active');
+  			$('#accordion div.accordion-block').hide(300);
+		  }
     };
-    if($(window).width() > 767 ){
+    if ($(window).width() > 767 ){
     	$('.app_ui-wrapper .shadow').hide();
     }
 });
@@ -45,7 +45,7 @@ $(".chart-block .tabs a").click(function(e){
 		} else if($(this).hasClass('bar')){
 			$('.chart-block .chart img.bar').addClass('active').siblings('img').removeClass('active');
 		}
-	};	    	
+	};
 });
 $(".app_ui-wrapper header .nav-ico").click(function(){
 	if($(window).width() > 767){
@@ -59,7 +59,7 @@ $(".app_ui-wrapper header .nav-ico").click(function(){
 		$('.app_ui-wrapper aside').toggleClass('active');
 		$('.app_ui-wrapper .app_ui-block').toggleClass('active');
 	};
-	if( $(window).width() < 768 && $('.app_ui-wrapper aside').hasClass('active')) {     
+	if( $(window).width() < 768 && $('.app_ui-wrapper aside').hasClass('active')) {
 	    $('.app_ui-wrapper .shadow').fadeIn(300);
 	}
 	else if($(window).width() < 768 && !$('.app_ui-wrapper aside').hasClass('active')) {
