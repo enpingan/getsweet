@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<title>Business Overview</title>
+</head>
+
+<body>
+	<div class="sweet_app wrapper">
+		<div class="app_ui-wrapper">
+			<header>
+				<div class="logo"></div>
+				<div class="header-nav">
+					<div class="nav-ico"></div>
+					<div id="sb-search" class="search-ico sb-search">
+						<form>
+							<span class="sb-icon-search"><i class="fa fa-search sb-icon-search"></i> </span>
+							<input class="sb-search-input" placeholder="Enter your search term..." type="text" value="" name="search" id="search">
+							<input class="sb-search-submit" type="submit" value="">
+						</form>
+					</div>
+					<div class="exit-ico"><i class="fa fa-sign-out"></i></div>
+					<div class="settings-ico"><i class="fa fa-cog"></i></div>
+				</div>
+			</header>
+			<div class="relative">
+				<aside class="active active-tablet">
+					<div class="app-user-block">
+						<div class="photo online">
+							<!-- <img src="images/spree/manage/img/user-photo.jpg" alt=""> -->
+							<%=image_tag("spree/manage/img/user-photo.jpg")%>
+						</div>
+						<div class="info tablet-hide">
+							<p class="user-name">Djone Doe</p>
+							<p class="user-role">Manager</p>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="nav-block" id="accordion">
+						<h3><%=image_tag("spree/manage/img/nav-ico1.png")%>
+							<!-- <img src="images/spree/manage/img/nav-ico1.png" alt="">  -->
+							<span class="tablet-hide">Overview <i class="fa fa-angle-left"></i></span>
+						</h3>
+						<div class="accordion-block">
+							<ul>
+								<li><a href="">Etiam ullamcorper</a></li>
+								<li><a href="">Curabitur imperdiet</a></li>
+								<li><a href="">Nam laoreet</a></li>
+								<li><a href="">Aliquam</a></li>
+								<li><a href="">Duis vel lacus</a></li>
+								<li><a href="">Vestibulum sem</a></li>
+								<li><a href="">Phasellus</a></li>
+								<li><a href="">Cras feugiat</a></li>
+								<li><a href="">Curabitur</a></li>
+							</ul>
+						</div>
+
+						<h3>
+							<%=image_tag("spree/manage/img/nav-ico2.png")%>
+							<!-- <img src="images/spree/manage/img/nav-ico2.png" alt=""> -->
+							 <span class="tablet-hide">Inventory <i class="fa fa-angle-left"></i></span>
+					 	</h3>
+						<div class="accordion-block">
+							<ul>
+								<li><a href="">Etiam ullamcorper</a></li>
+								<li><a href="">Curabitur imperdiet</a></li>
+								<li><a href="">Nam laoreet</a></li>
+								<li><a href="">Aliquam</a></li>
+								<li><a href="">Duis vel lacus</a></li>
+								<li><a href="">Vestibulum sem</a></li>
+								<li><a href="">Phasellus</a></li>
+								<li><a href="">Cras feugiat</a></li>
+								<li><a href="">Curabitur</a></li>
+							</ul>
+						</div>
+						<h3>
+							<%=image_tag("spree/manage/img/nav-ico3.png")%>
+							<!-- <img src="images/spree/manage/img/nav-ico3.png" alt="">  -->
+							<span class="tablet-hide">Orders <i class="fa fa-angle-left"></i></span>
+						</h3>
+						<div class="accordion-block">
+							<ul>
+								<li><a href="">Etiam ullamcorper</a></li>
+								<li><a href="">Curabitur imperdiet</a></li>
+								<li><a href="">Nam laoreet</a></li>
+								<li><a href="">Aliquam</a></li>
+								<li><a href="">Duis vel lacus</a></li>
+								<li><a href="">Vestibulum sem</a></li>
+								<li><a href="">Phasellus</a></li>
+								<li><a href="">Cras feugiat</a></li>
+								<li><a href="">Curabitur</a></li>
+							</ul>
+						</div>
+						<h3>
+							<%=image_tag("spree/manage/img/nav-ico4.png")%>
+							<!-- <img src="images/spree/manage/img/nav-ico4.png" alt=""> -->
+							<span class="tablet-hide">Invoices <i class="fa fa-angle-left"></i></span>
+						</h3>
+						<div class="accordion-block">
+							<ul>
+								<li><a href="">Etiam ullamcorper</a></li>
+								<li><a href="">Curabitur imperdiet</a></li>
+								<li><a href="">Nam laoreet</a></li>
+								<li><a href="">Aliquam</a></li>
+								<li><a href="">Duis vel lacus</a></li>
+								<li><a href="">Vestibulum sem</a></li>
+								<li><a href="">Phasellus</a></li>
+								<li><a href="">Cras feugiat</a></li>
+								<li><a href="">Curabitur</a></li>
+							</ul>
+						</div>
+					</div>
+				</aside>
+				<div class="app_ui-block active">
+					<h1>Business Overview</h1>
+					<form action="#" id="chart-form">
+						<div class="leftpart">
+							<div class="app-dash-widget">
+								<h3 class="title">Food Sales</h3>
+								<div class="col1">
+									<select name="period" id="period">
+										<option value="Monthly">Monthly</option>
+										<option value="">Option 2</option>
+										<option value="">Option 3</option>
+									</select>
+								</div>
+								<div class="col2">
+									<a href="" id="basic-modal" class="cta-link">Enter Saless</a>
+								</div>
+								<div class="clear"></div>
+								<div class="average-price">
+									<div>$10.000 <i class="fa fa-arrow-up"></i></div>
+									<div>My Average: $8.000</div>
+								</div>
+								<div class="clear"></div>
+								<%=image_tag("spree/manage/img/chart1.png")%>
+								<!-- <img src="images/spree/manage/img/chart1.png" alt=""> -->
+							</div>
+						</div>
+						<div class="rightpart">
+							<div class="app-dash-widget">
+								<h3 class="title">Customer Sales</h3>
+								<label for=""><span class="label-text">Spend by:</span>
+									<select name="spendBy" id="spendBy">
+										<option value="Supplier">Customer</option>
+										<option value="">Option 2</option>
+										<option value="">Option 3</option>
+									</select>
+								</label>
+								<div class="chart-block">
+									<div class="tabs">
+										<a href="" class="pie"></a>
+										<a href="" class="bar active"></a>
+									</div>
+									<div class="chart">
+										<%=image_tag("spree/manage/img/chart2.png", class: "bar active")%>
+										<!-- <img src="images/spree/manage/img/chart2.png" alt="" class="bar active"> -->
+										<%=image_tag("spree/manage/img/chart3.png", class: "pie")%>
+										<!-- <img src="images/spree/manage/img/chart3.png" alt="" class="pie"> -->
+									</div>
+								</div>
+							</div>
+							<div class="app-dash-widget">
+								<h3 class="title">Payment Status</h3>
+								<table class="status-table">
+									<tr>
+										<th>Customer</th>
+										<th>Connection</th>
+										<th>Las Invoice</th>
+									</tr>
+									<tr>
+										<td>Whole Foods</td>
+										<td><i class="fa fa-check"></i></td>
+										<td>3 days ago</td>
+									</tr>
+									<tr>
+										<td>Dean and Deluca</td>
+										<td><i class="fa fa-check"></i></td>
+										<td>28 days ago</td>
+									</tr>
+								</table>
+								<p><a href="" class="cta-link2">2 outstanding invoices</a></p>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+				<div class="shadow"></div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Popup content -->
+	<div id="basic-modal-content">
+		<h2>Enter Sales</h2>
+		<div class="divider"></div>
+		<form action="#" id="sales-form">
+			<p><label for="s_moonth">Sales this month: <%=image_tag("spree/manage/img/dollar-ico.png")%></label><input type="text" id="s_moonth"></p>
+			<p><label for="s_week">Sales this week: <%=image_tag("spree/manage/img/dollar-ico.png")%></label><input type="text" id="s_week"></p>
+			<p><label for="s_year">Sales this year: <%=image_tag("spree/manage/img/dollar-ico.png")%></label><input type="text" id="s_year"></p>
+			<p class="aligncenter"><input type="submit" value="Submit"></p>
+		</form>
+	</div>
+	<!-- // -->
+
+<!-- Scripts -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<!-- Form styler -->
+	<script src="assets/spree/manage/js/jquery.formstyler.min.js"></script>
+	<script>
+		setTimeout(function() {
+		  $('select').styler({
+				selectSearch: false,
+				fileBrowse: 'Choose',
+	    		selectSearchPlaceholder: 'Search',
+	    		singleSelectzIndex: '20',
+			});
+		}, 100)
+	</script>
+	<!-- // -->
+	<!-- Popup -->
+	<script type='text/javascript' src='assets/spree/manage/js/jquery.simplemodal.js'></script>
+	<script>
+		jQuery(function ($) {
+			$('#basic-modal').click(function (e) {
+				e.preventDefault();
+				$('#basic-modal-content').modal();
+				return false;
+			});
+		});
+	</script>
+	<!-- // -->
+	<!-- Search field -->
+	<script src="assets/spree/manage/js/classie.js"></script>
+	<script src="assets/spree/manage/js/uisearch.js"></script>
+	<script>
+		new UISearch( document.getElementById( 'sb-search' ) );
+	</script>
+	<!-- // -->
+	<!-- Scripts -->
+	<script src="assets/spree/manage/js/scripts.js"></script>
+	<!-- // -->
+<!-- // -->
+</body>
+</html>

@@ -42,8 +42,8 @@ Rails.application.routes.draw do
 
   		#end
 
-			get '/', to: 'root#index'#, as: :admin
-
+			# get '/', to: 'root#index'#, as: :admin
+      get '/', to: 'root#overview'
 		end
 
 		namespace :admin do
