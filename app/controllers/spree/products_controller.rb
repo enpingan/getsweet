@@ -1,5 +1,5 @@
 module Spree
-  class ProductsController < ApplicationController
+  class ProductsController < Spree::CustomerHomeController
     before_action :authorize_customer
 
     def index
