@@ -1,28 +1,8 @@
-<!doctype html>
-<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!--[if lt IE 9]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
 	<title>Business Overview</title>
 </head>
 
 <body>
-	<div class="sweet_app wrapper">
-		<div class="app_ui-wrapper">
-
-			<header>
-				<%= render 'spree/manage/shared/header' %>
-			</header>
-
-			<div class="relative">
-
-				<%= render 'spree/manage/shared/side_menu/side_menu' %>
-
-				<div class="app_ui-block active">
 					<h1>Business Overview</h1>
 
 					<form action="#" id="chart-form">
@@ -53,7 +33,7 @@
 
 								<div class="chart-block">
 									<%= render 'spree/manage/root/app_dash_widget/chart_tabs' %>
-									
+
 									<div class="chart">
 										<%= render 'spree/manage/root/app_dash_widget/bar_chart' %>
 										<%= render 'spree/manage/root/app_dash_widget/pie_chart' %>
@@ -71,13 +51,8 @@
 						<div class="clear"></div>
 					</form>
 
-				</div>
-
 				<div class="shadow"></div>
 				<div class="clear"></div>
-			</div>
-		</div>
-	</div>
 
 	<!-- Popup content -->
 	<div id="basic-modal-content">
@@ -86,42 +61,6 @@
 	<!-- // -->
 
 <!-- Scripts -->
-	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-	<!-- Form styler -->
-	<script src="assets/spree/manage/js/jquery.formstyler.min.js"></script>
-	<script>
-		setTimeout(function() {
-		  $('select').styler({
-				selectSearch: false,
-				fileBrowse: 'Choose',
-	    		selectSearchPlaceholder: 'Search',
-	    		singleSelectzIndex: '20',
-			});
-		}, 100)
-	</script>
-	<!-- // -->
-	<!-- Popup -->
-	<script type='text/javascript' src='assets/spree/manage/js/jquery.simplemodal.js'></script>
-	<script>
-		jQuery(function ($) {
-			$('#basic-modal').click(function (e) {
-				e.preventDefault();
-				$('#basic-modal-content').modal();
-				return false;
-			});
-		});
-	</script>
-	<!-- // -->
-	<!-- Search field -->
-	<script src="assets/spree/manage/js/classie.js"></script>
-	<script src="assets/spree/manage/js/uisearch.js"></script>
-	<script>
-		new UISearch( document.getElementById( 'sb-search' ) );
-	</script>
-	<!-- // -->
-	<!-- Scripts -->
-	<script src="assets/spree/manage/js/scripts.js"></script>
-	<!-- // -->
 <!-- // -->
 </body>
 </html>

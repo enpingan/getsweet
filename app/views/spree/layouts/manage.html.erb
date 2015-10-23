@@ -3,9 +3,17 @@
   <head data-hook="manage_inside_head">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <%= render partial: 'spree/manage/shared/head' %>
+    <meta charset="UTF-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<!--[if lt IE 9]>
+  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  	<![endif]-->
   </head>
 
   <body class="admin">
+    <div class="sweet_app wrapper">
+  		<div class="app_ui-wrapper">
 
 <% if nil %>
 10/18/15 -- TEMPORARILY REMOVING
@@ -24,26 +32,28 @@
     <%#-------------------------------------------------%>
     <%# Header navbar                                   %>
     <%#-------------------------------------------------%>
-    <%#= render partial: 'spree/manage/shared/header' %>
-
+    <header class="header">
+      <%= render 'spree/manage/shared/header' %>
+    </header>
     <%#-------------------------------------------------%>
     <%# Main content                                    %>
     <%#-------------------------------------------------%>
-    <div id="wrapper" class="container-fluid <%= wrapper_classes %>">
-      <div class="row">
+    <!-- <div id="wrapper" class="container-fluid <%= wrapper_classes %>"> -->
+      <!-- <div class="row"> -->
 
         <%#-------------------------------------------------%>
         <%# Sidebar                                         %>
         <%#-------------------------------------------------%>
-        <div class="col-sm-3 col-md-2 hidden-xs sidebar" id="main-sidebar" data-hook="admin_tabs">
-          <%#= render partial: 'spree/admin/shared/main_menu' %>
+        <!-- <div class="col-sm-3 col-md-2 hidden-xs sidebar" id="main-sidebar" data-hook="admin_tabs"> -->
+        <div class="relative">
+          <%= render 'spree/manage/shared/side_menu/side_menu' %>
         </div>
 
         <%#-------------------------------------------------%>
         <%# Content                                         %>
         <%#-------------------------------------------------%>
         <div class="<%#= main_part_classes %> main" id="main-part">
-
+          <div class="app_ui-block active">
           <%#-------------------------------------------------%>
           <%# Content header (page title/actions)             %>
           <%#-------------------------------------------------%>
@@ -74,14 +84,59 @@
             <% end %>
           </div>
 
-
+          </div>
         </div>
       </div>
     </div>
 
+  </div>
+</div>
     <%#-------------------------------------------------%>
     <%# Insert footer scripts here                      %>
     <%#-------------------------------------------------%>
-    <div data-hook="admin_footer_scripts"></div>
+    <!-- <div data-hook="admin_footer_scripts"> -->
+      <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    	<!-- Form styler -->
+    	<!-- <script src="assets/spree/manage/js/jquery.formstyler.min.js"></script> -->
+      <%= javascript_include_tag "spree/manage/js/jquery.formstyler.min.js" %>
+    	<script>
+    		setTimeout(function() {
+    		  $('select').styler({
+    				selectSearch: false,
+    				fileBrowse: 'Choose',
+    	    		selectSearchPlaceholder: 'Search',
+    	    		singleSelectzIndex: '20',
+    			});
+    		}, 100)
+    	</script>
+    	<!-- // -->
+      <!-- Popup -->
+      <!-- <script type='text/javascript' src='assets/spree/manage/js/jquery.simplemodal.js'></script> -->
+      <%= javascript_include_tag "spree/manage/js/jquery.simplemodal.js" %>
+      <script>
+        jQuery(function ($) {
+          $('#basic-modal').click(function (e) {
+            e.preventDefault();
+            $('#basic-modal-content').modal();
+            return false;
+          });
+        });
+      </script>
+      <!-- // -->
+      <!-- Search field -->
+    	<!-- <script src="assets/spree/manage/js/classie.js"></script> -->
+      <%= javascript_include_tag "spree/manage/js/classie.js" %>
+    	<!-- <script src="assets/spree/manage/js/uisearch.js"></script> -->
+      <%= javascript_include_tag "spree/manage/js/uisearch.js" %>
+    	<script>
+    		new UISearch( document.getElementById( 'sb-search' ) );
+    	</script>
+    	<!-- // -->
+    	<!-- Scripts -->
+      <%= javascript_include_tag "spree/manage/js/scripts.js" %>
+    	<!-- <script src="assets/spree/manage/js/scripts.js"></script> -->
+    	<!-- // -->
+    <!-- </div> -->
+
   </body>
 </html>
