@@ -311,8 +311,10 @@ ActiveRecord::Schema.define(version: 20151022153706) do
     t.integer  "country_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "address_id"
   end
 
+  add_index "spree_addresses", ["address_id"], name: "index_spree_addresses_on_address_id"
   add_index "spree_addresses", ["country_id"], name: "index_spree_addresses_on_country_id"
   add_index "spree_addresses", ["firstname"], name: "index_addresses_on_firstname"
   add_index "spree_addresses", ["lastname"], name: "index_addresses_on_lastname"
@@ -415,6 +417,7 @@ ActiveRecord::Schema.define(version: 20151022153706) do
     t.integer  "account_id",      null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "email"
     t.integer  "ship_address_id"
   end
 
@@ -614,6 +617,11 @@ ActiveRecord::Schema.define(version: 20151022153706) do
   end
 
   add_index "spree_payment_methods", ["id", "type"], name: "index_spree_payment_methods_on_id_and_type"
+
+  create_table "spree_payment_terms", force: :cascade do |t|
+    t.integer "term_period_in_days", null: false
+    t.integer "vendor_id",           null: false
+  end
 
   create_table "spree_payments", force: :cascade do |t|
     t.decimal  "amount",               precision: 10, scale: 2, default: 0.0, null: false
