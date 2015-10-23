@@ -24,7 +24,7 @@ img{
 	max-width: 100%;
 	height: auto;
 }
-.none { 
+.none {
 	display: none;
 }
 .clear {
@@ -292,7 +292,7 @@ img{
 	background: #DADADA;
 }
 
-.app_ui-wrapper header {
+.header {
 	position: relative;
     background: #FFF;
     height: 52px;
@@ -301,7 +301,7 @@ img{
 	-moz-box-shadow: 0px 1px 8px #ccc;
 	box-shadow: 0px 1px 8px #ccc;
 }
-.app_ui-wrapper header .logo {
+.header .logo {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -320,7 +320,7 @@ img{
     box-sizing: border-box;
     padding: 6px 20px 6px 250px;
 }
-.app_ui-wrapper header .nav-ico, .app_ui-wrapper header .search-ico, .app_ui-wrapper header .settings-ico, .app_ui-wrapper header .exit-ico{
+.header .nav-ico, .header .search-ico, .header .settings-ico, .header .exit-ico{
     display: inline-block;
     float: left;
     cursor: pointer;
@@ -328,7 +328,7 @@ img{
     font-size: 18px;
     padding: 11px 0;
 }
-.app_ui-wrapper header .nav-ico {
+.header .nav-ico {
     background: url(../img/sprites.png) center no-repeat;
     background-position: -45px 0;
     width: 31px;
@@ -336,22 +336,22 @@ img{
     padding: 0;
     margin-top: 13px;
 }
-.app_ui-wrapper header div i{
+.header div i{
 	margin-top: -2px;
 }
-.app_ui-wrapper header .nav-ico:hover{
+.header .nav-ico:hover{
     background-position: 0 -1px ;
 }
-.app_ui-wrapper header .search-ico{
+.header .search-ico{
 	margin-left: 10px;
 }
-.app_ui-wrapper header .settings-ico:hover, .app_ui-wrapper header .search-ico:hover, .app_ui-wrapper header .exit-ico:hover{
+.header .settings-ico:hover, .header .search-ico:hover, .header .exit-ico:hover{
 	color: #FF7E00;
 }
-.app_ui-wrapper header .settings-ico{
+.header .settings-ico{
 	float: right;
 }
-.app_ui-wrapper header .exit-ico{
+.header .exit-ico{
     margin-left: 21px;
 	float: right;
 }
@@ -949,7 +949,7 @@ img{
 	text-decoration: none;
 }
 .upload-page #simplemodal-container{
-	position: absolute !important; 
+	position: absolute !important;
 }
 .app-user-block {
     padding: 20px 10px;
@@ -963,7 +963,7 @@ img{
 .app-user-block .photo img{
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
-	border-radius: 50%;	
+	border-radius: 50%;
 }
 .app-user-block .info {
     float: right;
@@ -1235,7 +1235,7 @@ img{
 	    width: 700px;
 	    padding: 40px 40px 20px 40px;
 	}
-	.app_ui-wrapper header .logo {
+	.header .logo {
 	    width: 70px;
 	    height: 100%;
 	    background: #FF7E00 url("../img/logo2.png") no-repeat center center;
@@ -1349,7 +1349,7 @@ img{
 	.app_ui-wrapper aside h3 i {
 	    margin-right: 10px;
 	}
-	
+
 }
 @media (max-width: 767px) {
 	.sweet_app .welcome-logo-block .logo {
@@ -1403,7 +1403,7 @@ img{
 	    margin-top: 8px;
 	}
 }
-@media (max-width: 599px) { 
+@media (max-width: 599px) {
 	.sweet_app .welcome-form label {
 	    font-size: 25px;
 	    line-height: 25px;
@@ -1504,7 +1504,7 @@ img{
 	    line-height: 30px;
 	    padding: 10px;
 	}
-	.app_ui-wrapper header:after {
+	.header:after {
 	    content: "";
 	    display: block;
 	    clear: both;
@@ -1530,7 +1530,7 @@ img{
 	.app-dash-widget .jq-selectbox{
 		width: 100% !important;
 	}
-	.app_ui-wrapper header .sb-search {
+	.header .sb-search {
 	    position: absolute;
 	    top: 6px;
 	}
@@ -1559,7 +1559,7 @@ img{
 	.app_ui-wrapper .app_ui-block table.average {
 	    margin: 30px 0;
 	}
-	
+
 	.app_ui-wrapper .app_ui-block #invoice-form .cta-link {
 	    float: none;
 	    margin: 0 0 20px 0;
