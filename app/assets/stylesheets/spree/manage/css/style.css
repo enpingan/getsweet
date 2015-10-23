@@ -634,10 +634,10 @@ img{
 .app_ui-wrapper .chart-block .tabs .bar.active{
 	background-position: -48px -1px ;
 }
-.app_ui-wrapper .chart-block .chart div{
+.app_ui-wrapper .chart-block .chart div div{
 	display: none;
 }
-.app_ui-wrapper .chart-block .chart div.active{
+.app_ui-wrapper .chart-block .chart div div.active{
 	display: block;
 }
 .app_ui-wrapper .chart-block .chart img{
