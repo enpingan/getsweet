@@ -232,6 +232,7 @@ GEM
       warden (~> 1.2.3)
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
+    diffy (3.0.7)
     dragonfly (1.0.10)
       addressable (~> 2.3)
       multi_json (~> 1.0)
@@ -428,6 +429,7 @@ DEPENDENCIES
   binding_of_caller
   byebug
   coffee-rails (~> 4.1.0)
+  diffy
   jbuilder (~> 2.0)
   jquery-rails
   pry-rails
