@@ -1,7 +1,7 @@
 module Spree
   class CustomerHomeController < Spree::BaseController
 
-
+    layout '/spree/layouts/customer'
 
     private
 
