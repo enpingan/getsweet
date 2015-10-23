@@ -41,9 +41,13 @@ $(".chart-block .tabs a").click(function(e){
 	if(!$(this).hasClass('active')){
 		$(this).addClass('active').siblings('a').removeClass('active');
 		if($(this).hasClass('pie')){
-			$('.chart-block .chart img.pie').addClass('active').siblings('img').removeClass('active');
+			//$('.chart-block .chart div.pie').addClass('active').siblings('div').removeClass('active');
+			$('.chart-block .chart div#pie').addClass('active');
+			$('.chart-block .chart div#bar').removeClass('active');
 		} else if($(this).hasClass('bar')){
-			$('.chart-block .chart img.bar').addClass('active').siblings('img').removeClass('active');
+			//$('.chart-block .chart div.bar').addClass('active').siblings('div').removeClass('active');
+			$('.chart-block .chart div#pie').removeClass('active');
+			$('.chart-block .chart div#bar').addClass('active');
 		}
 	};
 });

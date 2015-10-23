@@ -22,7 +22,7 @@
 								</div>
 
 								<div class="clear"></div>
-								<%=image_tag("spree/manage/img/chart1.png")%>
+								<%= high_chart("area_chart", @sales_overtime_chart) %>
 							</div>
 						</div>
 
@@ -35,8 +35,8 @@
 									<%= render 'spree/manage/root/app_dash_widget/chart_tabs' %>
 
 									<div class="chart">
-										<%= render 'spree/manage/root/app_dash_widget/bar_chart' %>
-										<%= render 'spree/manage/root/app_dash_widget/pie_chart' %>
+										<%= high_chart("bar", @customer_sales_bar_chart) %>
+										<%= high_chart("pie", @customer_sales_pie_chart) %>
 									</div>
 								</div>
 

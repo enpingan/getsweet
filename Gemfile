@@ -44,8 +44,11 @@ group :development, :test do
   gem 'binding_of_caller'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+	gem 'diffy'
 end
 
 gem 'spree', github: 'spree/spree', branch: '3-0-stable'
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '3-0-stable'
 gem 'alchemy_spree', github: 'magiclabs/alchemy_spree', branch: 'spree-3.0'
+
+gem 'lazy_high_charts'

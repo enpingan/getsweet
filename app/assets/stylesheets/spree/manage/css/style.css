@@ -601,6 +601,7 @@ img{
 	position: absolute;
 	top: 0;
 	right: 0;
+	z-index: 1000;
 }
 .app_ui-wrapper .chart-block .tabs .pie, .app_ui-wrapper .chart-block .tabs .bar{
 	background: url(../img/charts.png) no-repeat;
@@ -632,6 +633,12 @@ img{
 }
 .app_ui-wrapper .chart-block .tabs .bar.active{
 	background-position: -48px -1px ;
+}
+.app_ui-wrapper .chart-block .chart div{
+	display: none;
+}
+.app_ui-wrapper .chart-block .chart div.active{
+	display: block;
 }
 .app_ui-wrapper .chart-block .chart img{
 	display: none;
