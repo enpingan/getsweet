@@ -36,7 +36,7 @@ module Spree
 
 					f.plotOptions(series: {
 								color: 'orange',
-                fillColor: 
+                fillColor:
 									{
                     linearGradient: [0, 0, 0, 300],
                     stops: [
@@ -48,7 +48,7 @@ module Spree
 					)
 
   				#f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
-				end	
+				end
 			end
 
 			# http://jsfiddle.net/gh/get/jquery/1.9.1/highslide-software/highcharts.com/tree/master/samples/highcharts/demo/column-drilldown/
@@ -91,13 +91,13 @@ module Spree
             }]
         	)
 
-				end	
+				end
 			end
 
 			# http://jsfiddle.net/gh/get/jquery/1.7.2/highslide-software/highcharts.com/tree/master/samples/highcharts/demo/pie-basic/
 			def build_sales_pie_chart
 				@customer_sales_pie_chart = LazyHighCharts::HighChart.new('graph') do |f|
-  				f.chart({:type=>"pie", :className=>"pie active", margin: [30,30,70,30]})
+  				f.chart({:type=>"pie", :className=>"pie", margin: [30,30,70,30]})
 				  f.title(:text => "Sales by Customer, Last 12 Months")
 				  f.tooltip(pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>')
 					f.plotOptions(
@@ -150,7 +150,7 @@ module Spree
             }]
         	)
 
-				end	
+				end
 			end
 
       protected

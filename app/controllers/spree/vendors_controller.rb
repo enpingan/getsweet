@@ -1,6 +1,6 @@
 module Spree
 
-  class VendorsController < ApplicationController
+  class VendorsController < Spree::CustomerHomeController
     before_action :authorize_customer, only: [:show]
     def index
       @vendors = Vendor.all

@@ -1,5 +1,5 @@
 module Spree
-  class OrdersController < ApplicationController
+  class OrdersController < Spree::CustomerHomeController
     before_action :authorize_customer
     before_action :ensure_customer, only: [:show, :edit, :update, :destroy]
 
@@ -48,7 +48,7 @@ module Spree
 
     def ensure_customer
       @order = Spree::Order.friendly.find(params[:id])
-      redirect_to login_url unless current_spree_user.customer_id == @order.customer_id
+      redirect_to root_url unless current_spree_user.customer_id == @order.customer_id
     end
   end
 end
