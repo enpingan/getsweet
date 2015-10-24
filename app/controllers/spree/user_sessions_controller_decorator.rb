@@ -12,4 +12,8 @@ Spree::UserSessionsController.class_eval do
     end
   end
 
+  def logout
+    
+  end
+
 end

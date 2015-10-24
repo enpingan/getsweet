@@ -1,12 +1,14 @@
 <aside class="active active-tablet">
 
-  <%= render 'spree/manage/shared/side_menu/user_block' %>
+  <%= render 'spree/customer/shared/side_menu/user_block' %>
 
   <div class="nav-block" id="accordion">
-    <%= render 'spree/manage/shared/side_menu/category/overview' %>
-    <%= render 'spree/manage/shared/side_menu/category/invoices' %>
-    <%= render 'spree/manage/shared/side_menu/category/orders' %>
-    <%= render 'spree/manage/shared/side_menu/category/inventory' %>
+    <%= render 'spree/customer/shared/side_menu/category/my_account' %>
+    <%= render 'spree/customer/shared/side_menu/category/vendors' %>
+    <%#= render 'spree/customer/shared/side_menu/category/overview' %>
+    <%#= render 'spree/customer/shared/side_menu/category/invoices' %>
+    <%= render 'spree/customer/shared/side_menu/category/orders' %>
+    <%#= render 'spree/customer/shared/side_menu/category/inventory' %>
   </div>
 
 </aside>
