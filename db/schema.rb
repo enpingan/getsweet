@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022153706) do
+ActiveRecord::Schema.define(version: 20151024203145) do
 
   create_table "alchemy_attachments", force: :cascade do |t|
     t.string   "name"
@@ -416,6 +416,7 @@ ActiveRecord::Schema.define(version: 20151022153706) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "ship_address_id"
+    t.string   "email"
   end
 
   add_index "spree_customers", ["account_id"], name: "index_spree_customers_on_account_id"
