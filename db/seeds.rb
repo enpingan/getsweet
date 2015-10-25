@@ -14,6 +14,7 @@ admin = Spree::Role.create(name: 'admin')
 vendor = Spree::Role.create(name: 'vendor')
 customer = Spree::Role.create(name: 'customer')
 
+
 ##############################################################################
 # Create users
 ##############################################################################
@@ -32,7 +33,6 @@ u4.save!
 u5 = Spree::User.create(email: 'bill@billysbakery.com', firstname: 'Bill', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 5, password: 'password')
 u5.spree_roles << vendor
 u5.save!
-
 
 u6 = Spree::User.create(email: 'amy@creeksidecafe.com', firstname: 'Amy', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 1, password: 'password')
 u6.spree_roles << customer
@@ -407,7 +407,6 @@ var8.stock_items.create(stock_location_id: sl5.id)
 var9.stock_items.create(stock_location_id: sl5.id)
 var10.stock_items.create(stock_location_id: sl5.id)
 
-
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
     delivery_date: DateTime.new(2015, mo + 1, 28))
@@ -422,6 +421,7 @@ var10.stock_items.create(stock_location_id: sl5.id)
   o1.line_items.create(variant_id: var9.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var10.id, quantity: rand(12..100))
 end
+
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,

@@ -166,6 +166,12 @@ GEM
       json
     awesome_nested_set (3.0.2)
       activerecord (>= 4.0.0, < 5)
+    aws-sdk (2.1.31)
+      aws-sdk-resources (= 2.1.31)
+    aws-sdk-core (2.1.31)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.1.31)
+      aws-sdk-core (= 2.1.31)
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -258,6 +264,7 @@ GEM
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jmespath (1.1.3)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -337,6 +344,11 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.4)
+    rails_stdout_logging (0.0.4)
     railties (4.2.3)
       actionpack (= 4.2.3)
       activesupport (= 4.2.3)
@@ -385,7 +397,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.10)
     state_machines (0.4.0)
     state_machines-activemodel (0.3.0)
       activemodel (~> 4.1)
@@ -430,6 +441,7 @@ PLATFORMS
 DEPENDENCIES
   alchemy_spree!
   annotate
+  aws-sdk
   better_errors
   binding_of_caller
   byebug
@@ -438,15 +450,16 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   lazy_high_charts
+  paperclip
   pg
   pry-rails
   rails (= 4.2.3)
+  rails_12factor
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spree!
   spree_auth_devise!
   spring
-  sqlite3
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
