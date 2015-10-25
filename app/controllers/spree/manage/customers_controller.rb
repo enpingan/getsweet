@@ -13,6 +13,7 @@ module Spree
       end
 
       def show
+				@vendor=current_spree_user.vendor
         @customer = Spree::Customer.find(params[:id])
         render :show
       end

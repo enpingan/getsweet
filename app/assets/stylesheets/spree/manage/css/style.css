@@ -328,6 +328,10 @@ img{
     font-size: 18px;
     padding: 11px 0;
 }
+.header .nav-ico, .header .search-ico, .header .settings-ico, .header .exit-ico a{
+		text-decoration: none;
+		color: #A49E97;
+}
 .header .nav-ico {
     background: url(../img/sprites.png) center no-repeat;
     background-position: -45px 0;
@@ -345,7 +349,7 @@ img{
 .header .search-ico{
 	margin-left: 10px;
 }
-.header .settings-ico:hover, .header .search-ico:hover, .header .exit-ico:hover{
+.header .settings-ico:hover, .header .search-ico:hover, .header .exit-ico:hover a{
 	color: #FF7E00;
 }
 .header .settings-ico{
