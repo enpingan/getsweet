@@ -80,7 +80,7 @@ img{
 	-webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    background: url(../img/app-bg.jpg) center no-repeat;
+    background: image_url("spree/manage/img/app-bg.jpg") center no-repeat;
 	background-size: cover;
 }
 .sweet_app .welcome-block .welcome-logo-block, .sweet_app .account-form-block{
@@ -91,7 +91,7 @@ img{
 	margin: 0 auto 82px auto;
 	width: 333px;
 	height: 70px;
-	background: url(../img/logo1.png) center no-repeat;
+	background: image_url("spree/manage/img/logo1.png") center no-repeat;
 	background-size: contain;
 }
 .sweet_app .account-block{
@@ -110,7 +110,7 @@ img{
     margin-left: -118px;
     width: 222px;
     height: 48px;
-    background: url(../img/logo1.png) center no-repeat;
+    background: image_url("spree/manage/img/logo1.png") center no-repeat;
     background-size: contain;
 }
 .welcome-logo-block h1 {
@@ -308,7 +308,7 @@ img{
     display: inline-block;
     width: 230px;
     height: 100%;
-    background: #ff7e00 url(../img/logo1.png) center no-repeat;
+    background: #ff7e00 image_url("spree/manage/img/logo1.png") center no-repeat;
     margin-right: 20px;
 }
 .app_ui-wrapper .header-nav {
@@ -333,7 +333,7 @@ img{
 		color: #A49E97;
 }
 .header .nav-ico {
-    background: url(../img/sprites.png) center no-repeat;
+    background: image_url("spree/manage/img/sprites.png") center no-repeat;
     background-position: -45px 0;
     width: 31px;
     height: 14px;
@@ -608,7 +608,7 @@ img{
 	z-index: 1000;
 }
 .app_ui-wrapper .chart-block .tabs .pie, .app_ui-wrapper .chart-block .tabs .bar{
-	background: url(../img/charts.png) no-repeat;
+	background: image_url("spree/manage/img/charts.png") no-repeat;
 	margin: 0 7px;
 	display: inline-block;
 }
@@ -769,7 +769,7 @@ img{
 	text-align: center;
 }
 #simplemodal-overlay {background-color:#000;}
-#simplemodal-container a.modalCloseImg {background:url(../img/close-ico.png) no-repeat; width:18px; height:19px; display:inline; z-index:3200; position:absolute; top:20px; right:20px; cursor:pointer;}
+#simplemodal-container a.modalCloseImg {background:image_url("spree/manage/img/close-ico.png") no-repeat; width:18px; height:19px; display:inline; z-index:3200; position:absolute; top:20px; right:20px; cursor:pointer;}
 #basic-modal-content h2{
 	font-size: 60px;
 	line-height: 60px;
@@ -838,7 +838,7 @@ img{
     padding: 40px 50px;
     border: 20px solid rgba(0, 0, 0, 0);
     border-radius: 3px;
-    border-image: url('../img/border-image.png') 25 repeat;
+    border-image: image_url('spree/manage/img/border-image.png') 25 repeat;
     text-align: center;
     text-transform: uppercase;
     font-size: 16px;
@@ -911,7 +911,7 @@ img{
 #upload ul li span {
     width: 15px;
     height: 12px;
-    background: url('../img/icons.png') no-repeat;
+    background: image_url('spree/manage/img/icons.png') no-repeat;
     position: absolute;
     top: 34px;
     right: 33px;
@@ -1004,7 +1004,7 @@ img{
     height: 9px;
     bottom: 3px;
     right: 11px;
-    background: url(../img/online-ico.png) no-repeat;
+    background: image_url("spree/manage/img/online-ico.png") no-repeat;
 }
 #accordion .accordion-block{
 	overflow: hidden;
@@ -1249,7 +1249,7 @@ img{
 	.header .logo {
 	    width: 70px;
 	    height: 100%;
-	    background: #FF7E00 url("../img/logo2.png") no-repeat center center;
+	    background: #FF7E00 image_url("spree/manage/img/logo2.png") no-repeat center center;
 	}
 	.app_ui-wrapper .header-nav {
 	    padding: 6px 20px 6px 85px;
