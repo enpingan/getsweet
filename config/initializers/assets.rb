@@ -14,7 +14,7 @@ Rails.application.config.assets.precompile += %w( spree/manage/js/jquery.simplem
 Rails.application.config.assets.precompile += %w( spree/manage/js/classie.js )
 Rails.application.config.assets.precompile += %w( spree/manage/js/uisearch.js )
 
-
+Rails.application.config.assets.precompile += %w( fonts.css )
 
 
 
