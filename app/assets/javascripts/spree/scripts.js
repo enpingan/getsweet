@@ -82,3 +82,38 @@ $(".app_ui-wrapper header .nav-ico").click(function(){
 		});
 	});
  /* -- */
+ /* Spin */
+ $('.qty_input').bind("change keyup input click", function() {
+     if (this.value.match(/[^0-9]/g)) {
+         this.value = this.value.replace(/[^0-9]/g, '');
+     }
+ });
+
+ $(function() {
+ 	$('.qty_input').each(function() {
+ 		var input = $(this);
+ 		input.prev('span.minus').click(function() {
+ 			var data = input.val();
+             if(data > 0) {
+                 input.val(parseInt(data) - 1);
+             }
+             return false
+ 		});
+
+ 		input.next('span.plus', this.parentNode).click(function() {
+ 			var data = input.val();
+             input.val(parseInt(data) + 1);
+             return false
+ 		});
+
+ 	});
+ });
+ /* -- */
+ /* Drop Down Effect */
+ 	$(function() {
+ 		$("#recent_orders").click(function() {
+ 			$(this).toggleClass('active');
+ 			$(this).next('ul').slideToggle("fast");
+ 		});
+ 	});
+ /* -- */
