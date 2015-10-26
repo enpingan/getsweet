@@ -1,18 +1,4 @@
-<!-- <!doctype html>
-<html lang="en"> -->
-<!-- <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/jquery.formstyler.css">
-	<link rel="stylesheet" href="css/style.css"> -->
-	<!--[if lt IE 9]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<!-- <title>Landing page</title>
-</head> -->
+
 <body>
 					<div class="search-area">
 						<div class="search-block">
@@ -33,15 +19,16 @@
 							<div class="recent-list">
 								<a href="#" id="recent_orders">Recent Orders <i class="fa fa-angle-down"></i></a>
 								<ul>
-									<li><a href="">Order 1</a></li>
-									<li><a href="">Order 2</a></li>
-									<li><a href="">Order 3</a></li>
+                  <% @recent_orders.each do |order| %>
+									  <li><a href=""><%= order.delivery_date.to_date %> (# <%= order.number %>)</a></li>
+									<% end %>
 								</ul>
 							</div>
-							<a href="" class="browse_catalog">Browse Catalog</a>
+							<!-- <a href="" class="browse_catalog">Browse Catalog</a> -->
 						</div>
 					</div>
-					<h1 class="tablet-center">Sweet Deals!</h1>
+					<!-- <h1 class="tablet-center">Sweet Deals!</h1> -->
+          <h1 class="tablet-center">Product Catalog</h1>
 					<form action="#" id="order-form">
 						<div class="order-product-list">
 							<div class="tRow header">
@@ -64,88 +51,31 @@
 									<a href="" class="sort-price">Price <i class="fa fa-sort"></i></a>
 								</div>
 								<div class="cel">
-
-								</div>
-								<div class="cel">
                   <a href="" class="sort-qty">Quantity <i class="fa fa-sort"></i></a>
 								</div>
+								<div class="cel">
+
+								</div>
 							</div>
+              <% @products.each do |product| %>
 							<div class="tRow">
 								<div class="cel">
 									<img>
 								</div>
 								<div class="cel">
-									Macaroons
+									<a href="<%= vendor_product_url(@vendor, product) %>"><%= product.name %></a>
 								</div>
 								<div class="cel">
-									# 2345436456
+									<%= product.sku %>
 								</div>
-								<div class="cel">
-									8 ct
-								</div>
-								<div class="cel">
-									2 days
-								</div>
-								<div class="cel">
-									$16.00
-								</div>
-								<div class="mobile-divider"></div>
-								<div class="cel">
-									<div class="qty-block">
-										<div class="spin"><span class="minus"><i class="fa fa-minus"></i></span><input value="0" placeholder="Qty" class="qty_input"/><span class="plus"><i class="fa fa-plus"></i></span></div>
-									</div>
-								</div>
-								<div class="cel">
-									<a href="#" class="addToOrder-button">Add to Order</a>
-								</div>
-							</div>
-							<div class="tRow">
-								<div class="cel">
-									<img>
-								</div>
-								<div class="cel">
-									Opera Cake
-								</div>
-								<div class="cel">
-									# 2345436456
-								</div>
-								<div class="cel">
+								<div class="cel sort-pack_size">
 									Each
 								</div>
-								<div class="cel">
-									2 days
+								<div class="cel sort-lead_time">
+									1 day
 								</div>
-								<div class="cel">
-									$6.10
-								</div>
-								<div class="mobile-divider"></div>
-								<div class="cel">
-									<div class="qty-block">
-										<div class="spin"><span class="minus"><i class="fa fa-minus"></i></span><input value="0" placeholder="Qty" class="qty_input"/><span class="plus"><i class="fa fa-plus"></i></span></div>
-									</div>
-								</div>
-								<div class="cel">
-									<a href="#" class="addToOrder-button">Add to Order</a>
-								</div>
-							</div>
-							<div class="tRow">
-								<div class="cel">
-									<img>
-								</div>
-								<div class="cel">
-									Napolean
-								</div>
-								<div class="cel">
-									# 2345436456
-								</div>
-								<div class="cel">
-									2/10#
-								</div>
-								<div class="cel">
-									2 days
-								</div>
-								<div class="cel">
-									$5.10
+								<div class="cel sort-price">
+									<%= number_to_currency(product.price) %>
 								</div>
 								<div class="mobile-divider"></div>
 								<div class="cel">
@@ -157,6 +87,8 @@
 									<a href="#" class="addToOrder-button">Add to Order</a>
 								</div>
 							</div>
+              <% end %>
+
 						</div>
 						<div class="clear"></div>
 					</form>

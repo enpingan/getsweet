@@ -1413,6 +1413,15 @@ img{
 .order-product-list .qty-block{
 	background: #FCF9F6;
 	padding: 15px 0px;
+	min-width: 150px;
+}
+
+.sort-price {
+	min-width: 80px;
+}
+
+.sort-lead_time, .sort-pack_size {
+	min-width: 110px;
 }
 
 /*-------------------------------------------------------------------------*/

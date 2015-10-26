@@ -15,5 +15,9 @@ module Spree
       end
     end
 
+    def current_customer
+      current_spree_user.customer
+    end
+
   end
 end
