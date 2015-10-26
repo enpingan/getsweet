@@ -53,40 +53,52 @@ module Spree
 
 			# http://jsfiddle.net/gh/get/jquery/1.9.1/highslide-software/highcharts.com/tree/master/samples/highcharts/demo/column-drilldown/
 			def build_sales_bar_chart
+        c1 = current_vendor.customers.find(1)
+        c1_total = c1.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
+
+        c2 = current_vendor.customers.find(2)
+        c2_total = c2.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
+
+        c3 = current_vendor.customers.find(3)
+        c3_total = c3.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
+
+        c4 = current_vendor.customers.find(4)
+        c4_total = c4.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
+
+        c5 = current_vendor.customers.find(5)
+        c5_total = c5.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
+
+
 				@customer_sales_bar_chart = LazyHighCharts::HighChart.new('graph') do |f|
   				f.chart({:type=>"column", :className=>"bar active"})
 				  f.title(:text => "Sales by Customer, Last 12 Months")
 					f.series(
-						name: "Brands",
+						name: "Customers",
             colorByPoint: true,
             data: [{
-                name: "Microsoft Internet Explorer",
-                y: 56.33,
+                name: c1.name,
+                y: c1_total.to_i,
                 #drilldown: "Microsoft Internet Explorer"
                 #drilldown: null
             }, {
-                name: "Chrome",
-                y: 24.03,
+                name: c2.name,
+                y: c2_total.to_i,
                 #drilldown: "Chrome"
                 #drilldown: null
             }, {
-                name: "Firefox",
-                y: 10.38,
+              name: c3.name,
+              y: c3_total.to_i,
                 #drilldown: "Firefox"
                 #drilldown: null
             }, {
-                name: "Safari",
-                y: 4.77,
+                name: c4.name,
+                y: c4_total.to_i,
                 #drilldown: "Safari"
                 #drilldown: null
             }, {
-                name: "Opera",
-                y: 0.91,
+                name: c5.name,
+                y: c5_total.to_i,
                 #drilldown: "Opera"
-                #drilldown: null
-            }, {
-                name: "Proprietary or Undetectable",
-                y: 0.2,
                 #drilldown: null
             }]
         	)

@@ -4,7 +4,7 @@
 #
 # To use the locales, use `I18n.t`:
 #
-#   I18n.t 'hello'
+  # I18n.t 'hello'
 #
 # In views, this is aliased to just `t`:
 #

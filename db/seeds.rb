@@ -74,10 +74,10 @@ c10.build_ship_address(firstname: u6.firstname, lastname: u10.lastname, address1
   state_name: 'New York', company: c6.name, country_id: 232)
 
 c6.vendors += [v1, v2, v3, v4, v5]
-c7.vendors += [v1, v2, v3, v5]
-c8.vendors += [v1, v2, v4, v5]
-c9.vendors += [v3, v4, v5]
-c10.vendors += [v1, v4, v5]
+c7.vendors += [v1, v2, v3, v4, v5]
+c8.vendors += [v1, v2, v3, v4, v5]
+c9.vendors += [v1, v2, v3, v4, v5]
+c10.vendors += [v1, v2, v3, v4, v5]
 
 c6.save!
 c7.save!
