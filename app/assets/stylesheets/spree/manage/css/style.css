@@ -1010,6 +1010,10 @@ img{
 	overflow: hidden;
 	display: none;
 }
+
+#accordion a{
+	text-decoration: none;
+}
 .jq-selectbox, .jq-selectbox__select{
     max-width: 100%;
 }
