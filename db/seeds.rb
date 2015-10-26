@@ -158,6 +158,17 @@ var10.stock_items.create(stock_location_id: sl1.id)
   o1.line_items.create(variant_id: var8.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var9.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var10.id, quantity: rand(4..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
 end
 
 12.times do |mo|
@@ -170,6 +181,17 @@ end
   o1.line_items.create(variant_id: var6.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var7.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var8.id, quantity: rand(4..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
 end
 
 ###############################################################################
@@ -232,6 +254,17 @@ var10.stock_items.create(stock_location_id: sl2.id)
   o1.line_items.create(variant_id: var8.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var9.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var10.id, quantity: rand(1..5))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
 end
 
 12.times do |mo|
@@ -244,6 +277,17 @@ end
   o1.line_items.create(variant_id: var6.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var7.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var8.id, quantity: rand(1..5))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
 end
 
 ###############################################################################
@@ -284,6 +328,17 @@ var5.stock_items.create(stock_location_id: sl3.id)
   o1.line_items.create(variant_id: var4.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var5.id, quantity: rand(1..100))
 
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+
 end
 
 12.times do |mo|
@@ -295,6 +350,17 @@ end
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var4.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var5.id, quantity: rand(1..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
 end
 
 ###############################################################################
@@ -345,6 +411,17 @@ var7.stock_items.create(stock_location_id: sl4.id)
   o1.line_items.create(variant_id: var7.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var8.id, quantity: rand(12..100))
 
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+
 end
 
 12.times do |mo|
@@ -359,6 +436,17 @@ end
   o1.line_items.create(variant_id: var6.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var7.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var8.id, quantity: rand(12..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
 end
 
 ###############################################################################
@@ -420,6 +508,17 @@ var10.stock_items.create(stock_location_id: sl5.id)
   o1.line_items.create(variant_id: var8.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var9.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var10.id, quantity: rand(12..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
 end
 
 
@@ -437,4 +536,15 @@ end
     o1.line_items.create(variant_id: var8.id, quantity: rand(1..5))
     o1.line_items.create(variant_id: var9.id, quantity: rand(12..100))
     o1.line_items.create(variant_id: var10.id, quantity: rand(12..100))
+
+    item_count = 0
+    item_total = 0
+    o1.line_items.each do |item|
+      item_count += item.quantity
+      item_total += (item.quantity * item.price)
+    end
+    o1.item_count = item_count
+    o1.item_total = item_total
+    o1.total = item_total
+    o1.save
 end
