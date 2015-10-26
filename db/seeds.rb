@@ -194,6 +194,84 @@ end
   o1.save
 end
 
+12.times do |mo|
+  o1 = v1.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
+    delivery_date: DateTime.new(2015, mo + 1, 28))
+  o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var6.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var7.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var8.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var9.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var10.id, quantity: rand(4..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
+
+12.times do |mo|
+  o1 = v1.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
+    delivery_date: DateTime.new(2015, mo + 1, 28))
+  o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var6.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var7.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var8.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var9.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var10.id, quantity: rand(4..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
+
+12.times do |mo|
+  o1 = v1.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
+    delivery_date: DateTime.new(2015, mo + 1, 28))
+  o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var6.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var7.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var8.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var9.id, quantity: rand(4..100))
+  o1.line_items.create(variant_id: var10.id, quantity: rand(4..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
+
 ###############################################################################
 # Vendor 2 - Ceci Cela :Products, Variants, Orders > Li
 ###############################################################################
@@ -242,7 +320,7 @@ var10.stock_items.create(stock_location_id: sl2.id)
 
 
 12.times do |mo|
-  o1 = v2.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
+  o1 = v2.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
     delivery_date: DateTime.new(2015, mo + 1, 28))
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
@@ -290,6 +368,83 @@ end
   o1.save
 end
 
+12.times do |mo|
+  o1 = v2.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
+    delivery_date: DateTime.new(2015, mo + 1, 28))
+  o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var6.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var7.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var8.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var9.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var10.id, quantity: rand(1..5))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
+
+12.times do |mo|
+  o1 = v2.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
+    delivery_date: DateTime.new(2015, mo + 1, 28))
+  o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var6.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var7.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var8.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var9.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var10.id, quantity: rand(1..5))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
+
+12.times do |mo|
+  o1 = v2.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
+    delivery_date: DateTime.new(2015, mo + 1, 28))
+  o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var6.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var7.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var8.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var9.id, quantity: rand(1..5))
+  o1.line_items.create(variant_id: var10.id, quantity: rand(1..5))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
 ###############################################################################
 # Vendor 3 - Canele by Celine :Products, Variants, Orders > Li
 ###############################################################################
@@ -318,6 +473,71 @@ var3.stock_items.create(stock_location_id: sl3.id)
 var4.stock_items.create(stock_location_id: sl3.id)
 var5.stock_items.create(stock_location_id: sl3.id)
 
+12.times do |mo|
+  o1 = v3.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
+    delivery_date: DateTime.new(2015, mo + 1, 15))
+
+  o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(1..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
+
+12.times do |mo|
+  o1 = v3.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
+    delivery_date: DateTime.new(2015, mo + 1, 15))
+
+  o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(1..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
+
+12.times do |mo|
+  o1 = v3.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
+    delivery_date: DateTime.new(2015, mo + 1, 15))
+
+  o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(1..100))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(1..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
@@ -342,7 +562,7 @@ var5.stock_items.create(stock_location_id: sl3.id)
 end
 
 12.times do |mo|
-  o1 = v3.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
+  o1 = v3.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
     delivery_date: DateTime.new(2015, mo + 1, 15))
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
@@ -399,6 +619,81 @@ var6.stock_items.create(stock_location_id: sl4.id)
 var7.stock_items.create(stock_location_id: sl4.id)
 
 12.times do |mo|
+  o1 = v4.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
+    delivery_date: DateTime.new(2015, mo + 1, 28))
+
+  o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(1..10))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(1..10))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var6.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var7.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var8.id, quantity: rand(12..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
+
+12.times do |mo|
+  o1 = v4.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
+    delivery_date: DateTime.new(2015, mo + 1, 28))
+
+  o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(1..10))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(1..10))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var6.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var7.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var8.id, quantity: rand(12..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
+
+12.times do |mo|
+  o1 = v4.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
+    delivery_date: DateTime.new(2015, mo + 1, 28))
+
+  o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var3.id, quantity: rand(1..10))
+  o1.line_items.create(variant_id: var4.id, quantity: rand(1..10))
+  o1.line_items.create(variant_id: var5.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var6.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var7.id, quantity: rand(12..100))
+  o1.line_items.create(variant_id: var8.id, quantity: rand(12..100))
+
+  item_count = 0
+  item_total = 0
+  o1.line_items.each do |item|
+    item_count += item.quantity
+    item_total += (item.quantity * item.price)
+  end
+  o1.item_count = item_count
+  o1.item_total = item_total
+  o1.total = item_total
+  o1.save
+end
+
+12.times do |mo|
   o1 = v4.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
     delivery_date: DateTime.new(2015, mo + 1, 28))
 
@@ -421,7 +716,6 @@ var7.stock_items.create(stock_location_id: sl4.id)
   o1.item_total = item_total
   o1.total = item_total
   o1.save
-
 end
 
 12.times do |mo|
@@ -496,7 +790,7 @@ var9.stock_items.create(stock_location_id: sl5.id)
 var10.stock_items.create(stock_location_id: sl5.id)
 
 12.times do |mo|
-  o1 = v5.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
+  o1 = v5.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
     delivery_date: DateTime.new(2015, mo + 1, 28))
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -524,6 +818,87 @@ end
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
+    delivery_date: DateTime.new(2015, mo + 1, 15))
+
+    o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
+    o1.line_items.create(variant_id: var4.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var5.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var6.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var7.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var8.id, quantity: rand(1..5))
+    o1.line_items.create(variant_id: var9.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var10.id, quantity: rand(12..100))
+
+    item_count = 0
+    item_total = 0
+    o1.line_items.each do |item|
+      item_count += item.quantity
+      item_total += (item.quantity * item.price)
+    end
+    o1.item_count = item_count
+    o1.item_total = item_total
+    o1.total = item_total
+    o1.save
+end
+
+12.times do |mo|
+  o1 = v5.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
+    delivery_date: DateTime.new(2015, mo + 1, 15))
+
+    o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
+    o1.line_items.create(variant_id: var4.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var5.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var6.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var7.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var8.id, quantity: rand(1..5))
+    o1.line_items.create(variant_id: var9.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var10.id, quantity: rand(12..100))
+
+    item_count = 0
+    item_total = 0
+    o1.line_items.each do |item|
+      item_count += item.quantity
+      item_total += (item.quantity * item.price)
+    end
+    o1.item_count = item_count
+    o1.item_total = item_total
+    o1.total = item_total
+    o1.save
+end
+
+12.times do |mo|
+  o1 = v5.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
+    delivery_date: DateTime.new(2015, mo + 1, 15))
+
+    o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
+    o1.line_items.create(variant_id: var4.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var5.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var6.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var7.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var8.id, quantity: rand(1..5))
+    o1.line_items.create(variant_id: var9.id, quantity: rand(12..100))
+    o1.line_items.create(variant_id: var10.id, quantity: rand(12..100))
+
+    item_count = 0
+    item_total = 0
+    o1.line_items.each do |item|
+      item_count += item.quantity
+      item_total += (item.quantity * item.price)
+    end
+    o1.item_count = item_count
+    o1.item_total = item_total
+    o1.total = item_total
+    o1.save
+end
+
+12.times do |mo|
+  o1 = v5.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
     delivery_date: DateTime.new(2015, mo + 1, 15))
 
     o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
