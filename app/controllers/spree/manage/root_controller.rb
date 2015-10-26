@@ -19,12 +19,26 @@ module Spree
 
 			# http://jsfiddle.net/gh/get/jquery/1.7.2/highslide-software/highcharts.com/tree/master/samples/highcharts/plotoptions/area-fillcolor-gradient/
 			def build_sales_line_chart
+        month_totals = []
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 1, 1), DateTime.new(2015,2,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 2, 1), DateTime.new(2015,3,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 3, 1), DateTime.new(2015,4,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 4, 1), DateTime.new(2015,5,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 5, 1), DateTime.new(2015,6,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 6, 1), DateTime.new(2015,7,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 7, 1), DateTime.new(2015,8,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 8, 1), DateTime.new(2015,9,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 9, 1), DateTime.new(2015,10,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 10, 1), DateTime.new(2015,11,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 11, 1), DateTime.new(2015,12,1)).sum(:total).to_i
+        month_totals << current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", DateTime.new(2015, 12, 1), DateTime.new(2016,1,1)).sum(:total).to_i
+
 				@sales_overtime_chart = LazyHighCharts::HighChart.new('graph') do |f|
   				f.chart({:type=>"area"})
 				  f.title(:text => "Sales Over Time - 2015")
 					f.xAxis(:categories => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
 					f.series(
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            data: month_totals
         	)
 				  #f.series(:name => "GDP in Billions", :yAxis => 0, :data => [14119, 5068, 4985, 3339, 2656])
   				#f.series(:name => "Population in Millions", :yAxis => 1, :data => [310, 127, 1340, 81, 65])
