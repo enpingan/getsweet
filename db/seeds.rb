@@ -172,10 +172,10 @@ var10.stock_items.create(stock_location_id: sl1.id)
   o1.item_total = item_total
   o1.total = item_total
 
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -201,10 +201,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -233,10 +233,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -265,10 +265,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -297,10 +297,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -376,10 +376,10 @@ var10.stock_items.create(stock_location_id: sl2.id)
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -405,10 +405,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -437,10 +437,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -469,10 +469,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -501,10 +501,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -556,10 +556,10 @@ var5.stock_items.create(stock_location_id: sl3.id)
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -584,10 +584,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -612,10 +612,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -639,10 +639,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -668,10 +668,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -734,10 +734,10 @@ var7.stock_items.create(stock_location_id: sl4.id)
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -765,10 +765,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -796,10 +796,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -827,10 +827,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -858,10 +858,10 @@ end
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -936,10 +936,10 @@ var10.stock_items.create(stock_location_id: sl5.id)
   o1.item_count = item_count
   o1.item_total = item_total
   o1.total = item_total
-  o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-  if delivery_date < Time.now
+  o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+  if o1.delivery_date < Time.now
     o1.state = "complete"
-    o1.completed_at = delivery_date
+    o1.completed_at = o1.delivery_date
   end
 
   o1.save
@@ -970,10 +970,10 @@ end
     o1.item_count = item_count
     o1.item_total = item_total
     o1.total = item_total
-    o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-    if delivery_date < Time.now
+    o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+    if o1.delivery_date < Time.now
       o1.state = "complete"
-      o1.completed_at = delivery_date
+      o1.completed_at = o1.delivery_date
     end
 
     o1.save
@@ -1003,10 +1003,10 @@ end
     o1.item_count = item_count
     o1.item_total = item_total
     o1.total = item_total
-    o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-    if delivery_date < Time.now
+    o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+    if o1.delivery_date < Time.now
       o1.state = "complete"
-      o1.completed_at = delivery_date
+      o1.completed_at = o1.delivery_date
     end
 
     o1.save
@@ -1036,10 +1036,10 @@ end
     o1.item_count = item_count
     o1.item_total = item_total
     o1.total = item_total
-    o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-    if delivery_date < Time.now
+    o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+    if o1.delivery_date < Time.now
       o1.state = "complete"
-      o1.completed_at = delivery_date
+      o1.completed_at = o1.delivery_date
     end
 
     o1.save
@@ -1069,10 +1069,10 @@ end
     o1.item_count = item_count
     o1.item_total = item_total
     o1.total = item_total
-    o1.payments.create(payment_method_id: Spree::PaymentMethods.last.id)
-    if delivery_date < Time.now
+    o1.payments.create(payment_method_id: Spree::PaymentMethod.last.id)
+    if o1.delivery_date < Time.now
       o1.state = "complete"
-      o1.completed_at = delivery_date
+      o1.completed_at = o1.delivery_date
     end
 
     o1.save
