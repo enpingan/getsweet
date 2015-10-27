@@ -10,7 +10,7 @@ module Spree
     end
 
     def show
-      @order = Spree::Order.friendly.find(params[:id])
+      @order = set_order_session
       render :show
     end
 
@@ -23,12 +23,12 @@ module Spree
     end
 
     def edit
-      @order = Spree::Order.friendly.find(params[:id])
+      @order = set_order_session
       render :edit
     end
 
     def update
-      @order = Spree::Order.friendly.find(params[:id])
+      @order = set_order_session
 
       if @order.update(order_params)
         redirect_to orders_url
@@ -79,6 +79,12 @@ module Spree
     def ensure_customer
       @order = Spree::Order.friendly.find(params[:id])
       redirect_to root_url unless current_customer.id == @order.customer_id
+    end
+
+    def set_order_session
+      order = Spree::Order.friendly.find(params[:id])
+      session[:order_id] = order.id
+      order
     end
   end
 end
