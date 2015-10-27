@@ -29,6 +29,7 @@
 					</div>
 					<!-- <h1 class="tablet-center">Sweet Deals!</h1> -->
           <h1 class="tablet-center">Product Catalog</h1>
+					<h3 id="current-order">Current Order: <a href="<%= order_url(@current_order) %>">#<%= @current_order.number %> (<%= @current_order.delivery_date.to_date %>)</a></h3>
 					<form action="#" id="order-form">
 						<div class="order-product-list">
 							<div class="tRow header">
