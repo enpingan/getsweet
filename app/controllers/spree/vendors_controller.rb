@@ -22,17 +22,19 @@ module Spree
     private
 
     def find_or_create_order(vendor)
+
       if session[:order_id]
         current_order = Spree::Order.find(session[:order_id])
         unless current_order.vendor_id == vendor.id
-          current_order = vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
-          session[:order_id] = current_order.id
+          current_order = vendor.orders.where('customer_id = ? AND delivery_date = ?' , current_customer.id, DateTime.tomorrow).limit(1).first
+          if !current_order
+            current_order = vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
+          end
         end
       else
         current_order = vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
-        session[:order_id] = current_order.id
       end
-
+      session[:order_id] = current_order.id
       current_order
     end
 
