@@ -10,6 +10,8 @@
 Spree::Core::Engine.load_seed if defined?(Spree::Core)
 Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 
+Alchemy::Seeder.seed!
+
 admin = Spree::Role.create(name: 'admin')
 vendor = Spree::Role.create(name: 'vendor')
 customer = Spree::Role.create(name: 'customer')

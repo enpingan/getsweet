@@ -10,11 +10,11 @@ class VendorsController < ApplicationController
 
   def show
     @vendor = Vendor.friendly.find(params[:id])
-    @products = @vendor.products
+    @products = @vendor.products.order('name DESC')
   end
 end
 
   # /. Vendor
-  end 
+  end
 # /. Spree
 end

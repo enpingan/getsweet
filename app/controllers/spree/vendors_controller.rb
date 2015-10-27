@@ -10,6 +10,7 @@ module Spree
     def show
       @vendor = Vendor.friendly.find(params[:id])
       @products = @vendor.products
+      @recent_orders = current_customer.orders.where('delivery_date > ? AND vendor_id = ?', 3.months.ago, @vendor.id)
       # @products = @vendor.products.select {|product| product.promotional == true}
     end
   end

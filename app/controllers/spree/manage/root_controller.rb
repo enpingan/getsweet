@@ -38,6 +38,7 @@ module Spree
 				  f.title(:text => "Sales Over Time - 2015")
 					f.xAxis(:categories => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
 					f.series(
+            name: "Total Sales",
             data: month_totals
         	)
 				  #f.series(:name => "GDP in Billions", :yAxis => 0, :data => [14119, 5068, 4985, 3339, 2656])
