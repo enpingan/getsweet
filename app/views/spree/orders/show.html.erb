@@ -1,7 +1,7 @@
 <h1> <%= @order.vendor.name %> </h1>
 <h4><a href="<%= orders_url %>">Back to All Orders</a></h4>
 <h1> Vendor: <%= @order.vendor.name %> </h1>
-<h3> Order #<%= @order.id %> </h3>
+<h3> Order #<%= @order.number %> </h3>
 <h4>Order status: <%= @order.state %></h4>
 
 <div data-hook="outside_cart_form">
@@ -44,7 +44,7 @@
   				</tr>
 				</table>
 
-      
+
 
       </div>
     </div>
