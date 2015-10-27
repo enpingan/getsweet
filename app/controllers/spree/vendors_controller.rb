@@ -32,7 +32,10 @@ module Spree
           end
         end
       else
-        current_order = vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
+        current_order = vendor.orders.where('customer_id = ? AND delivery_date = ?' , current_customer.id, DateTime.tomorrow).limit(1).first
+        if !current_order
+          current_order = vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
+        end
       end
       session[:order_id] = current_order.id
       current_order
