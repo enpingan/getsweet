@@ -11,7 +11,7 @@ module Spree
       @vendor = Vendor.friendly.find(params[:id])
       # @current_order = current_customer.orders.where('vendor_id = ?', @vendor.id).last
 
-      @current_order = find_or_create_order
+      @current_order = find_or_create_order(@vendor)
 
       @line_items = @current_order.line_items
       @products = @vendor.products
@@ -21,11 +21,15 @@ module Spree
 
     private
 
-    def find_or_create_order
+    def find_or_create_order(vendor)
       if session[:order_id]
         current_order = Spree::Order.find(session[:order_id])
+        unless current_order.vendor_id == vendor.id
+          current_order = vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
+          session[:order_id] = current_order.id
+        end
       else
-        current_order = @vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
+        current_order = vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
         session[:order_id] = current_order.id
       end
 
