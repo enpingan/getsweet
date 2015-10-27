@@ -84,7 +84,6 @@ class OrdersController < Spree::Manage::BaseController
 
 	def ensure_vendor
     @order = Spree::Order.friendly.find(params[:id])
-		debugger
     redirect_to root_url unless current_vendor.id == @order.vendor_id
   end
 end
