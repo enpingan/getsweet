@@ -1,5 +1,9 @@
 module Spree
   class OrdersController < Spree::CustomerHomeController
+    respond_to :js
+
+    skip_before_action :verify_authenticity_token
+
     before_action :authorize_customer
     before_action :ensure_customer, only: [:show, :edit, :update, :destroy]
 
@@ -40,7 +44,7 @@ module Spree
     # Adds a new item to the order (creating a new order if none already exists)
     def populate
 
-      order    = current_order(create_order_if_necessary: true)
+      order    = Spree::Order.find(params[:order]['id'].to_i)
       variant  = Spree::Variant.find(params[:index])
       quantity = params[:quantity].to_i
       options  = params[:options] || {}
