@@ -30,7 +30,7 @@
 					<!-- <h1 class="tablet-center">Sweet Deals!</h1> -->
           <h1 class="tablet-center"><%= @vendor.name %> Product Catalog</h1>
 					<h3 id="current-order">Current Order: <a href="<%= order_url(@current_order) %>">#<%= @current_order.number %> (<%= @current_order.delivery_date.to_date %>)</a></h3>
-					<form action="#" id="order-form">
+					<div id="order-form">
 						<div class="order-product-list">
 							<div class="tRow header">
 								<div class="cel">
@@ -59,12 +59,11 @@
 								</div>
 							</div>
               <% @products.each do |product| %>
-								<%= form_for :order, url: populate_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
+								<%= form_for :order, html: {class: "tRow"}, url: populate_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
 									<input type="hidden" name=order[id] value="<%= @current_order.id %>">
 
-									<div class="tRow">
 										<div class="cel">
-											No Img
+											<img>
 										</div>
 										<div class="cel">
 											<a href="<%= vendor_product_url(@vendor, product) %>"><%= product.name %></a>
@@ -95,17 +94,17 @@
 										</div>
 										<div class="cel">
 											<!-- <a href="#" class="addToOrder-button">Add to Order</a> -->
-											<%= button_tag :class => 'add-prod-to-order btn btn-success', :id => 'add-to-cart-button', :type => :submit do %>
-				                <%= Spree.t(:add_to_order) %>
+											<%#= button_tag :class => 'add-prod-to-order btn btn-success', :id => 'add-to-cart-button', :type => :submit do %>
+											<%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit do %>
+												<%= Spree.t(:add_to_order) %>
 				              <% end %>
 										</div>
-									</div>
 								<% end %>
               <% end %>
 
 						</div>
 						<div class="clear"></div>
-					</form>
+					</div>
 
 				<div class="shadow"></div>
 				<div class="clear"></div>
