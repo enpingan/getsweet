@@ -29,7 +29,7 @@ class OrdersController < Spree::Manage::BaseController
   end
 
   def show
-    @order = Spree::Order.find_by(number:params[:id])
+    @order = set_order_session
 		@vendor = @order.vendor ? @order.vendor : Spree::Vendor.first
     render :show
   end
@@ -39,14 +39,14 @@ class OrdersController < Spree::Manage::BaseController
   end
 
   def update
-    @order = Spree::Order.find(params[:id])
+    @order = set_order_session
 
   end
 
   # Adds a new item to the order (creating a new order if none already exists)
   def populate
 
-    order    = current_order(create_order_if_necessary: true)
+    order    = set_order_session
     variant  = Spree::Variant.find(params[:index])
     quantity = params[:quantity].to_i
     options  = params[:options] || {}
@@ -86,6 +86,12 @@ class OrdersController < Spree::Manage::BaseController
     @order = Spree::Order.friendly.find(params[:id])
     redirect_to root_url unless current_vendor.id == @order.vendor_id
   end
+
+	def set_order_session
+		order = Spree::Order.friendly.find(params[:id])
+		session[:order_id] = order.id
+		order
+	end
 end
 
 

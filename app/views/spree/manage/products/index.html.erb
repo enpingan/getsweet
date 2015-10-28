@@ -1,82 +1,102 @@
 <%#= form_for :order, url: populate_manage_orders_path(format: 'js'), remote: true do |f| %>
 
-<h1 class="vendor-heading"> <%= @vendor.name %></h1>
+<h1 class="tablet-center"><%= @vendor.name %> Product Catalog</h1>
 
 <input type="text" placeholder="Product name or sku"></input>
 <button class=search>Search</button>
 
-<h3> Product Guide, <%= @products.count %> Items Available </h3>
-Current order: <%#= @current_order.number %> <!-- DEBUG -->
-<table>
-  <colgroup span="7"></colgroup>
-  <tr>
-    <th></th>
-    <th>Product Name</th>
-    <th>SKU #</th>
-    <th>Pack/Size</th>
-    <th>Lead Time</th>
-    <th>Price</th>
-    <th>Quantity</th>
-    <th></th>
-  </tr>
-  <% @products.each do |product| %>
-	
-
-		<%# SETTING THE INDEX TO PRODUCT.MASTER.ID BELOW BUT WILL NEED TO DETERMINE HOW TO CONSIDER VARIANTS IN THIS CATALOG VIEW %>
-	 <%= form_for :order, url: populate_manage_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
-
-    <tr>
-      <td>
-        <% if product.images.present? %>
-          <%= image_tag product.images.first.attachment.url(:mini) %>
-        <% else %>
-           No IMG
-        <% end %>
-      </td>
-      <td><a href="<%= manage_product_url(product.id) %>"><%= product.name %></a></td>
-      <td><%=Spree::Variant.find_by_product_id(product.id).sku %></td>
-      <td>pack/size</td>
-      <td>lead time</td>
-      <td><%= number_to_currency(product.price) %></td>
-      <td>
-        <div class="cart-item-quantity count-block" data-hook="cart_item_quantity">
-          <span href="#" class="minus count-buttons">-</span>
-            <div class="count">
-							<%= number_field_tag :quantity, 1, :class => 'title form-control', :min => 1 %>
-            </div>
-            <span href="#" class="plus count-buttons">+</span>
-        </div>
-      </td>
-			<td>
-        <div class="add-to-cart">
-          <br/>
-          <div class="input-group">
-            <span class="input-group-btn">
-              <%= button_tag :class => 'add-prod-to-order btn btn-success', :id => 'add-to-cart-button', :type => :submit do %>
-                <%= Spree.t(:add_to_cart) %>
-              <% end %>
-            </span>
-          </div>
-				</td>
-    </tr>
-	 <!-- /. form_for -->
-	 <% end %>
+<h3><%= @products.count %> Items Available </h3>
+<h3> Current Customer:
+  <% if @current_customer %>
+    <a href="manage_customer_url(@current_customer)"><%= @current_customer.name %></a>
+  <% else %>
+    None Selected
   <% end %>
-  <tfoot>
-    <tr>
-      <td>
-        <div class="add-to-cart">
-          <br/>
-          <div class="input-group">
-            <span class="input-group-btn">
-              <%= button_tag :class => 'add-to-order btn btn-success', :id => 'add-to-cart-button', :type => :submit do %>
-                <%= Spree.t(:add_to_cart) %>
-              <% end %>
-            </span>
-          </div>
-      </td>
-    </tr>
-  </tfoot>
-</table>
+</h3>
+<h3> Delivery Date</h3>
+<input class="delivery_date_picker" type="date_field"
+  name=order[delivery_date] value="<%= @current_order.delivery_date.to_date if @current_order%> "
+  placeholder="yyyy-mm-dd">
+<%#= form_for ([:manage, @order]) do |f| %>
+  <%#= f.date_field :delivery_date, placeholder: "Delivery Date" %>
+<%# end %>
 
+<h3 id="current-order">Current Order: <a href="<%= manage_order_url(@current_order) %>">#<%= @current_order.number %> (<%= @current_order.delivery_date.to_date %>)</a></h3>
+<div id="order-form">
+  <div class="order-product-list">
+
+    <div class="tRow header">
+      <div class="cel">
+      </div>
+      <div class="cel">
+        <a href="" class="sort-name">Name <i class="fa fa-sort"></i></a>
+      </div>
+      <div class="cel">
+        <a href="" class="sort-sku">SKU <i class="fa fa-sort"></i></a>
+      </div>
+      <div class="cel">
+        <a href="" class="sort-pack_size">Pack/Size <i class="fa fa-sort"></i></a>
+      </div>
+      <div class="cel">
+        <a href="" class="sort-lead_time">Lead Time <i class="fa fa-sort"></i></a>
+      </div>
+      <div class="cel">
+        <a href="" class="sort-price">Price <i class="fa fa-sort"></i></a>
+      </div>
+      <div class="cel">
+        <a href="" class="sort-qty">Quantity <i class="fa fa-sort"></i></a>
+      </div>
+      <div class="cel">
+      </div>
+    </div>
+
+    <% @products.each do |product| %>
+      <%= form_for :order, html: {class: "tRow"}, url: populate_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
+        <input type="hidden" name=order[id] value="<%= @current_order.id %>">
+
+          <div class="cel">
+            <img>
+          </div>
+          <div class="cel">
+            <a href="<%= vendor_product_url(@vendor, product) %>"><%= product.name %></a>
+          </div>
+          <div class="cel">
+            <%= product.sku %>
+          </div>
+          <div class="cel sort-pack_size">
+            Each
+          </div>
+          <div class="cel sort-lead_time">
+            1 day
+          </div>
+          <div class="cel sort-price">
+            <%= number_to_currency(product.price) %>
+          </div>
+          <div class="mobile-divider"></div>
+          <div class="cel">
+            <div class="qty-block">
+              <div class="spin"><span class="minus">
+                <i class="fa fa-minus"></i>
+              </span>
+              <%#= number_field_tag :quantity, 1, :class => 'title form-control', :min => 1 %>
+              <%= number_field_tag :quantity, 0, :class => 'qty_input', :min => 1 %>
+              <!-- <input value="0" placeholder="Qty" class="qty_input"/> -->
+              <span class="plus"><i class="fa fa-plus"></i></span></div>
+            </div>
+          </div>
+          <div class="cel">
+            <%#= button_tag :class => 'add-prod-to-order btn btn-success', :id => 'add-to-cart-button', :type => :submit do %>
+            <%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit do %>
+              <%= "Add to Order" %>
+            <% end %>
+          </div>
+      <% end %>
+    <% end %>
+
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div class="shadow"></div>
+<div class="clear"></div>
 <%# end %>

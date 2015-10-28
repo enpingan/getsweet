@@ -10,9 +10,10 @@ module Spree
     #@vendor = Vendor.find(params[:vendor_id])
     #@products = @vendor.products
     # @vendor = Vendor.first
-    if @vendor.orders.present?
-	    @current_order = @vendor.orders.last
-    end
+    @current_customer = current_customer
+
+    @current_order = find_or_create_order
+
     # @products = Spree::Product.all
     @products = @vendor.products
     render :index
@@ -58,9 +59,31 @@ module Spree
     redirect_to root_url unless current_vendor.id == @product.vendor_id
   end
 
+
+  def find_or_create_order
+
+    if session[:order_id]
+      current_order = Spree::Order.find(session[:order_id])
+      unless current_order.customer_id == current_customer.id 
+        current_order = current_vendor.orders.where('customer_id = ? AND delivery_date = ?' , current_customer.id, DateTime.tomorrow).limit(1).first
+        if !current_order
+          current_order = current_vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
+        end
+      end
+    else
+      current_order = current_vendor.orders.where('customer_id = ? AND delivery_date = ?' , current_customer.id, DateTime.tomorrow).limit(1).first
+      if !current_order
+        current_order = current_vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
+      end
+    end
+    session[:order_id] = current_order.id
+    current_order
+  end
+
+  def current_customer
+    @current_customer ||= Spree::Customer.find(1) #TEMPORARY -- NEED TO BE ABLE TO SELECT CUSTOMER
+  end
 end
-
-
   # /. Vendor
   end
 # /. Spree
