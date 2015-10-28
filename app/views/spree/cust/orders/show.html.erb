@@ -3,6 +3,10 @@
 <h1> Vendor: <%= @order.vendor.name %> </h1>
 <h3> Order #<%= @order.number %> </h3>
 <h4>Order status: <%= @order.state %></h4>
+<!-- change to appropriate order.state -->
+<% unless @order.state == 'complete' || @order.delivery_date < DateTime.tomorrow ||(@order.delivery_date == DateTime.tomorrow && Time.now > @order.vendor.order_cutoff_time.to_datetime)%>
+	<a href="<%= edit_order_url(@order) %>">Edit</a>
+<% end %>
 
 <div data-hook="outside_cart_form">
 	<%= form_for @order, url: spree.update_cart_path, html: { id: 'update-cart' } do |order_form| %>
