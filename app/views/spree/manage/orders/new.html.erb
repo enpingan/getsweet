@@ -2,7 +2,11 @@
   <%= f.label :customer_id %>
   <%= f.select(:customer_id) do %>
     <% @customers.each do |customer| %>
-      <option value="<%= customer.id %>"><%= customer.name %></option>
+      <% if @current_customer_id == customer.id %>
+        <option value="<%= customer.id %>" selected="selected"><%= customer.name %></option>
+      <% else %>
+        <option value="<%= customer.id %>"><%= customer.name %></option>
+      <% end %>
     <% end %>
   <% end %>
 

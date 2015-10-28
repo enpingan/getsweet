@@ -14,6 +14,9 @@ class OrdersController < Spree::Manage::BaseController
   end
 
   def new
+		if session[:customer_id]
+			@current_customer_id = session[:customer_id]
+		end
 		@customers = current_vendor.customers
 		@order = current_vendor.orders.new
   end

@@ -1,15 +1,14 @@
-<!-- remove this link when using accordian-block -->
-<a href="<%= manage_orders_url %>">
-  <h3>
-    <%=image_tag("spree/manage/img/nav-ico3.png")%>
-    <span class="tablet-hide">Orders
-      <!-- <i class="fa fa-angle-left"></i> -->
-    </span>
-  </h3>
-</a>
+
+<h3>
+  <%=image_tag("spree/manage/img/nav-ico3.png")%>
+  <span class="tablet-hide">Orders
+    <i class="fa fa-angle-left"></i>
+  </span>
+</h3>
 
 <div class="accordion-block">
   <ul>
-    <li><a href=""></a></li>
+    <li><a href="<%= new_manage_order_url %>">Create New Order</a></li>
+    <li><a href="<%= manage_orders_url %>">All Orders</a></li>
   </ul>
 </div>
