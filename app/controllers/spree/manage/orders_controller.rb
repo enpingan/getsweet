@@ -35,7 +35,9 @@ class OrdersController < Spree::Manage::BaseController
   end
 
   def edit
-
+		@order = set_order_session
+		@vendor = current_vendor
+		render :edit
   end
 
   def update

@@ -22,7 +22,7 @@
   <%#= f.date_field :delivery_date, placeholder: "Delivery Date" %>
 <%# end %>
 
-<h3 id="current-order">Current Order: <a href="<%= manage_order_url(@current_order) %>">#<%= @current_order.number %> (<%= @current_order.delivery_date.to_date %>)</a></h3>
+<h3 id="current-order">Current Order: <a href="<%= edit_manage_order_url(@current_order) %>">#<%= @current_order.number %> (<%= @current_order.delivery_date.to_date %>)</a></h3>
 <div id="order-form">
   <div class="order-product-list">
 

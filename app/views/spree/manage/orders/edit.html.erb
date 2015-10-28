@@ -26,7 +26,7 @@
      					<th class="cart-item-delete-header"></th>
     				</tr>
   				</thead>
-					
+
 					<tbody id="line_items" data-hook>
 						<%= render partial: 'line_item', collection: order_form.object.line_items, locals: { order_form: order_form } %>
 					</tbody>
@@ -62,4 +62,3 @@
     </div>
   <% end %>
 </div>
-
