@@ -43,6 +43,12 @@ class OrdersController < Spree::Manage::BaseController
   def update
     @order = set_order_session
 
+		if @order.update(order_params)
+			redirect_to manage_orders_url
+		else
+			render :edit
+		end
+
   end
 
   # Adds a new item to the order (creating a new order if none already exists)
@@ -81,7 +87,7 @@ class OrdersController < Spree::Manage::BaseController
   protected
 
   def order_params
-    self.params.require(:spree_order).permit(:customer_id) #this makes sense from the vendor side
+    self.params.require(:order).permit(:customer_id, :delivery_date) #this makes sense from the vendor side
   end
 
 	def ensure_vendor

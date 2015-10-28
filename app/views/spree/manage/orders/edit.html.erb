@@ -7,7 +7,7 @@
 <h4>Order status: <%= @order.state %></h4>
 
 <div data-hook="outside_cart_form">
-	<%= form_for @order, url: spree.update_cart_path, html: { id: 'update-cart' } do |order_form| %>
+	<%= form_for ([:manage, @order]),url: manage_order_url, method: "patch", html: { id: 'update-cart' } do |order_form| %>
 		<%= order_form.label :delivery_date %>
 	  <%= order_form.date_field :delivery_date, placeholder: "Delivery Date" %>
 		<div data-hook="inside_cart_form">
@@ -49,7 +49,7 @@
 
         <div class="links col-md-6 navbar-form pull-right text-right" data-hook="cart_buttons">
           <div class="form-group">
-            <%= button_tag class: 'btn btn-primary add-to-order', id: 'update-button' do %>
+            <%= order_form.submit class: 'btn btn-primary add-to-order', id: 'update-button' do %>
              <%= Spree.t(:update) %>
             <% end %>
             <%= button_tag class: 'btn btn-lg btn-success add-to-order', id: 'checkout-link', name: 'checkout' do %>
