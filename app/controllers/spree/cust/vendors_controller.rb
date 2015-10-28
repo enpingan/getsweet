@@ -1,6 +1,6 @@
 module Spree
-
-  class VendorsController < Spree::CustomerHomeController
+ module Cust
+  class VendorsController < Spree::Cust::CustomerHomeController
     before_action :authorize_customer, only: [:show]
     def index
       @vendors = Vendor.all
@@ -42,4 +42,5 @@ module Spree
     end
 
   end
+ end
 end

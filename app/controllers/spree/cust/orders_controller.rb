@@ -1,5 +1,6 @@
 module Spree
-  class OrdersController < Spree::CustomerHomeController
+ module Cust
+  class OrdersController < Spree::Cust::CustomerHomeController
     respond_to :js
 
     skip_before_action :verify_authenticity_token
@@ -91,4 +92,5 @@ module Spree
       order
     end
   end
+ end
 end

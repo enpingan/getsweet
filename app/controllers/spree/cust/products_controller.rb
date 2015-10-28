@@ -1,5 +1,6 @@
 module Spree
-  class ProductsController < Spree::CustomerHomeController
+ module Cust
+  class ProductsController < Spree::Cust::CustomerHomeController
     before_action :authorize_customer
 
     def index
@@ -15,4 +16,5 @@ module Spree
       render :show
     end
   end
+ end
 end

@@ -2,7 +2,7 @@
 <html lang="<%= I18n.locale %>">
   <head data-hook="customer_inside_head">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <%= render partial: 'spree/customer/shared/head' %>
+    <%= render partial: 'spree/cust/shared/head' %>
   </head>
 
   <body class="customer">
@@ -27,7 +27,7 @@
     <%# Header navbar                                   %>
     <%#-------------------------------------------------%>
     <header class="header">
-      <%= render 'spree/customer/shared/header' %>
+      <%= render 'spree/cust/shared/header' %>
     </header>
     <%#-------------------------------------------------%>
     <%# Main content                                    %>
@@ -40,7 +40,7 @@
         <%#-------------------------------------------------%>
         <!-- <div class="col-sm-3 col-md-2 hidden-xs sidebar" id="main-sidebar" data-hook="admin_tabs"> -->
         <div class="relative">
-          <%= render 'spree/customer/shared/side_menu/side_menu' %>
+          <%= render 'spree/cust/shared/side_menu/side_menu' %>
         </div>
 
         <%#-------------------------------------------------%>
