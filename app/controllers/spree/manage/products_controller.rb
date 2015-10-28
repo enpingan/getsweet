@@ -64,7 +64,7 @@ module Spree
 
     if session[:order_id]
       current_order = Spree::Order.find(session[:order_id])
-      unless current_order.customer_id == current_customer.id 
+      unless current_order.customer_id == current_customer.id
         current_order = current_vendor.orders.where('customer_id = ? AND delivery_date = ?' , current_customer.id, DateTime.tomorrow).limit(1).first
         if !current_order
           current_order = current_vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
@@ -81,7 +81,8 @@ module Spree
   end
 
   def current_customer
-    @current_customer ||= Spree::Customer.find(1) #TEMPORARY -- NEED TO BE ABLE TO SELECT CUSTOMER
+    @current_customer = Spree::Customer.find(session[:customer_id])
+    # @current_customer ||= Spree::Customer.find(1) #TEMPORARY -- NEED TO BE ABLE TO SELECT CUSTOMER
   end
 end
   # /. Vendor

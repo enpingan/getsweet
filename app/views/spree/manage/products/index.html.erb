@@ -13,10 +13,11 @@
     None Selected
   <% end %>
 </h3>
-<h3> Delivery Date</h3>
+<h3> Delivery Date
 <input class="delivery_date_picker" type="date_field"
-  name=order[delivery_date] value="<%= @current_order.delivery_date.to_date if @current_order%> "
+  name=order[delivery_date] value="<%= @current_order.delivery_date.to_date if @current_order%>"
   placeholder="yyyy-mm-dd">
+</h3>
 <%#= form_for ([:manage, @order]) do |f| %>
   <%#= f.date_field :delivery_date, placeholder: "Delivery Date" %>
 <%# end %>
@@ -51,7 +52,7 @@
     </div>
 
     <% @products.each do |product| %>
-      <%= form_for :order, html: {class: "tRow"}, url: populate_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
+      <%= form_for :order, html: {class: "tRow"}, url: populate_manage_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
         <input type="hidden" name=order[id] value="<%= @current_order.id %>">
 
           <div class="cel">

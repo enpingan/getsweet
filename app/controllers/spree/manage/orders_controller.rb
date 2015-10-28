@@ -46,7 +46,7 @@ class OrdersController < Spree::Manage::BaseController
   # Adds a new item to the order (creating a new order if none already exists)
   def populate
 
-    order    = set_order_session
+    order    = Spree::Order.find(params[:order]['id'].to_i)
     variant  = Spree::Variant.find(params[:index])
     quantity = params[:quantity].to_i
     options  = params[:options] || {}
@@ -90,6 +90,7 @@ class OrdersController < Spree::Manage::BaseController
 	def set_order_session
 		order = Spree::Order.friendly.find(params[:id])
 		session[:order_id] = order.id
+		session[:customer_id] = order.customer.id
 		order
 	end
 end
