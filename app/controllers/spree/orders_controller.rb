@@ -65,7 +65,7 @@ module Spree
         redirect_back_or_default(spree.root_path)
       else
         respond_with(order) do |format|
-          format.js
+          format.js { redirect_to vendor_path(order.vendor) }
           format.html { redirect_to cart_path }
         end
       end
