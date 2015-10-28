@@ -8,12 +8,12 @@ module Spree
       def index
         # This is just temporary until the customers are connected to the vendor
         # @customers = Spree::Customer.all
-        @vendor = current_spree_user.vendor
+        @vendor = current_vendor
         @customers = @vendor.customers
       end
 
       def show
-				@vendor=current_spree_user.vendor
+				@vendor=current_vendor
         @customer = Spree::Customer.find(params[:id])
         render :show
       end
@@ -38,6 +38,7 @@ module Spree
         @customer = Spree::Customer.create(customer_params[:customer])
 
         if @customer.save
+          session[:customer_id] = @customer.id
           redirect_to manage_customers_url(@customer)
         else
           render :new
@@ -58,6 +59,7 @@ module Spree
         @customer = Spree::Customer.find(params[:id])
 
         if @customer.update(customer_params)
+          session[:customer_id] = @customer.id
           redirect_to manage_customer_url(@customer)
         else
           render :edit

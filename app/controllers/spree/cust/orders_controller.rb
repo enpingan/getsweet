@@ -79,7 +79,7 @@ module Spree
     protected
 
     def order_params
-      params.require(:order).permit()
+      params.require(:order).permit(:delivery_date)
     end
 
     def ensure_customer

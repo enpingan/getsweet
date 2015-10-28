@@ -30,7 +30,7 @@
 			</td>
       <td>
 				<% if nil %><a href="<%= vendor_order_url(order.vendor_id, order.id) %>"><%= order.number %></a> <% end %>
-				<a href="<%= manage_order_url(order) %>"><%= order.number %></a>
+				<a href="<%= edit_manage_order_url(order) %>"><%= order.number %></a>
 			</td>
       <td><%=order.item_count%></td>
       <td><%=number_to_currency(order.total)%></td>

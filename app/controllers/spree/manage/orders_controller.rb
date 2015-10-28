@@ -29,24 +29,32 @@ class OrdersController < Spree::Manage::BaseController
   end
 
   def show
-    @order = Spree::Order.find_by(number:params[:id])
+    @order = set_order_session
 		@vendor = @order.vendor ? @order.vendor : Spree::Vendor.first
     render :show
   end
 
   def edit
-
+		@order = set_order_session
+		@vendor = current_vendor
+		render :edit
   end
 
   def update
-    @order = Spree::Order.find(params[:id])
+    @order = set_order_session
+
+		if @order.update(order_params)
+			redirect_to manage_orders_url
+		else
+			render :edit
+		end
 
   end
 
   # Adds a new item to the order (creating a new order if none already exists)
   def populate
 
-    order    = current_order(create_order_if_necessary: true)
+    order    = Spree::Order.find(params[:order]['id'].to_i)
     variant  = Spree::Variant.find(params[:index])
     quantity = params[:quantity].to_i
     options  = params[:options] || {}
@@ -79,13 +87,20 @@ class OrdersController < Spree::Manage::BaseController
   protected
 
   def order_params
-    self.params.require(:spree_order).permit(:customer_id) #this makes sense from the vendor side
+    self.params.require(:order).permit(:customer_id, :delivery_date) #this makes sense from the vendor side
   end
 
 	def ensure_vendor
     @order = Spree::Order.friendly.find(params[:id])
     redirect_to root_url unless current_vendor.id == @order.vendor_id
   end
+
+	def set_order_session
+		order = Spree::Order.friendly.find(params[:id])
+		session[:order_id] = order.id
+		session[:customer_id] = order.customer.id
+		order
+	end
 end
 
 
