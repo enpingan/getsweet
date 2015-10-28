@@ -1,4 +1,5 @@
 module Spree
+ module Cust
   class CustomerHomeController < Spree::BaseController
 
     layout '/spree/layouts/customer'
@@ -20,4 +21,5 @@ module Spree
     end
 
   end
+ end
 end
