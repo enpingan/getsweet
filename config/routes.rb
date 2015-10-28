@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   # mount Alchemy::Engine, at: '/'
 
 	Spree::Core::Engine.add_routes do
+
+	 scope module: 'cust' do
+
     resources :vendors, only: [:index, :show] do
       resources :products, only: [:index, :show]
     end
@@ -30,6 +33,8 @@ Rails.application.routes.draw do
     resources :products do
       resources :variants
     end
+
+	 end
 
  		namespace :manage do
  			#resources :vendors, only: [:index, :show] do
