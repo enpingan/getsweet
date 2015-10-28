@@ -14,14 +14,17 @@ class OrdersController < Spree::Manage::BaseController
   end
 
   def new
+		@customers = current_vendor.customers
 		@order = current_vendor.orders.new
   end
 
   def create
+		@customers = current_vendor.customers
     @order = current_vendor.orders.new(order_params)
 
     if @order.save!
-      redirect_to :vendor_orders_url
+			set_order_session(@order)
+      redirect_to manage_products_url
     else
       flash[:errors] = @order.errors.full_messages
       render :new
@@ -95,8 +98,8 @@ class OrdersController < Spree::Manage::BaseController
     redirect_to root_url unless current_vendor.id == @order.vendor_id
   end
 
-	def set_order_session
-		order = Spree::Order.friendly.find(params[:id])
+	def set_order_session(order = nil)
+		order ||= Spree::Order.friendly.find(params[:id])
 		session[:order_id] = order.id
 		session[:customer_id] = order.customer.id
 		order

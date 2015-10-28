@@ -1,0 +1,12 @@
+<%= form_for ([:manage, @order]) do |f| %>
+  <%= f.label :customer_id %>
+  <%= f.select(:customer_id) do %>
+    <% @customers.each do |customer| %>
+      <option value="<%= customer.id %>"><%= customer.name %></option>
+    <% end %>
+  <% end %>
+
+  <%= f.label :delivery_date %>
+  <%= f.date_field :delivery_date, placeholder: "Delivery Date" %>
+  <%= f.submit "Add Products from Catalog" %>
+<% end %>

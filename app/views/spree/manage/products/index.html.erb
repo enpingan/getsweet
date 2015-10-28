@@ -3,26 +3,21 @@
 <h1 class="tablet-center"><%= @vendor.name %> Product Catalog</h1>
 
 <input type="text" placeholder="Product name or sku"></input>
-<button class=search>Search</button>
-
+<button class="search">Search</button>
 <h3><%= @products.count %> Items Available </h3>
-<h3> Current Customer:
-  <% if @current_customer %>
-    <a href="manage_customer_url(@current_customer)"><%= @current_customer.name %></a>
-  <% else %>
-    None Selected
+
+<a href="<%= new_manage_order_url %>" class="new-order-button">Create New Order</a>
+
+  <% if @current_customer && @current_order%>
+    <h3> Customer:<a href="manage_customer_url(@current_customer)"><%= @current_customer.name %></a></h3>
+    <h3> Delivery Date: <%= @current_order.delivery_date.to_date.to_formatted_s(:long) %></h3>
   <% end %>
-</h3>
-<h3> Delivery Date
-<input class="delivery_date_picker" type="date_field"
-  name=order[delivery_date] value="<%= @current_order.delivery_date.to_date if @current_order%>"
-  placeholder="yyyy-mm-dd">
-</h3>
 <%#= form_for ([:manage, @order]) do |f| %>
   <%#= f.date_field :delivery_date, placeholder: "Delivery Date" %>
 <%# end %>
-
-<h3 id="current-order">Current Order: <a href="<%= edit_manage_order_url(@current_order) %>">#<%= @current_order.number %> (<%= @current_order.delivery_date.to_date %>)</a></h3>
+<% if @current_order %>
+  <h3 id="current-order">Order: <a href="<%= edit_manage_order_url(@current_order) %>">#<%= @current_order.number %></a></h3>
+<% end %>
 <div id="order-form">
   <div class="order-product-list">
 
@@ -45,7 +40,9 @@
         <a href="" class="sort-price">Price <i class="fa fa-sort"></i></a>
       </div>
       <div class="cel">
-        <a href="" class="sort-qty">Quantity <i class="fa fa-sort"></i></a>
+        <% if @current_order %>
+          <a href="" class="sort-qty">Quantity <i class="fa fa-sort"></i></a>
+        <% end %>
       </div>
       <div class="cel">
       </div>
@@ -53,7 +50,9 @@
 
     <% @products.each do |product| %>
       <%= form_for :order, html: {class: "tRow"}, url: populate_manage_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
-        <input type="hidden" name=order[id] value="<%= @current_order.id %>">
+        <% if @current_order %>
+          <input type="hidden" name=order[id] value="<%= @current_order.id %>">
+        <% end %>
 
           <div class="cel">
             <img>
@@ -75,20 +74,25 @@
           </div>
           <div class="mobile-divider"></div>
           <div class="cel">
-            <div class="qty-block">
-              <div class="spin"><span class="minus">
-                <i class="fa fa-minus"></i>
-              </span>
-              <%#= number_field_tag :quantity, 1, :class => 'title form-control', :min => 1 %>
-              <%= number_field_tag :quantity, 0, :class => 'qty_input', :min => 1 %>
-              <!-- <input value="0" placeholder="Qty" class="qty_input"/> -->
-              <span class="plus"><i class="fa fa-plus"></i></span></div>
-            </div>
+            <% if @current_order %>
+              <div class="qty-block">
+                <div class="spin"><span class="minus">
+                  <i class="fa fa-minus"></i>
+                </span>
+                <%#= number_field_tag :quantity, 1, :class => 'title form-control', :min => 1 %>
+                <%= number_field_tag :quantity, 0, :class => 'qty_input', :min => 1 %>
+                <!-- <input value="0" placeholder="Qty" class="qty_input"/> -->
+                <span class="plus"><i class="fa fa-plus"></i></span></div>
+              </div>
+            <% else %>
+              <a href="<%= edit_manage_product_url(product) %>">Edit</a>
+            <% end %>
           </div>
           <div class="cel">
-            <%#= button_tag :class => 'add-prod-to-order btn btn-success', :id => 'add-to-cart-button', :type => :submit do %>
-            <%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit do %>
-              <%= "Add to Order" %>
+            <% if @current_order %>
+              <%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit do %>
+                <%= "Add to Order" %>
+              <% end %>
             <% end %>
           </div>
       <% end %>
