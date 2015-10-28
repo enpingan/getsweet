@@ -81,8 +81,13 @@ module Spree
   end
 
   def current_customer
-    @current_customer = Spree::Customer.find(session[:customer_id])
-    # @current_customer ||= Spree::Customer.find(1) #TEMPORARY -- NEED TO BE ABLE TO SELECT CUSTOMER
+    if session[:customer_id]
+      @current_customer = Spree::Customer.find(session[:customer_id])
+    else
+      @current_customer = Spree::Customer.first #NEEED TO FIX, THIS IS JUST TEMPORARY
+      session[:customer_id] = @current_customer.id
+    end
+    @current_customer
   end
 end
   # /. Vendor
