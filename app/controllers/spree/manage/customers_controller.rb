@@ -15,6 +15,7 @@ module Spree
       def show
 				@vendor=current_vendor
         @customer = Spree::Customer.find(params[:id])
+        session[:customer_id] = @customer.id
         render :show
       end
 
@@ -36,7 +37,7 @@ module Spree
 
       def create
         @customer = Spree::Customer.create(customer_params[:customer])
-
+        session[:customer_id] = @customer.id
         if @customer.save
           session[:customer_id] = @customer.id
           redirect_to manage_customers_url(@customer)
@@ -51,13 +52,13 @@ module Spree
 				country_id = Address.default.country.id
 				@customer.build_ship_address(country_id: country_id) if @customer.ship_address.nil?
 				@customer.ship_address.country_id = country_id if @customer.ship_address.country.nil?
-
+        session[:customer_id] = @customer.id
         render :edit
       end
 
       def update
         @customer = Spree::Customer.find(params[:id])
-
+        session[:customer_id] = @customer.id
         if @customer.update(customer_params)
           session[:customer_id] = @customer.id
           redirect_to manage_customer_url(@customer)
