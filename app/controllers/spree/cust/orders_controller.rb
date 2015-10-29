@@ -16,6 +16,7 @@ module Spree
 
     def show
       @order = set_order_session
+      @path = "show"
       render :show
     end
 
