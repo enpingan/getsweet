@@ -32,7 +32,7 @@
 	<a href="<%= new_order_url %>" class="new-order-button">Create New Order</a>
 
 	<% if @current_order%>
-		<h3 id="current-order">Order: <a href="<%= order_url(@current_order) %>">#<%= @current_order.number %> (<%= @current_order.delivery_date.to_date %>)</a></h3>
+		<h3 id="current-order">Order: <a href="<%= order_url(@current_order) %>">#<%= @current_order.number %></a></h3>
 		<h3> Delivery Date: <%= @current_order.delivery_date.to_date.to_formatted_s(:long) %></h3>
 	<% end %>
 
