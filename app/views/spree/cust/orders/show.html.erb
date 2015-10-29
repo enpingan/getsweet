@@ -2,6 +2,7 @@
 <h4><a href="<%= orders_url %>">Back to All Orders</a></h4>
 <h1> Vendor: <%= @order.vendor.name %> </h1>
 <h3> Order #<%= @order.number %> </h3>
+<h3> Delivery Date: <%= @order.delivery_date.to_date.to_formatted_s(:long) %></h3>
 <h4>Order status: <%= @order.state %></h4>
 <!-- change to appropriate order.state -->
 <% unless @order.state == 'complete' || @order.delivery_date < DateTime.tomorrow ||(@order.delivery_date == DateTime.tomorrow && Time.now > @order.vendor.order_cutoff_time.to_datetime)%>
