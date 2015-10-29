@@ -91,7 +91,8 @@ module Spree
     protected
 
     def order_params
-      params.require(:order).permit(:delivery_date, :vendor_id)
+      params.require(:order).permit(:delivery_date, :vendor_id,
+        line_items_attributes: [:quantity, :id])
     end
 
     def ensure_customer
