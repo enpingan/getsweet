@@ -34,6 +34,7 @@ module Spree
 
       if @order.save
         set_order_session(@order)
+        flash[:success] = "You've started a new order!"
         redirect_to vendor_url(@order.vendor_id)
       else
         flash[:errors] = @order.errors.full_messages
@@ -53,6 +54,7 @@ module Spree
         flash[:success] = "Your order has been successfully update!"
         redirect_to orders_url
       else
+        flash[:errors] = @order.errors.full_messages
         render :edit
       end
     end

@@ -6,6 +6,15 @@
 }
 
 .alert-success{
-  background-color: indigo;
-  color: white;
+  background-color: #75ff7a;
+  color: #004702;
+  border: 1px solid #006b04;
+  border-radius: 10px;
+}
+
+.alert-danger{
+  background-color: #ff7070;
+  color: #800000;
+  border: 1px solid #c70000;
+  border-radius: 10px;
 }

@@ -11,7 +11,11 @@ module Spree
     end
 
     def authorize_customer
-      if current_spree_user.nil? || !current_spree_user.has_spree_role?('customer')
+      if current_spree_user.nil?
+        flash[:error] = "You must be logged in"
+        redirect_to root_url
+      elsif !current_spree_user.has_spree_role?('customer')
+        flash[:error] = "You do not have permission to view the page requested"
         redirect_to root_url
       end
     end
