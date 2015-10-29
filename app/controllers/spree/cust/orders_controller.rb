@@ -49,6 +49,7 @@ module Spree
       @order = set_order_session
 
       if @order.update(order_params)
+        flash[:success] = "Your order has been successfully update!"
         redirect_to orders_url
       else
         render :edit

@@ -1,0 +1,11 @@
+.alert{
+  display: block;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.alert-success{
+  background-color: indigo;
+  color: white;
+}
