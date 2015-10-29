@@ -14,7 +14,7 @@
  *= require_self
  */
 
-body, html, img {
+body, html, img, form {
   margin: 0;
   padding: 0;
   border: 0;
@@ -39,7 +39,7 @@ body {
  div.root-page {
    min-height: 100%;
    background-color: indigo;
-   color: orange;
+   color: #F57E20;
  }
 
  .splash-logo, .login-form-container {
@@ -52,12 +52,16 @@ body {
  }
 
  .login-form-container input {
-   font-size: 1.2em;
+   font-size: 16px;
+   font-family: 'p22_underground_cy_probook';
    padding: 10px;
-   width: 100%;
+   width: 80%;
    margin: 40px auto;
-   min-width: 200px;
    display: block;
+   border-bottom: 1px solid #444;
+   border-left: 1px solid #444;
+   border-right: 1px solid #777;
+   border-top: 1px solid #777;
  }
 
  .btn-login{
@@ -65,6 +69,8 @@ body {
    background: #F57E20;
    color: #fff;
    font-size: 16px;
+   font-family: 'p22_underground_cy_probook';
    padding: 10px 20px;
    margin: 20px auto;
+   text-transform: uppercase;
  }
