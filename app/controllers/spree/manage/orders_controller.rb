@@ -93,7 +93,8 @@ class OrdersController < Spree::Manage::BaseController
   protected
 
   def order_params
-    self.params.require(:order).permit(:customer_id, :delivery_date) #this makes sense from the vendor side
+    self.params.require(:order).permit(:customer_id, :delivery_date,
+			line_items_attributes: [:quantity, :id]) #this makes sense from the vendor side
   end
 
 	def ensure_vendor
