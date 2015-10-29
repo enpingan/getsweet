@@ -16,7 +16,7 @@ module Spree
       @line_items = @current_order.line_items if @current_order
       @products = @vendor.products
       # @recent_orders = current_customer.orders.where('delivery_date > ? AND vendor_id = ?', 3.months.ago, @vendor.id)
-      @recent_orders = current_customer.orders.where('vendor_id = ?', @vendor.id).order('delivery_date DESC').limit(5)
+      @recent_orders = current_customer.orders.where('vendor_id = ?', @vendor.id).order('updated_at DESC').order('delivery_date DESC').limit(5)
       # @products = @vendor.products.select {|product| product.promotional == true}
     end
 
