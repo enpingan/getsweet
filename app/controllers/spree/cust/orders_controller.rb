@@ -21,10 +21,23 @@ module Spree
 
     def new
       @order = current_customer.orders.new
+      @vendors = current_customer.vendors
+      if session[:vendor_id]
+        @current_vendor_id = session[:vendor_id]
+      end
     end
 
     def create
-      @order = current_customer.orders.new
+      @order = current_customer.orders.new(order_params)
+      @vendors = current_customer.vendors
+
+      if @order.save
+        set_order_session(@order)
+        redirect_to vendor_url(@order.vendor_id)
+      else
+        flash[:errors] = @order.errors.full_messages
+        render :new
+      end
     end
 
     def edit
@@ -78,7 +91,7 @@ module Spree
     protected
 
     def order_params
-      params.require(:order).permit(:delivery_date)
+      params.require(:order).permit(:delivery_date, :vendor_id)
     end
 
     def ensure_customer
@@ -86,9 +99,10 @@ module Spree
       redirect_to root_url unless current_customer.id == @order.customer_id
     end
 
-    def set_order_session
-      order = Spree::Order.friendly.find(params[:id])
+    def set_order_session(order = nil)
+      order ||= Spree::Order.friendly.find(params[:id])
       session[:order_id] = order.id
+      session[:vendor_id] = order.vendor.id
       order
     end
   end
