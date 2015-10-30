@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :orders
     resources :orders, :except => [:index, :new, :create, :destroy] do
       post :populate, :on => :collection
+      get '/success', to: 'orders#success'
     end
 
     populate_redirect = redirect do |params, request|
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
     end
 
     get '/orders/populate', :to => populate_redirect
+
 
     resources :products do
       resources :variants
