@@ -1,12 +1,14 @@
 <%#= form_for :order, url: populate_manage_orders_path(format: 'js'), remote: true do |f| %>
 
-<h1 class="tablet-center"><%= @vendor.name %> Product Catalog</h1>
+<h1 class="catalog-title"><%= @vendor.name %> Product Catalog</h1>
+<a href="<%= new_manage_order_url %>" class="new-order-button">Start New Order</a>
+
+<div class="clear"></div>
 
 <input type="text" placeholder="Product name or sku"></input>
 <button class="search">Search</button>
 <h3><%= @products.count %> Items Available </h3>
 
-<a href="<%= new_manage_order_url %>" class="new-order-button">Create New Order</a>
 
   <% if @current_customer && @current_order%>
     <h3> Customer:<a href="manage_customer_url(@current_customer)"><%= @current_customer.name %></a></h3>
