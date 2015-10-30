@@ -7,5 +7,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require spree/backend
+//= require spree/backend/get-sweet
 
 //= require_tree .
