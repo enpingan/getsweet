@@ -47,18 +47,30 @@ class OrdersController < Spree::Manage::BaseController
 		render :edit
   end
 
-  def update
-    @order = set_order_session
+	def update
+		@order = set_order_session
+
+
+		if request.patch?
+			if (params[:commit] == Spree.t(:update))
+				flash[:success] = "Your order has been successfully update!"
+			elsif (params[:commit] == "Approve Order")
+				@order.approver_id = current_spree_user.id
+				@order.approved_at = Time.now
+				flash[:success] = "Order Approved!"
+			elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
+				redirect_to manage_products_url and return
+			end
+		end
 
 		if @order.update(order_params)
-			flash[:success] = "The order has been successfully update!"
-			redirect_to manage_orders_url
+			redirect_to edit_manage_order_url(@order)
 		else
+			flash[:success] = nil
 			flash[:errors] = @order.errors.full_messages
 			render :edit
 		end
-
-  end
+	end
 
   # Adds a new item to the order (creating a new order if none already exists)
   def populate

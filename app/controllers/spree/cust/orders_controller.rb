@@ -54,12 +54,13 @@ module Spree
       if request.patch?
         if (params[:commit] == Spree.t(:update))
           flash[:success] = "Your order has been successfully update!"
-          redirect_to order_url(@order) and return
         elsif (params[:commit] == "Submit Order")
           @order.state = "complete"
           @order.completed_at = Time.now
           flash[:success] = "Order submitted"
         elsif (params[:commit] == "Resubmit Order")
+          @order.approver_id = nil
+  				@order.approved_at = nil
           @order.completed_at = Time.now
           flash[:success] = "Your updated order has been submitted!"
         elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
