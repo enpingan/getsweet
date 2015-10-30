@@ -47,8 +47,8 @@
     				<td></td>
   				</tr>
 				</table>
-				<a href="<%= vendor_url(@order.vendor) %>" class="new-order-button">Add New Product To Order</a>
-
+				<!-- <a href="<%= vendor_url(@order.vendor) %>" class="new-order-button">Add New Product To Order</a> -->
+				<%= submit_tag "Add New Product To Order", class: "add-new-product-btn" %>
         <div class="links col-md-6 navbar-form pull-right text-right" data-hook="cart_buttons">
           <div class="form-group">
             <%= submit_tag Spree.t(:update), class: 'btn btn-primary add-to-order', id: 'update-button' %>
