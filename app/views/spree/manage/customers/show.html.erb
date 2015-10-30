@@ -16,16 +16,17 @@
 	<% if @customer.ship_address %>
   <ul class="contact-left">
     <li>Primary Contact: <%= "#{@customer.ship_address.firstname} #{@customer.ship_address.lastname}" %></li>
-    <li>Primary Phone: <%#= @customer.phone %></li>
-    <li>Primary Email: <%#= @customer.email %></li>
+    <li>Primary Phone: <%= @customer.ship_address.phone %></li>
+    <li>Primary Email: <%= @customer.email %></li>
     <li>Customer Address: </li>
       <ul class="address">
         <li><%= @customer.ship_address.address1 %></li>
-        <% if @customer.ship_address.address2 %>
+        <% unless @customer.ship_address.address2.empty? %>
           <li><%= @customer.ship_address.address2 %></li>
         <% end %>
         <li> <%= @customer.ship_address.city %></li>
-        <li> <%= @customer.ship_address.state_name %></li>
+        <!-- change to @customer.ship_address.state_name after associated correctly -->
+        <li> <%= Spree::State.find(@customer.ship_address.state_id) %></li>
         <li> <%= @customer.ship_address.zipcode %></li>
       </ul>
   </ul>

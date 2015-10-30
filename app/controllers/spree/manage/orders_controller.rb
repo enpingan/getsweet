@@ -8,8 +8,14 @@ class OrdersController < Spree::Manage::BaseController
 	before_action :ensure_vendor, only: [:show, :edit, :update, :destroy]
 
   def index
+		@current_customer_id = session[:customer_id]
+		session[:customer_id] = nil
 		@vendor = current_vendor
-		@orders = @vendor.orders
+		if @current_customer_id
+			@orders = @vendor.orders.where('customer_id = ?', @current_customer_id)
+		else
+			@orders = @vendor.orders
+		end
     render :index
   end
 
