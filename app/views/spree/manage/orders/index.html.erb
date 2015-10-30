@@ -14,6 +14,7 @@
   <tr>
     <th>Customer</th>
     <th>Order #</th>
+    <th>Delivery Date</th>
     <th>Total Items</th>
     <th>Total</th>
     <th>Status</th>
@@ -29,9 +30,9 @@
 				<% end %>
 			</td>
       <td>
-				<% if nil %><a href="<%= vendor_order_url(order.vendor_id, order.id) %>"><%= order.number %></a> <% end %>
 				<a href="<%= edit_manage_order_url(order) %>"><%= order.number %></a>
 			</td>
+      <td><%= order.delivery_date.to_date.to_formatted_s(:long) %></td>
       <td><%=order.item_count%></td>
       <td><%=number_to_currency(order.total)%></td>
       <td><%= order.state %></td>

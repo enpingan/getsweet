@@ -9,6 +9,7 @@
     <tr>
       <th>Vendor</th>
       <th>Order #</th>
+      <th>Delivery Date</th>
       <th>Total Items</th>
       <th>Total</th>
       <th>Status</th>
@@ -20,6 +21,7 @@
         <td>
   				<a href="<%= order_url(order) %>"><%= order.number %></a>
   			</td>
+        <td><%= order.delivery_date.to_date.to_formatted_s(:long) %></td>
         <td><%=order.item_count%></td>
         <td><%=number_to_currency(order.total)%></td>
         <td><%= order.state %></td>
