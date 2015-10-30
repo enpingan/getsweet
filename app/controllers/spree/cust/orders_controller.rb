@@ -10,7 +10,7 @@ module Spree
 
     def index
       @orders = current_customer.orders
-
+      @customer = current_customer
       render :index
     end
 
