@@ -5,7 +5,7 @@
 <h4>Order status: <%= @order.state %></h4>
 
 <div data-hook="outside_cart_form">
-	<%= form_for @order, url: spree.update_cart_path, html: { id: 'update-cart' } do |order_form| %>
+	<%= form_for @order, url: order_url, method: "patch", html: { id: 'update-cart' } do |order_form| %>
 	<%= order_form.label :delivery_date %>
 	<%= order_form.date_field :delivery_date, placeholder: "Delivery Date" %>
 		<div data-hook="inside_cart_form">
@@ -39,12 +39,15 @@
     				</tr>
     				<%= render "spree/orders/adjustments" %>
   				<% end %>
+
+
   				<tr class="warning cart-total">
     				<td colspan="4" align='right'><h5><%= Spree.t(:total) %></h5></td>
     				<td class="lead" colspan><%= order_form.object.display_total %></td>
     				<td></td>
   				</tr>
 				</table>
+				<a href="<%= vendor_url(@order.vendor) %>" class="new-order-button">Add New Product To Order</a>
 
         <div class="links col-md-6 navbar-form pull-right text-right" data-hook="cart_buttons">
           <div class="form-group">

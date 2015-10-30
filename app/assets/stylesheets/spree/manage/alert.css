@@ -1,0 +1,20 @@
+.alert{
+  display: block;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.alert-success{
+  background-color: #bd80ff;
+  color: #360070;
+  border: 1px solid #5600b3;
+  border-radius: 10px;
+}
+
+.alert-danger{
+  background-color: #ff7070;
+  color: #800000;
+  border: 1px solid #c70000;
+  border-radius: 10px;
+}

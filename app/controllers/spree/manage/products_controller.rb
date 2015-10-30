@@ -12,7 +12,7 @@ module Spree
     # @vendor = Vendor.first
     @current_customer = current_customer
 
-    @current_order = find_or_create_order
+    @current_order = current_order
 
     # @products = Spree::Product.all
     @products = @vendor.products
@@ -25,6 +25,16 @@ module Spree
   end
 
   def create
+
+    @product = current_vendor.products.new(product_params)
+
+    if @product.save
+      flash[:success] = "New product added!"
+      redirect_to manage_products_url
+    else
+      flash[:errors] = @product.errors.full_messages
+      render :new
+    end
   end
 
   def show
@@ -42,8 +52,10 @@ module Spree
     @product = Spree::Product.friendly.find(params[:id])
 
     if @product.update(product_params)
+      flash[:success] = "Product has been updated!"
       redirect_to manage_product_url
     else
+      flash[:errors] = @product.errors.full_messages
       render :edit
     end
   end
@@ -56,34 +68,45 @@ module Spree
 
   def ensure_vendor
     @product = Spree::Product.friendly.find(params[:id])
-    redirect_to root_url unless current_vendor.id == @product.vendor_id
+    unless current_vendor.id == @product.vendor_id
+      flash[:error] = "You don't have permission to view the requested page"
+      redirect_to root_url
+    end
   end
 
-
-  def find_or_create_order
-
+  def current_order
     if session[:order_id]
-      current_order = Spree::Order.find(session[:order_id])
-      unless current_order.customer_id == current_customer.id
-        current_order = current_vendor.orders.where('customer_id = ? AND delivery_date = ?' , current_customer.id, DateTime.tomorrow).limit(1).first
-        if !current_order
-          current_order = current_vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
-        end
-      end
-    else
-      current_order = current_vendor.orders.where('customer_id = ? AND delivery_date = ?' , current_customer.id, DateTime.tomorrow).limit(1).first
-      if !current_order
-        current_order = current_vendor.orders.create(customer_id: current_customer.id, delivery_date: DateTime.tomorrow)
-      end
+      @current_order = Spree::Order.find(session[:order_id])
+      return nil unless @current_order.customer.id == current_customer.id
     end
-    session[:order_id] = current_order.id
-    current_order
+    @current_order
   end
 
   def current_customer
-    @current_customer = Spree::Customer.find(session[:customer_id])
-    # @current_customer ||= Spree::Customer.find(1) #TEMPORARY -- NEED TO BE ABLE TO SELECT CUSTOMER
+    if session[:customer_id]
+      @current_customer = Spree::Customer.find(session[:customer_id])
+    end
+      @current_customer
   end
+
+    # if session[:order_id]
+    #   current_order = Spree::Order.find(session[:order_id])
+    #   unless current_order.customer_id == current_customer_id
+    #     current_order = current_vendor.orders.where('customer_id = ? AND delivery_date = ?' , current_customer_id, DateTime.tomorrow).limit(1).first
+    #     if !current_order
+    #       current_order = current_vendor.orders.create(customer_id: current_customer_id, delivery_date: DateTime.tomorrow)
+    #     end
+    #   end
+    # else
+    #   current_order = current_vendor.orders.where('customer_id = ? AND delivery_date = ?' , current_customer_id, DateTime.tomorrow).limit(1).first
+    #   if !current_order
+    #     current_order = current_vendor.orders.create(customer_id: current_customer_id, delivery_date: DateTime.tomorrow)
+    #   end
+    # end
+    # session[:order_id] = current_order.id
+    # current_order
+  # end
+
 end
   # /. Vendor
   end

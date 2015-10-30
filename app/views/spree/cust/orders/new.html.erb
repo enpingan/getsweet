@@ -1,0 +1,16 @@
+<%= form_for @order do |f| %>
+  <%= f.label :vendor_id %>
+  <%= f.select(:vendor_id) do %>
+    <% @vendors.each do |vendor| %>
+      <% if @current_vendor_id == vendor.id %>
+        <option value="<%= vendor.id %>" selected="selected"><%= vendor.name %></option>
+      <% else %>
+        <option value="<%= vendor.id %>"><%= vendor.name %></option>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= f.label :delivery_date %>
+  <%= f.date_field :delivery_date, placeholder: "Delivery Date" %>
+  <%= f.submit "Add Products from Catalog" %>
+<% end %>

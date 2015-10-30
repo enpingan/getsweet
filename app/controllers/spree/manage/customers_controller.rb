@@ -15,6 +15,7 @@ module Spree
       def show
 				@vendor=current_vendor
         @customer = Spree::Customer.find(params[:id])
+        session[:customer_id] = @customer.id
         render :show
       end
 
@@ -36,11 +37,13 @@ module Spree
 
       def create
         @customer = Spree::Customer.create(customer_params[:customer])
-
+        session[:customer_id] = @customer.id
         if @customer.save
           session[:customer_id] = @customer.id
+          flash[:success] = "Congratulations, a new customer!"
           redirect_to manage_customers_url(@customer)
         else
+          flash[:errors] = @customer.errors.full_messages
           render :new
         end
       end
@@ -51,17 +54,19 @@ module Spree
 				country_id = Address.default.country.id
 				@customer.build_ship_address(country_id: country_id) if @customer.ship_address.nil?
 				@customer.ship_address.country_id = country_id if @customer.ship_address.country.nil?
-
+        session[:customer_id] = @customer.id
         render :edit
       end
 
       def update
         @customer = Spree::Customer.find(params[:id])
-
+        session[:customer_id] = @customer.id
         if @customer.update(customer_params)
           session[:customer_id] = @customer.id
+          flash[:success] = "Customer has been update!"
           redirect_to manage_customer_url(@customer)
         else
+          flash[:errors] = @customer.errors.full_messages
           render :edit
         end
       end
@@ -82,7 +87,10 @@ module Spree
 
       	def ensure_vendor
         	@customer = Spree::Customer.find(params[:id])
-        	redirect_to root_url unless @customer.vendors.include?(current_vendor)
+        	unless @customer.vendors.include?(current_vendor)
+            flash[:error] = "You do not have permission to view the page requested"
+            redirect_to root_url
+          end
       	end
 
     end

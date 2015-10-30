@@ -14,14 +14,21 @@ class OrdersController < Spree::Manage::BaseController
   end
 
   def new
+		if session[:customer_id]
+			@current_customer_id = session[:customer_id]
+		end
+		@customers = current_vendor.customers
 		@order = current_vendor.orders.new
   end
 
   def create
+		@customers = current_vendor.customers
     @order = current_vendor.orders.new(order_params)
 
     if @order.save!
-      redirect_to :vendor_orders_url
+			set_order_session(@order)
+			flash[:success] = "You've started a new order!"
+      redirect_to manage_products_url
     else
       flash[:errors] = @order.errors.full_messages
       render :new
@@ -44,8 +51,10 @@ class OrdersController < Spree::Manage::BaseController
     @order = set_order_session
 
 		if @order.update(order_params)
+			flash[:success] = "The order has been successfully update!"
 			redirect_to manage_orders_url
 		else
+			flash[:errors] = @order.errors.full_messages
 			render :edit
 		end
 
@@ -87,16 +96,20 @@ class OrdersController < Spree::Manage::BaseController
   protected
 
   def order_params
-    self.params.require(:order).permit(:customer_id, :delivery_date) #this makes sense from the vendor side
+    self.params.require(:order).permit(:customer_id, :delivery_date,
+			line_items_attributes: [:quantity, :id])
   end
 
 	def ensure_vendor
     @order = Spree::Order.friendly.find(params[:id])
-    redirect_to root_url unless current_vendor.id == @order.vendor_id
+    unless current_vendor.id == @order.vendor_id
+			flash[:error] = "You don't have permission to view the requested page"
+			redirect_to root_url
+		end
   end
 
-	def set_order_session
-		order = Spree::Order.friendly.find(params[:id])
+	def set_order_session(order = nil)
+		order ||= Spree::Order.friendly.find(params[:id])
 		session[:order_id] = order.id
 		session[:customer_id] = order.customer.id
 		order

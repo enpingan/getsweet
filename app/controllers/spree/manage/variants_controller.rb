@@ -20,8 +20,10 @@ module Spree
         @variant.product_id = @product.id
 
         if @variant.save
+          flash[:success] = "Product variant has been added!"
           redirect_to manage_product_url(@variant.product)
         else
+          flash[:errors] = @variant.errors.full_messages
           render :new
         end
       end
@@ -42,8 +44,10 @@ module Spree
         @product = @variant.product
 
         if @variant.update(variant_params)
+          flash[:success] = "Product variant has been update!"
           redirect_to manage_product_url(@variant.product)
         else
+          flash[:errors] = @variant.errors.full_messages
           render :edit
         end
       end
@@ -59,7 +63,10 @@ module Spree
 
       def ensure_vendor
         @product = Spree::Product.friendly.find(params[:product_id])
-        redirect_to root_url unless current_vendor.id == @product.vendor_id
+        unless current_vendor.id == @product.vendor_id
+          flash[:error] = "You don't have permission to view the requested page"
+    			redirect_to root_url
+        end
       end
     end
 

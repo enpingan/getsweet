@@ -127,16 +127,27 @@ p9 = v1.products.create(name: "Lemon Poppy", price: 3.00, shipping_category_id: 
 p10 = v1.products.create(name: "Filled Nutella", price: 3.50, shipping_category_id: 1, available_on: available_date,
   description: "Delectable Nutella filled doughnut.")
 
-var1 = p1.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var2 = p2.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var3 = p3.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var4 = p4.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var5 = p5.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var6 = p6.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var7 = p7.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var8 = p8.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var9 = p9.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var10 = p10.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+p2.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+p3.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+p4.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+p5.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+p6.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+p7.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+p8.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+p9.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+p10.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+
+var1 = p1.master
+var2 = p2.master
+var3 = p3.master
+var4 = p4.master
+var5 = p5.master
+var6 = p6.master
+var7 = p7.master
+var8 = p8.master
+var9 = p9.master
+var10 = p10.master
 
 var1.stock_items.create(stock_location_id: sl1.id)
 var2.stock_items.create(stock_location_id: sl1.id)
@@ -332,16 +343,27 @@ p9 = v2.products.create(name: "Strawberry Charlotte", price: 36.00, shipping_cat
 p10 = v2.products.create(name: "Tiramisu", price: 36.00, shipping_category_id: 1, available_on: available_date,
   description: "Mascarpone cheese mousse, espresso sponged ladyfingers, marcalas liquor surrounded by ladyfingers")
 
-var1 = p1.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var2 = p2.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var3 = p3.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var4 = p4.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var5 = p5.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var6 = p6.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var7 = p7.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var8 = p8.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var9 = p9.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var10 = p10.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p2.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p3.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p4.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p5.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p6.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p7.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p8.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p9.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p10.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+
+  var1 = p1.master
+  var2 = p2.master
+  var3 = p3.master
+  var4 = p4.master
+  var5 = p5.master
+  var6 = p6.master
+  var7 = p7.master
+  var8 = p8.master
+  var9 = p9.master
+  var10 = p10.master
 
 var1.stock_items.create(stock_location_id: sl2.id)
 var2.stock_items.create(stock_location_id: sl2.id)
@@ -526,12 +548,17 @@ p5 = v3.products.create(name: "Large Canele (Selection of 6)", price: 21.00, shi
   description: "A selection of 6 canelés of your choice. If you would like a selection, let the bakery know your choice of flavors in the comments box.")
 
 
-var1 = p1.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var2 = p2.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var3 = p3.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var4 = p4.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var5 = p5.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p2.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p3.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p4.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p5.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
 
+  var1 = p1.master
+  var2 = p2.master
+  var3 = p3.master
+  var4 = p4.master
+  var5 = p5.master
 
 var1.stock_items.create(stock_location_id: sl3.id)
 var2.stock_items.create(stock_location_id: sl3.id)
@@ -698,13 +725,21 @@ p7 = v4.products.create(name: "Dough'ssant", price: 5.00, shipping_category_id: 
   description: "Is this the original croissant-doughnut hybrid? It is most certainly worth trying all the flavors!")
 
 
-var1 = p1.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var2 = p2.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var3 = p3.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var4 = p4.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var5 = p5.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var6 = p6.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var7 = p7.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p2.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p3.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p4.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p5.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p6.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p7.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+
+  var1 = p1.master
+  var2 = p2.master
+  var3 = p3.master
+  var4 = p4.master
+  var5 = p5.master
+  var6 = p6.master
+  var7 = p7.master
 
 var1.stock_items.create(stock_location_id: sl4.id)
 var2.stock_items.create(stock_location_id: sl4.id)
@@ -893,16 +928,27 @@ p9 = v5.products.create(name: "Banana Cream Pie", price: 26, shipping_category_i
 p10 = v5.products.create(name: "Chocolate Chip Cookie Sandwich", price: 2.50, shipping_category_id: 1, available_on: available_date,
   description: "Buttercream icing sandwiched between homestyle cookies.")
 
-var1 = p1.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var2 = p2.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var3 = p3.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var4 = p4.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var5 = p5.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var6 = p6.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var7 = p7.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var8 = p8.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var9 = p9.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
-var10 = p10.variants.create(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p2.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p3.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p4.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p5.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p6.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p7.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p8.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p9.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+  p10.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
+
+  var1 = p1.master
+  var2 = p2.master
+  var3 = p3.master
+  var4 = p4.master
+  var5 = p5.master
+  var6 = p6.master
+  var7 = p7.master
+  var8 = p8.master
+  var9 = p9.master
+  var10 = p10.master
 
 var1.stock_items.create(stock_location_id: sl5.id)
 var2.stock_items.create(stock_location_id: sl5.id)
