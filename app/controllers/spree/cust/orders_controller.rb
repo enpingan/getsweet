@@ -78,17 +78,6 @@ module Spree
       end
     end
 
-    def submit_order
-      @order = set_order_session
-
-      if @order.update(order_params)
-        redirect_to order_success_url(@order)
-      else
-        flash[:errors] = @order.errors.full_messages
-        render :edit
-      end
-    end
-
     def order_success
       @order = set_order_session
     end
