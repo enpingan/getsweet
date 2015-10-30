@@ -1,6 +1,6 @@
-<h1> <%= @vendor.name %> </h1>
-
-<h1>Orders Overview</h1>
+<h1 class="catalog-title"><%= @vendor.name %> Orders Overview</h1>
+<a href="<%= new_manage_order_url %>" class="new-order-button">Start New Order</a>
+<div class="clear"></div>
 <section class="orders-overview-filters">
   <ul>
     <li>Filter by [Customer dropdown]</li>
@@ -8,7 +8,7 @@
     <li>Select Delivery [Date dropdown]</li>
   </ul>
 </section>
-<a href="<%= new_manage_order_url %>" class="new-order-button">Create New Order</a>
+
 <table class="orders-overview">
   <colgroup span="6"></colgroup>
   <tr>
