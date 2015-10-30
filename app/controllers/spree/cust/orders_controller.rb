@@ -57,11 +57,13 @@ module Spree
         elsif (params[:commit] == "Submit Order")
           @order.state = "complete"
           @order.completed_at = Time.now
+          @order.user_id = current_spree_user.id
           flash[:success] = "Order submitted"
         elsif (params[:commit] == "Resubmit Order")
           @order.approver_id = nil
   				@order.approved_at = nil
           @order.completed_at = Time.now
+          @order.user_id = current_spree_user.id
           flash[:success] = "Your updated order has been submitted!"
         elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
           redirect_to vendor_url(@order.vendor) and return
