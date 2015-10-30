@@ -5,7 +5,7 @@
 <h3> Delivery Date: <%= @order.delivery_date.to_date.to_formatted_s(:long) %></h3>
 <h4>Order status: <%= @order.state %></h4>
 <!-- change to appropriate order.state -->
-<% unless @order.state == 'complete' || @order.delivery_date < DateTime.tomorrow ||(@order.delivery_date == DateTime.tomorrow && Time.now > @order.vendor.order_cutoff_time.to_datetime)%>
+<% unless @order.delivery_date < DateTime.tomorrow ||(@order.delivery_date == DateTime.tomorrow && Time.now > @order.vendor.order_cutoff_time.to_datetime)%>
 	<a href="<%= edit_order_url(@order) %>">Edit</a>
 <% end %>
 

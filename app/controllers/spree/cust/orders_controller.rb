@@ -50,13 +50,45 @@ module Spree
     def update
       @order = set_order_session
 
+
+      if request.patch?
+        if params[:commit] == Spree.t(:update)
+          flash[:success] = "Your order has been successfully update!"
+          # redirect_to :action => :page_two
+        elsif (params[:commit] == "Submit Order")
+          @order.state = "complete"
+          @order.completed_at = Time.now
+          flash[:success] = "Order submitted"
+          # redirect_to :action => :index
+        elsif (params[:commit] == "Resubmit Order")
+          @order.completed_at = Time.now
+          flash[:success] = "Your updated order has been submitted!"
+        end
+      end
       if @order.update(order_params)
-        flash[:success] = "Your order has been successfully update!"
+
+        # flash[:success] = "Your order has been successfully update!"
         redirect_to orders_url
+      else
+        flash[:success] = nil
+        flash[:errors] = @order.errors.full_messages
+        render :edit
+      end
+    end
+
+    def submit_order
+      @order = set_order_session
+
+      if @order.update(order_params)
+        redirect_to order_success_url(@order)
       else
         flash[:errors] = @order.errors.full_messages
         render :edit
       end
+    end
+
+    def order_success
+      @order = set_order_session
     end
 
     # Adds a new item to the order (creating a new order if none already exists)

@@ -25,7 +25,7 @@
         <td><%= order.state %></td>
         <td>
           <!-- change to appropriate order.state -->
-          <% unless order.state == 'complete' || order.delivery_date < DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now > order.vendor.order_cutoff_time.to_datetime)%>
+          <% unless order.delivery_date < DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now > order.vendor.order_cutoff_time.to_datetime)%>
           	<a href="<%= edit_order_url(order) %>">Edit</a>
           <% end %>
         </td>
