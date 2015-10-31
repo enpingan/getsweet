@@ -25,12 +25,14 @@
 
     <%= f.fields_for :ship_address do |sa_form| %>
 
-  		<%= render partial: 'spree/admin/shared/address_form', locals: { f: sa_form, type: 'shipping' } %>
+  		<%= render partial: 'spree/manage/customers/address_form', locals: { f: sa_form, type: 'shipping' } %>
 
     <% end %>
 
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit class: "update-customer"%>
     </div>
   <% end %>
+
+  <div class="clear"></div>
 </div>
