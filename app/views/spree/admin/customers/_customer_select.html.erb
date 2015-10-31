@@ -1,0 +1,12 @@
+<% if can? :edit, @order.user %>
+  <div id="select-customer-id" class="panel panel-default" data-hook>
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        <%= Spree.t(:associate_customer_with_order) %>
+      </h1>
+    </div>
+    <div class="panel-body">
+      <%= hidden_field_tag "order[customer_id]", @order.customer_id, class: 'customer_picker error-message', id: 'customer_select' %>
+    </div>
+  </div>
+<% end %>

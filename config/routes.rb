@@ -68,6 +68,7 @@ Rails.application.routes.draw do
 		end
 
 		namespace :admin do
+      get '/search/customers', to: "search#customers", as: :search_customers
 
 	    resources :customers do
  	    	collection do

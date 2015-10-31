@@ -95,6 +95,12 @@ ul.address {
   background: #FF9012;
 }
 
+.app_ui-wrapper .app_ui-block .customer-edit label{
+  text-align: left;
+  padding: 0;
+  margin: 0;
+}
+
 @media (max-width: 999px){
   .customer-account-info{
     float: left;
