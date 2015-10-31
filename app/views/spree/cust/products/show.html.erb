@@ -1,64 +1,69 @@
-<h1> <%= @product.name %></h1>
 
-<% if @product.variants.empty? %>
-  <h3>SKU # <%= @product.master.sku %></h3>
+
+<% if @current_order %>
+  <h3>Order <a href="<%= order_url(@current_order) %>">#<%= @current_order.number %></a></h3>
 <% end %>
+					<div class="product-view-block">
+						<div class="product-view-block-preview">
+							<div class="row">
+								<div class="col1">
+									<h3 class="title"><%= @product.name %></h3>
+									<p class="desc"><b>Mfg:</b> <%= @product.vendor.name %></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col1">
+                  <%= image_tag("spree/manage/img/product-img4.jpg", class: "prodcut-view-img")%>
+									<!-- <img src="img/product-img4.jpg" class="product-view-img"> -->
+									<p class="desc"><b>Allergans:</b> Gluten</p>
+									<p class="desc"><b></b> Eggs</p>
+									<p class="desc"><b></b> Etca</p>
+									<div class="divider2"></div>
+									<p class="desc"><b>Lead Time:</b> None</p>
+								</div>
+								<div class="col2">
+									<div class="description">
+										<p><%= @product.description %></p>
+										<a href="#" id="desc-toggle"><i class="fa fa-angle-double-up"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="order-form">
+							<div class="order-product-list">
+                <% @product.variants_including_master.each do |variant| %>
+                  <%= form_for :order, html: {class: "tRow"}, url: populate_orders_path(format: 'js', index: variant.id), remote: true do |f| %>
 
-<h5>Manufacturer: </h5>
+    								<!-- <div class="tRow"> -->
+    									<div class="cel">
+    										<b>SKU #</b> <%= variant.sku %>
+    									</div>
+    									<div class="cel">
+    										<b>Pack/Size:</b> Each
+    									</div>
+    									<div class="cel">
+    										<b>Price:</b> <%= number_to_currency(variant.price) %>
+    									</div>
+    									<div class="cel">
+    										<div class="qty-block">
+    											<div class="spin"><span class="minus"><i class="fa fa-minus"></i></span>
+                            <%= number_field_tag :quantity, 0, :class => 'qty_input', :min => 1 %>
+                            <span class="plus"><i class="fa fa-plus"></i></span></div>
+    										</div>
+    									</div>
+    									<div class="cel">
+                        <%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit do %>
+        									<%= "Add to Order" %>
+        	              <% end %>
+    										<!-- <a href="#" class="addToOrder-button">Add to Order</a> -->
+    									</div>
+    								<!-- </div> -->
+                  <% end %>
+                <% end %>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
 
-<a href="<%= vendor_products_url(@product.vendor) %>">Back to Catalog</a>
-<div class="group">
-  <div class="product-left">
-    <img src="", alt="Image not Available">
-
-    <ul class="allergans">
-      <% 5.times do %>
-        <li>add allergans to @product model</li>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="product-right">
-    <p class="product-description">This is the @product description. Not sure
-      if there is a field in the DB for this yet, still have to check. But this
-      is where it would go.
-    </p>
-    <ul class="dietary-restrictions">
-      <% 3.times do %>
-        <li>V</li>
-      <% end %>
-    </ul>
-
-  </div>
-</div>
-
-<section class="product-bottom group">
-
-  <table class="single-order">
-    <colgroup span="4"></colgroup>
-    <tr>
-      <th>SKU</th>
-      <th>Pack/Size</th>
-      <th>Price</th>
-      <th>Quantity</th>
-    </tr>
-    <% @product.variants_including_master.each do |variant| %>
-      <tr>
-        <td><%=variant.sku %></td>
-        <td>variant.pack_size</td>
-        <td><%= number_to_currency(variant.price) %></td>
-        <td> - <input type="text" value="" placeholder="QTY"></input> + </td>
-      </tr>
-    <% end %>
-  </table>
-
-  <div class="add-to-cart">
-    <br/>
-    <div class="input-group">
-      <span class="input-group-btn">
-        <%= button_tag :class => 'add-to-order btn btn-success', :id => 'add-to-cart-button', :type => :submit do %>
-          <%= Spree.t(:add_to_cart) %>
-        <% end %>
-      </span>
-    </div>
-</section>
+				<div class="shadow"></div>
+				<div class="clear"></div>

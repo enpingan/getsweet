@@ -58,6 +58,11 @@ $(".app_ui-wrapper header .nav-ico").click(function(){
 		$('.app_ui-wrapper .shadow').hide();
 	};
 });
+
+$("#desc-toggle").click(function(e){
+	e.preventDefault();
+	$(this).toggleClass('rotate').parent('.description').toggleClass('full');
+});
 /* -- */
 /* Accordion -*/
 	$(function() {

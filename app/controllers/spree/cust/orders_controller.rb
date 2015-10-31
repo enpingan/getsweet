@@ -88,8 +88,8 @@ module Spree
 
     # Adds a new item to the order (creating a new order if none already exists)
     def populate
-
-      order    = Spree::Order.find(params[:order]['id'].to_i)
+      order = Spree::Order.find(session[:order_id])
+      # order    = Spree::Order.find(params[:order]['id'].to_i)
       variant  = Spree::Variant.find(params[:index])
       quantity = params[:quantity].to_i
       options  = params[:options] || {}
@@ -107,7 +107,9 @@ module Spree
 
       if error
         flash[:error] = error
+        puts "an error has occured!"
         redirect_back_or_default(spree.root_path)
+
       else
         respond_with(order) do |format|
           format.js { redirect_to vendor_path(order.vendor) }
