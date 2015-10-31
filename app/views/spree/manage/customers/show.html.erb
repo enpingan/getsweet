@@ -1,4 +1,6 @@
-<h1 class="catalog-title"><%= @customer.name %></h1>
+<h1 class="catalog-title"><%= @customer.name %>
+  <a href="<%= edit_manage_customer_url %>" class="edit-link">(Edit)</a>
+</h1>
 <a href="<%= new_manage_order_url %>" class="new-order-button">Start New Order</a>
 <div class="clear"></div>
 <h3 id="account-id">Account #<%= @customer.account_id %> </h3>
@@ -46,4 +48,3 @@
 
   <div class="clear"></div>
 </div>
-<a href="<%= edit_manage_customer_url %>" class="btn-edit-contact">Edit Customer</a>

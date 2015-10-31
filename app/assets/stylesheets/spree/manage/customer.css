@@ -2,6 +2,15 @@ ul, li{
   list-style: none;
 }
 
+.catalog-title > .edit-link{
+  font-size: 16px;
+  color:inherit;
+  text-decoration: none;
+  padding: 0px 20px;
+}
+.catalog-title > .edit-link:hover{
+  color: #FF7E00;
+}
 #account-id {
   margin-bottom: 30px;
 }
@@ -57,7 +66,7 @@ ul.address {
 
 }
 
-.btn-edit-contact, .nav-btn{
+.nav-btn{
   font-family: 'p22_underground_cy_prodemi';
   color: #FFF;
   background: #FF7E00;
@@ -82,7 +91,7 @@ ul.address {
   padding: 5px 10px 3px 10px;
 }
 
-.btn-edit-contact:hover, .nav-btn:hover{
+.nav-btn:hover{
   background: #FF9012;
 }
 
