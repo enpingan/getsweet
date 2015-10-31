@@ -1,6 +1,6 @@
-<h1> <%= @vendor.name %> </h1>
-
-<h1>Orders Overview</h1>
+<h1 class="catalog-title"><%= @vendor.name %> Orders Overview</h1>
+<a href="<%= new_manage_order_url %>" class="new-order-button">Start New Order</a>
+<div class="clear"></div>
 <section class="orders-overview-filters">
   <ul>
     <li>Filter by [Customer dropdown]</li>
@@ -8,12 +8,13 @@
     <li>Select Delivery [Date dropdown]</li>
   </ul>
 </section>
-<a href="<%= new_manage_order_url %>" class="new-order-button">Create New Order</a>
+
 <table class="orders-overview">
   <colgroup span="6"></colgroup>
   <tr>
     <th>Customer</th>
     <th>Order #</th>
+    <th>Delivery Date</th>
     <th>Total Items</th>
     <th>Total</th>
     <th>Status</th>
@@ -29,9 +30,9 @@
 				<% end %>
 			</td>
       <td>
-				<% if nil %><a href="<%= vendor_order_url(order.vendor_id, order.id) %>"><%= order.number %></a> <% end %>
 				<a href="<%= edit_manage_order_url(order) %>"><%= order.number %></a>
 			</td>
+      <td><%= order.delivery_date.to_date.to_formatted_s(:long) %></td>
       <td><%=order.item_count%></td>
       <td><%=number_to_currency(order.total)%></td>
       <td><%= order.state %></td>

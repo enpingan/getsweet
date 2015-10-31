@@ -10,7 +10,7 @@ module Spree
 
     def index
       @orders = current_customer.orders
-
+      @customer = current_customer
       render :index
     end
 
@@ -50,13 +50,40 @@ module Spree
     def update
       @order = set_order_session
 
+      if request.patch?
+        if (params[:commit] == Spree.t(:update))
+          flash[:success] = "Your order has been successfully update!"
+        elsif (params[:commit] == "Submit Order")
+          @order.state = "complete"
+          @order.completed_at = Time.now
+          @order.user_id = current_spree_user.id
+
+        elsif (params[:commit] == "Resubmit Order")
+          @order.approver_id = nil
+  				@order.approved_at = nil
+          @order.completed_at = Time.now
+          @order.user_id = current_spree_user.id
+
+        elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
+          redirect_to vendor_url(@order.vendor) and return
+        end
+      end
       if @order.update(order_params)
-        flash[:success] = "Your order has been successfully update!"
-        redirect_to orders_url
+        if params[:commit] == "Submit Order" || params[:commit] == "Resubmit Order"
+          redirect_to order_success_url(@order.id)
+        else
+          redirect_to order_url(@order)
+        end
       else
+        flash[:success] = nil
         flash[:errors] = @order.errors.full_messages
         render :edit
       end
+    end
+
+    def success
+      @order = set_order_session
+      render :success
     end
 
     # Adds a new item to the order (creating a new order if none already exists)
@@ -106,7 +133,13 @@ module Spree
     end
 
     def set_order_session(order = nil)
-      order ||= Spree::Order.friendly.find(params[:id])
+      unless order
+        if params[:order_id]
+          order = Spree::Order.friendly.find(params[:order_id])
+        else
+          order = Spree::Order.friendly.find(params[:id])
+        end
+      end
       session[:order_id] = order.id
       session[:vendor_id] = order.vendor.id
       order

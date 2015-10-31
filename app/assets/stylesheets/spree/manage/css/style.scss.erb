@@ -760,6 +760,14 @@ img{
     min-width: 160px;
 }
 
+.catalog-title {
+	padding-top: 18px;
+	float:left;
+}
+.new-order-button {
+	float:right;
+}
+
 /* Modal popup */
 #basic-modal-content {
 	display:none;
@@ -2200,15 +2208,19 @@ img{
 	.order-product-list .qty-block {
 	    padding: 9px 0;
 	}
+	.catalog-title{
+		float: none;
+		display: block;
+	}
+	.new-order-button {
+		float:none;
+		display: block;
+		margin: 20px auto;
+	}
 }
  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   /* IE10+ specific styles go here */
   .order-product-list .tRow .cel:nth-child(4):after, .order-product-list .tRow .cel:nth-child(5):after, .order-product-list .tRow .cel:nth-child(6):after, .order-product-list .tRow .cel:nth-child(7):after {
 	    margin-top: 20px;
 	}
-}
-
-a.new-order-button {
-	width: 300px;
-	margin: 20px auto;
 }

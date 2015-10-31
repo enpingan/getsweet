@@ -1,6 +1,6 @@
-<h1>Orders Overview</h1>
-
-<a href="<%= new_order_url %>" class="new-order-button">Create New Order</a>
+<h1 class="catalog-title"><%= @customer.name %> Orders Overview</h1>
+<a href="<%= new_order_url %>" class="new-order-button">Start New Order</a>
+<div class="clear"></div>
 
 <% if @orders %>
 
@@ -9,6 +9,7 @@
     <tr>
       <th>Vendor</th>
       <th>Order #</th>
+      <th>Delivery Date</th>
       <th>Total Items</th>
       <th>Total</th>
       <th>Status</th>
@@ -20,12 +21,13 @@
         <td>
   				<a href="<%= order_url(order) %>"><%= order.number %></a>
   			</td>
+        <td><%= order.delivery_date.to_date.to_formatted_s(:long) %></td>
         <td><%=order.item_count%></td>
         <td><%=number_to_currency(order.total)%></td>
         <td><%= order.state %></td>
         <td>
           <!-- change to appropriate order.state -->
-          <% unless order.state == 'complete' || order.delivery_date < DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now > order.vendor.order_cutoff_time.to_datetime)%>
+          <% unless order.delivery_date < DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now > order.vendor.order_cutoff_time.to_datetime)%>
           	<a href="<%= edit_order_url(order) %>">Edit</a>
           <% end %>
         </td>

@@ -1,0 +1,10 @@
+<h1 class="confirmation"><span class="sweet">SWEET!</span> Your Order#<%= @order.number %> has been placed!</h1>
+
+<p class="confirmation">Your will receive a confirmation email shortly. If you need to edit your order, you may resubmit
+it up until <%= @order.vendor.order_cutoff_time %> on <%= (@order.delivery_date.to_date - 1.day).to_formatted_s(:long)  %>.</p>
+
+<section class="confirmation-nav">
+  <a href="<%= orders_url %>" class="confirmation-nav-btn">Back to All Orders</a>
+  <a href="<%= edit_order_url(@order) %>" class="confirmation-nav-btn">Edit Order</a>
+  <a href="<%= new_order_url %>" class="confirmation-nav-btn">Start a New Order</a>
+</section>

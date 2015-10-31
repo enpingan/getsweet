@@ -1,36 +1,50 @@
-<h1> <%= @customer.name %></h1>
+<h1 class="catalog-title"><%= @customer.name %>
+  <a href="<%= edit_manage_customer_url %>" class="edit-link">(Edit)</a>
+</h1>
+<a href="<%= new_manage_order_url %>" class="new-order-button">Start New Order</a>
+<div class="clear"></div>
+<h3 id="account-id">Account #<%= @customer.account_id %> </h3>
 
-<section class="customer-top group">
-  <ul class="customer-right">
-    <li>Account ID: <%= @customer.account_id %> </li>
-    <li>Current Balance: </li>
-    <li>Past Due Balance:</li>
-    <!-- temporary terms -->
-    <li>Payment Terms: <%= @vendor.payment_terms %> Days</li>
-    <li><a href=" <%= manage_orders_url %>">Orders</a></li>
-    <li><a href="">Invoices</a></li>
-  </ul>
+<div class="manage-customer">
+  <section class="customer-account-info">
+    <ul>
+      <li><strong>Current Balance:</strong> </li>
+      <li><strong>Past Due Balance:</strong></li>
+      <!-- temporary terms -->
+      <li><strong>Payment Terms:</strong> <%= @vendor.payment_terms %> Days</li>
+      <a href=" <%= manage_orders_url %>" class="nav-btn">Orders</a>
+      <!-- <li><a href="">Invoices</a></li> -->
+    </ul>
 
-	<% if @customer.ship_address %>
-  <ul class="contact-left">
-    <li>Primary Contact: <%= "#{@customer.ship_address.firstname} #{@customer.ship_address.lastname}" %></li>
-    <li>Primary Phone: <%#= @customer.phone %></li>
-    <li>Primary Email: <%#= @customer.email %></li>
-    <li>Customer Address: </li>
-      <ul class="address">
-        <li><%= @customer.ship_address.address1 %></li>
-        <% if @customer.ship_address.address2 %>
-          <li><%= @customer.ship_address.address2 %></li>
-        <% end %>
-        <li> <%= @customer.ship_address.city %></li>
-        <li> <%= @customer.ship_address.state_name %></li>
-        <li> <%= @customer.ship_address.zipcode %></li>
-      </ul>
-  </ul>
-	<% else %>
-		No address found.
-	<% end %>
-</section>
-<a href="<%= edit_manage_customer_url %>" class="btn-new-contact">Edit contact</a>
+  </section>
+  <div class="contact-group">
+    <img class="contact-img">
 
-<a href="<%= new_manage_order_url %>" class="new-order-button">Create New Order</a>
+    <div class="contact-info">
+      <% if @customer.ship_address %>
+        <ul class="primary-contact">
+          <li><strong>Contact:</strong> <%= "#{@customer.ship_address.firstname} #{@customer.ship_address.lastname}" %></li>
+          <li><strong>Phone:</strong> <%= @customer.ship_address.phone %></li>
+          <li><strong>Email:</strong> <%= @customer.email %></li>
+          <li><strong>Address:</strong>
+            <ul class="address">
+              <li><%= @customer.ship_address.address1 %></li>
+              <% unless @customer.ship_address.address2.nil? %>
+                <li><%= @customer.ship_address.address2 %></li>
+              <% end %>
+              <li> <%= @customer.ship_address.city %>,
+                <%= Spree::State.find(@customer.ship_address.state_id).abbr %>
+                <%= @customer.ship_address.zipcode %>
+              </li>
+              <!-- change to @customer.ship_address.state_name after associated correctly -->
+            </ul>
+          </li>
+        </ul>
+    	<% else %>
+    		No address found.
+    	<% end %>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+</div>

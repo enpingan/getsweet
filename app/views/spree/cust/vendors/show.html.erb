@@ -28,8 +28,9 @@
 		</div>
 	</div>
 	<!-- <h1 class="tablet-center">Sweet Deals!</h1> -->
-  <h1 class="tablet-center"><%= @vendor.name %> Product Catalog</h1>
-	<a href="<%= new_order_url %>" class="new-order-button">Create New Order</a>
+	<h1 class="catalog-title"><%= @vendor.name %> Product Catalog</h1>
+	<a href="<%= new_order_url %>" class="new-order-button">Start New Order</a>
+	<div class="clear"></div>
 
 	<% if @current_order%>
 		<h3 id="current-order">Order: <a href="<%= order_url(@current_order) %>">#<%= @current_order.number %></a></h3>

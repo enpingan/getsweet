@@ -4,7 +4,13 @@
 <h4><a href="<%= manage_orders_url %>">Back to All Orders</a></h4>
 <h1> Customer: <%= @order.customer.name if @order.customer %> </h1>
 <h3> Order #<%= @order.number %> </h3>
-<h4>Order status: <%= @order.state %></h4>
+<h4>Order status:
+	<% if @order.approved_at %>
+		Approved
+	<% else %>
+		Action Required
+	<% end %>
+</h4>
 
 <div data-hook="outside_cart_form">
 	<%= form_for ([:manage, @order]),url: manage_order_url, method: "patch", html: { id: 'update-cart' } do |order_form| %>
@@ -48,17 +54,19 @@
 
 				</table>
 
-				<a href="<%= manage_products_url %>" class="new-order-button">Add Products From Catalog</a>
+				<%= submit_tag "Add New Product To Order", class: "add-new-product-btn" %>
 
         <div class="links col-md-6 navbar-form pull-right text-right" data-hook="cart_buttons">
           <div class="form-group">
-            <%= order_form.submit class: 'btn btn-primary add-to-order', id: 'update-button' do %>
-             <%= Spree.t(:update) %>
-            <% end %>
-            <%= button_tag class: 'btn btn-lg btn-success add-to-order', id: 'checkout-link', name: 'checkout' do %>
+            <%#= order_form.submit class: 'btn btn-primary add-to-order', id: 'update-button' do %>
+             <%#= Spree.t(:update) %>
+            <%# end %>
+						<%= submit_tag Spree.t(:update), class: 'btn btn-primary add-to-order', id: 'update-button' %>
+						<%= submit_tag "Approve Order", class: 'btn btn-primary add-to-order', id: 'approve-button' %>
+            <%#= button_tag class: 'btn btn-lg btn-success add-to-order', id: 'checkout-link', name: 'checkout' do %>
               <%#= Spree.t(:checkout) %>
-              <%= "Approve Order"%>
-            <% end %>
+              <%#= "Approve Order"%>
+            <%# end %>
           </div>
         </div>
 
