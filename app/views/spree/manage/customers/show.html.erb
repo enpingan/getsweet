@@ -6,10 +6,10 @@
 <div class="manage-customer">
   <section class="customer-account-info">
     <ul>
-      <li>Current Balance: </li>
-      <li>Past Due Balance:</li>
+      <li><strong>Current Balance:</strong> </li>
+      <li><strong>Past Due Balance:</strong></li>
       <!-- temporary terms -->
-      <li>Payment Terms: <%= @vendor.payment_terms %> Days</li>
+      <li><strong>Payment Terms:</strong> <%= @vendor.payment_terms %> Days</li>
       <a href=" <%= manage_orders_url %>" class="nav-btn">Orders</a>
       <!-- <li><a href="">Invoices</a></li> -->
     </ul>
@@ -46,4 +46,4 @@
 
   <div class="clear"></div>
 </div>
-<a href="<%= edit_manage_customer_url %>" class="btn-edit-contact">Edit contact</a>
+<a href="<%= edit_manage_customer_url %>" class="btn-edit-contact">Edit Customer</a>
