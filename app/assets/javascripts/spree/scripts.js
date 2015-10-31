@@ -117,3 +117,10 @@ $(".app_ui-wrapper header .nav-ico").click(function(){
  		});
  	});
  /* -- */
+/* Auto disappear flash messages */
+ $(document).ready(function() {
+    setTimeout(function() {
+        $(".alert-auto-dissapear").fadeOut(1500);
+    },2000);
+});
+/* -- */
