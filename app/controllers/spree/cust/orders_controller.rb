@@ -107,7 +107,6 @@ module Spree
 
       if error
         flash[:error] = error
-        puts "an error has occured!"
         redirect_back_or_default(spree.root_path)
 
       else
