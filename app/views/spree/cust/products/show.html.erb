@@ -1,7 +1,8 @@
 
 
 <% if @current_order %>
-  <h3>Order <a href="<%= order_url(@current_order) %>">#<%= @current_order.number %></a></h3>
+  <h3>Order <a href="<%= order_url(@current_order) %>">#<%= @current_order.number %>
+     - <%= @current_order.delivery_date.to_date.to_formatted_s(:long) %></a></h3>
 <% end %>
 					<div class="product-view-block">
 						<div class="product-view-block-preview">
@@ -44,18 +45,23 @@
     									<div class="cel">
     										<b>Price:</b> <%= number_to_currency(variant.price) %>
     									</div>
+
     									<div class="cel">
+                        <% if @current_order %>
     										<div class="qty-block">
     											<div class="spin"><span class="minus"><i class="fa fa-minus"></i></span>
                             <%= number_field_tag :quantity, 0, :class => 'qty_input', :min => 1 %>
                             <span class="plus"><i class="fa fa-plus"></i></span></div>
     										</div>
+                        <% end %>
     									</div>
     									<div class="cel">
+                        <% if @current_order %>
                         <%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit do %>
         									<%= "Add to Order" %>
         	              <% end %>
     										<!-- <a href="#" class="addToOrder-button">Add to Order</a> -->
+                        <% end %>
     									</div>
     								<!-- </div> -->
                   <% end %>
