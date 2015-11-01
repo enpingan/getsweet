@@ -4,11 +4,19 @@
 <a href="<%= new_manage_order_url %>" class="new-order-button">Start New Order</a>
 
 <div class="clear"></div>
-
-<input type="text" placeholder="Product name or sku"></input>
-<button class="search">Search</button>
+<!-- <input type="text" placeholder="Product name or sku"></input>
+<button class="search">Search</button> -->
 <h3><%= @products.count %> Items Available </h3>
+<div id="order-form">
 
+<div class="liveFilterContainer">
+  <label>Search
+    <input type="text" class="liveFilterInput default" placeholder="Product name or sku" />
+
+    <a href="#" class="clearField" title="Clear Filter">x</a>
+  </label>
+</div>
+<div class="noResults"><strong>Sorry.</strong> There is no match for your filter; please try again.</div>
 
   <% if @current_customer && @current_order%>
     <h3> Customer:<a href="manage_customer_url(@current_customer)"><%= @current_customer.name %></a></h3>
@@ -20,8 +28,7 @@
 <% if @current_order %>
   <h3 id="current-order">Order: <a href="<%= edit_manage_order_url(@current_order) %>">#<%= @current_order.number %></a></h3>
 <% end %>
-<div id="order-form">
-  <div class="order-product-list">
+  <div class="order-product-list liveFilterList">
 
     <div class="tRow header">
       <div class="cel">
@@ -104,3 +111,4 @@
 <div class="shadow"></div>
 <div class="clear"></div>
 <%# end %>
+<%= javascript_include_tag "spree/product_search" %>

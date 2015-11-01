@@ -13,6 +13,7 @@ Rails.application.config.assets.precompile += %w( spree/manage/js/jquery.formsty
 Rails.application.config.assets.precompile += %w( spree/manage/js/jquery.simplemodal.js )
 Rails.application.config.assets.precompile += %w( spree/manage/js/classie.js )
 Rails.application.config.assets.precompile += %w( spree/manage/js/uisearch.js )
+Rails.application.config.assets.precompile += %w( spree/product_search.js )
 
 Rails.application.config.assets.precompile += %w( fonts.css )
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/

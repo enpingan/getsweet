@@ -55,10 +55,10 @@ img{
 .relative{
 	position: relative;
 }
-::-webkit-input-placeholder {color:#6e665f;}
-::-moz-placeholder          {color:#6e665f;}
-:-moz-placeholder           {color:#6e665f;}
-:-ms-input-placeholder      {color:#6e665f;}
+::-webkit-input-placeholder {color:#ccc;}
+::-moz-placeholder          {color:#ccc;}
+:-moz-placeholder           {color:#ccc;}
+:-ms-input-placeholder      {color:#ccc;}
 :focus::-webkit-input-placeholder {color: transparent}
 :focus::-moz-placeholder          {color: transparent}
 :focus:-moz-placeholder           {color: transparent}
@@ -66,6 +66,30 @@ img{
 /*-------------------------------------------------------------------------*/
 /*	2.	Content Styles
 /*-------------------------------------------------------------------------*/
+
+.noResults {
+	display: none;
+}
+
+.liveFilterContainer a{
+	text-decoration: none;
+	color: #6e665f;
+}
+.liveFilterContainer a:hover{
+	color: #ff7e00;
+}
+
+.app_ui-wrapper .app_ui-block .liveFilterContainer label{
+	text-align: left;
+	font-size: 16px;
+}
+
+.app_ui-wrapper .app_ui-block .liveFilterContainer input{
+	font-size: 14px;
+	padding: 5px 10px;
+	margin-bottom: 20px;
+}
+
 .sweet_app{
 	min-height: 100%;
 	overflow: hidden;
