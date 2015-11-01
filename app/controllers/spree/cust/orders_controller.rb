@@ -65,12 +65,12 @@ module Spree
           @order.user_id = current_spree_user.id
 
         elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
-          @order.persist_totals
+          @order.update!
           redirect_to vendor_url(@order.vendor) and return
         end
       end
       if @order.update(order_params)
-        @order.persist_totals
+        @order.update!
         if params[:commit] == "Submit Order" || params[:commit] == "Resubmit Order"
           redirect_to order_success_url(@order.id)
         else

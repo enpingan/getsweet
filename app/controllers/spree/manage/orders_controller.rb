@@ -65,13 +65,13 @@ class OrdersController < Spree::Manage::BaseController
 				@order.approved_at = Time.now
 				flash[:success] = "Order Approved!"
 			elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
-				@order.persist_totals
+				@order.update!
 				redirect_to manage_products_url and return
 			end
 		end
 
 		if @order.update(order_params)
-			@order.persist_totals
+			@order.update!
 			redirect_to edit_manage_order_url(@order)
 		else
 			flash[:success] = nil
