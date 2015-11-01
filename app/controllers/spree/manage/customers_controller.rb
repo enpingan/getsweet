@@ -36,12 +36,13 @@ module Spree
       end
 
       def create
-        @customer = Spree::Customer.create(customer_params[:customer])
+        @vendor = current_vendor
+        @customer = current_vendor.customers.create(customer_params)
         session[:customer_id] = @customer.id
         if @customer.save
           session[:customer_id] = @customer.id
           flash[:success] = "Congratulations, a new customer!"
-          redirect_to manage_customers_url(@customer)
+          redirect_to manage_customers_url
         else
           flash[:errors] = @customer.errors.full_messages
           render :new

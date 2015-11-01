@@ -3,7 +3,7 @@
 <%#= ---=== KNOWN ISSUE: New customer does not work correctly due to routing / association issues related to customer/address relatiponship ===--- %>
 <%#= https://trello.com/c/YOpuCQuQ/16-manage-customers-new-functionality-does-not-work-no-route-matches-post %>
 
-<%= form_for @customer, url: spree.new_manage_customer_url do |f| %>
+<%= form_for @customer, url: manage_customers_url do |f| %>
   <% if @customer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
