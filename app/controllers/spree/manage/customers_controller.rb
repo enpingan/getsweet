@@ -6,22 +6,17 @@ module Spree
       before_action :ensure_vendor, only: [:show, :edit, :update, :destroy]
 
       def index
-        # This is just temporary until the customers are connected to the vendor
-        # @customers = Spree::Customer.all
         @vendor = current_vendor
         @customers = @vendor.customers
       end
 
       def show
-				@vendor=current_vendor
+				@vendor = current_vendor
         @customer = Spree::Customer.find(params[:id])
         session[:customer_id] = @customer.id
         render :show
       end
 
-
-			# 10/21 - KNOWN ISSUE PREVENTING CREATION OF NEW CUSTOMER FROM VENDOR MANAGE PORTAL
-			# https://trello.com/c/YOpuCQuQ/16-manage-customers-new-functionality-does-not-work-no-route-matches-post
       def new
         @customer = Spree::Customer.new
 
@@ -36,9 +31,7 @@ module Spree
       end
 
       def create
-        @vendor = current_vendor
         @customer = current_vendor.customers.create(customer_params)
-        session[:customer_id] = @customer.id
         if @customer.save
           session[:customer_id] = @customer.id
           flash[:success] = "Congratulations, a new customer!"
@@ -63,7 +56,6 @@ module Spree
         @customer = Spree::Customer.find(params[:id])
         session[:customer_id] = @customer.id
         if @customer.update(customer_params)
-          session[:customer_id] = @customer.id
           flash[:success] = "Customer has been update!"
           redirect_to manage_customer_url(@customer)
         else
