@@ -17,11 +17,14 @@
           <%# end %>
         </div>
         <div class="checkbox-block">
-          <p><b>Lead Time:</b>
-            <select name="lead_time:" id="lead_time">
+          <!-- <p><b>Lead Time (days):</b> -->
+            <label>Lead Time (days):
+            <input type="number" name="" value="0">
+          </label>
+            <!-- <select name="lead_time:" id="lead_time">
               <option value="none">None</option>
               <option value="option 1">Option 1</option>
-            </select>
+            </select> -->
           </p>
         </div>
       </div>
@@ -45,20 +48,22 @@
       <div class="col3">
         <div class="leftpart">
           <p>
-            <label>Pack/Size:</label>
-            <select name="pack_size:" id="pack_size">
+            <label>Pack/Size:
+              <input type="text" name="" value="Each">
+            </label>
+            <!-- <select name="pack_size:" id="pack_size">
               <option value="none">Each</option>
               <option value="option 1">Option 1</option>
-            </select>
+            </select> -->
           </p>
         </div>
         <div class="rightpart">
           <p>
             <label>Price: </label>
-            <input type="text" id="price" value="$5.00">
+            <input type="text" id="price" name="" value="<%= number_to_currency(variant.price) %>">
           </p>
         </div>
-        <div class="datepicker-block">
+        <!-- <div class="datepicker-block">
           <div class="leftpart">
             <p><input type="checkbox" id="promotional"><label for="promotional">Promotional</label></p>
           </div>
@@ -78,7 +83,7 @@
               <%#= image_tag("spree/manage/img/datepicker-ico.jpg", class: "date-icon") %>
             </p>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="clear"></div>
     </div>
