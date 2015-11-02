@@ -1,0 +1,50 @@
+<h1 class="catalog-title"><%= @customer.name %>
+  <a href="<%= edit_account_url %>" class="edit-link">(Edit)</a>
+</h1>
+<div class="clear"></div>
+<h3 id="account-id">Account #<%= @customer.account_id %> </h3>
+
+<div class="manage-customer">
+  <section class="customer-account-info">
+    <ul>
+      <li><strong>Current Balance:</strong> </li>
+      <li><strong>Past Due Balance:</strong></li>
+      <!-- temporary terms -->
+      <!-- <li><strong>Payment Terms:</strong> <%#= @vendor.payment_terms %> Days</li> -->
+      <li><strong>Payment Terms:</strong> 30 Days</li>
+      <a href=" <%= orders_url %>" class="nav-btn">Orders</a>
+      <!-- <li><a href="">Invoices</a></li> -->
+    </ul>
+
+  </section>
+  <div class="contact-group">
+    <img class="contact-img">
+
+    <div class="contact-info">
+      <% if @customer.ship_address %>
+        <ul class="primary-contact">
+          <li><strong>Contact:</strong> <%= "#{@customer.ship_address.firstname} #{@customer.ship_address.lastname}" %></li>
+          <li><strong>Phone:</strong> <%= @customer.ship_address.phone %></li>
+          <li><strong>Email:</strong> <%= @customer.email %></li>
+          <li><strong>Address:</strong>
+            <ul class="address">
+              <li><%= @customer.ship_address.address1 %></li>
+              <% unless @customer.ship_address.address2.nil? %>
+                <li><%= @customer.ship_address.address2 %></li>
+              <% end %>
+              <li> <%= @customer.ship_address.city %>, 
+                <%= Spree::State.find(@customer.ship_address.state_id).abbr %>
+                <%= @customer.ship_address.zipcode %>
+              </li>
+              <!-- change to @customer.ship_address.state_name after associated correctly -->
+            </ul>
+          </li>
+        </ul>
+      <% else %>
+        No address found.
+      <% end %>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+</div>

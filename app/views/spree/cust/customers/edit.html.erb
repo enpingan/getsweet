@@ -1,0 +1,8 @@
+<h1>Edit Customer</h1>
+  <div class="customer-edit">
+  <%= form_for @customer, url: account_url(@customer) do |f| %>
+    <%= render partial: 'spree/cust/customers/customer_form', locals: { f: f } %>
+  <% end %>
+
+  <div class="clear"></div>
+</div>

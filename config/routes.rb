@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
 	 scope module: 'cust' do
 
+		resource :account, to: 'customers', only: [:show, :edit, :update]
+
     resources :vendors, only: [:index, :show] do
       resources :products, only: [:index, :show]
     end

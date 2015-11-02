@@ -1,12 +1,14 @@
-<a href="<%#= my_account_url %>">
+<a href="<%= account_url %>">
   <h3><%=image_tag("spree/manage/img/my_account.png")%>
     <span class="tablet-hide">My Account
       <!-- <i class="fa fa-angle-left"></i> -->
     </span>
   </h3>
 </a>
+<% if nil %>
 <div class="accordion-block">
   <ul>
-    <li><a href=""></a></li>
+    <li><%= link_to "/account", "My Account" %></li>
   </ul>
 </div>
+<% end %>
