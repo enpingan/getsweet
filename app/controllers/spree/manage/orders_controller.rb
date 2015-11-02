@@ -104,8 +104,8 @@ class OrdersController < Spree::Manage::BaseController
       redirect_back_or_default(spree.root_path)
     else
       respond_with(order) do |format|
-				format.js
-        format.html { redirect_to cart_path }
+				format.js { flash[:success] = "#{variant.product.name} has been added to your order"}
+        # format.html { redirect_to cart_path }
       end
     end
   end

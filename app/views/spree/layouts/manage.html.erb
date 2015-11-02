@@ -57,7 +57,9 @@
             <%#-------------------------------------------------%>
             <%# Alerts                                          %>
             <%#-------------------------------------------------%>
-            <%= flash_alert(flash) %>
+            <div id="alert">
+              <%= flash_alert(flash) %>
+            </div>
             <%#= render partial: 'spree/admin/shared/alert', collection: session[:alerts] %>
 
             <%#-------------------------------------------------%>

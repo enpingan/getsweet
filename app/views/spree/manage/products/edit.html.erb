@@ -1,73 +1,95 @@
-<form action="<%=manage_product_url(@product.id)%>" method="post">
-  <input type="hidden" name="_method" value="patch">
-  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-
-  <h1>Edit <input type="text" name="" value="<%= @product.name %>"></h1>
-
-  <% if @product.variants.empty? %>
-    <h3>SKU #<%= @product.master.sku %></h3>
-  <% end %>
-
-  <h5>Manufacturer: <input type="text" name="" value=""></h5>
-
-  <div class="group">
-    <div class="product-left">
-      <img src="", alt="Image not Available">
-      <a href="#">Upload New Image</a>
-
-      <div class="allergans">
-        <label><input type="checkbox" name="" value="">Nuts</label><br>
-        <label><input type="checkbox" name="" value="">Dairy</label><br>
-        <label><input type="checkbox" name="" value="">Seafood</label><br>
-        <label><input type="checkbox" name="" value="">Gluten</label><br>
-        <label><input type="checkbox" name="" value=""></label><br>
-        <label><input type="checkbox" name="" value=""></label><br>
-        <label><input type="checkbox" name="" value=""></label><br>
+<div class="product-edit-block">
+  <form id="product-edit-form">
+    <p><label for="prod_name">Product Name:</label>
+       <input type="text" id="prod_name" name="product[name]" value="<%= @product.name %>"></p>
+    <p><label for="prod_name">Mfg:</label>
+       <input type="text" id="mfg" value="<%= @vendor.name %>"></p>
+    <div class="row">
+      <div class="col1">
+        <%= image_tag("spree/manage/img/product-img4.jpg", class: "prodcut-view-img")%>
+        <p class="aligncenter"><a href="#" class="upload-img-button">Upload new image</a></p>
+        <div class="divider2"></div>
+        <div class="checkbox-block">
+          <p><b>Allergans:</b>
+          <% @allergans.each do |allergan| %>
+          <!-- allergans still need to be linked up to model -->
+            <p><b></b><label><input type="checkbox"><%= allergan %></label></p>
+          <% end %>
+        </div>
+        <div class="checkbox-block">
+          <p><b>Lead Time:</b>
+            <select name="lead_time:" id="lead_time">
+              <option value="none">None</option>
+              <option value="option 1">Option 1</option>
+            </select>
+          </p>
+        </div>
+      </div>
+      <div class="col2">
+        <div class="relative description-wrap">
+          <textarea class="description" name="product[description]"> <%= @product.description %></textarea>
+          <p class="checkbox-block"><label>V<input type="checkbox" id="v"></label><label>VG<input type="checkbox" id="vg"></label><label>GF<input type="checkbox" id="gf"></label></p>
+        </div>
       </div>
     </div>
 
-    <div class="product-right">
-      <textarea class="product-description" name="">This is the @product description. Not sure
-        if there is a field in the DB for this yet, still have to check. But this
-        is where it would go.
-      </textarea>
-
-      <ul class="dietary-restrictions">
-        <label><input type="checkbox" name="" value=""></label>Gluten Free<br>
-        <label><input type="checkbox" name="" value=""></label>Vegetarian<br>
-        <label><input type="checkbox" name="" value=""></label>Vegan<br>
-      </ul>
-
+    <% @product.variants_including_master.each do |variant| %>
+    <div class="divider2"></div>
+    <div class="product-size-block">
+      <div class="col1">
+        <a href="" id="close-button"><i class="fa fa-times"></i></a>
+      </div>
+      <div class="col2">
+        <p><label for="sku">SKU #</label> <input type="text" id="sku" value="234134"></p>
+      </div>
+      <div class="col3">
+        <div class="leftpart">
+          <p>
+            <label>Pack/Size:</label>
+            <select name="pack_size:" id="pack_size">
+              <option value="none">Each</option>
+              <option value="option 1">Option 1</option>
+            </select>
+          </p>
+        </div>
+        <div class="rightpart">
+          <p>
+            <label>Price: </label>
+            <input type="text" id="price" value="$5.00">
+          </p>
+        </div>
+        <div class="datepicker-block">
+          <div class="leftpart">
+            <p><input type="checkbox" id="promotional"><label for="promotional">Promotional</label></p>
+          </div>
+          <div class="rightpart">
+            <p><label for="promo_price">Promo Price:</label> <input type="text" id="promo_price" value=""></p>
+          </div>
+          <div class="leftpart">
+            <p class="datepicker-cont"><label for="date_start">Start:</label>
+              <input type="text" class="datepicker" id="date_start" value="">
+              <!-- <img src="img/datepicker-ico.jpg" class="date-icon"> -->
+            </p>
+          </div>
+          <div class="rightpart">
+            <p class="datepicker-cont">
+              <label for="date_end">End:</label>
+              <input type="text" class="datepicker" id="date_end" value="">
+              <!-- <img src="img/datepicker-ico.jpg" class="date-icon"> -->
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
     </div>
-  </div>
+    <% end %>
 
-  <section class="product-bottom group">
-    <label>Meta Tags
-      <input type="text" name=product[meta_tags] value="">
-    </label>
-
-    <table class="single-order">
-      <colgroup span="4"></colgroup>
-      <tr>
-        <th>SKU</th>
-        <th>Pack/Size</th>
-        <th>Price</th>
-        <th></th>
-      </tr>
-      <% @product.variants_including_master.each do |variant| %>
-        <tr>
-          <td><%=variant.sku %></td>
-          <td>variant.pack_size</td>
-          <td><%= number_to_currency(variant.price) %></td>
-          <td><a href="<%=edit_manage_product_variant_url(@product, variant)%>">Edit Variant</a></td>
-        </tr>
-      <% end %>
-      <tr>
-        <td><a href="<%= new_manage_product_variant_url(@product) %>">Add New Variant</a></td>
-      </tr>
-    </table>
-
-  </section>
-
-  <button class="add-to-order">Update Product</button>
-</form>
+    <div class="divider2"></div>
+    <div class="product-edit-buttons">
+      <a href="" class="cta-button white"><i class="fa fa-plus"></i> Add new size</a>
+      <input type="submit" value="Remove product">
+      <a href="" class="cta-button white">Save</a>
+      <div class="clear"></div>
+    </div>
+  </form>
+</div>

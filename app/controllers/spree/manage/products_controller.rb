@@ -48,6 +48,9 @@ module Spree
 
   def edit
     @product = Spree::Product.friendly.find(params[:id])
+    @vendor = current_vendor
+    # Temporary allergans
+    @allergans = ['Peanut', 'Tree Nuts', 'Milk Egg', 'Wheat', 'Soy', 'Fish', 'Shellfish']
     render :edit
   end
 
