@@ -1593,8 +1593,6 @@ img{
     margin: 0 auto;
 }
 
-// ----- Product View -------------//
-
 .app_ui-wrapper .app_ui-block .product-edit-block p {
     margin-bottom: 10px;
 }
@@ -1613,20 +1611,23 @@ img{
 	height: 21px;
 }
 .product-edit-block .description {
-    position: relative;
-    margin: 0;
-    min-height: 404px;
-    background: #FCF9F6;
-    padding: 20px 20px 50px 20px;
-    font-size: 16px;
-    color: #6e665f;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+	position: relative;
+	margin: 0;
+	border: 1px solid #FCF9F6;
+	width: 100%;
+	resize: none;
+	min-height: 404px;
+	background: #FCF9F6;
+	padding: 20px 20px 50px 20px;
+	font-size: 16px;
+	color: #6e665f;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 .product-edit-block .description .checkbox-block{
 	position: absolute;
@@ -1639,7 +1640,7 @@ img{
     font-weight: 700;
     margin-right: 15px;
 }
-.app_ui-wrapper .app_ui-block .product-edit-block .description .checkbox-block label .jq-checkbox{
+.app_ui-wrapper .app_ui-block .product-edit-block .description-wrap .checkbox-block label .jq-checkbox{
 	margin-left: 6px;
 }
 .product-edit-block .upload-img-button {
@@ -1739,8 +1740,8 @@ img{
 .app_ui-wrapper .app_ui-block .product-size-block .datepicker-cont{
 	position: relative;
 }
-.app_ui-wrapper .app_ui-block .product-size-block .datepicker-cont:after{
-	content: "";
+.app_ui-wrapper .app_ui-block .product-size-block .datepicker-cont .date-icon{
+	display: block;
 	position: absolute;
 	right: 1px;
 	top: 1px;
@@ -1772,7 +1773,65 @@ img{
 .product-size-block .col3 .datepicker-block p{
 	margin-bottom: 15px;
 }
-
+.product-edit-buttons{
+	padding: 10px 0;
+}
+.product-edit-buttons .cta-button{
+    font-family: 'p22_underground_cy_prodemi';
+    color: #706861;
+    background: #FFF;
+    border: 2px solid #E0D9D2;
+    padding: 18px 20px 14px 20px;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 20px;
+    float: left;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.product-edit-buttons .cta-button i{
+	display: inline-block;
+	margin-right: 8px;
+	line-height: 16px;
+}
+.product-edit-buttons .cta-button:hover{
+	background: #F3F3F3;
+}
+.product-edit-buttons input[type="submit"] {
+    font-family: 'p22_underground_cy_prodemi';
+    color: #FFF;
+    background: #FF7E00;
+    padding: 20px 20px 16px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    border: none;
+    float: right;
+    font-weight: bold;
+    line-height: 20px;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.product-edit-buttons input[type="submit"]:hover {
+    background: #FF9012;
+}
+.product-edit-buttons .cta-button:nth-child(3){
+	float: right;
+	margin: 0 20px;
+}
+.pickmeup {
+    margin-left: -86px;
+}
 /*-------------------------------------------------------------------------*/
 /*	3.	Responsive
 /*-------------------------------------------------------------------------*/
@@ -1935,6 +1994,12 @@ img{
 	}
 	.search-area .recent-block .recent-list ul {
 	    top: 50px;
+	}
+	.app_ui-wrapper .app_ui-block .product-size-block .col3 .rightpart {
+	    margin: 0;
+	}
+	.app_ui-wrapper .app_ui-block .product-edit-block .checkbox-block label {
+	    min-width: 100px;
 	}
 }
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -2260,6 +2325,17 @@ img{
 	.product-view-block #order-form {
 	    max-width: 100%;
 	}
+	.product-edit-buttons .cta-button {
+			padding: 15px 15px 10px 15px;
+			font-size: 12px;
+	}
+	.product-edit-buttons input[type="submit"] {
+			padding: 16px 15px 12px 15px;
+			font-size: 12px;
+	}
+	.product-edit-buttons .cta-button:nth-child(3) {
+			margin: 0 10px;
+	}
 }
 @media (min-width: 768px) and (max-width: 991px) {
 	.app_ui-wrapper .app_ui-block.active {
@@ -2355,6 +2431,10 @@ img{
 	}
 	.app_ui-wrapper .active-tablet + .app_ui-block .product-size-block .col3 .leftpart {
 			min-width: 180px;
+	}
+	.app_ui-wrapper .app_ui-block .product-edit-block label {
+			font-size: 13px;
+			margin-right: 0;
 	}
 	.product-edit-block .description {
 			min-height: 266px;
@@ -2812,12 +2892,22 @@ img{
 	}
 	.app_ui-wrapper .app_ui-block .product-size-block .col3 .leftpart {
 	    float: right;
+			clear: right;
 	}
 	.app_ui-wrapper .app_ui-block .product-size-block .col3 .rightpart {
 	    clear: both;
 	}
 	.product-size-block .datepicker-block {
 	    padding: 15px 15px 5px;
+	}
+	.app_ui-wrapper .app_ui-block .product-edit-block .product-edit-buttons input[type="submit"]{
+		clear: left;
+		width: auto;
+		margin-top: 10px;
+	}
+	.product-edit-buttons .cta-button:nth-child(3) {
+			margin: 10px 0;
+			float: left;
 	}
 
 }
