@@ -38,13 +38,19 @@ module Spree
   end
 
   def show
+    @vendor = current_vendor
+    @current_customer = current_customer
+    @current_order = current_order
     @product = Spree::Product.friendly.find(params[:id])
-    render :show
 
+    render :show
   end
 
   def edit
     @product = Spree::Product.friendly.find(params[:id])
+    @vendor = current_vendor
+    # Temporary allergans
+    @allergans = ['Peanut', 'Tree Nuts', 'Milk Egg', 'Wheat', 'Soy', 'Fish', 'Shellfish']
     render :edit
   end
 

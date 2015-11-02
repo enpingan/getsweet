@@ -65,10 +65,12 @@ module Spree
           @order.user_id = current_spree_user.id
 
         elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
+          @order.update!
           redirect_to vendor_url(@order.vendor) and return
         end
       end
       if @order.update(order_params)
+        @order.update!
         if params[:commit] == "Submit Order" || params[:commit] == "Resubmit Order"
           redirect_to order_success_url(@order.id)
         else
@@ -88,8 +90,8 @@ module Spree
 
     # Adds a new item to the order (creating a new order if none already exists)
     def populate
-
-      order    = Spree::Order.find(params[:order]['id'].to_i)
+      order = Spree::Order.find(session[:order_id])
+      # order    = Spree::Order.find(params[:order]['id'].to_i)
       variant  = Spree::Variant.find(params[:index])
       quantity = params[:quantity].to_i
       options  = params[:options] || {}
@@ -108,11 +110,11 @@ module Spree
       if error
         flash[:error] = error
         redirect_back_or_default(spree.root_path)
+
       else
         respond_with(order) do |format|
-          #format.js { redirect_to vendor_path(order.vendor) }
-          format.js
           format.html { redirect_to cart_path }
+          format.js { flash[:success] = "#{variant.product.name} has been added to your order"}
         end
       end
     end

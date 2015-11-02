@@ -52,7 +52,7 @@
         <div class="links col-md-6 navbar-form pull-right text-right" data-hook="cart_buttons">
           <div class="form-group">
             <%= submit_tag Spree.t(:update), class: 'btn btn-primary add-to-order', id: 'update-button' %>
-						<% if @order.state = "complete" %>
+						<% if @order.state == "complete" %>
 							<%= submit_tag "Resubmit Order", class: 'btn btn-lg btn-success add-to-order', id: 'checkout-link'%>
 						<% else %>
             	<%= submit_tag "Submit Order", class: 'btn btn-lg btn-success add-to-order', id: 'checkout-link'%>

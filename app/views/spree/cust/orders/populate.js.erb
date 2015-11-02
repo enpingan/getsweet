@@ -3,3 +3,11 @@
 	// below code is from spree ajax add to cart gem
 	$('#link-to-cart').html("<%= j(link_to_cart) %>");
 <% end %>
+
+
+<% if flash[:success] %>
+	$('#alert').html("<div class='alert alert-success alert-auto-dissapear'><%= flash[:success] %></div>");
+	setTimeout(function() {
+			$(".alert-auto-dissapear").fadeOut(1500);
+	},2000);
+<% end %>

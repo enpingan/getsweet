@@ -58,6 +58,11 @@ $(".app_ui-wrapper header .nav-ico").click(function(){
 		$('.app_ui-wrapper .shadow').hide();
 	};
 });
+
+$("#desc-toggle").click(function(e){
+	e.preventDefault();
+	$(this).toggleClass('rotate').parent('.description').toggleClass('full');
+});
 /* -- */
 /* Accordion -*/
 	$(function() {
@@ -117,3 +122,10 @@ $(".app_ui-wrapper header .nav-ico").click(function(){
  		});
  	});
  /* -- */
+/* Auto disappear flash messages */
+ $(document).ready(function() {
+    setTimeout(function() {
+        $(".alert-auto-dissapear").fadeOut(1500);
+    },2000);
+});
+/* -- */

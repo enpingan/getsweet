@@ -2,15 +2,6 @@ ul, li{
   list-style: none;
 }
 
-.catalog-title > .edit-link{
-  font-size: 16px;
-  color:inherit;
-  text-decoration: none;
-  padding: 0px 20px;
-}
-.catalog-title > .edit-link:hover{
-  color: #FF7E00;
-}
 #account-id {
   margin-bottom: 30px;
 }
@@ -66,17 +57,17 @@ ul.address {
 
 }
 
-.nav-btn{
+.nav-btn, .app_ui-wrapper .app_ui-block .customer-edit .update-customer{
   font-family: 'p22_underground_cy_prodemi';
+  border: none;
   color: #FFF;
   background: #FF7E00;
-  padding: 22px 10px 18px 10px;
+
   font-size: 16px;
   text-decoration: none;
   font-weight: bold;
   line-height: 20px;
   display: block;
-  width: 150px;
   text-align: center;
   text-transform: uppercase;
   -webkit-transition: all 0.3s ease;
@@ -89,16 +80,48 @@ ul.address {
 .nav-btn{
   margin-top: 20px;
   padding: 5px 10px 3px 10px;
+  width: 150px;
 }
 
-.nav-btn:hover{
+.app_ui-wrapper .app_ui-block .customer-edit .update-customer{
+  width: 220px;
+  padding: 15px 0 12px 0;
+  margin-top: 37px;
+}
+
+.nav-btn:hover, .app_ui-wrapper .app_ui-block .customer-edit .update-customer:hover{
   background: #FF9012;
+}
+
+.customer-edit {
+  width: 530px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 0 0 20px 0;
 }
 
 .app_ui-wrapper .app_ui-block .customer-edit label{
   text-align: left;
   padding: 0;
-  margin: 0;
+  margin: 20px 20px 0 20px;
+  width: 200px;
+  float:left;
+}
+
+.app_ui-wrapper .app_ui-block .customer-edit input, .app_ui-wrapper .app_ui-block .customer-edit .jq-selectbox__select{
+  padding: 5px 10px;
+  margin: 0px 20px;
+  width: 200px;
+}
+
+.app_ui-wrapper .app_ui-block .customer-edit .jq-selectbox__select{
+  padding:2px 10px;
+}
+
+.app_ui-wrapper .app_ui-block .customer-edit .field, .app_ui-wrapper .app_ui-block .customer-edit .form-group,
+.app_ui-wrapper .app_ui-block .customer-edit .actions{
+  width: 265px;
+  float: left;
 }
 
 @media (max-width: 999px){
@@ -110,5 +133,26 @@ ul.address {
   .contact-group{
 
     width: 96%;
+  }
+  .app_ui-wrapper .app_ui-block .customer-edit input{
+    border: 1px solid #ddd;
+  }
+}
+
+@media (max-width: 559px){
+  .customer-edit{
+    width: 95%;
+    padding-right: 20px;
+  }
+  .app_ui-wrapper .app_ui-block .customer-edit .field, .app_ui-wrapper .app_ui-block .customer-edit .form-group,
+  .app_ui-wrapper .app_ui-block .customer-edit .actions{
+    width: 92%;
+  }
+  .app_ui-wrapper .app_ui-block .customer-edit label, .app_ui-wrapper .app_ui-block .customer-edit input,
+  .app_ui-wrapper .app_ui-block .customer-edit .jq-selectbox__select{
+    width:95%;
+  }
+  .app_ui-wrapper .app_ui-block .customer-edit input{
+    border: 1px solid #ddd;
   }
 }

@@ -1,12 +1,14 @@
 <div class="app-user-block">
-  <div class="photo online">
-    <!-- <img src="images/spree/manage/img/user-photo.jpg" alt=""> -->
-    <%=image_tag("spree/manage/img/user-photo.jpg")%>
+  <!-- <div class="photo online"> -->
+  <div class="photo">
+    <%=image_tag("spree/manage/img/user_placeholder.png")%>
   </div>
 
   <div class="info tablet-hide">
-    <p class="user-name">Djone Doe</p>
-    <p class="user-role">Manager</p>
+    <p class="user-name"><%= current_spree_user.firstname.capitalize %> <%= current_spree_user.lastname.capitalize %></p>
+    <% if current_spree_user.user_type %>
+      <p class="user-role"><%= current_spree_user.user_type.capitalize %></p>
+    <% end %>
   </div>
 
   <div class="clear"></div>

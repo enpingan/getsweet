@@ -65,11 +65,13 @@ class OrdersController < Spree::Manage::BaseController
 				@order.approved_at = Time.now
 				flash[:success] = "Order Approved!"
 			elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
+				@order.update!
 				redirect_to manage_products_url and return
 			end
 		end
 
 		if @order.update(order_params)
+			@order.update!
 			redirect_to edit_manage_order_url(@order)
 		else
 			flash[:success] = nil
@@ -80,8 +82,8 @@ class OrdersController < Spree::Manage::BaseController
 
   # Adds a new item to the order (creating a new order if none already exists)
   def populate
-
-    order    = Spree::Order.find(params[:order]['id'].to_i)
+		order = Spree::Order.find(session[:order_id])
+    # order    = Spree::Order.find(params[:order]['id'].to_i)
     variant  = Spree::Variant.find(params[:index])
     quantity = params[:quantity].to_i
     options  = params[:options] || {}
@@ -102,8 +104,8 @@ class OrdersController < Spree::Manage::BaseController
       redirect_back_or_default(spree.root_path)
     else
       respond_with(order) do |format|
-				format.js
-        format.html { redirect_to cart_path }
+				format.js { flash[:success] = "#{variant.product.name} has been added to your order"}
+        # format.html { redirect_to cart_path }
       end
     end
   end

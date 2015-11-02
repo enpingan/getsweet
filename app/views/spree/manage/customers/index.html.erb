@@ -1,5 +1,7 @@
-<h1> <%= current_spree_user.vendor.name %> Customer List</h1>
+<h1 class="catalog-title"> <%= current_spree_user.vendor.name %> Customer List</h1>
+<a href="<%= new_manage_customer_url %>" class="new-order-button">New Customer</a>
 
+<div class="clear"></div>
 <ul class="customer-list">
   <% @customers.each do |customer| %>
     <li>

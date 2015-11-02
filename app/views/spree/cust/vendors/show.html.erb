@@ -1,7 +1,7 @@
 
-<body>
+
 	<div class="search-area">
-		<div class="search-block">
+		<!-- <div class="search-block">
 			<form id="search-form">
 				<input type="text" placeholder="Search Products">
 				<input type="submit" value="Search">
@@ -14,7 +14,7 @@
 					<option value="name">Name</option>
 				</select>
 			</form>
-		</div>
+		</div> -->
 		<div class="recent-block">
 			<div class="recent-list">
 				<a href="#" id="recent_orders">Recent Orders <i class="fa fa-angle-down"></i></a>
@@ -38,7 +38,16 @@
 	<% end %>
 
 	<div id="order-form">
-		<div class="order-product-list">
+
+		<div class="liveFilterContainer">
+		  <label>Search
+		    <input type="text" class="liveFilterInput default" placeholder="Product name or sku" />
+
+		    <a href="#" class="clearField" title="Clear Filter">x</a>
+		  </label>
+		</div>
+		<div class="noResults"><strong>Sorry.</strong> There is no match for your filter; please try again.</div>
+		<div class="order-product-list liveFilterList">
 
 			<div class="tRow header">
 				<div class="cel">
@@ -69,9 +78,6 @@
 
       <% @products.each do |product| %>
 				<%= form_for :order, html: {class: "tRow"}, url: populate_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
-					<% if @current_order %>
-						<input type="hidden" name=order[id] value="<%= @current_order.id %>">
-					<% end %>
 
 						<div class="cel">
 							<img>
@@ -125,8 +131,8 @@
 
 	<!-- // -->
 	<!-- Scripts -->
-
+<%= javascript_include_tag "spree/product_search" %>
 	<!-- // -->
 <!-- // -->
-</body>
+
 <!-- </html> -->
