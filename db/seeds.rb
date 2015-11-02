@@ -12,13 +12,22 @@ Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 
 Alchemy::Seeder.seed!
 
-admin = Spree::Role.create(name: 'admin')
 vendor = Spree::Role.create(name: 'vendor')
 customer = Spree::Role.create(name: 'customer')
 
 pm = Spree::PaymentMethod.create(type: "Spree::PaymentMethod::Check", name: "Check", description: "", active: true, display_on: "", preferences: {})
 
-
+def image(name, type="jpeg")
+	curr_dir = "#{File.expand_path File.dirname(__FILE__)}"
+  images_path = "#{curr_dir}/images/"
+  path = images_path + "#{name}.#{type}"
+  if !File.exist?(path)
+		puts "Unable to find seed image for #{name} at #{path}"
+		return false
+	else
+  	File.open(path)
+	end
+end
 
 ##############################################################################
 # Create users
@@ -160,6 +169,17 @@ var8.stock_items.create(stock_location_id: sl1.id)
 var9.stock_items.create(stock_location_id: sl1.id)
 var10.stock_items.create(stock_location_id: sl1.id)
 
+# load images for each product, need to convert product name to lowercase, underscore-separated name which corresponds to seed image file names
+p1.master.images.create!({:attachment => image(p1.name.gsub(/ /,"_").downcase)})
+p2.master.images.create!({:attachment => image(p2.name.gsub(/ /,"_").downcase)})
+p3.master.images.create!({:attachment => image(p3.name.gsub(/ /,"_").downcase)})
+p4.master.images.create!({:attachment => image(p4.name.gsub(/ /,"_").downcase)})
+p5.master.images.create!({:attachment => image(p5.name.gsub(/ /,"_").downcase)})
+p6.master.images.create!({:attachment => image(p6.name.gsub(/ /,"_").downcase)})
+p7.master.images.create!({:attachment => image(p7.name.gsub(/ /,"_").downcase)})
+p8.master.images.create!({:attachment => image(p8.name.gsub(/ /,"_").downcase)})
+p9.master.images.create!({:attachment => image(p9.name.gsub(/ /,"_").downcase)})
+p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)})
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
@@ -376,6 +396,16 @@ var8.stock_items.create(stock_location_id: sl2.id)
 var9.stock_items.create(stock_location_id: sl2.id)
 var10.stock_items.create(stock_location_id: sl2.id)
 
+p1.master.images.create!({:attachment => image(p1.name.gsub(/ /,"_").downcase)})
+p2.master.images.create!({:attachment => image(p2.name.gsub(/ /,"_").downcase)})
+p3.master.images.create!({:attachment => image(p3.name.gsub(/ /,"_").downcase)})
+p4.master.images.create!({:attachment => image(p4.name.gsub(/ /,"_").downcase)})
+p5.master.images.create!({:attachment => image(p5.name.gsub(/ /,"_").downcase)})
+p6.master.images.create!({:attachment => image(p6.name.gsub(/ /,"_").downcase)})
+p7.master.images.create!({:attachment => image(p7.name.gsub(/ /,"_").downcase)})
+p8.master.images.create!({:attachment => image(p8.name.gsub(/ /,"_").downcase)})
+p9.master.images.create!({:attachment => image(p9.name.gsub(/ /,"_").downcase)})
+p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)})
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
@@ -566,6 +596,12 @@ var3.stock_items.create(stock_location_id: sl3.id)
 var4.stock_items.create(stock_location_id: sl3.id)
 var5.stock_items.create(stock_location_id: sl3.id)
 
+p1.master.images.create!({:attachment => image(p1.name.gsub(/ /,"_").downcase)})
+p2.master.images.create!({:attachment => image(p2.name.gsub(/ /,"_").downcase)})
+p3.master.images.create!({:attachment => image(p3.name.gsub(/ /,"_").downcase)})
+p4.master.images.create!({:attachment => image(p4.name.gsub(/ /,"_").downcase)})
+p5.master.images.create!({:attachment => image(p5.name.gsub(/ /,"_").downcase)})
+
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
     delivery_date: DateTime.new(2015, mo + 1, 15))
@@ -748,6 +784,14 @@ var4.stock_items.create(stock_location_id: sl4.id)
 var5.stock_items.create(stock_location_id: sl4.id)
 var6.stock_items.create(stock_location_id: sl4.id)
 var7.stock_items.create(stock_location_id: sl4.id)
+
+p1.master.images.create!({:attachment => image(p1.name.gsub(/ /,"_").downcase)})
+p2.master.images.create!({:attachment => image(p2.name.gsub(/ /,"_").downcase)})
+p3.master.images.create!({:attachment => image(p3.name.gsub(/ /,"_").downcase)})
+p4.master.images.create!({:attachment => image(p4.name.gsub(/ /,"_").downcase)})
+p5.master.images.create!({:attachment => image(p5.name.gsub(/ /,"_").downcase)})
+p6.master.images.create!({:attachment => image(p6.name.gsub(/ /,"_").downcase)})
+p7.master.images.create!({:attachment => image(p7.name.gsub(/ /,"_").downcase)})
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
@@ -960,6 +1004,17 @@ var7.stock_items.create(stock_location_id: sl5.id)
 var8.stock_items.create(stock_location_id: sl5.id)
 var9.stock_items.create(stock_location_id: sl5.id)
 var10.stock_items.create(stock_location_id: sl5.id)
+
+p1.master.images.create!({:attachment => image(p1.name.gsub(/ /,"_").downcase)})
+p2.master.images.create!({:attachment => image(p2.name.gsub(/ /,"_").downcase)})
+p3.master.images.create!({:attachment => image(p3.name.gsub(/ /,"_").downcase)})
+p4.master.images.create!({:attachment => image(p4.name.gsub(/ /,"_").downcase)})
+p5.master.images.create!({:attachment => image(p5.name.gsub(/ /,"_").downcase)})
+p6.master.images.create!({:attachment => image(p6.name.gsub(/ /,"_").downcase)})
+p7.master.images.create!({:attachment => image(p7.name.gsub(/ /,"_").downcase)})
+p8.master.images.create!({:attachment => image(p8.name.gsub(/ /,"_").downcase)})
+p9.master.images.create!({:attachment => image(p9.name.gsub(/ /,"_").downcase)})
+p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)})
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
