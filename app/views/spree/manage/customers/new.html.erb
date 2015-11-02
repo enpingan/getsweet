@@ -1,10 +1,8 @@
-<h1>New Customer</h1>
 
-<%#= ---=== KNOWN ISSUE: New customer does not work correctly due to routing / association issues related to customer/address relatiponship ===--- %>
-<%#= https://trello.com/c/YOpuCQuQ/16-manage-customers-new-functionality-does-not-work-no-route-matches-post %>
 <div class="customer-edit">
 <%= form_for @customer, url: manage_customers_url do |f| %>
   <%= render partial: 'spree/manage/customers/customer_form', locals: { f: f } %>
+
 <% end %>
   <div class="clear"></div>
 </div>
