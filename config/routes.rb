@@ -42,6 +42,9 @@ Rails.application.routes.draw do
 
  		namespace :manage do
  			#resources :vendors, only: [:index, :show] do
+		
+			resource :account, to: 'vendors', only: [:show, :edit, :update]
+
       resources :customers do
 				resources :ship_addresses
 			end
