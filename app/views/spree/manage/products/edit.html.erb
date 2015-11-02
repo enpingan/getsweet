@@ -10,11 +10,11 @@
         <p class="aligncenter"><a href="#" class="upload-img-button">Upload new image</a></p>
         <div class="divider2"></div>
         <div class="checkbox-block">
-          <p><b>Allergans:</b>
-          <% @allergans.each do |allergan| %>
+          <!-- <p><b>Allergans:</b> -->
+          <%# @allergans.each do |allergan| %>
           <!-- allergans still need to be linked up to model -->
-            <p><b></b><label><input type="checkbox"><%= allergan %></label></p>
-          <% end %>
+            <!-- <p><b></b><label><input type="checkbox"><%#= allergan %></label></p> -->
+          <%# end %>
         </div>
         <div class="checkbox-block">
           <p><b>Lead Time:</b>
@@ -28,7 +28,7 @@
       <div class="col2">
         <div class="relative description-wrap">
           <textarea class="description" name="product[description]"> <%= @product.description %></textarea>
-          <p class="checkbox-block"><label>V<input type="checkbox" id="v"></label><label>VG<input type="checkbox" id="vg"></label><label>GF<input type="checkbox" id="gf"></label></p>
+          <!-- <p class="checkbox-block"><label>V<input type="checkbox" id="v"></label><label>VG<input type="checkbox" id="vg"></label><label>GF<input type="checkbox" id="gf"></label></p> -->
         </div>
       </div>
     </div>
