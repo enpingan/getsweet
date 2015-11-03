@@ -21,11 +21,13 @@ module Spree
 
   def new
     @vendor = current_vendor
-    @product = @vendor.products.new
+    @product = current_vendor.products.new
+
+    render :new
   end
 
   def create
-
+    @vendor = current_vendor
     @product = current_vendor.products.new(product_params)
 
     if @product.save

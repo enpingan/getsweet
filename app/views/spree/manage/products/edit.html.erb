@@ -1,42 +1,7 @@
 <div class="product-edit-block">
   <!-- <form id="product-edit-form"> -->
   <%= form_for @product, url: manage_product_url(@product), html: {id: "product-edit-form"} do |f|%>
-    <p><label for="prod_name">Product Name:</label>
-       <input type="text" id="prod_name" name=product[name] value="<%= @product.name %>"></p>
-    <!-- <p><label for="prod_name">Mfg: </label> -->
-       <!-- <input type="text" id="mfg" value="<%#= @vendor.name %>"></p> -->
-       <p>Mfg: <%= @vendor.name %></p>
-    <div class="row">
-      <div class="col1">
-        <%= image_tag("spree/manage/img/product-img4.jpg", class: "prodcut-view-img")%>
-        <p class="aligncenter"><a href="#" class="upload-img-button">Upload new image</a></p>
-        <div class="divider2"></div>
-        <div class="checkbox-block">
-          <!-- <p><b>Allergans:</b> -->
-          <%# @allergans.each do |allergan| %>
-          <!-- allergans still need to be linked up to model -->
-            <!-- <p><b></b><label><input type="checkbox"><%#= allergan %></label></p> -->
-          <%# end %>
-        </div>
-        <div class="checkbox-block">
-          <!-- <p><b>Lead Time (days):</b> -->
-            <!-- <label>Lead Time (days):
-            <input type="number" name="" value="0">
-          </label> -->
-            <!-- <select name="lead_time:" id="lead_time">
-              <option value="none">None</option>
-              <option value="option 1">Option 1</option>
-            </select> -->
-          </p>
-        </div>
-      </div>
-      <div class="col2">
-        <div class="relative description-wrap">
-          <textarea class="description" name="product[description]"> <%= @product.description %></textarea>
-          <!-- <p class="checkbox-block"><label>V<input type="checkbox" id="v"></label><label>VG<input type="checkbox" id="vg"></label><label>GF<input type="checkbox" id="gf"></label></p> -->
-        </div>
-      </div>
-    </div>
+    <%= render partial: 'form' %>
 
     <% @product.variants_including_master.each do |variant| %>
     <div class="divider2"></div>
