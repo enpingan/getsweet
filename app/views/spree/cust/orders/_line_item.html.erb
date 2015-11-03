@@ -46,7 +46,9 @@
 
     </td>
     <td class="cart-item-delete" data-hook="cart_item_delete">
-      <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-minus-sign'), '#', class: 'delete', id: "delete_#{dom_id(line_item)}" %>
+      <%= link_to "Remove", {action: :unpopulate, order_id: @order.id, index: line_item.id},
+        class: 'btn-remove-item', id: 'delete-item-button' %>
+      <%#= link_to content_tag(:span, '', class: 'glyphicon glyphicon-minus-sign'), '#', class: 'delete', id: "delete_#{dom_id(line_item)}" %>
     </td>
   </tr>
 <% end %>

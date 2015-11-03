@@ -113,6 +113,18 @@ class OrdersController < Spree::Manage::BaseController
     end
   end
 
+	def unpopulate
+		order = Spree::Order.friendly.find(params[:order_id])
+		line_item = Spree::LineItem.find(params[:index])
+		if line_item.destroy
+			order.update!
+			flash[:success] = "Item Removed"
+			redirect_to edit_manage_order_url(order)
+		else
+			render :edit
+		end
+	end
+
   def destroy
 		@order = Spree::Order.friendly.find(params[:id])
 		if @order.destroy
