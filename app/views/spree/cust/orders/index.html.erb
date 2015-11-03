@@ -1,41 +1,88 @@
-<h1 class="catalog-title"><%= @customer.name %> Orders Overview</h1>
+
+<h1 class="catalog-title">Orders Overview</h1>
 <a href="<%= new_order_url %>" class="new-order-button">Start New Order</a>
 <div class="clear"></div>
 
-<% if @orders %>
 
-  <table class="orders-overview">
-    <colgroup span="6"></colgroup>
-    <tr>
-      <th>Vendor</th>
-      <th>Order #</th>
-      <th>Delivery Date</th>
-      <th>Total Items</th>
-      <th>Total</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.vendor.name %></td>
-        <td>
-  				<a href="<%= order_url(order) %>"><%= order.number %></a>
-  			</td>
-        <td><%= order.delivery_date.to_date.to_formatted_s(:long) %></td>
-        <td><%=order.item_count%></td>
-        <td><%=number_to_currency(order.total)%></td>
-        <td><%= order.state %></td>
-        <td>
-          <!-- change to appropriate order.state -->
-          <% unless order.delivery_date < DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now > order.vendor.order_cutoff_time.to_datetime)%>
-          	<a href="<%= edit_order_url(order) %>">Edit</a>
+  <div class="orders-list-block">
+    <div class="search-block">
+      <form id="filter-form">
+        <label>Filter by Vendor:</label>
+        <select name="filter_by" id="filter_by">
+          <% @customer.vendors.each do |vendor| %>
+            <option value="<%= vendor.id %>"><%= vendor.name %></option>
           <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-  </table>
-
-<% else %>
-  <h1 class="no-orders">You do not have any orders.</h1>
-<% end %>
+        </select>
+      </form>
+      <form id="search-form">
+        <label>Search:</label>
+        <input type="text" placeholder="Search Products">
+        <input type="submit" value="Search">
+      </form>
+      <form id="date-form">
+        <label>Delivery Date:</label>
+        <select name="date-form" id="date_form">
+          <option value="all">10/20/2015</option>
+          <option value="price">Option 2</option>
+          <option value="name">Option 3</option>
+        </select>
+      </form>
+      <div class="clear"></div>
+    </div>
+    <form action="#" id="orders-list-form">
+      <div class="orders-list-table">
+        <div class="tRow header">
+          <div class="cel">
+            <a href="" class="sort-name">Vendor <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-name">Order # <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-name">Delivery Date<i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-sku">Total Items <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-pack_size">Total <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-lead_time">Status <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-price"></a>
+          </div>
+          <div class="cel"></div>
+        </div>
+        <% if @orders %>
+          <% @orders.each do |order| %>
+            <div class="tRow">
+              <div class="cel"><a href="<%= vendor_url(order.vendor) %>"><%= order.vendor.name %></a></div>
+              <div class="cel"><a href="<%= order_url(order) %>"><%= order.number %></a></div>
+              <div class="cel"><%= order.delivery_date.to_date.to_formatted_s(:long) %></div>
+              <div class="cel"><%= order.item_count %></div>
+              <div class="cel"> <%= number_to_currency(order.total) %></div>
+              <div class="cel"> <%= order.state %></div>
+              <div class="cel">
+                <% unless order.delivery_date < DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now > order.vendor.order_cutoff_time.to_datetime)%>
+                	<a href="<%= edit_order_url(order) %>">(Edit)</a>
+                <% end %></div>
+              <div class="cel"></div>
+              <div class="cel mobile"><a href="<%= order_url(order) %>" class="cta-button">View</a></div>
+            </div>
+          <% end %>
+          <div class="tRow footer">
+            <div class="cel"></div>
+            <div class="cel"><b></b></div>
+            <div class="cel"></div>
+            <div class="cel"></div>
+            <div class="cel"></div>
+            <div class="cel"></div>
+            <div class="cel"></div>
+          </div>
+        <% end %>
+      </div>
+      <div class="clear"></div>
+    </form>
+  </div>

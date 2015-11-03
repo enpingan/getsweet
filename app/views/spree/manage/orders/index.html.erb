@@ -1,51 +1,85 @@
-<h1 class="catalog-title"><%= @vendor.name %> Orders Overview</h1>
+
+<h1 class="catalog-title">Orders Overview</h1>
 <a href="<%= new_manage_order_url %>" class="new-order-button">Start New Order</a>
 <div class="clear"></div>
-<section class="orders-overview-filters">
-  <ul>
-    <li>Filter by [Customer dropdown]</li>
-    <li>Search [Customer search box]</li>
-    <li>Select Delivery [Date dropdown]</li>
-  </ul>
-</section>
 
-<table class="orders-overview">
-  <colgroup span="6"></colgroup>
-  <tr>
-    <th>Customer</th>
-    <th>Order #</th>
-    <th>Delivery Date</th>
-    <th>Total Items</th>
-    <th>Total</th>
-    <th>Status</th>
-    <th>Approve <input type="checkbox">Select All</input></th>
-  </tr>
-  <% @orders.each do |order| %>
-    <tr>
-      <td>
-				<% if order.customer %>
-					<%= order.customer.name %>
-				<% else %>
-					TBD <!-- NEED TO UPDATE -->
-				<% end %>
-			</td>
-      <td>
-				<a href="<%= edit_manage_order_url(order) %>"><%= order.number %></a>
-			</td>
-      <td><%= order.delivery_date.to_date.to_formatted_s(:long) %></td>
-      <td><%=order.item_count%></td>
-      <td><%=number_to_currency(order.total)%></td>
-      <td><%= order.state %></td>
-      <td>
-        <!-- remove quotes and change to order.status when set up -->
-        <% if 'Action Req' == 'Action Req' %>
-          <input type="checkbox"></input>
+
+  <div class="orders-list-block">
+    <div class="search-block">
+      <form id="filter-form">
+        <label>Filter by Customer:</label>
+        <select name="filter_by" id="filter_by">
+          <% @vendor.customers.each do |customer| %>
+            <option value="<%= customer.id %>"><%= customer.name %></option>
+          <% end %>
+        </select>
+      </form>
+      <form id="search-form">
+        <label>Search:</label>
+        <input type="text" placeholder="Search Products">
+        <input type="submit" value="Search">
+      </form>
+      <form id="date-form">
+        <label>Delivery Date:</label>
+        <select name="date-form" id="date_form">
+          <option value="all">10/20/2015</option>
+          <option value="price">Option 2</option>
+          <option value="name">Option 3</option>
+        </select>
+      </form>
+      <div class="clear"></div>
+    </div>
+    <form action="#" id="orders-list-form">
+      <div class="orders-list-table">
+        <div class="tRow header">
+          <div class="cel">
+            <a href="" class="sort-name">Customer <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-name">Order # <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-name">Delivery Date<i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-sku">Total Items <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-pack_size">Total <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-lead_time">Status <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel">
+            <a href="" class="sort-price">Approve <i class="fa fa-sort"></i></a>
+          </div>
+          <div class="cel"></div>
+        </div>
+        <% if @orders %>
+          <% @orders.each do |order| %>
+            <div class="tRow">
+              <div class="cel"><a href="<%= manage_customer_url(order.customer) %>"><%= order.customer.name %></a></div>
+              <div class="cel"><a href="<%= edit_manage_order_url(order) %>"><%= order.number %></a></div>
+              <div class="cel"><%= order.delivery_date.to_date.to_formatted_s(:long) %></div>
+              <div class="cel"><%= order.item_count %></div>
+              <div class="cel"> <%= number_to_currency(order.total) %></div>
+              <div class="cel"> <%= order.state %></div>
+              <div class="cel"><input type="checkbox"></div>
+              <div class="cel"></div>
+              <div class="cel mobile"><a href="<%= edit_manage_order_url(order) %>" class="cta-button">View</a></div>
+            </div>
+          <% end %>
+          <div class="tRow footer">
+            <div class="cel"></div>
+            <div class="cel"><b></b></div>
+            <div class="cel"></div>
+            <div class="cel"></div>
+            <div class="cel"></div>
+            <div class="cel"><input type="checkbox"> All</div>
+            <div class="cel"><input type="submit" value="confirm"></div>
+          </div>
         <% end %>
-      </td>
-    </tr>
-  <% end %>
-
-</table>
-
-
-<button class="add-to-order">Confirm Orders</button>
+      </div>
+      <div class="clear"></div>
+    </form>
+  </div>
