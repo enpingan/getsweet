@@ -6,7 +6,7 @@
        <input type="text" id="mfg" value="<%= @vendor.name %>"></p>
     <div class="row">
       <div class="col1">
-        <%= image_tag("spree/manage/img/product-img4.jpg", class: "prodcut-view-img")%>
+					<%= render :partial => 'image' %>
         <p class="aligncenter"><a href="#" class="upload-img-button">Upload new image</a></p>
         <div class="divider2"></div>
         <div class="checkbox-block">

@@ -78,9 +78,10 @@
 
       <% @products.each do |product| %>
 				<%= form_for :order, html: {class: "tRow"}, url: populate_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
+					<% url = spree.product_url(product) %>
 
 						<div class="cel">
-							<img>
+							<%= link_to small_image(product, itemprop: "image"), url, itemprop: 'url' %><br/>
 						</div>
 						<div class="cel">
 							<a href="<%= vendor_product_url(@vendor, product) %>"><%= product.name %></a>
