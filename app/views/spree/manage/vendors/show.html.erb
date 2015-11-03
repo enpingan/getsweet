@@ -1,0 +1,25 @@
+<h1 class="catalog-title"><%= @account.name %>
+  <a href="<%= edit_manage_account_url %>" class="edit-link">(Edit)</a>
+</h1>
+<div class="clear"></div>
+
+<div class="manage-customer">
+  <div class="contact-group">
+    <img class="contact-img">
+
+    <div class="contact-info">
+      <% if @account %>
+        <ul class="primary-contact">
+          <li><strong>Name:</strong> <%= "#{@account.name}" %></li>
+          <li><strong>Order Cutoff Time:</strong> <%= @account.order_cutoff_time %></li>
+          <li><strong>Delivery Minimum:</strong> $<%= number_with_precision(@account.delivery_minimum, precision: 2) %></li>
+          <li><strong>Payment Terms:</strong> <%= @account.payment_terms %> Days</li>
+        </ul>
+      <% else %>
+        No information found.
+      <% end %>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+</div>

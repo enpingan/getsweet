@@ -119,9 +119,8 @@ module Spree
 
       else
         respond_with(order) do |format|
-          # format.js { redirect_to vendor_path(order.vendor) }
+          format.html { redirect_to cart_path }
           format.js { flash[:success] = "#{variant.product.name} has been added to your order"}
-          # format.html { redirect_to cart_path }
         end
       end
     end
