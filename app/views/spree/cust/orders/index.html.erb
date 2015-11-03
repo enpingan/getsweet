@@ -59,6 +59,7 @@
           <% @orders.each do |order| %>
             <div class="tRow">
               <div class="cel"><a href="<%= vendor_url(order.vendor) %>"><%= order.vendor.name %></a></div>
+              <div class="cel mobile"><a href="<%= order_url(order) %>" class="cta-button">View</a></div>
               <div class="cel"><a href="<%= order_url(order) %>"><%= order.number %></a></div>
               <div class="cel"><%= order.delivery_date.to_date.to_formatted_s(:long) %></div>
               <div class="cel"><%= order.item_count %></div>
@@ -67,9 +68,9 @@
               <div class="cel">
                 <% unless order.delivery_date < DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now > order.vendor.order_cutoff_time.to_datetime)%>
                 	<a href="<%= edit_order_url(order) %>">(Edit)</a>
-                <% end %></div>
+                <% end %>
+              </div>
               <div class="cel"></div>
-              <div class="cel mobile"><a href="<%= order_url(order) %>" class="cta-button">View</a></div>
             </div>
           <% end %>
           <div class="tRow footer">
