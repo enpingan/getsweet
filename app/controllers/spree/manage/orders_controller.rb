@@ -12,9 +12,9 @@ class OrdersController < Spree::Manage::BaseController
 		session[:customer_id] = nil
 		@vendor = current_vendor
 		if @current_customer_id
-			@orders = @vendor.orders.where('customer_id = ?', @current_customer_id)
+			@orders = @vendor.orders.where('customer_id = ?', @current_customer_id).order('delivery_date DESC')
 		else
-			@orders = @vendor.orders
+			@orders = @vendor.orders.order('delivery_date DESC')
 		end
     render :index
   end

@@ -9,7 +9,7 @@ module Spree
     before_action :ensure_customer, only: [:show, :edit, :update, :destroy]
 
     def index
-      @orders = current_customer.orders
+      @orders = current_customer.orders.order('delivery_date DESC')
       @customer = current_customer
       render :index
     end
