@@ -59,7 +59,9 @@
 						<% end %>
           </div>
         </div>
-
+				<%= link_to 'Cancel Order',  { action: :destroy, id: @order.id },
+				method: :delete, data: { confirm: 'Are you sure? This order will be completely deleted!' },
+				class: 'btn btn-primary add-to-order'%>
       </div>
     </div>
   <% end %>

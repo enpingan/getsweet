@@ -114,6 +114,14 @@ class OrdersController < Spree::Manage::BaseController
   end
 
   def destroy
+		@order = Spree::Order.friendly.find(params[:id])
+		if @order.destroy
+			session[:order_id] = nil;
+			flash[:success] = "Order ##{@order.number} has been cancelled"
+		else
+			flash[:errors] = @order.errors.full_messages
+		end
+		redirect_to manage_orders_url
   end
 
   protected

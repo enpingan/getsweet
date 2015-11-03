@@ -63,10 +63,10 @@
             <%# end %>
 						<%= submit_tag Spree.t(:update), class: 'btn btn-primary add-to-order', id: 'update-button' %>
 						<%= submit_tag "Approve Order", class: 'btn btn-primary add-to-order', id: 'approve-button' %>
-            <%#= button_tag class: 'btn btn-lg btn-success add-to-order', id: 'checkout-link', name: 'checkout' do %>
-              <%#= Spree.t(:checkout) %>
-              <%#= "Approve Order"%>
-            <%# end %>
+						<!-- <a href="" class='btn btn-lg btn-success add-to-order'>Cancel Order</a> -->
+            <%= link_to 'Cancel Order',  { action: :destroy, id: @order.id },
+						method: :delete, data: { confirm: 'Are you sure? This order will be completely deleted!' },
+						class: 'btn btn-primary add-to-order'%>
           </div>
         </div>
 
