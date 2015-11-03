@@ -71,6 +71,9 @@ class OrdersController < Spree::Manage::BaseController
 		end
 
 		if @order.update(order_params)
+			@order.line_items.each do |line_item|
+				line_item.destroy! if line_item.quantity == 0
+			end
 			@order.update!
 			redirect_to edit_manage_order_url(@order)
 		else
