@@ -2517,10 +2517,10 @@ img{
 	.orders-list-table .tRow .cel {
 		border: none;
 		position: relative;
-		padding-left: 50%;
+		// padding-left: 50%;
 		border: none;
 		float: left;
-		width: 100%;
+		// width: 100%;
 	}
 	.orders-list-table .tRow .cel:before {
 		position: absolute;
@@ -2537,46 +2537,72 @@ img{
 		color: #ff7e00;
 		font-weight: bold;
 		width: 50%;
-		background: #FCF9F6;
+		display: block;
+		// background: #FCF9F6;
+		float: left;
 	}
 	.orders-list-table .tRow .cel:nth-of-type(2){
 		float: left;
-		padding-left: 0px;
-		width: 50%;
-		background: #FCF9F6;
-	}
-	.orders-list-table .tRow .cel:nth-of-type(5){
-		float: left;
 		padding-left: 10px;
 		width: 50%;
+		// background: #FCF9F6;
+	}
+	.orders-list-table .tRow .cel:nth-of-type(3){
+		width: 50%;
+		float: left;
+		padding-left: 20px;
+		background: #FCF9F6;
+	}
+	.orders-list-table .tRow .cel:nth-of-type(4){
+		width: 50%;
+		float: left;
+		padding-left: 0px;
+		background: #FCF9F6;
+	}
+
+	.orders-list-table .tRow .cel:nth-of-type(5){
+		float: left;
+		padding-left: 50%;
+		width: 100%;
 	}
 	.orders-list-table .tRow .cel:nth-of-type(6){
 		float: left;
+		padding-left: 50%;
+		width: 100%;
+		background: #FCF9F6;
+	}
+	.orders-list-table .tRow .cel:nth-of-type(7){
+		float: left;
+		padding-left: 10px;
+		width: 50%;
+
+	}
+	.orders-list-table .tRow .cel:nth-of-type(8){
+		float: left;
 		padding-left: 0px;
 		width: 50%;
+
 	}
-	.orders-list-table .tRow .cel:nth-of-type(8) {
+	.orders-list-table .tRow .cel:nth-of-type(9) {
 	    float: left;
 	    padding-left: 10px;
-	    width: 100%;
+	    width: 50%;
 	    text-align: center;
-	}
-	.orders-list-table .tRow .cel:nth-of-type(4){
-		background: #FCF9F6;
 	}
 	.orders-list-block .jq-checkbox {
 	    margin: 0 3px 0px 0;
 	    margin-left: 75px;
 	}
-	.orders-list-table .tRow .cel:nth-child(6):before {
-	    left: 0;
+	.orders-list-table .tRow .cel:nth-child(8):before {
+			padding-left: 10px;
 	}
-	.orders-list-table .tRow .cel:nth-child(7) {
+	.orders-list-table .tRow .cel:nth-child(9) {
 	    display: none;
 	}
-	.orders-list-table .tRow .cel:nth-of-type(3):before { content: "Total Items:"; }
-	.orders-list-table .tRow .cel:nth-of-type(4):before { content: "Total:"; }
-	.orders-list-table .tRow .cel:nth-of-type(6):before { content: "Approve"; }
+	.orders-list-table .tRow .cel:nth-of-type(3):before { content: "#"; }
+	.orders-list-table .tRow .cel:nth-of-type(5):before { content: "Total Items:"; }
+	.orders-list-table .tRow .cel:nth-of-type(6):before { content: "Total:"; }
+	.orders-list-table .tRow .cel:nth-of-type(8):before { content: "Approve"; }
 	.orders-list-table .tRow .cel img {
 	    margin: 0 auto;
 	}
