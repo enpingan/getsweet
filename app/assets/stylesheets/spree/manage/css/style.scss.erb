@@ -2994,6 +2994,8 @@ img{
 	    text-align: left;
 	    float: left;
 	    border-bottom: 1px solid #E0DCD8;
+			height: 53px;
+			overflow: hidden;
 	}
 	.single-order-block .orders-list-table .cel:nth-child(6), .single-order-block .orders-list-table .cel:nth-child(3){
 		width: 33.333%;
@@ -3007,13 +3009,17 @@ img{
 	    z-index: 1;
 	    border-bottom: none;
 	}
-	.single-order-block .orders-list-table .cel:last-child {
+	.single-order-block .orders-list-table .cel.out-of-stock {
 	    width: 100%;
 	    position: relative;
 	    padding-left: 120px;
 	    border-bottom: none;
+			border-top: 1px solid #E0DCD8;
 	}
-	.single-order-block .orders-list-table .cel:last-child:before {
+	.single-order-block .orders-list-table .cel:nth-child(7), .single-order-block .orders-list-table .cel:nth-child(6){
+		border-bottom: none;
+	}
+	.single-order-block .orders-list-table .cel.out-of-stock:before {
 	    content: "Out of Stock";
 	    position: absolute;
 	    top: 4px;
@@ -3674,6 +3680,8 @@ img{
 	}
 	.single-order-block .orders-list-table .cel, .single-order-block .orders-list-table .cel:nth-child(6), .single-order-block .orders-list-table .cel:nth-child(3){
 			width: 50%;
+			height: 53px;
+			overflow: hidden;
 	}
 	.single-order-block .order-items-block .order-items-el .order-item {
 			padding-left: 32px;
