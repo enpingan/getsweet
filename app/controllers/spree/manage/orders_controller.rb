@@ -129,6 +129,7 @@ class OrdersController < Spree::Manage::BaseController
 		order = Spree::Order.friendly.find(params[:order_id])
 		line_item = Spree::LineItem.find(params[:index])
 		if line_item.destroy
+			order.item_count = order.line_items.sum(:quantity)
 			order.update!
 			flash[:success] = "Item Removed"
 			redirect_to edit_manage_order_url(order)
@@ -151,7 +152,7 @@ class OrdersController < Spree::Manage::BaseController
   protected
 
   def order_params
-    self.params.require(:order).permit(:customer_id, :delivery_date, :item_count, :user_id
+    self.params.require(:order).permit(:customer_id, :delivery_date, :item_count, :user_id,
 			line_items_attributes: [:quantity, :id])
   end
 

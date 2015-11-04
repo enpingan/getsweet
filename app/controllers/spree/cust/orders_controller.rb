@@ -144,6 +144,7 @@ module Spree
       order = Spree::Order.friendly.find(params[:order_id])
       line_item = Spree::LineItem.find(params[:index])
       if line_item.destroy
+        order.item_count = order.line_items.sum(:quantity)
         order.update!
         flash[:success] = "Item Removed"
         redirect_to edit_order_url(order)
