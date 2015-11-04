@@ -44,10 +44,9 @@ module Spree
     def create
       @order = current_customer.orders.new(order_params)
       @vendors = current_customer.vendors
-      @order.user_id = current_spree_user.id
-      @order.ship_address_id = current_spree_user.customer.ship_address_id
-      @order.bill_address_id = current_spree_user.customer.ship_address_id
-      @order.created_by_id = current_spree_user.id
+
+      associate_user(@order)
+
       if @order.save
         set_order_session(@order)
         flash[:success] = "You've started a new order!"
@@ -191,6 +190,13 @@ module Spree
       session[:order_id] = order.id
       session[:vendor_id] = order.vendor.id
       order
+    end
+
+    def associate_user(order)
+      order.user_id = current_spree_user.id
+      order.ship_address_id = current_spree_user.customer.ship_address_id
+      order.bill_address_id = current_spree_user.customer.ship_address_id
+      order.created_by_id = current_spree_user.id
     end
   end
  end
