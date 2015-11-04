@@ -11,11 +11,20 @@ class OrdersController < Spree::Manage::BaseController
 		@current_customer_id = session[:customer_id]
 		session[:customer_id] = nil
 		@vendor = current_vendor
-		if @current_customer_id
-			@orders = @vendor.orders.where('customer_id = ?', @current_customer_id).order('delivery_date DESC')
-		else
-			@orders = @vendor.orders.order('delivery_date DESC')
-		end
+		# if @current_customer_id
+		# 	@orders = @vendor.orders.where('customer_id = ?', @current_customer_id).order('delivery_date DESC')
+		# else
+		# 	@orders = @vendor.orders.order('delivery_date DESC')
+		# end
+
+		if (params[:customer] && @vendor.customers.collect(&:name).include?(params[:customer][:name]))
+			@current_customer = Spree::Customer.find_by_name(params[:customer][:name])
+			@orders = @vendor.orders.where('customer_id = ?', @current_customer.id).order('delivery_date DESC')
+			session[:customer_id] = @current_customer.id
+	  else
+	     @orders = @vendor.orders.order('delivery_date DESC')
+	  end
+
     render :index
   end
 
