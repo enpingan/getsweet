@@ -1,13 +1,21 @@
-<a href="<%= orders_url %>">
+
   <h3>
     <%=image_tag("spree/manage/img/nav-ico3.png")%>
     <span class="tablet-hide">Orders
-       <!-- <i class="fa fa-angle-left"></i> -->
+       <i class="fa fa-angle-left"></i>
      </span>
   </h3>
-</a>
+
 <div class="accordion-block">
   <ul>
-    <li><a href=""></a></li>
+    <li><a href="<%= new_order_url %>">Start New Order</a></li>
+    <li><a href="<%= orders_url %>">All Orders</a></li>
+    <li><ul class="recent-orders-list">Recent Orders
+        <% recent_orders = current_spree_user.customer.orders.order('updated_at DESC').limit(5) %>
+        <% recent_orders.each do |order| %>
+          <li><a href="<%= order_url(order) %>">#<%= order.number %></a></li>
+        <% end %>
+      </ul>
+    </li>
   </ul>
 </div>
