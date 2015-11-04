@@ -11,13 +11,26 @@ module Spree
     def index
       @orders = current_customer.orders.order('delivery_date DESC')
       @customer = current_customer
+
+      if (params[:vendor] && @customer.vendors.collect(&:name).include?(params[:vendor][:name]))
+  			@current_vendor = Spree::Vendor.find_by_name(params[:vendor][:name])
+  			@orders = @customer.orders.where('vendor_id = ?', @current_vendor.id).order('delivery_date DESC')
+  			session[:vendor_id] = @current_vendor.id
+  	  else
+  	     @orders = @customer.orders.order('delivery_date DESC')
+  	  end
+
       render :index
     end
 
     def show
       @order = set_order_session
       @path = "show"
-      render :show
+      unless @order.state == "complete"
+        redirect_to edit_order_url(@order)
+      else
+        render :show
+      end
     end
 
     def new
@@ -152,7 +165,7 @@ module Spree
     protected
 
     def order_params
-      params.require(:order).permit(:delivery_date, :vendor_id,
+      params.require(:order).permit(:delivery_date, :vendor_id, :user_id,
         line_items_attributes: [:quantity, :id])
     end
 

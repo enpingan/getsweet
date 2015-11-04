@@ -1222,7 +1222,7 @@ img{
 	float: left;
 	margin-right: 20px;
 }
-.app_ui-wrapper .app_ui-block .single-order-block .search-block label{
+.app_ui-wrapper .app_ui-block .single-order-block .search-block label, .app_ui-wrapper .app_ui-block .orders-list-block .search-block label{
 	display: inline-block;
   float: left;
   margin-right: 20px;
@@ -2142,6 +2142,15 @@ img{
 .order-items-total-count{
 	padding-top: 15px;
 }
+.orders-list-block #filter-form input[type="submit"]{
+	display: inline-block;
+	width: 75px;
+	margin: 0;
+	margin-left: -4px;
+	padding: 3px 5px 7px 5px;
+	text-align: center;
+	vertical-align: baseline;
+}
 /*-------------------------------------------------------------------------*/
 /*	3.	Responsive
 /*-------------------------------------------------------------------------*/
@@ -2994,6 +3003,8 @@ img{
 	    text-align: left;
 	    float: left;
 	    border-bottom: 1px solid #E0DCD8;
+			height: 53px;
+			overflow: hidden;
 	}
 	.single-order-block .orders-list-table .cel:nth-child(6), .single-order-block .orders-list-table .cel:nth-child(3){
 		width: 33.333%;
@@ -3007,13 +3018,17 @@ img{
 	    z-index: 1;
 	    border-bottom: none;
 	}
-	.single-order-block .orders-list-table .cel:last-child {
+	.single-order-block .orders-list-table .cel.out-of-stock {
 	    width: 100%;
 	    position: relative;
 	    padding-left: 120px;
 	    border-bottom: none;
+			border-top: 1px solid #E0DCD8;
 	}
-	.single-order-block .orders-list-table .cel:last-child:before {
+	.single-order-block .orders-list-table .cel:nth-child(7), .single-order-block .orders-list-table .cel:nth-child(6){
+		border-bottom: none;
+	}
+	.single-order-block .orders-list-table .cel.out-of-stock:before {
 	    content: "Out of Stock";
 	    position: absolute;
 	    top: 4px;
@@ -3674,6 +3689,8 @@ img{
 	}
 	.single-order-block .orders-list-table .cel, .single-order-block .orders-list-table .cel:nth-child(6), .single-order-block .orders-list-table .cel:nth-child(3){
 			width: 50%;
+			height: 53px;
+			overflow: hidden;
 	}
 	.single-order-block .order-items-block .order-items-el .order-item {
 			padding-left: 32px;
