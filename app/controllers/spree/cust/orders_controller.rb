@@ -44,7 +44,10 @@ module Spree
     def create
       @order = current_customer.orders.new(order_params)
       @vendors = current_customer.vendors
-
+      @order.user_id = current_spree_user.id
+      @order.ship_address_id = current_spree_user.customer.ship_address_id
+      @order.bill_address_id = current_spree_user.customer.ship_address_id
+      @order.created_by_id = current_spree_user.id
       if @order.save
         set_order_session(@order)
         flash[:success] = "You've started a new order!"
@@ -168,6 +171,7 @@ module Spree
 
     def order_params
       params.require(:order).permit(:delivery_date, :vendor_id, :user_id, :item_count,
+        :ship_address_id, :bill_address_id, :created_by_id,
         line_items_attributes: [:quantity, :id])
     end
 
