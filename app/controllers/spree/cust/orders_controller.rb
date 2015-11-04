@@ -65,6 +65,7 @@ module Spree
       @order = set_order_session
 
       if request.patch?
+        @order.item_count = @order.line_items.sum(:quantity)
         if (params[:commit] == Spree.t(:update))
           flash[:success] = "Your order has been successfully update!"
         elsif (params[:commit] == "Submit Order")
@@ -165,7 +166,7 @@ module Spree
     protected
 
     def order_params
-      params.require(:order).permit(:delivery_date, :vendor_id, :user_id,
+      params.require(:order).permit(:delivery_date, :vendor_id, :user_id, :item_count,
         line_items_attributes: [:quantity, :id])
     end
 

@@ -39,7 +39,7 @@ class OrdersController < Spree::Manage::BaseController
   def create
 		@customers = current_vendor.customers
     @order = current_vendor.orders.new(order_params)
-
+		@order.user_id = @order.customer.users.first.id
     if @order.save!
 			set_order_session(@order)
 			flash[:success] = "You've started a new order!"
@@ -68,11 +68,13 @@ class OrdersController < Spree::Manage::BaseController
 
 
 		if request.patch?
+			@order.item_count = @order.line_items.sum(:quantity)
 			if (params[:commit] == Spree.t(:update))
 				flash[:success] = "Your order has been successfully update!"
 			elsif (params[:commit] == "Approve Order")
 				@order.approver_id = current_spree_user.id
 				@order.approved_at = Time.now
+				@order.user_id = @order.customer.users.first.id unless @order.user_id
 				flash[:success] = "Order Approved!"
 			elsif (params[:commit] == "Add Item" && @order.update(order_params))
 				@order.update!
@@ -149,7 +151,7 @@ class OrdersController < Spree::Manage::BaseController
   protected
 
   def order_params
-    self.params.require(:order).permit(:customer_id, :delivery_date,
+    self.params.require(:order).permit(:customer_id, :delivery_date, :item_count, :user_id
 			line_items_attributes: [:quantity, :id])
   end
 
