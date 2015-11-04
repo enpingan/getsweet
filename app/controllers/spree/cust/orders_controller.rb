@@ -26,7 +26,11 @@ module Spree
     def show
       @order = set_order_session
       @path = "show"
-      render :show
+      unless @order.state == "complete"
+        redirect_to edit_order_url(@order)
+      else
+        render :show
+      end
     end
 
     def new
