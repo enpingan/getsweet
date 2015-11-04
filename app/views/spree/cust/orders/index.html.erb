@@ -62,8 +62,10 @@
               <div class="cel"> <%= number_to_currency(order.total) %></div>
               <div class="cel"> <%= order.state %></div>
               <div class="cel">
-                <% unless order.delivery_date < DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now > order.vendor.order_cutoff_time.to_datetime)%>
+                <% if order.delivery_date > DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now < order.vendor.order_cutoff_time.to_datetime)%>
                 	<a href="<%= edit_order_url(order) %>">(Edit)</a>
+                <% elsif order.state != 'complete' %>
+                  Past Order Cutoff
                 <% end %>
               </div>
               <div class="cel"></div>
