@@ -11,6 +11,15 @@ module Spree
     def index
       @orders = current_customer.orders.order('delivery_date DESC')
       @customer = current_customer
+
+      if (params[:vendor] && @customer.vendors.collect(&:name).include?(params[:vendor][:name]))
+  			@current_vendor = Spree::Vendor.find_by_name(params[:vendor][:name])
+  			@orders = @customer.orders.where('vendor_id = ?', @current_vendor.id).order('delivery_date DESC')
+  			session[:vendor_id] = @current_vendor.id
+  	  else
+  	     @orders = @customer.orders.order('delivery_date DESC')
+  	  end
+
       render :index
     end
 

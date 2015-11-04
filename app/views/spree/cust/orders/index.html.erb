@@ -7,12 +7,11 @@
   <div class="orders-list-block">
     <div class="search-block">
       <form id="filter-form">
-        <label>Filter by Vendor:</label>
-        <select name="filter_by" id="filter_by">
-          <% @customer.vendors.each do |vendor| %>
-            <option value="<%= vendor.id %>"><%= vendor.name %></option>
-          <% end %>
-        </select>
+        <%= select(:vendor, :name) do%>
+          <option value="all">All</option>
+          <%= options_for_select (@customer.vendors.collect(&:name)) %>
+        <% end %>
+        <input type="submit" value="Filter">
       </form>
       <form id="search-form">
         <label>Search:</label>
