@@ -9,7 +9,7 @@ module Spree
     before_action :ensure_customer, only: [:show, :edit, :update, :destroy]
 
     def index
-      @orders = current_customer.orders
+      @orders = current_customer.orders.order('delivery_date DESC')
       @customer = current_customer
       render :index
     end
@@ -44,6 +44,7 @@ module Spree
 
     def edit
       @order = set_order_session
+      @vendor = @order.vendor
       render :edit
     end
 
@@ -64,12 +65,18 @@ module Spree
           @order.completed_at = Time.now
           @order.user_id = current_spree_user.id
 
-        elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
+        elsif (params[:commit] == "Add Item" && @order.update(order_params))
           @order.update!
+          zero_qty_items = @order.line_items.each do |line_item|
+    				line_item.destroy! if line_item.quantity == 0
+    			end
           redirect_to vendor_url(@order.vendor) and return
         end
       end
       if @order.update(order_params)
+        zero_qty_items = @order.line_items.each do |line_item|
+  				line_item.destroy! if line_item.quantity == 0
+  			end
         @order.update!
         if params[:commit] == "Submit Order" || params[:commit] == "Resubmit Order"
           redirect_to order_success_url(@order.id)
@@ -119,7 +126,27 @@ module Spree
       end
     end
 
+    def unpopulate
+      order = Spree::Order.friendly.find(params[:order_id])
+      line_item = Spree::LineItem.find(params[:index])
+      if line_item.destroy
+        order.update!
+        flash[:success] = "Item Removed"
+        redirect_to edit_order_url(order)
+      else
+        render :edit
+      end
+    end
+
     def destroy
+      @order = Spree::Order.friendly.find(params[:id])
+  		if @order.destroy
+  			session[:order_id] = nil;
+  			flash[:success] = "Order ##{@order.number} has been cancelled"
+  		else
+  			flash[:errors] = @order.errors.full_messages
+  		end
+  		redirect_to orders_url
     end
 
     protected

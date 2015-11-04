@@ -1,48 +1,25 @@
 <% variant = line_item.variant %>
 
+
 <%= order_form.fields_for :line_items, line_item do |item_form| %>
-  <tr class="line-item">
-    <td class="cart-item-image" data-hook="cart_item_image">
-      <% if variant.images.length == 0 %>
-        <%#= link_to spree.small_image(variant.product), variant.product %>
-      <% else %>
-        <%= link_to image_tag(variant.images.first.attachment.url(:small)), variant.product %>
-      <% end %>
-    </td>
-    <td class="cart-item-description" data-hook="cart_item_description">
-      <h4><%= link_to line_item.name, manage_product_path(variant.product) %></h4>
-      <%= variant.options_text %>
-      <% if line_item.insufficient_stock? %>
-        <span class="out-of-stock">
-          <%= Spree.t(:out_of_stock) %>&nbsp;&nbsp;<br />
-        </span>
-      <% end %>
-      <span class="line-item-description" data-hook="line_item_description">
-        <%#= line_item_description_text(line_item.description) %>
-      </span>
-    </td>
-    <td class="lead text-primary cart-item-sku">
-      <%= line_item.sku %>
-    </td>
-    <td class="lead text-primary cart-item-packsz">
-      <%#= line_item.single_money.to_html %>
-			Case
-    </td>
-    <td class="lead text-primary cart-item-price" data-hook="cart_item_price">
-      <%= line_item.single_money.to_html %>
-    </td>
-    <td class="cart-item-quantity" data-hook="cart_item_quantity" valign="center">
-      <%= item_form.number_field :quantity, min: 0, class: "form-control line_item_quantity", size: 5 %>
-    </td>
-    <td class="lead text-primary cart-item-total" data-hook="cart_item_total">
-      <%= line_item.display_amount.to_html unless line_item.quantity.nil? %>
-    </td>
-    <td class="lead text-primary cart_item_stock" >
-      <%#= line_item.single_money.to_html %>
-			<input type="checkbox">
-    </td>
-    <td class="cart-item-delete" data-hook="cart_item_delete">
-      <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-minus-sign'), '#', class: 'delete', id: "delete_#{dom_id(line_item)}" %>
-    </td>
-  </tr>
+    <div class="order-item">
+      <div class="cel">
+        <%= link_to raw("<i class='fa fa-times'></i>"), {action: :unpopulate, order_id: @order.id, index: line_item.id},
+          class: 'close-button', id: 'delete-item-button' %>
+      </div>
+      <div class="cel"><%= link_to line_item.name, manage_product_path(variant.product) %></div>
+      <div class="cel"><%= line_item.sku %></div>
+      <div class="cel">Each</div>
+      <div class="cel"><%= line_item.single_money.to_html %></div>
+      <div class="cel">
+        <div class="qty-block">
+          <div class="spin"><span class="minus"><i class="fa fa-minus"></i></span>
+            <!-- <input value="30" placeholder="Qty" class="qty_input"/> -->
+            <%= item_form.number_field :quantity, min: 0, class: "form-control line_item_quantity qty_input", size: 5 %>
+            <span class="plus"><i class="fa fa-plus"></i></span></div>
+        </div>
+      </div>
+      <div class="cel"><%= line_item.display_amount.to_html unless line_item.quantity.nil? %></div>
+      <div class="cel"><input type="checkbox"></div>
+    </div>
 <% end %>

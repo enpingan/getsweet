@@ -21,11 +21,13 @@ module Spree
 
   def new
     @vendor = current_vendor
-    @product = @vendor.products.new
+    @product = current_vendor.products.new
+
+    render :new
   end
 
   def create
-
+    @vendor = current_vendor
     @product = current_vendor.products.new(product_params)
 
     if @product.save
@@ -50,7 +52,7 @@ module Spree
     @product = Spree::Product.friendly.find(params[:id])
     @vendor = current_vendor
     # Temporary allergans
-    @allergans = ['Peanut', 'Tree Nuts', 'Milk Egg', 'Wheat', 'Soy', 'Fish', 'Shellfish']
+    @allergans = ['Peanut', 'Tree Nuts', 'Milk', 'Egg', 'Wheat', 'Soy', 'Fish', 'Shellfish']
     render :edit
   end
 
@@ -69,7 +71,8 @@ module Spree
   protected
 
   def product_params  #Add more permissions
-    params.require(:product).permit(:name)
+    params.require(:product).permit(:name, :description, :sku, :price,
+      variants_attributes: [:price])
   end
 
   def ensure_vendor
@@ -83,7 +86,7 @@ module Spree
   def current_order
     if session[:order_id]
       @current_order = Spree::Order.find(session[:order_id])
-      return nil unless @current_order.customer.id == current_customer.id
+      return nil unless current_customer && @current_order.customer.id == current_customer.id
     end
     @current_order
   end

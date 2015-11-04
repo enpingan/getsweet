@@ -59,14 +59,14 @@
           <% @orders.each do |order| %>
             <div class="tRow">
               <div class="cel"><a href="<%= manage_customer_url(order.customer) %>"><%= order.customer.name %></a></div>
+              <div class="cel mobile"><a href="<%= edit_manage_order_url(order) %>" class="cta-button">View</a></div>
               <div class="cel"><a href="<%= edit_manage_order_url(order) %>"><%= order.number %></a></div>
               <div class="cel"><%= order.delivery_date.to_date.to_formatted_s(:long) %></div>
               <div class="cel"><%= order.item_count %></div>
               <div class="cel"> <%= number_to_currency(order.total) %></div>
               <div class="cel"> <%= order.state %></div>
-              <div class="cel"><input type="checkbox"></div>
+              <div class="cel approve"><input type="checkbox"></div>
               <div class="cel"></div>
-              <div class="cel mobile"><a href="<%= edit_manage_order_url(order) %>" class="cta-button">View</a></div>
             </div>
           <% end %>
           <div class="tRow footer">

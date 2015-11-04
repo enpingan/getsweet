@@ -1,16 +1,83 @@
-<%= form_for ([:manage, @order]) do |f| %>
-  <%= f.label :customer_id %>
-  <%= f.select(:customer_id) do %>
-    <% @customers.each do |customer| %>
-      <% if @current_customer_id == customer.id %>
-        <option value="<%= customer.id %>" selected="selected"><%= customer.name %></option>
-      <% else %>
-        <option value="<%= customer.id %>"><%= customer.name %></option>
-      <% end %>
-    <% end %>
-  <% end %>
 
-  <%= f.label :delivery_date %>
-  <%= f.date_field :delivery_date, placeholder: "Delivery Date" %>
-  <%= f.submit "Add Products from Catalog" %>
+<div class="search-area layout2">
+	<a href="<%= manage_orders_url %>" class="cta-link">Back to all Orders</a>
+	<div class="search-block">
+		<form id="search-form">
+			<input type="text" placeholder="Search by order#">
+			<input type="submit" value="Search">
+		</form>
+	</div>
+</div>
+
+<%= form_for ([:manage, @order]),url: manage_orders_url, method: "post", html: { id: 'single-order-form' } do |order_form| %>
+	<div class="single-order-block">
+		<div class="search-block">
+			<div class="order-name">
+        <%= order_form.label :customer_id %>
+        <%= order_form.select(:customer_id) do %>
+          <% @customers.each do |customer| %>
+            <% if @current_customer_id == customer.id %>
+              <option value="<%= customer.id %>" selected="selected"><%= customer.name %></option>
+            <% else %>
+              <option value="<%= customer.id %>"><%= customer.name %></option>
+            <% end %>
+          <% end %>
+        <% end %>
+			</div>
+
+			<div id="date-form">
+        <% @order.delivery_date = Date.tomorrow %>
+				<%= order_form.label :delivery_date, id: 'date_form' %>
+			  <%= order_form.date_field :delivery_date, placeholder: "Delivery Date" %>
+			</div>
+		</div>
+
+		<div class="clear"></div>
+
+		<div class="orders-list-table">
+			<div class="header">
+				<div class="cel"></div>
+				<div class="cel">
+					<a href="" class="sort-name">Item <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">
+					<a href="" class="sort-name">SKU <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">
+					<a href="" class="sort-sku">Pack/Size <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">
+					<a href="" class="sort-lead_time">Price <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">
+					<a href="" class="sort-pack_size">Qty <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">
+					<a href="" class="sort-price">Total <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">Out of Stock</div>
+			</div>
+
+			<div class="order-items-block">
+					<!-- This will need to be split by vendor.categories.each when inplace in model -->
+				<div class="order-items-el">
+				  <!-- <a href="#" class="order-items-toggle">All</a> -->
+					<div class="order-items-count-block">
+						<div class="col1">
+							<%= submit_tag "Add Item", class: "cta-button white" %>
+						</div>
+						<div class="col2">
+							<p class="category-count">Category Count: <span class="count-val"><%= @order.line_items.sum(:quantity) %></span></p>
+						</div>
+						<div class="col3">
+							<p class="subtotal-count">Subtotal: <span class="count-val"><%= order_form.object.display_total %></span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+
+
+	</div>
 <% end %>

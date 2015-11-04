@@ -26,7 +26,7 @@ module Spree
     def current_order
       if session[:order_id]
         @current_order = Spree::Order.find(session[:order_id])
-        return nil unless @current_order.vendor.id == current_vendor.id
+        return nil unless current_vendor && @current_order.vendor.id == current_vendor.id
       end
       @current_order
     end

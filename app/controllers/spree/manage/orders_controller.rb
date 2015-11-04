@@ -12,9 +12,9 @@ class OrdersController < Spree::Manage::BaseController
 		session[:customer_id] = nil
 		@vendor = current_vendor
 		if @current_customer_id
-			@orders = @vendor.orders.where('customer_id = ?', @current_customer_id)
+			@orders = @vendor.orders.where('customer_id = ?', @current_customer_id).order('delivery_date DESC')
 		else
-			@orders = @vendor.orders
+			@orders = @vendor.orders.order('delivery_date DESC')
 		end
     render :index
   end
@@ -49,6 +49,7 @@ class OrdersController < Spree::Manage::BaseController
 
   def edit
 		@order = set_order_session
+		@customer = @order.customer
 		@vendor = current_vendor
 		render :edit
   end
@@ -64,13 +65,16 @@ class OrdersController < Spree::Manage::BaseController
 				@order.approver_id = current_spree_user.id
 				@order.approved_at = Time.now
 				flash[:success] = "Order Approved!"
-			elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
+			elsif (params[:commit] == "Add Item" && @order.update(order_params))
 				@order.update!
 				redirect_to manage_products_url and return
 			end
 		end
 
 		if @order.update(order_params)
+			@order.line_items.each do |line_item|
+				line_item.destroy! if line_item.quantity == 0
+			end
 			@order.update!
 			redirect_to edit_manage_order_url(@order)
 		else
@@ -104,13 +108,33 @@ class OrdersController < Spree::Manage::BaseController
       redirect_back_or_default(spree.root_path)
     else
       respond_with(order) do |format|
-				format.js { flash[:success] = "#{variant.product.name} has been added to your order"}
+				format.js { flash.now[:success] = "#{variant.product.name} has been added to your order"}
         # format.html { redirect_to cart_path }
       end
     end
   end
 
+	def unpopulate
+		order = Spree::Order.friendly.find(params[:order_id])
+		line_item = Spree::LineItem.find(params[:index])
+		if line_item.destroy
+			order.update!
+			flash[:success] = "Item Removed"
+			redirect_to edit_manage_order_url(order)
+		else
+			render :edit
+		end
+	end
+
   def destroy
+		@order = Spree::Order.friendly.find(params[:id])
+		if @order.destroy
+			session[:order_id] = nil;
+			flash[:success] = "Order ##{@order.number} has been cancelled"
+		else
+			flash[:errors] = @order.errors.full_messages
+		end
+		redirect_to manage_orders_url
   end
 
   protected

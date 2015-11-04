@@ -63,6 +63,11 @@ $("#desc-toggle").click(function(e){
 	e.preventDefault();
 	$(this).toggleClass('rotate').parent('.description').toggleClass('full');
 });
+
+$(".order-items-toggle").click(function(e){
+	e.preventDefault();
+	$(this).toggleClass('rotate').next('.order-items-cont').slideToggle(300);
+});
 /* -- */
 /* Accordion -*/
 	$(function() {
