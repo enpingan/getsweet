@@ -1,76 +1,180 @@
-<!-- NEED TO REMOVE BELOW IF STATEMENTS FOR VENDOR NAME AND CUSTOMER NAME BEFORE GOING LIVE -->
-
-<h1> <%= @order.vendor.name if @order.vendor %> </h1>
-<h4><a href="<%= manage_orders_url %>">Back to All Orders</a></h4>
-<h1> Customer: <%= @order.customer.name if @order.customer %> </h1>
-<h3> Order #<%= @order.number %> </h3>
-<h4>Order status:
-	<% if @order.approved_at %>
-		Approved
-	<% else %>
-		Action Required
-	<% end %>
-</h4>
-
-<div data-hook="outside_cart_form">
-	<%= form_for ([:manage, @order]),url: manage_order_url, method: "patch", html: { id: 'update-cart' } do |order_form| %>
-		<%= order_form.label :delivery_date %>
-	  <%= order_form.date_field :delivery_date, placeholder: "Delivery Date" %>
-		<div data-hook="inside_cart_form">
-			<div data-hook="cart_items" class="table-responsive">
-
-				<table class="single-order">
-				  <!-- <colgroup span="7"></colgroup> -->
-				  <thead>
-				    <tr class="active" data-hook="cart_items_headers">
-				      <th class="cart-item-description-header" colspan="2"><%= Spree.t(:item) %></th>
-							<th>SKU #</th>
-				 	 		<th>Pack/Size</th>
-   					  <th class="cart-item-price-header"><%= Spree.t(:price) %></th>
-   					  <th class="cart-item-quantity-header"><%= Spree.t(:qty) %></th>
-     					<th class="cart-item-total-header"><%= Spree.t(:total) %></th>
-    					<th>Out of Stock</th>
-     					<th class="cart-item-delete-header"></th>
-    				</tr>
-  				</thead>
-
-					<tbody id="line_items" data-hook>
-						<%= render partial: 'line_item', collection: order_form.object.line_items, locals: { order_form: order_form } %>
-					</tbody>
-
-					<% if @order.adjustments.nonzero.exists? || @order.line_item_adjustments.nonzero.exists? || @order.shipment_adjustments.nonzero.exists? || @order.shipments.any? %>
-				    <tr class="cart-subtotal">
-    			  	<td colspan="4" align='right'><h5><%= Spree.t(:cart_subtotal, count: @order.line_items.sum(:quantity)) %></h5></td>
-      				<td colspan><h5><%= order_form.object.display_item_total %></h5></td>
-      				<td></td>
-    				</tr>
-    				<%= render "spree/orders/adjustments" %>
-  				<% end %>
-  				<tr class="warning cart-total">
-    				<td colspan="4" align='right'><h5><%= Spree.t(:total) %></h5></td>
-    				<td class="lead" colspan><%= order_form.object.display_total %></td>
-    				<td></td>
-  				</tr>
-
-				</table>
-
-				<%= submit_tag "Add New Product To Order", class: "add-new-product-btn" %>
-
-        <div class="links col-md-6 navbar-form pull-right text-right" data-hook="cart_buttons">
-          <div class="form-group">
-            <%#= order_form.submit class: 'btn btn-primary add-to-order', id: 'update-button' do %>
-             <%#= Spree.t(:update) %>
-            <%# end %>
-						<%= submit_tag Spree.t(:update), class: 'btn btn-primary add-to-order', id: 'update-button' %>
-						<%= submit_tag "Approve Order", class: 'btn btn-primary add-to-order', id: 'approve-button' %>
-						<!-- <a href="" class='btn btn-lg btn-success add-to-order'>Cancel Order</a> -->
-            <%= link_to 'Cancel Order',  { action: :destroy, id: @order.id },
-						method: :delete, data: { confirm: 'Are you sure? This order will be completely deleted!' },
-						class: 'btn btn-primary add-to-order'%>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  <% end %>
+<div class="search-area layout2">
+	<a href="" class="cta-link">Back to all Orders</a>
+	<div class="search-block">
+		<form id="search-form">
+			<input type="text" placeholder="Search by order#">
+			<input type="submit" value="Search">
+		</form>
+	</div>
+</div>
+<div class="single-order-block">
+	<div class="search-block">
+		<div class="order-name">
+			W Hotel
+		</div>
+		<div class="orders-nav">
+			<a href="#" class="nav-left"><i class="fa fa-chevron-left"></i></a>
+			<span class="order-id">Order # 1147259704</span>
+			<a href="#" class="nav-right"><i class="fa fa-chevron-right"></i></a>
+		</div>
+		<form id="date-form">
+			<label>Delivery Date:</label>
+			<select name="date-form" id="date_form">
+				<option value="all">10/20/2015</option>
+				<option value="price">Option 2</option>
+				<option value="name">Option 3</option>
+			</select>
+		</form>
+		<div class="clear"></div>
+	</div>
+	<form action="#" id="single-order-form">
+		<div class="orders-list-table">
+			<div class="header">
+				<div class="cel"></div>
+				<div class="cel">
+					<a href="" class="sort-name">Item <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">
+					<a href="" class="sort-name">SKU <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">
+					<a href="" class="sort-sku">Pack/Size <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">
+					<a href="" class="sort-lead_time">Price <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">
+					<a href="" class="sort-pack_size">Qty <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">
+					<a href="" class="sort-price">Total <i class="fa fa-sort"></i></a>
+				</div>
+				<div class="cel">Out of Stock</div>
+			</div>
+			<div class="order-items-block">
+				<div class="order-items-el" id="pastries">
+					<a href="#" class="order-items-toggle">Pastries <i class="fa fa-chevron-down"></i></a>
+					<div class="order-items-cont">
+						<div class="order-item">
+							<div class="cel"><a href="" class="close-button"><i class="fa fa-times"></i></a></div>
+							<div class="cel">Pear Tart</div>
+							<div class="cel">234134</div>
+							<div class="cel">Each</div>
+							<div class="cel">$5.00</div>
+							<div class="cel">
+								<div class="qty-block">
+									<div class="spin"><span class="minus"><i class="fa fa-minus"></i></span><input value="30" placeholder="Qty" class="qty_input"/><span class="plus"><i class="fa fa-plus"></i></span></div>
+								</div>
+							</div>
+							<div class="cel">$150.00</div>
+							<div class="cel"><input type="checkbox"></div>
+						</div>
+						<div class="order-item">
+							<div class="cel"><a href="" class="close-button"><i class="fa fa-times"></i></a></div>
+							<div class="cel">Fruit Tart</div>
+							<div class="cel">234134</div>
+							<div class="cel">Each</div>
+							<div class="cel">$5.00</div>
+							<div class="cel">
+								<div class="qty-block">
+									<div class="spin"><span class="minus"><i class="fa fa-minus"></i></span><input value="30" placeholder="Qty" class="qty_input"/><span class="plus"><i class="fa fa-plus"></i></span></div>
+								</div>
+							</div>
+							<div class="cel">$150.00</div>
+							<div class="cel"><input type="checkbox"></div>
+						</div>
+					</div>
+					<div class="order-items-count-block">
+						<div class="col1">
+							<a href="" class="cta-button white"><i class="fa fa-plus"></i> Add item</a>
+						</div>
+						<div class="col2">
+							<p class="category-count">Category Count: <span class="count-val">60</span></p>
+						</div>
+						<div class="col3">
+							<p class="subtotal-count">Subtotal: <span class="count-val">$300.00</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="order-items-el" id="breads">
+					<a href="#" class="order-items-toggle">Breads <i class="fa fa-chevron-down"></i></a>
+					<div class="order-items-cont">
+						<div class="order-item">
+							<div class="cel"><a href="" class="close-button"><i class="fa fa-times"></i></a></div>
+							<div class="cel">Brioche</div>
+							<div class="cel">232134</div>
+							<div class="cel">12</div>
+							<div class="cel">$20.00</div>
+							<div class="cel">
+								<div class="qty-block">
+									<div class="spin"><span class="minus"><i class="fa fa-minus"></i></span><input value="5" placeholder="Qty" class="qty_input"/><span class="plus"><i class="fa fa-plus"></i></span></div>
+								</div>
+							</div>
+							<div class="cel">$100.00</div>
+							<div class="cel"><input type="checkbox"></div>
+						</div>
+					</div>
+					<div class="order-items-count-block">
+						<div class="col1">
+							<a href="" class="cta-button white"><i class="fa fa-plus"></i> Add item</a>
+						</div>
+						<div class="col2">
+							<p class="category-count">Category Count: <span class="count-val">5</span></p>
+						</div>
+						<div class="col3">
+							<p class="subtotal-count">Subtotal: <span class="count-val">$100.00</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="order-items-el" id="minis">
+					<a href="#" class="order-items-toggle">Minis</a>
+					<div class="order-items-count-block">
+						<div class="col1">
+							<a href="" class="cta-button white"><i class="fa fa-plus"></i> Add item</a>
+						</div>
+						<div class="col2">
+							<p class="category-count">Category Count: <span class="count-val">0</span></p>
+						</div>
+						<div class="col3">
+							<p class="subtotal-count">Subtotal: <span class="count-val">$0.00</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="order-items-el" id="other">
+					<a href="#" class="order-items-toggle">Other</a>
+					<div class="order-items-count-block">
+						<div class="col1">
+							<a href="" class="cta-button white"><i class="fa fa-plus"></i> Add item</a>
+						</div>
+						<div class="col2">
+							<p class="category-count">Category Count: <span class="count-val">0</span></p>
+						</div>
+						<div class="col3">
+							<p class="subtotal-count">Subtotal: <span class="count-val">$0.00</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="order-items-total-count" id="total_count">
+					<div class="order-items-count-block">
+						<div class="col1">
+							&nbsp;
+						</div>
+						<div class="col2">
+							<p class="total-count">Total Count: <span class="count-val">65</span></p>
+						</div>
+						<div class="col3">
+							<p class="total-price">Total: <span class="count-val">$400.00</span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="single-order-buttons">
+			<a href="" class="cta-button notify"><i class="fa fa-bell-o"></i> Notify customer</a>
+			<a href="" class="cta-button cancel"></i> Cancel</a>
+			<input type="submit" value="Approve Order">
+			<div class="clear"></div>
+		</div>
+	</form>
 </div>
