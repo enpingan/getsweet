@@ -170,7 +170,7 @@ module Spree
 
     def order_params
       params.require(:order).permit(:delivery_date, :vendor_id, :user_id, :item_count,
-        :ship_address_id, :bill_address_id, :created_by_id,
+        :ship_address_id, :bill_address_id, :created_by_id, :state, :completed_at,
         line_items_attributes: [:quantity, :id])
     end
 
