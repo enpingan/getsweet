@@ -1222,6 +1222,11 @@ img{
 	float: left;
 	margin-right: 20px;
 }
+.app_ui-wrapper .app_ui-block .single-order-block .search-block label{
+	display: inline-block;
+  float: left;
+  margin-right: 20px;
+}
 .search-block #search-form {
 	margin-right: 30px;
 }
@@ -1906,7 +1911,7 @@ img{
 .orders-list-block .search-block #search-form {
     margin: 0 0 0 9%;
 }
-.orders-list-block .search-block form#date-form{
+.orders-list-block .search-block div#date-form{
 	float: right;
 }
 .orders-list-block  input[type="submit"] {
@@ -1984,17 +1989,20 @@ img{
 .single-order-block .orders-nav a:hover{
 	color: #FF7E00;
 }
-.app_ui-wrapper .app_ui-block .single-order-block .search-block form {
+.app_ui-wrapper .app_ui-block .single-order-block .search-block #date-form {
     float: right;
 }
 .single-order-block .orders-list-table .header{
 	background: #FCF9F6;
+	box-shadow: none;
+	display: table-header-group;
 }
 .single-order-block .orders-list-table .header .cel {
     font-size: 18px;
     padding: 15px 10px;
     font-family: 'p22_underground_cy_prodemi';
     color: #6e665f;
+		vertical-align: bottom;
 }
 .single-order-block .orders-list-table .header a {
     color: #6e665f;
@@ -2962,13 +2970,13 @@ img{
 		padding-bottom: 20px;
 		border-bottom: 1px solid #E0DCD8;
 	}
-	.single-order-block .orders-nav, .app_ui-wrapper .app_ui-block .single-order-block .search-block form{
+	.single-order-block .orders-nav, .app_ui-wrapper .app_ui-block .single-order-block .search-block #date-form{
 	    display: block;
 	    float: none;
 	    text-align: center;
 	    margin: 10px 0 0 0;
 	}
-	.app_ui-wrapper .app_ui-block .single-order-block .search-block form label {
+	.app_ui-wrapper .app_ui-block .single-order-block .search-block #date-form label {
 	    float: none;
 	}
 	.single-order-block .orders-list-table .header{
@@ -3401,10 +3409,13 @@ img{
 	    float: none;
 	    text-align: right;
 	}
-	.orders-list-block .search-block form#date-form{
+	.orders-list-block .search-block div#date-form{
 		display: block;
 	    float: none;
 	    margin-top: 10px;
+	}
+	.orders-list-block .search-block #date-form input#order_delivery_date{
+		float: left;
 	}
 	.app_ui-wrapper .app_ui-block .orders-list-block  .search-block form label {
 	    display: inline-block;

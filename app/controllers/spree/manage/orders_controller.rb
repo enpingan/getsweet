@@ -49,6 +49,7 @@ class OrdersController < Spree::Manage::BaseController
 
   def edit
 		@order = set_order_session
+		@customer = @order.customer
 		@vendor = current_vendor
 		render :edit
   end
@@ -64,7 +65,7 @@ class OrdersController < Spree::Manage::BaseController
 				@order.approver_id = current_spree_user.id
 				@order.approved_at = Time.now
 				flash[:success] = "Order Approved!"
-			elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
+			elsif (params[:commit] == "Add Item" && @order.update(order_params))
 				@order.update!
 				redirect_to manage_products_url and return
 			end
