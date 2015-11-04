@@ -44,6 +44,7 @@ module Spree
 
     def edit
       @order = set_order_session
+      @vendor = @order.vendor
       render :edit
     end
 
@@ -64,7 +65,7 @@ module Spree
           @order.completed_at = Time.now
           @order.user_id = current_spree_user.id
 
-        elsif (params[:commit] == "Add New Product To Order" && @order.update(order_params))
+        elsif (params[:commit] == "Add Item" && @order.update(order_params))
           @order.update!
           zero_qty_items = @order.line_items.each do |line_item|
     				line_item.destroy! if line_item.quantity == 0
