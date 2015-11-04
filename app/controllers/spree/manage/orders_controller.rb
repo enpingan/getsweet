@@ -39,7 +39,9 @@ class OrdersController < Spree::Manage::BaseController
   def create
 		@customers = current_vendor.customers
     @order = current_vendor.orders.new(order_params)
-		@order.user_id = @order.customer.users.first.id
+
+		associate_user(@order)
+
     if @order.save!
 			set_order_session(@order)
 			flash[:success] = "You've started a new order!"
@@ -169,6 +171,13 @@ class OrdersController < Spree::Manage::BaseController
 		session[:order_id] = order.id
 		session[:customer_id] = order.customer.id
 		order
+	end
+
+	def associate_user(order)
+		order.user_id = order.customer.users.first.id
+		order.ship_address_id = order.customer.ship_address_id
+		order.bill_address_id = order.customer.ship_address_id
+		order.created_by_id = order.user_id
 	end
 end
 
