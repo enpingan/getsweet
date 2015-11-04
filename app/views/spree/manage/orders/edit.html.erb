@@ -60,7 +60,7 @@
 					</div>
 					<div class="order-items-count-block">
 						<div class="col1">
-							<button class="cta-button white"><i class="fa fa-plus"></i> Add Item</button>
+							<%= submit_tag "Add Item", class: "cta-button white" %>
 						</div>
 						<div class="col2">
 							<p class="category-count">Category Count: <span class="count-val"><%= @order.line_items.sum(:quantity) %></span></p>
