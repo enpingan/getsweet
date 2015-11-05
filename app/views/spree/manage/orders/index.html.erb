@@ -9,11 +9,13 @@
 
       <form id="filter-form">
         <%= select(:customer, :name) do%>
-        <option value="all">All</option>
+          <option value="all">All</option>
           <%= options_for_select (@vendor.customers.collect(&:name)) %>
         <% end %>
+        <input type="date" name=date>
         <input type="submit" value="Filter">
       </form>
+
 
       <form id="search-form">
         <label>Search:</label>
@@ -23,11 +25,11 @@
 
 
 
-          <div id="date-form">
+          <!-- <div id="date-form">
             <label>Delivery Date:</label>
     				<%#= label :delivery_date, id: 'date_form' %>
-    			  <%= date_field :delivery_date, placeholder: "Delivery Date" %>
-    			</div>
+    			  <%#= date_field :delivery_date, placeholder: "Delivery Date" %>
+    			</div> -->
 
       <div class="clear"></div>
     </div>

@@ -9,16 +9,9 @@ module Spree
     before_action :ensure_customer, only: [:show, :edit, :update, :destroy]
 
     def index
-      @orders = current_customer.orders.order('delivery_date DESC')
       @customer = current_customer
 
-      if (params[:vendor] && @customer.vendors.collect(&:name).include?(params[:vendor][:name]))
-  			@current_vendor = Spree::Vendor.find_by_name(params[:vendor][:name])
-  			@orders = @customer.orders.where('vendor_id = ?', @current_vendor.id).order('delivery_date DESC')
-  			session[:vendor_id] = @current_vendor.id
-  	  else
-  	     @orders = @customer.orders.order('delivery_date DESC')
-  	  end
+      @orders = filter_orders
 
       render :index
     end
@@ -26,8 +19,8 @@ module Spree
     def show
       @order = set_order_session
       @path = "show"
-      unless @order.state == "complete"
-        redirect_to edit_order_url(@order)
+      if @order.delivery_date > DateTime.tomorrow ||(@order.delivery_date == DateTime.tomorrow && Time.now < @order.vendor.order_cutoff_time.to_datetime)
+        redirect_to edit_order_url(@order) unless @order.state == "complete"
       else
         render :show
       end
@@ -196,6 +189,20 @@ module Spree
       order.ship_address_id = current_spree_user.customer.ship_address_id
       order.bill_address_id = current_spree_user.customer.ship_address_id
       order.created_by_id = current_spree_user.id
+    end
+
+    def filter_orders
+      @orders = current_customer.orders.order('delivery_date DESC')
+      if (params[:vendor] && @customer.vendors.collect(&:name).include?(params[:vendor][:name]))
+  			@current_vendor = Spree::Vendor.find_by_name(params[:vendor][:name])
+  			@orders = @customer.orders.where('vendor_id = ?', @current_vendor.id).order('delivery_date DESC')
+  			session[:vendor_id] = @current_vendor.id
+  	  end
+
+      unless (params[:date].nil? || params[:date].empty?)
+  			@orders = @orders.where('delivery_date = ?', params[:date])
+  		end
+      @orders
     end
   end
  end

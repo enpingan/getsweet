@@ -11,19 +11,15 @@ class OrdersController < Spree::Manage::BaseController
 		@current_customer_id = session[:customer_id]
 		session[:customer_id] = nil
 		@vendor = current_vendor
+
+		@orders = filter_orders
 		# if @current_customer_id
 		# 	@orders = @vendor.orders.where('customer_id = ?', @current_customer_id).order('delivery_date DESC')
 		# else
 		# 	@orders = @vendor.orders.order('delivery_date DESC')
 		# end
 
-		if (params[:customer] && @vendor.customers.collect(&:name).include?(params[:customer][:name]))
-			@current_customer = Spree::Customer.find_by_name(params[:customer][:name])
-			@orders = @vendor.orders.where('customer_id = ?', @current_customer.id).order('delivery_date DESC')
-			session[:customer_id] = @current_customer.id
-	  else
-	     @orders = @vendor.orders.order('delivery_date DESC')
-	  end
+
 
     render :index
   end
@@ -156,7 +152,7 @@ class OrdersController < Spree::Manage::BaseController
   protected
 
   def order_params
-    self.params.require(:order).permit(:customer_id, :delivery_date, :item_count, :user_id, :state, :completed_at,
+    params.require(:order).permit(:customer_id, :delivery_date, :item_count, :user_id, :state, :completed_at,
 			line_items_attributes: [:quantity, :id])
   end
 
@@ -180,6 +176,23 @@ class OrdersController < Spree::Manage::BaseController
 		order.ship_address_id = order.customer.ship_address_id
 		order.bill_address_id = order.customer.ship_address_id
 		order.created_by_id = order.user_id
+	end
+
+	def filter_orders
+
+		@current_customer_id = session[:customer_id]
+		@orders = @vendor.orders.order('delivery_date DESC')
+
+		if (params[:customer] && @vendor.customers.collect(&:name).include?(params[:customer][:name]))
+			@current_customer = Spree::Customer.find_by_name(params[:customer][:name])
+			@orders = @vendor.orders.where('customer_id = ?', @current_customer.id).order('delivery_date DESC')
+			session[:customer_id] = @current_customer.id
+	  end
+
+		unless (params[:date].nil? || params[:date].empty?)
+			@orders = @orders.where('delivery_date = ?', params[:date])
+		end
+		@orders
 	end
 end
 
