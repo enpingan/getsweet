@@ -183,7 +183,7 @@ p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
@@ -216,7 +216,7 @@ end
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id)
 
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var4.id, quantity: rand(4..100))
@@ -245,7 +245,7 @@ end
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), , user_id: u8.id, created_by_id: u8.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
@@ -277,7 +277,7 @@ end
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
@@ -309,7 +309,7 @@ end
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u10.id, created_by_id: u10.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
@@ -409,7 +409,7 @@ p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
@@ -441,7 +441,7 @@ end
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id)
 
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var4.id, quantity: rand(1..5))
@@ -470,7 +470,7 @@ end
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u8.id, created_by_id: u8.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
@@ -502,7 +502,7 @@ end
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
@@ -534,7 +534,7 @@ end
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u10.id, created_by_id: u10.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
@@ -604,7 +604,7 @@ p5.master.images.create!({:attachment => image(p5.name.gsub(/ /,"_").downcase)})
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u6.id, created_by_id: u6.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
@@ -632,7 +632,7 @@ end
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
@@ -660,7 +660,7 @@ end
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u8.id, created_by_id: u8.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
@@ -688,7 +688,7 @@ end
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..100))
@@ -716,7 +716,7 @@ end
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u10.id, created_by_id: u10.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
@@ -795,7 +795,7 @@ p7.master.images.create!({:attachment => image(p7.name.gsub(/ /,"_").downcase)})
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -826,7 +826,7 @@ end
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u7.id, created_by_id: u7.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -857,7 +857,7 @@ end
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u8.id, created_by_id: u8.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -888,7 +888,7 @@ end
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -919,7 +919,7 @@ end
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u10.id, created_by_id: u10.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -1018,7 +1018,7 @@ p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28))
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
@@ -1051,7 +1051,7 @@ end
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id)
 
     o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
     o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -1084,7 +1084,7 @@ end
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u8.id, created_by_id: u8.id)
 
     o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
     o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -1117,7 +1117,7 @@ end
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u9.id, created_by_id: u9.id)
 
     o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
     o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -1150,7 +1150,7 @@ end
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
-    delivery_date: DateTime.new(2015, mo + 1, 15))
+    delivery_date: DateTime.new(2015, mo + 1, 15), user_id: u10.id, created_by_id: u10.id)
 
     o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
     o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
