@@ -71,8 +71,7 @@ module Spree
         if (params[:commit] == Spree.t(:update))
           flash[:success] = "Your order has been successfully update!"
         elsif (params[:commit] == "Submit Order")
-          @order.state = "complete"
-          @order.completed_at = Time.now
+					@order.next
           @order.user_id = current_spree_user.id
 
         elsif (params[:commit] == "Resubmit Order")
