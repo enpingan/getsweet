@@ -245,7 +245,7 @@ end
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: DateTime.new(2015, mo + 1, 28), , user_id: u8.id, created_by_id: u8.id)
+    delivery_date: DateTime.new(2015, mo + 1, 28), user_id: u8.id, created_by_id: u8.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
