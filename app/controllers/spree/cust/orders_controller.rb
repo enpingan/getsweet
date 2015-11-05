@@ -26,8 +26,8 @@ module Spree
     def show
       @order = set_order_session
       @path = "show"
-      unless @order.state == "complete"
-        redirect_to edit_order_url(@order)
+      if @order.delivery_date > DateTime.tomorrow ||(@order.delivery_date == DateTime.tomorrow && Time.now < @order.vendor.order_cutoff_time.to_datetime)
+        redirect_to edit_order_url(@order) unless @order.state == "complete"
       else
         render :show
       end
