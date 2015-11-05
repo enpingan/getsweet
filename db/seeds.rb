@@ -32,7 +32,7 @@ end
 ##############################################################################
 # Create users
 ##############################################################################
-u1 = Spree::User.create(email: 'john_dough@sweetst.co', firstname: 'John', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 1, password: 'password')
+u1 = Spree::User.create(email: 'john_dough@sweetist.co', firstname: 'John', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 1, password: 'password')
 u1.spree_roles << vendor
 u1.save!
 u2 = Spree::User.create(email: 'mark_cecicela@sweetist.co', firstname: 'Mark', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 2, password: 'password')
