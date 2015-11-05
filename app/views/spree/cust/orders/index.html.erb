@@ -5,12 +5,14 @@
 
 
   <div class="orders-list-block">
+
     <div class="search-block">
       <form id="filter-form">
         <%= select(:vendor, :name) do%>
           <option value="all">All</option>
           <%= options_for_select (@customer.vendors.collect(&:name)) %>
         <% end %>
+        <input type="date" name=date>
         <input type="submit" value="Filter">
       </form>
       <form id="search-form">
@@ -18,13 +20,9 @@
         <input type="text" placeholder="Search Products">
         <input type="submit" value="Search">
       </form>
-      <div id="date-form">
-        <label>Delivery Date:</label>
-        <%#= label :delivery_date, id: 'date_form' %>
-        <%= date_field :delivery_date, placeholder: "Delivery Date" %>
-      </div>
       <div class="clear"></div>
     </div>
+
     <form action="#" id="orders-list-form">
       <div class="orders-list-table">
         <div class="tRow header">
