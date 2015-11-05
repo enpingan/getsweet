@@ -32,35 +32,35 @@ end
 ##############################################################################
 # Create users
 ##############################################################################
-u1 = Spree::User.create(email: 'john@doughdonuts.com', firstname: 'John', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 1, password: 'password')
+u1 = Spree::User.create(email: 'john_dough@sweetst.co', firstname: 'John', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 1, password: 'password')
 u1.spree_roles << vendor
 u1.save!
-u2 = Spree::User.create(email: 'mark@cecicela.com', firstname: 'Mark', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 2, password: 'password')
+u2 = Spree::User.create(email: 'mark_cecicela@sweetist.co', firstname: 'Mark', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 2, password: 'password')
 u2.spree_roles << vendor
 u2.save!
-u3 = Spree::User.create(email: 'celine@canele.com', firstname: 'Celine', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 3, password: 'password')
+u3 = Spree::User.create(email: 'celine@sweetist.co', firstname: 'Celine', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 3, password: 'password')
 u3.spree_roles << vendor
 u3.save!
-u4 = Spree::User.create(email: 'mary@chikalicious.com', firstname: 'Mary', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 4, password: 'password')
+u4 = Spree::User.create(email: 'mary_chika@sweetist.co', firstname: 'Mary', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 4, password: 'password')
 u4.spree_roles << vendor
 u4.save!
-u5 = Spree::User.create(email: 'bill@billysbakery.com', firstname: 'Bill', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 5, password: 'password')
+u5 = Spree::User.create(email: 'bill_bakery@sweetist.co', firstname: 'Bill', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 5, password: 'password')
 u5.spree_roles << vendor
 u5.save!
 
-u6 = Spree::User.create(email: 'amy@creeksidecafe.com', firstname: 'Amy', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 1, password: 'password')
+u6 = Spree::User.create(email: 'amy_creekside@sweetist.co', firstname: 'Amy', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 1, password: 'password')
 u6.spree_roles << customer
 u6.save!
-u7 = Spree::User.create(email: 'michael@whotel.com', firstname: 'Michael', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 2, password: 'password')
+u7 = Spree::User.create(email: 'michael_whotel@sweetist.co', firstname: 'Michael', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 2, password: 'password')
 u7.spree_roles << customer
 u7.save!
-u8 = Spree::User.create(email: 'kat@frenchcafe.com', firstname: 'Kathleen', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 3, password: 'password')
+u8 = Spree::User.create(email: 'kat_frenchcafe@sweetist.co', firstname: 'Kathleen', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 3, password: 'password')
 u8.spree_roles << customer
 u8.save!
-u9 = Spree::User.create(email: 'myles@murrays.com', firstname: 'Myles', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 4, password: 'password')
+u9 = Spree::User.create(email: 'myles_murrays@sweetist.co', firstname: 'Myles', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 4, password: 'password')
 u9.spree_roles << customer
 u9.save!
-u10 = Spree::User.create(email: 'pete@knickerbocker.com', firstname: 'Pete', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 5, password: 'password')
+u10 = Spree::User.create(email: 'pete_knickerbocker@sweetist.co', firstname: 'Pete', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, customer_id: 5, password: 'password')
 u10.spree_roles << customer
 u10.save!
 
@@ -70,11 +70,11 @@ v3 = Spree::Vendor.create(name: 'Canele by Celine', order_cutoff_time: '8PM', de
 v4 = Spree::Vendor.create(name: "Chikalicious", order_cutoff_time: '9PM', delivery_minimum: 10.0, payment_terms: 15)
 v5 = Spree::Vendor.create(name: "Billy's Bakery", order_cutoff_time: '5PM', delivery_minimum: 10.0, payment_terms: 45)
 
-c6 = Spree::Customer.create(name: "Creek Side Cafe", account_id: 47584, email: "contact@creeksidecafe.com")
-c7 = Spree::Customer.create(name: "W Hotel", account_id: 85893, email: "contact@whotel.com")
-c8 = Spree::Customer.create(name: "French Cafe", account_id: 57203, email: "contact@frenchcafe.com")
-c9 = Spree::Customer.create(name: "Murray's", account_id: 60593, email: "contact@murrays.com")
-c10 = Spree::Customer.create(name: "Knickerbocker Club", account_id: 29493, email: "contact@knickerbocker.com")
+c6 = Spree::Customer.create(name: "Creek Side Cafe", account_id: 47584, email: "contact_creekside@sweetist.co")
+c7 = Spree::Customer.create(name: "W Hotel", account_id: 85893, email: "contact_whotel@sweetist.co")
+c8 = Spree::Customer.create(name: "French Cafe", account_id: 57203, email: "contact_frenchcafe@sweetist.co")
+c9 = Spree::Customer.create(name: "Murray's", account_id: 60593, email: "contact_murrays@sweetist.co")
+c10 = Spree::Customer.create(name: "Knickerbocker Club", account_id: 29493, email: "contact_knickerbocker@sweetist.co")
 
 c6.build_ship_address(firstname: u6.firstname, lastname: u6.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u6.phone,
   state_name: 'New York', company: c6.name, country_id: 232)
