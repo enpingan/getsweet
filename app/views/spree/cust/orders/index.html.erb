@@ -53,22 +53,35 @@
         </div>
         <% if @orders %>
           <% @orders.each do |order| %>
-            <div class="tRow">
-              <div class="cel"><a href="<%= vendor_url(order.vendor) %>"><%= order.vendor.name %></a></div>
+            <div class="tRow orders-list-order">
+              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+                <%= order.vendor.name %>
+              </a>
               <div class="cel mobile"><a href="<%= order_url(order) %>" class="cta-button">View</a></div>
-              <div class="cel"><a href="<%= order_url(order) %>"><%= order.number %></a></div>
-              <div class="cel"><%= order.delivery_date.to_date.to_formatted_s(:long) %></div>
-              <div class="cel"><%= order.item_count %></div>
-              <div class="cel"> <%= number_to_currency(order.total) %></div>
-              <div class="cel"> <%= order.state %></div>
-              <div class="cel">
-                <% if order.delivery_date > DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now < order.vendor.order_cutoff_time.to_datetime)%>
-                	<a href="<%= edit_order_url(order) %>">(Edit)</a>
-                <% elsif order.state != 'complete' %>
-                  Past Order Cutoff
-                <% end %>
-              </div>
-              <div class="cel"></div>
+              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+                <%= order.number %>
+              </a>
+              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+                <%= order.delivery_date.to_date.to_formatted_s(:long) %>
+              </a>
+              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+                <%= order.item_count %>
+              </a>
+              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+                <%= number_to_currency(order.total) %>
+              </a>
+              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+                <%= order.state %>
+              </a>
+              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+                  <% if order.delivery_date > DateTime.tomorrow ||(order.delivery_date == DateTime.tomorrow && Time.now < order.vendor.order_cutoff_time.to_datetime)%>
+                  	<!-- <a href="<%#= edit_order_url(order) %>">(Edit)</a> -->
+                    Edit
+                  <% elsif order.state != 'complete' %>
+                    Past Order Cutoff
+                  <% end %>
+              </a>
+              <a href="<%= order_url(order) %>" class="orders-list-order-link cel"></a>
             </div>
           <% end %>
           <div class="tRow footer">
