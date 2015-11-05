@@ -25,5 +25,7 @@ module Spree
 		accepts_nested_attributes_for :ship_address
 
 		has_and_belongs_to_many :vendors, join_table: :spree_customers_vendors
+
+		has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Spree::CustomerImage"
 	end
 end

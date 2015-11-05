@@ -9,6 +9,8 @@
 			<% @account.images.each do |image| %>
 				<%= image_tag image.attachment.url(:product), :class => "contact-img", alt: image.alt %>
 			<% end %>
+    <% else %>
+      <%= image_tag "spree/manage/img/multi-user.png", :class => "contact-img", alt: "account image" %>
 		<% end %>
 
     <div class="contact-info">
