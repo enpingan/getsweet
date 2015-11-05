@@ -45,6 +45,8 @@ module Spree
       @order = current_customer.orders.new(order_params)
       @vendors = current_customer.vendors
 
+      associate_user(@order)
+
       if @order.save
         set_order_session(@order)
         flash[:success] = "You've started a new order!"
@@ -65,11 +67,11 @@ module Spree
       @order = set_order_session
 
       if request.patch?
+        @order.item_count = @order.line_items.sum(:quantity)
         if (params[:commit] == Spree.t(:update))
           flash[:success] = "Your order has been successfully update!"
         elsif (params[:commit] == "Submit Order")
-          @order.state = "complete"
-          @order.completed_at = Time.now
+					@order.next
           @order.user_id = current_spree_user.id
 
         elsif (params[:commit] == "Resubmit Order")
@@ -143,6 +145,7 @@ module Spree
       order = Spree::Order.friendly.find(params[:order_id])
       line_item = Spree::LineItem.find(params[:index])
       if line_item.destroy
+        order.item_count = order.line_items.sum(:quantity)
         order.update!
         flash[:success] = "Item Removed"
         redirect_to edit_order_url(order)
@@ -165,7 +168,8 @@ module Spree
     protected
 
     def order_params
-      params.require(:order).permit(:delivery_date, :vendor_id, :user_id,
+      params.require(:order).permit(:delivery_date, :vendor_id, :user_id, :item_count,
+        :ship_address_id, :bill_address_id, :created_by_id, :state, :completed_at,
         line_items_attributes: [:quantity, :id])
     end
 
@@ -185,6 +189,13 @@ module Spree
       session[:order_id] = order.id
       session[:vendor_id] = order.vendor.id
       order
+    end
+
+    def associate_user(order)
+      order.user_id = current_spree_user.id
+      order.ship_address_id = current_spree_user.customer.ship_address_id
+      order.bill_address_id = current_spree_user.customer.ship_address_id
+      order.created_by_id = current_spree_user.id
     end
   end
  end
