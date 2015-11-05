@@ -34,7 +34,6 @@ Rails.application.routes.draw do
 
     get '/orders/populate', :to => populate_redirect
 
-
     resources :products do
       resources :variants
     end
@@ -77,48 +76,42 @@ Rails.application.routes.draw do
 		namespace :admin do
       get '/search/customers', to: "search#customers", as: :search_customers
 
-	    resources :customers do
- 	    	collection do
-  	      get :search
-      	end
-
       resources :orders do
         member do
           patch :delivery_update
         end
       end
-=begin
+
+	    resources :customers do
+ 	    	collection do
+  	      get :search
+      	end
       	resources :customer_images do
         	collection do
           	post :update_positions
         	end
       	end
-
       	resources :customer_logos do
         	collection do
         		post :update_positions
         	end
       	end
-=end
 			end
 
 	    resources :vendors do
  	    	collection do
   	      get :search
       	end
-=begin
       	resources :vendor_images do
         	collection do
           	post :update_positions
         	end
       	end
-
       	resources :vendor_logos do
         	collection do
         		post :update_positions
         	end
       	end
-=end
 			end
 
 		end

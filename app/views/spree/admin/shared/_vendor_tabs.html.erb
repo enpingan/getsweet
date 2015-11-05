@@ -1,0 +1,15 @@
+<% content_for :page_title do %>
+  <%= link_to "Vendors", admin_vendors_path %> /
+  <%= @vendor.name %>
+<% end %>
+
+<% content_for :sidebar do %>
+  <ul class="nav nav-pills nav-stacked" data-hook="admin_product_tabs">
+    <%= content_tag :li, class: ('active' if current == :details) do %>
+      <%= link_to_with_icon 'edit', Spree.t(:details), edit_admin_vendor_url(@vendor) %>
+    <% end if can?(:admin, Spree::Vendor) %>
+    <%= content_tag :li, class: ('active' if current == :images) do %>
+      <%= link_to_with_icon 'picture', Spree.t(:images), admin_vendor_vendor_images_url(@vendor) %>
+    <% end if can?(:admin, Spree::VendorImage) %>
+  </ul>
+<% end %>
