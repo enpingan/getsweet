@@ -25,7 +25,7 @@ module Spree
 	      @account = spree_current_user.vendor
 	      session[:vendor_id] = @account.id
 	      if @account.update(account_params)
- 	      	flash[:success] = "Account has been update!"
+ 	      	flash[:success] = "Account has been updated!"
  	      	redirect_to manage_account_url
 	      else
 	        flash[:errors] = @account.errors.full_messages
