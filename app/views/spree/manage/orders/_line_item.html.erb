@@ -20,6 +20,6 @@
         </div>
       </div>
       <div class="cel"><%= line_item.display_amount.to_html unless line_item.quantity.nil? %></div>
-      <div class="cel"><input type="checkbox"></div>
+      <div class="cel out-of-stock"><input type="checkbox"></div>
     </div>
 <% end %>

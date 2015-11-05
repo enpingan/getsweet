@@ -6,27 +6,29 @@
 
   <div class="orders-list-block">
     <div class="search-block">
+
       <form id="filter-form">
-        <label>Filter by Customer:</label>
-        <select name="filter_by" id="filter_by">
-          <% @vendor.customers.each do |customer| %>
-            <option value="<%= customer.id %>"><%= customer.name %></option>
-          <% end %>
-        </select>
+        <%= select(:customer, :name) do%>
+        <option value="all">All</option>
+          <%= options_for_select (@vendor.customers.collect(&:name)) %>
+        <% end %>
+        <input type="submit" value="Filter">
       </form>
+
       <form id="search-form">
         <label>Search:</label>
         <input type="text" placeholder="Search Products">
         <input type="submit" value="Search">
       </form>
-      <form id="date-form">
-        <label>Delivery Date:</label>
-        <select name="date-form" id="date_form">
-          <option value="all">10/20/2015</option>
-          <option value="price">Option 2</option>
-          <option value="name">Option 3</option>
-        </select>
-      </form>
+
+
+
+          <div id="date-form">
+            <label>Delivery Date:</label>
+    				<%#= label :delivery_date, id: 'date_form' %>
+    			  <%= date_field :delivery_date, placeholder: "Delivery Date" %>
+    			</div>
+
       <div class="clear"></div>
     </div>
     <form action="#" id="orders-list-form">

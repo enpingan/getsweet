@@ -78,14 +78,14 @@ c10 = Spree::Customer.create(name: "Knickerbocker Club", account_id: 29493, emai
 
 c6.build_ship_address(firstname: u6.firstname, lastname: u6.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u6.phone,
   state_name: 'New York', company: c6.name, country_id: 232)
-c7.build_ship_address(firstname: u6.firstname, lastname: u7.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u7.phone,
-  state_name: 'New York', company: c6.name, country_id: 232)
-c8.build_ship_address(firstname: u6.firstname, lastname: u8.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u8.phone,
-  state_name: 'New York', company: c6.name, country_id: 232)
-c9.build_ship_address(firstname: u6.firstname, lastname: u9.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u9.phone,
-  state_name: 'New York', company: c6.name, country_id: 232)
-c10.build_ship_address(firstname: u6.firstname, lastname: u10.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u10.phone,
-  state_name: 'New York', company: c6.name, country_id: 232)
+c7.build_ship_address(firstname: u7.firstname, lastname: u7.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u7.phone,
+  state_name: 'New York', company: c7.name, country_id: 232)
+c8.build_ship_address(firstname: u8.firstname, lastname: u8.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u8.phone,
+  state_name: 'New York', company: c8.name, country_id: 232)
+c9.build_ship_address(firstname: u9.firstname, lastname: u9.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u9.phone,
+  state_name: 'New York', company: c9.name, country_id: 232)
+c10.build_ship_address(firstname: u10.firstname, lastname: u10.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u10.phone,
+  state_name: 'New York', company: c10.name, country_id: 232)
 
 c6.vendors += [v1, v2, v3, v4, v5]
 c7.vendors += [v1, v2, v3, v4, v5]

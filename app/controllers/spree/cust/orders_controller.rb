@@ -11,13 +11,26 @@ module Spree
     def index
       @orders = current_customer.orders.order('delivery_date DESC')
       @customer = current_customer
+
+      if (params[:vendor] && @customer.vendors.collect(&:name).include?(params[:vendor][:name]))
+  			@current_vendor = Spree::Vendor.find_by_name(params[:vendor][:name])
+  			@orders = @customer.orders.where('vendor_id = ?', @current_vendor.id).order('delivery_date DESC')
+  			session[:vendor_id] = @current_vendor.id
+  	  else
+  	     @orders = @customer.orders.order('delivery_date DESC')
+  	  end
+
       render :index
     end
 
     def show
       @order = set_order_session
       @path = "show"
-      render :show
+      unless @order.state == "complete"
+        redirect_to edit_order_url(@order)
+      else
+        render :show
+      end
     end
 
     def new
@@ -31,6 +44,8 @@ module Spree
     def create
       @order = current_customer.orders.new(order_params)
       @vendors = current_customer.vendors
+
+      associate_user(@order)
 
       if @order.save
         set_order_session(@order)
@@ -52,6 +67,7 @@ module Spree
       @order = set_order_session
 
       if request.patch?
+        @order.item_count = @order.line_items.sum(:quantity)
         if (params[:commit] == Spree.t(:update))
           flash[:success] = "Your order has been successfully update!"
         elsif (params[:commit] == "Submit Order")
@@ -130,6 +146,7 @@ module Spree
       order = Spree::Order.friendly.find(params[:order_id])
       line_item = Spree::LineItem.find(params[:index])
       if line_item.destroy
+        order.item_count = order.line_items.sum(:quantity)
         order.update!
         flash[:success] = "Item Removed"
         redirect_to edit_order_url(order)
@@ -152,7 +169,8 @@ module Spree
     protected
 
     def order_params
-      params.require(:order).permit(:delivery_date, :vendor_id,
+      params.require(:order).permit(:delivery_date, :vendor_id, :user_id, :item_count,
+        :ship_address_id, :bill_address_id, :created_by_id, :state, :completed_at,
         line_items_attributes: [:quantity, :id])
     end
 
@@ -172,6 +190,13 @@ module Spree
       session[:order_id] = order.id
       session[:vendor_id] = order.vendor.id
       order
+    end
+
+    def associate_user(order)
+      order.user_id = current_spree_user.id
+      order.ship_address_id = current_spree_user.customer.ship_address_id
+      order.bill_address_id = current_spree_user.customer.ship_address_id
+      order.created_by_id = current_spree_user.id
     end
   end
  end

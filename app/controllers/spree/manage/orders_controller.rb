@@ -11,11 +11,20 @@ class OrdersController < Spree::Manage::BaseController
 		@current_customer_id = session[:customer_id]
 		session[:customer_id] = nil
 		@vendor = current_vendor
-		if @current_customer_id
-			@orders = @vendor.orders.where('customer_id = ?', @current_customer_id).order('delivery_date DESC')
-		else
-			@orders = @vendor.orders.order('delivery_date DESC')
-		end
+		# if @current_customer_id
+		# 	@orders = @vendor.orders.where('customer_id = ?', @current_customer_id).order('delivery_date DESC')
+		# else
+		# 	@orders = @vendor.orders.order('delivery_date DESC')
+		# end
+
+		if (params[:customer] && @vendor.customers.collect(&:name).include?(params[:customer][:name]))
+			@current_customer = Spree::Customer.find_by_name(params[:customer][:name])
+			@orders = @vendor.orders.where('customer_id = ?', @current_customer.id).order('delivery_date DESC')
+			session[:customer_id] = @current_customer.id
+	  else
+	     @orders = @vendor.orders.order('delivery_date DESC')
+	  end
+
     render :index
   end
 
@@ -30,6 +39,8 @@ class OrdersController < Spree::Manage::BaseController
   def create
 		@customers = current_vendor.customers
     @order = current_vendor.orders.new(order_params)
+
+		associate_user(@order)
 
     if @order.save!
 			set_order_session(@order)
@@ -59,11 +70,15 @@ class OrdersController < Spree::Manage::BaseController
 
 
 		if request.patch?
+			@order.item_count = @order.line_items.sum(:quantity)
 			if (params[:commit] == Spree.t(:update))
 				flash[:success] = "Your order has been successfully update!"
 			elsif (params[:commit] == "Approve Order")
+				@order.state = "complete"
+				@order.completed_at = Time.now
 				@order.approver_id = current_spree_user.id
 				@order.approved_at = Time.now
+				@order.user_id = @order.customer.users.first.id unless @order.user_id
 				flash[:success] = "Order Approved!"
 			elsif (params[:commit] == "Add Item" && @order.update(order_params))
 				@order.update!
@@ -118,6 +133,7 @@ class OrdersController < Spree::Manage::BaseController
 		order = Spree::Order.friendly.find(params[:order_id])
 		line_item = Spree::LineItem.find(params[:index])
 		if line_item.destroy
+			order.item_count = order.line_items.sum(:quantity)
 			order.update!
 			flash[:success] = "Item Removed"
 			redirect_to edit_manage_order_url(order)
@@ -140,7 +156,7 @@ class OrdersController < Spree::Manage::BaseController
   protected
 
   def order_params
-    self.params.require(:order).permit(:customer_id, :delivery_date,
+    self.params.require(:order).permit(:customer_id, :delivery_date, :item_count, :user_id, :state, :completed_at,
 			line_items_attributes: [:quantity, :id])
   end
 
@@ -157,6 +173,13 @@ class OrdersController < Spree::Manage::BaseController
 		session[:order_id] = order.id
 		session[:customer_id] = order.customer.id
 		order
+	end
+
+	def associate_user(order)
+		order.user_id = order.customer.users.first.id
+		order.ship_address_id = order.customer.ship_address_id
+		order.bill_address_id = order.customer.ship_address_id
+		order.created_by_id = order.user_id
 	end
 end
 
