@@ -28,3 +28,7 @@
   border: 1px solid #c70000;
   border-radius: 10px;
 }
+
+#login-errors {
+  text-align: center;
+}
