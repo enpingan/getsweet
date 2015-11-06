@@ -2,7 +2,7 @@ module Spree
 	module Manage
 
 class OrdersController < Spree::Manage::BaseController
-
+	helper_method :sort_column, :sort_direction
 	respond_to :js
 
 	before_action :ensure_vendor, only: [:show, :edit, :update, :destroy]
@@ -13,6 +13,7 @@ class OrdersController < Spree::Manage::BaseController
 		@vendor = current_vendor
 
 		@orders = filter_orders
+		@orders = @orders.order(sort_column + ' ' + sort_direction)
 		# if @current_customer_id
 		# 	@orders = @vendor.orders.where('customer_id = ?', @current_customer_id).order('delivery_date DESC')
 		# else
@@ -181,11 +182,11 @@ class OrdersController < Spree::Manage::BaseController
 	def filter_orders
 
 		@current_customer_id = session[:customer_id]
-		@orders = @vendor.orders.order('delivery_date DESC')
+		@orders = @vendor.orders
 
 		if (params[:customer] && @vendor.customers.collect(&:name).include?(params[:customer][:name]))
 			@current_customer = Spree::Customer.find_by_name(params[:customer][:name])
-			@orders = @vendor.orders.where('customer_id = ?', @current_customer.id).order('delivery_date DESC')
+			@orders = @vendor.orders.where('customer_id = ?', @current_customer.id)
 			session[:customer_id] = @current_customer.id
 	  end
 
@@ -193,6 +194,14 @@ class OrdersController < Spree::Manage::BaseController
 			@orders = @orders.where('delivery_date = ?', params[:date])
 		end
 		@orders
+	end
+
+	def sort_column
+		Spree::Product.column_names.include?(params[:sort]) ? params[:sort] : "delivery_date"
+	end
+
+	def sort_direction
+		%w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
 	end
 end
 

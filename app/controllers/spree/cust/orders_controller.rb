@@ -2,7 +2,7 @@ module Spree
  module Cust
   class OrdersController < Spree::Cust::CustomerHomeController
     respond_to :js
-
+    helper_method :sort_column, :sort_direction
     skip_before_action :verify_authenticity_token
 
     before_action :authorize_customer
@@ -12,6 +12,7 @@ module Spree
       @customer = current_customer
 
       @orders = filter_orders
+      @orders = @orders.order(sort_column + ' ' + sort_direction)
 
       render :index
     end
@@ -192,10 +193,10 @@ module Spree
     end
 
     def filter_orders
-      @orders = current_customer.orders.order('delivery_date DESC')
+      @orders = current_customer.orders
       if (params[:vendor] && @customer.vendors.collect(&:name).include?(params[:vendor][:name]))
   			@current_vendor = Spree::Vendor.find_by_name(params[:vendor][:name])
-  			@orders = @customer.orders.where('vendor_id = ?', @current_vendor.id).order('delivery_date DESC')
+  			@orders = @customer.orders.where('vendor_id = ?', @current_vendor.id)
   			session[:vendor_id] = @current_vendor.id
   	  end
 
@@ -204,6 +205,15 @@ module Spree
   		end
       @orders
     end
+
+    def sort_column
+      Spree::Product.column_names.include?(params[:sort]) ? params[:sort] : "delivery_date"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    end
+
   end
  end
 end
