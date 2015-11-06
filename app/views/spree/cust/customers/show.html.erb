@@ -7,7 +7,7 @@
 <div class="manage-customer">
   <section class="customer-account-info">
     <ul>
-      <li><strong>Current Balance:</strong> </li>
+      <li><strong>Current Balance:</strong> <%= number_to_currency(@balance) %></li>
       <li><strong>Past Due Balance:</strong></li>
       <!-- temporary terms -->
       <!-- <li><strong>Payment Terms:</strong> <%#= @vendor.payment_terms %> Days</li> -->
@@ -32,7 +32,7 @@
               <% unless @customer.ship_address.address2.nil? %>
                 <li><%= @customer.ship_address.address2 %></li>
               <% end %>
-              <li> <%= @customer.ship_address.city %>, 
+              <li> <%= @customer.ship_address.city %>,
                 <%= Spree::State.find(@customer.ship_address.state_id).abbr %>
                 <%= @customer.ship_address.zipcode %>
               </li>

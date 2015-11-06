@@ -15,6 +15,7 @@ module Spree
 
     def show
       @customer = spree_current_user.customer
+      @balance = @customer.orders.where('delivery_date > ?', 30.days.ago).sum('total')
 
     end
 
