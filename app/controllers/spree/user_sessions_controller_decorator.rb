@@ -5,6 +5,7 @@ Spree::UserSessionsController.class_eval do
   end
 
   def create
+    flash[:errors] = "Invalid Email/Password Combination!"
     redirect_to '/'
   end
 

@@ -18,6 +18,9 @@
     <div class="login-form-container">
 
       <form action="/login" method="post">
+        <div id="login-errors">
+          <%= flash[:errors] if flash[:errors] %>
+        </div>
         <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
 
         <input type="email" name=spree_user[email] placeholder="Email">
