@@ -1,6 +1,7 @@
 module Spree
  module Cust
   class VendorsController < Spree::Cust::CustomerHomeController
+    helper_method :sort_column, :sort_direction
     before_action :authorize_customer, only: [:show]
     def index
       @vendors = Vendor.all
@@ -14,7 +15,7 @@ module Spree
       @current_order = current_order
 
       @line_items = @current_order.line_items if @current_order
-      @products = @vendor.products
+      @products = @vendor.products.order(sort_column + ' ' + sort_direction)
       # @recent_orders = current_customer.orders.where('delivery_date > ? AND vendor_id = ?', 3.months.ago, @vendor.id)
       @recent_orders = current_customer.orders.where('vendor_id = ?', @vendor.id).order('updated_at DESC').order('delivery_date DESC').limit(5)
       # @products = @vendor.products.select {|product| product.promotional == true}
@@ -35,6 +36,14 @@ module Spree
         @current_vendor = Spree::Vendor.find(session[:vendor_id])
       end
         @current_vendor
+    end
+
+    def sort_column
+      Spree::Product.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
     end
 
   end

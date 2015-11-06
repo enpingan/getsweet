@@ -1377,6 +1377,19 @@ img{
 	display: table-row;
 	border-bottom: 1px solid #DADADA;
 }
+
+.order-product-list .tRow.header .cel .current {
+  padding-right: 30px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+.order-product-list .tRow.header .cel .asc {
+  background-image: url(<%= asset_path 'arrowup.png' %>);
+}
+
+.order-product-list .tRow.header .cel .desc {
+  background-image: url(<%= asset_path 'arrowdown.png' %>);
+}
 .order-product-list .tRow.header {
 	display: table-header-group;
 	background: #FCF9F6;

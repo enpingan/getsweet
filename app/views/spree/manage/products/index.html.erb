@@ -34,7 +34,9 @@
       <div class="cel">
       </div>
       <div class="cel">
-        <a href="" class="sort-name">Name <i class="fa fa-sort"></i></a>
+        <%#= link_to "Name", sort: "name" %>
+        <%= sortable "name" %>
+        <!-- <a href="" class="sort-name">Name <i class="fa fa-sort"></i></a> -->
       </div>
       <div class="cel">SKU
         <!-- <a href="" class="sort-sku">SKU <i class="fa fa-sort"></i></a> -->
@@ -46,7 +48,9 @@
         <!-- <a href="" class="sort-lead_time">Lead Time <i class="fa fa-sort"></i></a> -->
       </div>
       <div class="cel">
-        <a href="" class="sort-price">Price <i class="fa fa-sort"></i></a>
+        <%#= link_to "Price", sort: "price" %>
+        Price
+        <!-- <a href="" class="sort-price">Price <i class="fa fa-sort"></i></a> -->
       </div>
       <div class="cel">
         <% if @current_order %>
