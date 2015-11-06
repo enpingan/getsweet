@@ -207,7 +207,7 @@ module Spree
     end
 
     def sort_column
-      Spree::Product.column_names.include?(params[:sort]) ? params[:sort] : "delivery_date"
+      Spree::Order.column_names.include?(params[:sort]) ? params[:sort] : "delivery_date"
     end
 
     def sort_direction

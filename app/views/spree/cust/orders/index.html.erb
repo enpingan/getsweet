@@ -30,23 +30,27 @@
             <a href="" class="sort-name">Vendor <i class="fa fa-sort"></i></a>
           </div>
           <div class="cel">
-            <a href="" class="sort-name">Order # <i class="fa fa-sort"></i></a>
+            <%= sortable "number", "Order #" %>
+            <!-- <a href="" class="sort-name">Order # <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
             <%= sortable "delivery_date" %>
             <!-- <a href="" class="sort-date">Delivery Date<i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            <a href="" class="sort-sku">Total Items <i class="fa fa-sort"></i></a>
+            <%= sortable "item_count", "Total Items" %>
+            <!-- <a href="" class="sort-sku">Total Items <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            <a href="" class="sort-pack_size">Total <i class="fa fa-sort"></i></a>
+            <%= sortable "title" %>
+            <!-- <a href="" class="sort-pack_size">Total <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            <a href="" class="sort-lead_time">Status <i class="fa fa-sort"></i></a>
+            <% sortable "state", "Status" %>
+            <!-- <a href="" class="sort-lead_time">Status <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            <a href="" class="sort-price"></a>
+            
           </div>
           <div class="cel"></div>
         </div>
