@@ -12,8 +12,11 @@ module Spree
       @customer = current_customer
 
       @orders = filter_orders
-      @orders = @orders.order(sort_column + ' ' + sort_direction)
-
+      if params[:sort] && params[:sort] == 'spree_vendor.name'
+        @orders = @orders.order(sort_column + ' ' + sort_direction).references(:spree_vendors)
+      else
+        @orders = @orders.order(sort_column + ' ' + sort_direction)
+      end
       render :index
     end
 
@@ -207,7 +210,13 @@ module Spree
     end
 
     def sort_column
-      Spree::Order.column_names.include?(params[:sort]) ? params[:sort] : "delivery_date"
+      if Spree::Order.column_names.include?(params[:sort])
+        params[:sort]
+      elsif params[:sort] == "spree_vendor.name"
+        params[:sort]
+      else
+        "delivery_date"
+      end
     end
 
     def sort_direction
