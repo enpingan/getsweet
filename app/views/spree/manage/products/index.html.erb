@@ -61,27 +61,27 @@
     </div>
 
     <% @products.each do |product| %>
-      <%= form_for :order, html: {class: "tRow"}, url: populate_manage_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
+      <%= form_for :order, html: {class: "tRow product-list-item"}, url: populate_manage_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
 				<% url = spree.product_url(product) %>
 
           <div class="cel">
             <%= link_to small_image(product, itemprop: "image"), manage_product_url(product), itemprop: 'url' %><br/>
           </div>
-          <div class="cel">
-            <a href="<%= manage_product_url(product) %>"><%= product.name %></a>
-          </div>
-          <div class="cel">
-            <%= product.sku %>
-          </div>
-          <div class="cel sort-pack_size">
-            Each
-          </div>
-          <div class="cel sort-lead_time">
-            1 day
-          </div>
-          <div class="cel sort-price">
-            <%= number_to_currency(product.price) %>
-          </div>
+          <!-- <div class="cel"> -->
+            <a href="<%= manage_product_url(product) %>" class="cel"><%= product.name %></a>
+          <!-- </div> -->
+          <!-- <div class="cel"> -->
+            <a href="<%= manage_product_url(product) %>" class="cel"><%= product.sku %></a>
+          <!-- </div> -->
+          <!-- <div class="cel sort-pack_size"> -->
+            <a href="<%= manage_product_url(product) %>" class="cel sort-pack_size">Each</a>
+          <!-- </div> -->
+          <!-- <div class="cel sort-lead_time"> -->
+            <a href="<%= manage_product_url(product) %>" class="cel sort-lead_time">1 day</a>
+          <!-- </div> -->
+          <!-- <div class="cel sort-price"> -->
+            <a href="<%= manage_product_url(product) %>" class="cel sort-price"><%= number_to_currency(product.price) %></a>
+          <!-- </div> -->
           <div class="mobile-divider"></div>
           <div class="cel">
             <% if @current_order %>
