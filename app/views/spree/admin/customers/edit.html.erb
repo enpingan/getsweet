@@ -1,7 +1,8 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:editing_resource, resource: Spree::Customer.model_name.human) %>
+  <%#= Spree.t(:editing_resource, resource: Spree::Customer.model_name.human) %>
 <% end %>
 
+<%= render partial: 'spree/admin/shared/customer_tabs', locals: {current: :details} %>
 <%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @customer } %>
 
 <%= form_for [:admin, @customer] do |f| %>

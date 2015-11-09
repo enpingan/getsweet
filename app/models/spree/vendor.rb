@@ -23,6 +23,8 @@ module Spree
 	  has_and_belongs_to_many :customers, join_table: :spree_customers_vendors
 	  has_one :address
 
+		has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Spree::VendorImage"
+
 
 	  extend FriendlyId
 			friendly_id :name, use: [:slugged, :finders]
