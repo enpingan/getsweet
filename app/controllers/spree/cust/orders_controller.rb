@@ -13,7 +13,7 @@ module Spree
 
       @orders = filter_orders
       if params[:sort] && params[:sort] == 'spree_vendor.name'
-        @orders = @orders.order(sort_column + ' ' + sort_direction)
+        @orders = @orders.includes(:vendor).order('name '+ sort_direction).references(:spree_vendors)
       else
         @orders = @orders.order(sort_column + ' ' + sort_direction)
       end
