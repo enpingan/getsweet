@@ -9,6 +9,12 @@
 <h3><%= @products.count %> Items Available </h3>
 <div id="order-form">
 
+<% if @current_customer && @current_order%>
+  <h3> Customer: <a href="manage_customer_url(@current_customer)"><%= @current_customer.name %></a></h3>
+  <h3> Delivery Date: <%= @current_order.delivery_date.to_date.to_formatted_s(:long) %></h3>
+  <h3 id="current-order">Order: <a href="<%= edit_manage_order_url(@current_order) %>">#<%= @current_order.number %></a></h3>
+<% end %>
+<br>
 <div class="liveFilterContainer">
   <label>Search
     <input type="text" class="liveFilterInput default" placeholder="Product name or sku" />
@@ -18,16 +24,7 @@
 </div>
 <div class="noResults"><strong>Sorry.</strong> There is no match for your filter; please try again.</div>
 
-  <% if @current_customer && @current_order%>
-    <h3> Customer:<a href="manage_customer_url(@current_customer)"><%= @current_customer.name %></a></h3>
-    <h3> Delivery Date: <%= @current_order.delivery_date.to_date.to_formatted_s(:long) %></h3>
-  <% end %>
-<%#= form_for ([:manage, @order]) do |f| %>
-  <%#= f.date_field :delivery_date, placeholder: "Delivery Date" %>
-<%# end %>
-<% if @current_order %>
-  <h3 id="current-order">Order: <a href="<%= edit_manage_order_url(@current_order) %>">#<%= @current_order.number %></a></h3>
-<% end %>
+
   <div class="order-product-list liveFilterList">
 
     <div class="tRow header">
@@ -35,7 +32,7 @@
       </div>
       <div class="cel">
         <%#= link_to "Name", sort: "name" %>
-        <%= sortable "name" %>
+        <%= sortable "name", "Product" %>
         <!-- <a href="" class="sort-name">Name <i class="fa fa-sort"></i></a> -->
       </div>
       <div class="cel">SKU
