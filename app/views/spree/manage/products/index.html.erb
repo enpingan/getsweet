@@ -65,7 +65,7 @@
 				<% url = spree.product_url(product) %>
 
           <div class="cel">
-            <%= link_to small_image(product, itemprop: "image"), url, itemprop: 'url' %><br/>
+            <%= link_to small_image(product, itemprop: "image"), manage_product_url(product), itemprop: 'url' %><br/>
           </div>
           <div class="cel">
             <a href="<%= manage_product_url(product) %>"><%= product.name %></a>
