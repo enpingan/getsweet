@@ -17,13 +17,24 @@
       </form>
 
 
-      <form id="search-form">
+<% if nil %> 
+<!-- in progress code for activating search -->
+			<%= search_form_for [:manage, @search] do |f| %>
+				<div class="form-group">
+        	<%= label_tag :q_number_cont, Spree.t(:order_number, :number => '') %>
+          <%= f.text_field :number_cont, class: 'form-control js-quick-search-target' %>
+        </div>
+				<%= button Spree.t(:filter_results), 'search' %>
+			<% end %>
+
+      <!--<form id="search-form">
         <label>Search:</label>
-        <input type="text" placeholder="Search Products">
+        <input type="text" placeholder="Search Order #">
         <input type="submit" value="Search">
-      </form>
+      </form>-->
 
 
+<% end %>
 
           <!-- <div id="date-form">
             <label>Delivery Date:</label>

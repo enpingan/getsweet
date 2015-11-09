@@ -23,7 +23,7 @@ module Spree
       @customer = spree_current_user.customer
       session[:customer_id] = @customer.id
       if @customer.update(customer_params)
-        flash[:success] = "Customer has been update!"
+        flash[:success] = "Customer has been updated!"
         redirect_to account_url
       else
         flash[:errors] = @customer.errors.full_messages

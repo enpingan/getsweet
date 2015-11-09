@@ -15,13 +15,18 @@
         <input type="date" name=date>
         <input type="submit" value="Filter">
       </form>
+
+<% if nil %>
+<!-- temporary removal of search
       <form id="search-form">
         <label>Search:</label>
-        <input type="text" placeholder="Search Products">
+        <input type="text" placeholder="Search Order #">
         <input type="submit" value="Search">
       </form>
       <div class="clear"></div>
     </div>
+		-->
+<% end %>
 
     <form action="#" id="orders-list-form">
       <div class="orders-list-table">

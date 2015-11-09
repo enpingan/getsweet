@@ -39,7 +39,7 @@ body {
  div.root-page {
    min-height: 100%;
    background-color: indigo;
-   color: #F57E20;
+   color: black;
  }
 
  .splash-logo, .login-form-container {
