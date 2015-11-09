@@ -7,12 +7,15 @@ module Spree
 
   def index
     @vendor = current_vendor
-
     @current_customer = current_customer
-
     @current_order = current_order
 
-    @products = @vendor.products.order(sort_column + ' ' + sort_direction)
+    if params[:sort] && params[:sort] == 'price'
+      @products = sort_direction == 'asc' ? @vendor.products.ascend_by_master_price : @vendor.products.descend_by_master_price
+    else
+      @products = @vendor.products.order(sort_column + ' ' + sort_direction)
+    end
+
     render :index
   end
 
@@ -96,7 +99,7 @@ module Spree
   end
 
   def sort_column
-    Spree::Product.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    (Spree::Product.column_names.include?(params[:sort]) || params[:sort] == 'price') ? params[:sort] : "name"
   end
 
   def sort_direction

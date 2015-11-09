@@ -15,10 +15,15 @@ module Spree
       @current_order = current_order
 
       @line_items = @current_order.line_items if @current_order
-      @products = @vendor.products.order(sort_column + ' ' + sort_direction)
-      # @recent_orders = current_customer.orders.where('delivery_date > ? AND vendor_id = ?', 3.months.ago, @vendor.id)
+
+      if params[:sort] && params[:sort] == 'price'
+        @products = sort_direction == 'asc' ? @vendor.products.ascend_by_master_price : @vendor.products.descend_by_master_price
+      else
+        @products = @vendor.products.order(sort_column + ' ' + sort_direction)
+      end
+
       @recent_orders = current_customer.orders.where('vendor_id = ?', @vendor.id).order('updated_at DESC').order('delivery_date DESC').limit(5)
-      # @products = @vendor.products.select {|product| product.promotional == true}
+
     end
 
     private
@@ -39,7 +44,7 @@ module Spree
     end
 
     def sort_column
-      Spree::Product.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      (Spree::Product.column_names.include?(params[:sort]) || params[:sort] == 'price') ? params[:sort] : "name"
     end
 
     def sort_direction
