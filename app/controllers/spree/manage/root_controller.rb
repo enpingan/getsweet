@@ -70,21 +70,8 @@ module Spree
 
 			# http://jsfiddle.net/gh/get/jquery/1.9.1/highslide-software/highcharts.com/tree/master/samples/highcharts/demo/column-drilldown/
 			def build_sales_bar_chart
-        c1 = current_vendor.customers.find(1)
-        c1_total = c1.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
 
-        c2 = current_vendor.customers.find(2)
-        c2_total = c2.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
-
-        c3 = current_vendor.customers.find(3)
-        c3_total = c3.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
-
-        c4 = current_vendor.customers.find(4)
-        c4_total = c4.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
-
-        c5 = current_vendor.customers.find(5)
-        c5_total = c5.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
-
+        customers = top_customers
 
 				@customer_sales_bar_chart = LazyHighCharts::HighChart.new('graph') do |f|
   				f.chart({:type=>"column", :className=>"bar active"})
@@ -93,30 +80,20 @@ module Spree
 						name: "Customers",
             colorByPoint: true,
             data: [{
-                name: c1.name,
-                y: c1_total.to_i,
-                #drilldown: "Microsoft Internet Explorer"
-                #drilldown: null
+                name: Spree::Customer.find(customers[0][0]).name, #customer name
+                y: customers[0][1].to_i, #customer annual sales in whole dollars
             }, {
-                name: c2.name,
-                y: c2_total.to_i,
-                #drilldown: "Chrome"
-                #drilldown: null
+                name: Spree::Customer.find(customers[1][0]).name,
+                y: customers[1][1].to_i,
             }, {
-              name: c3.name,
-              y: c3_total.to_i,
-                #drilldown: "Firefox"
-                #drilldown: null
+                name: Spree::Customer.find(customers[2][0]).name,
+                y: customers[2][1].to_i,
             }, {
-                name: c4.name,
-                y: c4_total.to_i,
-                #drilldown: "Safari"
-                #drilldown: null
+                name: Spree::Customer.find(customers[3][0]).name,
+                y: customers[3][1].to_i,
             }, {
-                name: c5.name,
-                y: c5_total.to_i,
-                #drilldown: "Opera"
-                #drilldown: null
+                name: Spree::Customer.find(customers[4][0]).name,
+                y: customers[4][1].to_i,
             }]
         	)
 
@@ -125,20 +102,7 @@ module Spree
 
 			# http://jsfiddle.net/gh/get/jquery/1.7.2/highslide-software/highcharts.com/tree/master/samples/highcharts/demo/pie-basic/
 			def build_sales_pie_chart
-        c1 = current_vendor.customers.find(1)
-        c1_total = c1.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
-
-        c2 = current_vendor.customers.find(2)
-        c2_total = c2.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
-
-        c3 = current_vendor.customers.find(3)
-        c3_total = c3.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
-
-        c4 = current_vendor.customers.find(4)
-        c4_total = c4.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
-
-        c5 = current_vendor.customers.find(5)
-        c5_total = c5.orders.where("delivery_date > ? AND vendor_id = ?", 1.year.ago, current_vendor.id).sum(:total)
+        customers = top_customers
 
 				@customer_sales_pie_chart = LazyHighCharts::HighChart.new('graph') do |f|
   				f.chart({:type=>"pie", :className=>"pie", margin: [30,30,70,30]})
@@ -163,36 +127,30 @@ module Spree
 						name: "Customers",
             colorByPoint: true,
             data: [{
-                name: c1.name,
-                y: c1_total.to_i,
-                #drilldown: "Microsoft Internet Explorer"
-                #drilldown: null
+                name: Spree::Customer.find(customers[0][0]).name, #customer name
+                y: customers[0][1].to_i, #customer annual sales in whole dollars
             }, {
-                name: c2.name,
-                y: c2_total.to_i,
-                #drilldown: "Chrome"
-                #drilldown: null
+                name: Spree::Customer.find(customers[1][0]).name,
+                y: customers[1][1].to_i,
             }, {
-              name: c3.name,
-              y: c3_total.to_i,
-                #drilldown: "Firefox"
-                #drilldown: null
+                name: Spree::Customer.find(customers[2][0]).name,
+                y: customers[2][1].to_i,
             }, {
-                name: c4.name,
-                y: c4_total.to_i,
-                #drilldown: "Safari"
-                #drilldown: null
+                name: Spree::Customer.find(customers[3][0]).name,
+                y: customers[3][1].to_i,
             }, {
-                name: c5.name,
-                y: c5_total.to_i,
-                #drilldown: "Opera"
-                #drilldown: null
+                name: Spree::Customer.find(customers[4][0]).name,
+                y: customers[4][1].to_i,
             }]
         	)
 				end
 			end
 
       protected
+
+      def top_customers
+        @customers ||= customers = Spree::Vendor.first.orders.where('delivery_date > ?', 1.year.ago).group('customer_id').sum(:total).sort_by{|k, v| v}.reverse[0...5]
+      end
 
       def manage_root_redirect_path
         # spree.manage_products_path
