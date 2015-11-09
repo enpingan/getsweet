@@ -18,8 +18,8 @@
 
 								<div class="clear"></div>
 								<div class="average-price">
-									<div>$10.000 <i class="fa fa-arrow-up"></i></div>
-									<div>My Average: $8.000</div>
+									<div> <%= number_to_currency(@average * 0.15) %> <i class="fa fa-arrow-up"></i></div>
+									<div>My Average: <%= number_to_currency(@average) %></div>
 								</div>
 
 								<div class="clear"></div>

@@ -14,6 +14,8 @@ module Spree
 				build_sales_line_chart
 				build_sales_bar_chart
 				build_sales_pie_chart
+        #monthly average over 1 year period
+        @average = @vendor.orders.where('delivery_date > ?', 1.year.ago).sum("total")/ 12.0
         render :overview
       end
 
