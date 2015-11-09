@@ -13,12 +13,11 @@ class OrdersController < Spree::Manage::BaseController
 		@vendor = current_vendor
 
 		@orders = filter_orders
-		@orders = @orders.order(sort_column + ' ' + sort_direction)
-		# if @current_customer_id
-		# 	@orders = @vendor.orders.where('customer_id = ?', @current_customer_id).order('delivery_date DESC')
-		# else
-		# 	@orders = @vendor.orders.order('delivery_date DESC')
-		# end
+		if params[:sort] && params[:sort] == 'spree_customer.name'
+			@orders = @orders.includes(:customer).order('name '+ sort_direction).references(:spree_customers)
+		else
+			@orders = @orders.order(sort_column + ' ' + sort_direction)
+		end
 
 
 
@@ -197,7 +196,13 @@ class OrdersController < Spree::Manage::BaseController
 	end
 
 	def sort_column
-		Spree::Order.column_names.include?(params[:sort]) ? params[:sort] : "delivery_date"
+		if Spree::Order.column_names.include?(params[:sort])
+			params[:sort]
+		elsif params[:sort] == "spree_customer.name"
+			params[:sort]
+		else
+			"delivery_date"
+		end
 	end
 
 	def sort_direction
