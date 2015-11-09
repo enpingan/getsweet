@@ -34,23 +34,29 @@
       <div class="cel">
       </div>
       <div class="cel">
-        <a href="" class="sort-name">Name <i class="fa fa-sort"></i></a>
+        <%#= link_to "Name", sort: "name" %>
+        <%= sortable "name" %>
+        <!-- <a href="" class="sort-name">Name <i class="fa fa-sort"></i></a> -->
+      </div>
+      <div class="cel">SKU
+        <!-- <a href="" class="sort-sku">SKU <i class="fa fa-sort"></i></a> -->
+      </div>
+      <div class="cel">Pack/Size
+        <!-- <a href="" class="sort-pack_size">Pack/Size <i class="fa fa-sort"></i></a> -->
+      </div>
+      <div class="cel">Lead Time
+        <!-- <a href="" class="sort-lead_time">Lead Time <i class="fa fa-sort"></i></a> -->
       </div>
       <div class="cel">
-        <a href="" class="sort-sku">SKU <i class="fa fa-sort"></i></a>
-      </div>
-      <div class="cel">
-        <a href="" class="sort-pack_size">Pack/Size <i class="fa fa-sort"></i></a>
-      </div>
-      <div class="cel">
-        <a href="" class="sort-lead_time">Lead Time <i class="fa fa-sort"></i></a>
-      </div>
-      <div class="cel">
-        <a href="" class="sort-price">Price <i class="fa fa-sort"></i></a>
+        <%#= link_to "Price", sort: "price" %>
+        <%= sortable "price" %>
+
+        <!-- <a href="" class="sort-price">Price <i class="fa fa-sort"></i></a> -->
       </div>
       <div class="cel">
         <% if @current_order %>
-          <a href="" class="sort-qty">Quantity <i class="fa fa-sort"></i></a>
+        Quantity
+          <!-- <a href="" class="sort-qty">Quantity <i class="fa fa-sort"></i></a> -->
         <% end %>
       </div>
       <div class="cel">

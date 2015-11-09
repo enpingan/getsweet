@@ -2,20 +2,20 @@ module Spree
   module Manage
 
 	class ProductsController < Spree::Manage::BaseController
-
+    helper_method :sort_column, :sort_direction
     before_action :ensure_vendor, only: [:show, :edit, :update, :destroy]
 
   def index
     @vendor = current_vendor
-    #@vendor = Vendor.find(params[:vendor_id])
-    #@products = @vendor.products
-    # @vendor = Vendor.first
     @current_customer = current_customer
-
     @current_order = current_order
 
-    # @products = Spree::Product.all
-    @products = @vendor.products
+    if params[:sort] && params[:sort] == 'price'
+      @products = sort_direction == 'asc' ? @vendor.products.ascend_by_master_price : @vendor.products.descend_by_master_price
+    else
+      @products = @vendor.products.order(sort_column + ' ' + sort_direction)
+    end
+
     render :index
   end
 
@@ -96,6 +96,14 @@ module Spree
       @current_customer = Spree::Customer.find(session[:customer_id])
     end
       @current_customer
+  end
+
+  def sort_column
+    (Spree::Product.column_names.include?(params[:sort]) || params[:sort] == 'price') ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
   end
 
     # if session[:order_id]

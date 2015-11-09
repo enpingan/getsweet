@@ -48,25 +48,33 @@
       <div class="orders-list-table">
         <div class="tRow header">
           <div class="cel">
-            <a href="" class="sort-name">Customer <i class="fa fa-sort"></i></a>
+            <%#= sortable "customer_id" %>
+            <%= sortable "spree_customer.name", "Customer" %>
+            <!-- <a href="" class="sort-name">Customer <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            <a href="" class="sort-name">Order # <i class="fa fa-sort"></i></a>
+            <%= sortable "number", "Order #" %>
+            <!-- <a href="" class="sort-name">Order # <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            <a href="" class="sort-name">Delivery Date<i class="fa fa-sort"></i></a>
+            <%= sortable "delivery_date" %>
+            <!-- <a href="" class="sort-name">Delivery Date<i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            <a href="" class="sort-sku">Total Items <i class="fa fa-sort"></i></a>
+            <%= sortable "item_count", "Total Items" %>
+            <!-- <a href="" class="sort-sku">Total Items <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            <a href="" class="sort-pack_size">Total <i class="fa fa-sort"></i></a>
+            <%= sortable "total" %>
+            <!-- <a href="" class="sort-pack_size">Total <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            <a href="" class="sort-lead_time">Status <i class="fa fa-sort"></i></a>
+            <%= sortable "state", "Status" %>
+            <!-- <a href="" class="sort-lead_time">Status <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            <a href="" class="sort-price">Approve <i class="fa fa-sort"></i></a>
+            Approve
+            <!-- <a href="" class="sort-price">Approve <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel"></div>
         </div>

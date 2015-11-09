@@ -8,8 +8,8 @@
 <div class="manage-customer">
   <section class="customer-account-info">
     <ul>
-      <li><strong>Current Balance:</strong> </li>
-      <li><strong>Past Due Balance:</strong></li>
+      <li><strong>Current Balance:</strong> <%= number_to_currency(@balance) %></li>
+      <li><strong>Past Due Balance:</strong> $0.00</li>
       <!-- temporary terms -->
       <li><strong>Payment Terms:</strong> <%= @vendor.payment_terms %> Days</li>
       <a href=" <%= manage_orders_url %>" class="nav-btn">Orders</a>

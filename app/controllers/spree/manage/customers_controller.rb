@@ -14,6 +14,8 @@ module Spree
 				@vendor = current_vendor
         @customer = Spree::Customer.find(params[:id])
         session[:customer_id] = @customer.id
+        # stub balance for demo
+        @balance = @customer.orders.where('delivery_date > ?', 30.days.ago).sum('total')
         render :show
       end
 
