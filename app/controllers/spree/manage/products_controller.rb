@@ -58,7 +58,7 @@ module Spree
 
   def update
     @product = Spree::Product.friendly.find(params[:id])
-
+    @vendor = current_vendor
     if @product.update(product_params)
       flash[:success] = "Product has been updated!"
       redirect_to manage_product_url
@@ -71,8 +71,8 @@ module Spree
   protected
 
   def product_params  #Add more permissions
-    params.require(:product).permit(:name, :description, :sku, :price,
-      variants_attributes: [:price])
+    params.require(:product).permit(:name, :description, master_attributes: [:sku, :price, :id],
+      variants_attributes: [:sku, :price, :id])
   end
 
   def ensure_vendor
