@@ -6,7 +6,7 @@
 <div class="clear"></div>
 <!-- <input type="text" placeholder="Product name or sku"></input>
 <button class="search">Search</button> -->
-<h3><%= @products.count %> Items Available </h3>
+<h3><%= @products.count %> Items Available | <a href="<%= new_manage_product_url %>" class="add-new-product-btn">List a New Product</a></h3>
 <div id="order-form">
 
 <% if @current_customer && @current_order%>
@@ -114,5 +114,6 @@
 
 <div class="shadow"></div>
 <div class="clear"></div>
+
 <%# end %>
 <%= javascript_include_tag "spree/product_search" %>

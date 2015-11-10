@@ -29,7 +29,7 @@ module Spree
   def create
     @vendor = current_vendor
     @product = current_vendor.products.new(product_params)
-
+    @product.shipping_category_id ||= 1 #default value required to create new product
     if @product.save
       flash[:success] = "New product added!"
       redirect_to manage_products_url
