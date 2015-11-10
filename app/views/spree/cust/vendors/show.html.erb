@@ -83,27 +83,27 @@
 			</div>
 
       <% @products.each do |product| %>
-				<%= form_for :order, html: {class: "tRow"}, url: populate_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
-					<% url = spree.product_url(product) %>
+				<%= form_for :order, html: {class: "tRow product-list-item"}, url: populate_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
+					<% url = vendor_product_url(@vendor, product) %>
 
 						<div class="cel">
 							<%= link_to small_image(product, itemprop: "image"), url, itemprop: 'url' %><br/>
 						</div>
-						<div class="cel">
-							<a href="<%= vendor_product_url(@vendor, product) %>"><%= product.name %></a>
-						</div>
-						<div class="cel">
-							<%= product.sku %>
-						</div>
-						<div class="cel sort-pack_size">
-							Each
-						</div>
-						<div class="cel sort-lead_time">
-							1 day
-						</div>
-						<div class="cel sort-price">
-							<%= number_to_currency(product.price) %>
-						</div>
+						<!-- <div class="cel"> -->
+							<a href="<%= url %>" class="cel"><%= product.name %></a>
+						<!-- </div> -->
+						<!-- <div class="cel"> -->
+							<a href="<%= url %>" class="cel"><%= product.sku %></a>
+						<!-- </div> -->
+						<!-- <div class="cel sort-pack_size"> -->
+							<a href="<%= url %>" class="cel sort-pack_size">Each</a>
+						<!-- </div> -->
+						<!-- <div class="cel sort-lead_time"> -->
+							<a href="<%= url %>" class="cel sort-lead_time">1 day</a>
+						<!-- </div> -->
+						<!-- <div class="cel sort-price"> -->
+							<a href="<%= url %>" class="cel sort-price"><%= number_to_currency(product.price) %></a>
+						<!-- </div> -->
 						<div class="mobile-divider"></div>
 
 						<% if @current_order %>
