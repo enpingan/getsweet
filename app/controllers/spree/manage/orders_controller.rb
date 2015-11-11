@@ -36,16 +36,21 @@ class OrdersController < Spree::Manage::BaseController
 		@customers = current_vendor.customers
     @order = current_vendor.orders.new(order_params)
 
-		associate_user(@order)
+		if @order.customer.users.count == 0
+			flash[:error] = "You cannont create an order for a customer with no users."
+			render :new and return
+		else
+			associate_user(@order)
 
-    if @order.save!
-			set_order_session(@order)
-			flash[:success] = "You've started a new order!"
-      redirect_to manage_products_url
-    else
-      flash[:errors] = @order.errors.full_messages
-      render :new
-    end
+	    if @order.save!
+				set_order_session(@order)
+				flash[:success] = "You've started a new order!"
+	      redirect_to manage_products_url
+	    else
+	      flash[:errors] = @order.errors.full_messages
+	      render :new
+	    end
+		end
   end
 
   def show
