@@ -9,6 +9,9 @@
 
       <form id="filter-form">
         <%= select(:customer, :name) do%>
+          <% if @current_customer_id %>
+            <option value="<%= @current_customer_id %>"><%= Spree::Customer.find(@current_customer_id).name %></option>
+          <% end %>
           <option value="all">All</option>
           <%= options_for_select (@vendor.customers.collect(&:name)) %>
         <% end %>
@@ -17,7 +20,7 @@
       </form>
 
 
-<% if nil %> 
+<% if nil %>
 <!-- in progress code for activating search -->
 			<%= search_form_for [:manage, @search] do |f| %>
 				<div class="form-group">
