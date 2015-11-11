@@ -59,9 +59,15 @@ module Spree
   def update
     @product = Spree::Product.friendly.find(params[:id])
     @vendor = current_vendor
+    if params[:commit] == 'Add Variant'
+      @product.variants.create!
+      render :edit and return
+    end
+
+
     if @product.update(product_params)
       flash[:success] = "Product has been updated!"
-      redirect_to manage_product_url
+      redirect_to manage_product_url(@product)
     else
       flash[:errors] = @product.errors.full_messages
       render :edit
