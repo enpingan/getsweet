@@ -20,6 +20,11 @@
   <%= f.number_field :account_id %>
 </div>
 
+<div class="field">
+  <%= f.label :email %><br />
+  <%= f.email_field :email %>
+</div>
+
 <%= f.fields_for :ship_address do |sa_form| %>
 
   <%= render partial: 'spree/cust/customers/address_form', locals: { f: sa_form, type: 'shipping' } %>
