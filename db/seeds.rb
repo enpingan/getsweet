@@ -44,7 +44,7 @@ u3.save!
 u4 = Spree::User.create(email: 'mary_chika@sweetist.co', firstname: 'Mary', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 4, password: 'password')
 u4.spree_roles << vendor
 u4.save!
-u5 = Spree::User.create(email: 'bill_bakery@sweetist.co', firstname: 'Bill', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 5, password: 'password')
+u5 = Spree::User.create(email: 'pain_davignon@getsweet.co', firstname: 'Joanne', lastname: Faker::Name.last_name, phone: Faker::PhoneNumber.phone_number, vendor_id: 5, password: 'password')
 u5.spree_roles << vendor
 u5.save!
 
@@ -68,7 +68,7 @@ v1 = Spree::Vendor.create(name: 'Dough Donuts', order_cutoff_time: '5PM', delive
 v2 = Spree::Vendor.create(name: 'Ceci Cela', order_cutoff_time: '6PM', delivery_minimum: 10.0, payment_terms: 30)
 v3 = Spree::Vendor.create(name: 'Canele by Celine', order_cutoff_time: '8PM', delivery_minimum: 10.0, payment_terms: 0)
 v4 = Spree::Vendor.create(name: "Chikalicious", order_cutoff_time: '9PM', delivery_minimum: 10.0, payment_terms: 15)
-v5 = Spree::Vendor.create(name: "Billy's Bakery", order_cutoff_time: '5PM', delivery_minimum: 10.0, payment_terms: 45)
+v5 = Spree::Vendor.create(name: "Pain D'Avignon", order_cutoff_time: '5PM', delivery_minimum: 10.0, payment_terms: 45)
 
 c6 = Spree::Customer.create(name: "Creek Side Cafe", account_id: 47584, email: "contact_creekside@sweetist.co")
 c7 = Spree::Customer.create(name: "W Hotel", account_id: 85893, email: "contact_whotel@sweetist.co")
@@ -949,28 +949,28 @@ end
 end
 
 ###############################################################################
-# Vendor 5 - Billy's Bakery :Products, Variants, Orders > Li
+# Vendor 5 - Pain D'Avignon :Products, Variants, Orders > Li
 ###############################################################################
-p1 = v5.products.create(name: "Blueberry Pie", price: 6.00, shipping_category_id: 1, available_on: available_date,
-  description: "Rich blueberry filling in a buttery crust.")
-p2 = v5.products.create(name: "Chocolate Fudge Brownie", price: 3.25, shipping_category_id: 1, available_on: available_date,
-  description: "Rich and fudgy deep chocolate brownies.")
-p3 = v5.products.create(name: "Yellow Daisy Cake with Chocolate Buttercream", price: 45.00, shipping_category_id: 1, available_on: available_date,
-  description: "Classic yellow butter cake flavored with chocolate buttercream.")
-p4 = v5.products.create(name: "Pecan Pear Hand Pie", price: 3.00, shipping_category_id: 1, available_on: available_date,
-  description: "Delicious Pear cookie with pecans.")
-p5 = v5.products.create(name: "Gingerbread Cupcake", price: 3.50, shipping_category_id: 1, available_on: available_date,
-  description: "Gingerbread batter with a cream cheese frosting")
-p6 = v5.products.create(name: "Yellow Daisy Cupcake with Vanilla Buttercream", price: 3.50, shipping_category_id: 1, available_on: available_date,
-  description: "Classic yellow butter cake flavored with pure vanilla extract.")
-p7 = v5.products.create(name: "German Chocolate Cupcake", price: 3.50, shipping_category_id: 1, available_on: available_date,
-  description: "Sweet buttermilk chocolate cake with coconut pecan topping.")
-p8 = v5.products.create(name: "Nutella Cheesecake", price: 30.00, shipping_category_id: 1, available_on: available_date,
-  description: "Classic Nutella flavored")
-p9 = v5.products.create(name: "Banana Cream Pie", price: 26, shipping_category_id: 1, available_on: available_date,
-  description: "Fresh banana slices layered with vanilla pudding and topped with whipped cream.")
-p10 = v5.products.create(name: "Chocolate Chip Cookie Sandwich", price: 2.50, shipping_category_id: 1, available_on: available_date,
-  description: "Buttercream icing sandwiched between homestyle cookies.")
+p1 = v5.products.create(name: "Hamburger Buns", price: 6.00, shipping_category_id: 1, available_on: available_date,
+  description: "Very soft, with a thin, bubbly crust which locks in juicy burgers and sauces, and a light, regular crumb, with a mild saltiness.")
+p2 = v5.products.create(name: "Specialty Loaves", price: 3.25, shipping_category_id: 1, available_on: available_date,
+  description: "In addition to the many standard shapes and sizes, we offer special holiday loaves, and special events loaves (such as 6-foot sandwich bread.) If you have a special event or need bread for a special showcase or breadbasket, contact us and we’ll see how we can help you.")
+p3 = v5.products.create(name: "Raisin-Pecan", price: 45.00, shipping_category_id: 1, available_on: available_date,
+  description: "A regular dense and moist crumb full of raisins and pecans, slightly sweet, baked to a dark crusty brown.")
+p4 = v5.products.create(name: "Picholine Olive", price: 3.00, shipping_category_id: 1, available_on: available_date,
+  description: "A soft, open, airy crumb, filled with picholine olives and a little bit of fresh rosemary, matched with a soft, bubbly crust with just a bit of crunch.")
+p5 = v5.products.create(name: "White French", price: 3.50, shipping_category_id: 1, available_on: available_date,
+  description: "A light white loaf made for slicing, similar to the White French Baguette in flavor, but with a denser, more regular crumb and a crust which crackles.")
+p6 = v5.products.create(name: "Honey Whole Wheat", price: 3.50, shipping_category_id: 1, available_on: available_date,
+  description: "A light whole wheat loaf made for slicing, with a dense, regular crumb ideal for sandwiches, a slight wheat flavor and a very light crust.")
+p7 = v5.products.create(name: "Somun", price: 3.50, shipping_category_id: 1, available_on: available_date,
+  description: "A soft and light crumb and crust, very spongy, with a touch of olive oil.")
+p8 = v5.products.create(name: "Sourdough", price: 30.00, shipping_category_id: 1, available_on: available_date,
+  description: "All white-flour sourdough bread with very thin but durable crust, baked to a rich golden brown, a light semi-regular crumb and a pleasantly sour taste and smell.")
+p9 = v5.products.create(name: "Pane Francese", price: 26, shipping_category_id: 1, available_on: available_date,
+  description: "Similar to ciabatta, but made with sourdough starter, a very open, moist irregular crumb, very soft, almost waxy, and a slightly thicker crust, baked to a dark-golden brown. A slightly sour and salty taste.")
+p10 = v5.products.create(name: "Kalamata Olive", price: 2.50, shipping_category_id: 1, available_on: available_date,
+  description: "A light, colorful crumb, speckled with kalamata olives and a floured, golden, crust. This bread smells deeply of the olives, and the subtle sourness they impart on the bread.")
 
   p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
   p2.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
