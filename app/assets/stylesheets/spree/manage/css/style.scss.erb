@@ -405,7 +405,7 @@ img{
 }
 .app_ui-wrapper aside{
 	position: fixed;
-	top: 52;
+	top: 52px;
 	left: 0;
 	width: 0;
 	// min-height: 100%;
@@ -422,6 +422,9 @@ img{
 	-o-transition: all 0.17s ease;
 	transition: all 0.17s ease;
 }
+.app_ui-wrapper aside.active.active-tablet{
+	overflow-y: auto;
+}
 // .app_ui-wrapper aside::after {
 //     content: "";
 //     height: 2000px;
@@ -437,6 +440,8 @@ img{
 	width: 270px;
 	height: auto;
 	background: #4C4743;
+	top: 52px;
+	bottom: 0;
 }
 .app_ui-wrapper .app_ui-block{
 	padding: 30px;
@@ -2595,6 +2600,7 @@ img{
 		-o-transition: none;
 		transition: none;
 
+
 	}
 	.app_ui-wrapper aside.active.active-tablet {
 	    width: 230px;
@@ -2602,7 +2608,7 @@ img{
 		-moz-transition: none;
 		-o-transition: none;
 		transition: none;
-
+		overflow-y: auto;
 	}
 	.app_ui-wrapper aside h3 {
 	    padding: 14px 18px 13px 18px;
@@ -3151,6 +3157,7 @@ img{
 	}
 	.app_ui-wrapper aside.active.active-tablet {
 	    width: 280px;
+			overflow-y: auto;
 	}
 	.app-user-block .info {
 	    margin-top: 5px;
