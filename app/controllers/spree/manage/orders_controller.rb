@@ -9,7 +9,7 @@ class OrdersController < Spree::Manage::BaseController
 
   def index
 		@current_customer_id = session[:customer_id]
-		session[:customer_id] = nil
+		# session[:customer_id] = nil
 		@vendor = current_vendor
 
 		@orders = filter_orders
@@ -18,8 +18,6 @@ class OrdersController < Spree::Manage::BaseController
 		else
 			@orders = @orders.order(sort_column + ' ' + sort_direction)
 		end
-
-
 
     render :index
   end
@@ -186,13 +184,20 @@ class OrdersController < Spree::Manage::BaseController
 	def filter_orders
 
 		@current_customer_id = session[:customer_id]
-		@orders = @vendor.orders
 
 		if (params[:customer] && @vendor.customers.collect(&:name).include?(params[:customer][:name]))
-			@current_customer = Spree::Customer.find_by_name(params[:customer][:name])
-			@orders = @vendor.orders.where('customer_id = ?', @current_customer.id)
-			session[:customer_id] = @current_customer.id
-	  end
+			@current_customer_id = Spree::Customer.find_by_name(params[:customer][:name]).id
+			session[:customer_id] = @current_customer_id
+	  elsif (params[:customer] && params[:customer][:name] == 'all')
+			session[:customer_id] = nil
+			@current_customer_id = nil
+		end
+
+	  if @current_customer_id
+			@orders = @vendor.orders.where('customer_id = ?', @current_customer_id)
+		else
+			@orders = @vendor.orders
+		end
 
 		unless (params[:date].nil? || params[:date].empty?)
 			@orders = @orders.where('delivery_date = ?', params[:date])
