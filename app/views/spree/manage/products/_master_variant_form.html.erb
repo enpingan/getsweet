@@ -27,11 +27,8 @@
     </div>
     <div class="rightpart">
       <p>
-        <%#= f.label :price %>
-        <%= f.fields_for :prices do |price_field| %>
-          <%= price_field.label :price %>
-          <%= price_field.text_field :amount %>
-        <% end %>
+        <%= f.label :price %>
+        <%= f.text_field :price %>
       </p>
     </div>
     <!-- <div class="datepicker-block">

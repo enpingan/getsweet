@@ -4,7 +4,7 @@
     <%= render partial: 'form' %>
 
     <%= prod_form.fields_for :master do |f| %>
-      <%= render partial: 'spree/manage/products/variant_form', locals: {f:f} %>
+      <%= render partial: 'master_variant_form', locals: {f:f} %>
     <% end %>
 
     <div class="divider2"></div>
