@@ -29,7 +29,7 @@ module Spree
   def create
     @vendor = current_vendor
     @product = current_vendor.products.new(product_params)
-
+    @product.shipping_category_id ||= 1 #default value required to create new product
     if @product.save
       flash[:success] = "New product added!"
       redirect_to manage_products_url
@@ -58,10 +58,16 @@ module Spree
 
   def update
     @product = Spree::Product.friendly.find(params[:id])
+    @vendor = current_vendor
+    if params[:commit] == 'Add Variant'
+      @product.variants.create!
+      render :edit and return
+    end
+
 
     if @product.update(product_params)
       flash[:success] = "Product has been updated!"
-      redirect_to manage_product_url
+      redirect_to manage_product_url(@product)
     else
       flash[:errors] = @product.errors.full_messages
       render :edit
@@ -71,8 +77,8 @@ module Spree
   protected
 
   def product_params  #Add more permissions
-    params.require(:product).permit(:name, :description, :sku, :price,
-      variants_attributes: [:price])
+    params.require(:product).permit(:name, :description, master_attributes: [:sku, :price, :id, prices_attributes: [:id, :amount]],
+      variants_attributes: [:sku, :price, :id, prices_attributes: [:id, :amount]])
   end
 
   def ensure_vendor

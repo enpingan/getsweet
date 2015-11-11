@@ -58,6 +58,7 @@ img{
 }
 .relative{
 	position: relative;
+	min-height: 100%;
 }
 ::-webkit-input-placeholder {color:#ccc;}
 ::-moz-placeholder          {color:#ccc;}
@@ -407,7 +408,7 @@ img{
 	top: 52;
 	left: 0;
 	width: 0;
-	height: 0;
+	// min-height: 100%;
 	margin-left: -100%;
 	overflow: hidden;
 	float: left;
@@ -421,16 +422,16 @@ img{
 	-o-transition: all 0.17s ease;
 	transition: all 0.17s ease;
 }
-.app_ui-wrapper aside::after {
-    content: "";
-    height: 2000px;
-    bottom: 0;
-    background: #4C4743 none repeat scroll 0% 0%;
-    width: 100%;
-    position: relative;
-    left: 0;
-    display: block;
-}
+// .app_ui-wrapper aside::after {
+//     content: "";
+//     height: 2000px;
+//     bottom: 0;
+//     background: #4C4743 none repeat scroll 0% 0%;
+//     width: 100%;
+//     position: relative;
+//     left: 0;
+//     display: block;
+// }
 .app_ui-wrapper aside.active{
 	margin-left: 0;
 	width: 270px;
@@ -656,7 +657,7 @@ img{
 	position: absolute;
 	top: 0;
 	right: 0;
-	z-index: 1000;
+	z-index: 10;
 }
 .app_ui-wrapper .chart-block .tabs .pie, .app_ui-wrapper .chart-block .tabs .bar{
 	background: image_url("spree/manage/img/charts.png") no-repeat;
@@ -2669,7 +2670,7 @@ img{
 	    text-align: left;
 	    float: left;
 	}
-	.order-product-list .tRow .cel:nth-child(4), .order-product-list .tRow .cel:nth-child(5){
+	.order-product-list .tRow .cel:nth-child(4), .order-product-list .tRow .cel:nth-child(5), .order-product-list .tRow .cel:nth-child(7){
 		width: 33%;
 	    float: left;
 	    -webkit-box-sizing: border-box;
@@ -2677,7 +2678,7 @@ img{
 		box-sizing: border-box;
 	    padding: 6% 5px 5px 5px;
 	}
-	.order-product-list .tRow .cel:nth-child(7){
+	.order-product-list .tRow .cel:nth-child(8){
 		display: none;
 	}
 	.order-product-list .tRow .cel:nth-child(6), .order-product-list .tRow .cel:nth-child(8){
@@ -2717,7 +2718,8 @@ img{
 	}
 	.order-product-list .qty-block {
 	    padding: 9px;
-	    width: 100%;
+	    // width: 100%;
+			width: 50%;
 	    float: right;
 	    -webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
@@ -2889,33 +2891,34 @@ img{
 	}
 	.orders-list-table .tRow .cel:nth-of-type(2){
 		float: left;
-		padding-left: 10px;
+		padding-left: 20px;
 		width: 50%;
-		// background: #FCF9F6;
+		background: #FCF9F6;
 	}
 	.orders-list-table .tRow .cel:nth-of-type(3){
 		width: 50%;
 		float: left;
-		padding-left: 20px;
+		padding-left: 0px;
 		background: #FCF9F6;
 	}
 	.orders-list-table .tRow .cel:nth-of-type(4){
-		width: 50%;
+		width: 100%;
 		float: left;
-		padding-left: 0px;
-		background: #FCF9F6;
+		padding-left: 50%;
+		// background: #FCF9F6;
 	}
 
 	.orders-list-table .tRow .cel:nth-of-type(5){
 		float: left;
 		padding-left: 50%;
 		width: 100%;
+		background: #FCF9F6;
 	}
 	.orders-list-table .tRow .cel:nth-of-type(6){
 		float: left;
-		padding-left: 50%;
-		width: 100%;
-		background: #FCF9F6;
+		padding-left: 10px;
+		width: 50%;
+		// background: #FCF9F6;
 	}
 	.orders-list-table .tRow .cel:nth-of-type(7){
 		float: left;
@@ -2945,9 +2948,17 @@ img{
 	.orders-list-table .tRow .cel:nth-child(9) {
 	    display: none;
 	}
-	.orders-list-table .tRow .cel:nth-of-type(3):before { content: "#"; }
-	.orders-list-table .tRow .cel:nth-of-type(5):before { content: "Total Items:"; }
-	.orders-list-table .tRow .cel:nth-of-type(6):before { content: "Total:"; }
+	.orders-list-table .tRow .cel.approve{
+		background: transparent;
+		width: 50%;
+		// padding-left: 85px;
+		// padding-right: 0;
+		padding: 15px 0;
+		float:left;
+	}
+	.orders-list-table .tRow .cel:nth-of-type(2):before { content: "#"; }
+	.orders-list-table .tRow .cel:nth-of-type(4):before { content: "Total Items:"; }
+	.orders-list-table .tRow .cel:nth-of-type(5):before { content: "Total:"; }
 	.orders-list-table .tRow .cel.approve:before { content: "Approve"; }
 	.orders-list-table .tRow .cel img {
 	    margin: 0 auto;
@@ -3464,7 +3475,8 @@ img{
 	    top: 17px;
 	}
 	.order-product-list .tRow .cel:nth-child(10) {
-	    width: 50%;
+	    width: 45%;
+			margin-top: -15px;
 	}
 	.product-view-block .order-product-list .tRow .cel {
 	    font-size: 15px;
@@ -3631,7 +3643,7 @@ img{
 	    float: none;
 	    margin-bottom: 20px;
 	}
-	.order-product-list .tRow .cel:nth-child(4), .order-product-list .tRow .cel:nth-child(5), .order-product-list .tRow .cel:nth-child(6), .order-product-list .tRow .cel:nth-child(8){
+	.order-product-list .tRow .cel:nth-child(4), .order-product-list .tRow .cel:nth-child(5), .order-product-list .tRow .cel:nth-child(6), .order-product-list .tRow .cel:nth-child(7),.order-product-list .tRow .cel:nth-child(8){
 	    padding: 5px;
 	    width: 50%;
 	}
@@ -3640,7 +3652,7 @@ img{
 	    height: 48px;
 	}
 	.order-product-list .tRow .cel:last-child, .order-product-list .tRow .cel:nth-child(10){
-	    width: 50%;
+	    width: 45%;
 	    padding: 15px 5px;
 	}
 	.order-product-list .tRow .cel .addToOrder-button, a.new-order-button {

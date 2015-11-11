@@ -1,0 +1,57 @@
+<div class="divider2"></div>
+
+
+<div class="product-size-block">
+  <div class="col1">
+    <!-- <a href="" id="close-button"><i class="fa fa-times"></i></a> -->
+  </div>
+  <div class="col2">
+    <p>
+      <!-- <label for="sku">SKU #</label> -->
+      <!-- <input type="text" id="sku" name=product[sku] value="<%#= variant.sku %>"> -->
+      <%= f.label :sku %>
+      <%= f.text_field :sku %>
+    </p>
+  </div>
+  <div class="col3">
+    <div class="leftpart">
+      <p>
+        <label>Pack/Size:
+          <input type="text" name="" value="Each">
+        </label>
+        <!-- <select name="pack_size:" id="pack_size">
+          <option value="none">Each</option>
+          <option value="option 1">Option 1</option>
+        </select> -->
+      </p>
+    </div>
+    <div class="rightpart">
+      <p>
+        <%= f.label :price %>
+        <%= f.text_field :price %>
+      </p>
+    </div>
+    <!-- <div class="datepicker-block">
+      <div class="leftpart">
+        <p><input type="checkbox" id="promotional"><label for="promotional">Promotional</label></p>
+      </div>
+      <div class="rightpart">
+        <p><label for="promo_price">Promo Price:</label> <input type="text" id="promo_price" value=""></p>
+      </div>
+      <div class="leftpart">
+        <p class="datepicker-cont"><label for="date_start">Start:</label>
+          <input type="text" class="datepicker" id="date_start" value="">
+          <%#= image_tag("spree/manage/img/datepicker-ico.jpg", class: "date-icon") %>
+        </p>
+      </div>
+      <div class="rightpart">
+        <p class="datepicker-cont">
+          <label for="date_end">End:</label>
+          <input type="text" class="datepicker" id="date_end" value="">
+          <%#= image_tag("spree/manage/img/datepicker-ico.jpg", class: "date-icon") %>
+        </p>
+      </div>
+    </div> -->
+  </div>
+  <div class="clear"></div>
+</div>
