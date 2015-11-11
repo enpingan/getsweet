@@ -9,6 +9,9 @@
     <div class="search-block">
       <form id="filter-form">
         <%= select(:vendor, :name) do%>
+        <% if @current_vendor_id %>
+          <option value="<%= @current_vendor_id %>"><%= Spree::Vendor.find(@current_vendor_id).name %></option>
+        <% end %>
           <option value="all">All</option>
           <%= options_for_select (@customer.vendors.collect(&:name)) %>
         <% end %>

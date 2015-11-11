@@ -9,6 +9,7 @@ module Spree
     before_action :ensure_customer, only: [:show, :edit, :update, :destroy]
 
     def index
+      @current_vendor_id = session[:vendor_id]
       @customer = current_customer
 
       @orders = filter_orders
@@ -196,12 +197,22 @@ module Spree
     end
 
     def filter_orders
-      @orders = current_customer.orders
+
+      @current_vendor_id = session[:vendor_id]
+
       if (params[:vendor] && @customer.vendors.collect(&:name).include?(params[:vendor][:name]))
-  			@current_vendor = Spree::Vendor.find_by_name(params[:vendor][:name])
-  			@orders = @customer.orders.where('vendor_id = ?', @current_vendor.id)
-  			session[:vendor_id] = @current_vendor.id
+  			@current_vendor_id = Spree::Vendor.find_by_name(params[:vendor][:name]).id
+  			session[:vendor_id] = @current_vendor_id
+      elsif (params[:vendor] && params[:vendor][:name] == 'all')
+        session[:vendor_id] = nil
+        @current_vendor_id = nil
   	  end
+
+      if @current_vendor_id
+  			@orders = @customer.orders.where('vendor_id = ?', @current_vendor_id)
+  		else
+  			@orders = @customer.orders
+  		end
 
       unless (params[:date].nil? || params[:date].empty?)
   			@orders = @orders.where('delivery_date = ?', params[:date])
