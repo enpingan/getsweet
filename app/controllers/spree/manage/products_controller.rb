@@ -71,8 +71,8 @@ module Spree
   protected
 
   def product_params  #Add more permissions
-    params.require(:product).permit(:name, :description, master_attributes: [:sku, :price, :id],
-      variants_attributes: [:sku, :price, :id])
+    params.require(:product).permit(:name, :description, master_attributes: [:sku, :price, :id, prices_attributes: [:id, :amount]],
+      variants_attributes: [:sku, :price, :id, prices_attributes: [:id, :amount]])
   end
 
   def ensure_vendor

@@ -28,9 +28,9 @@
     <div class="rightpart">
       <p>
         <%= f.label :price %>
-        <%= f.text_field :price %>
-        <!-- <label>Price: </label> -->
-        <!-- <input type="text" id="price" name=product[price] value="<%#= number_to_currency(variant.price) %>"> -->
+        <%= f.fields_for :prices do |price_field| %>
+          <%= price_field.text_field :amount %>
+        <% end %>
       </p>
     </div>
     <!-- <div class="datepicker-block">
