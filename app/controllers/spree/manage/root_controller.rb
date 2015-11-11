@@ -38,6 +38,7 @@ module Spree
 				@sales_overtime_chart = LazyHighCharts::HighChart.new('graph') do |f|
   				f.chart({:type=>"area"})
 				  f.title(:text => "Sales Over Time - 2015")
+          f.legend(enabled: false)
 					f.xAxis(:categories => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
 					f.series(
             name: "Total Sales",
@@ -76,8 +77,10 @@ module Spree
 				@customer_sales_bar_chart = LazyHighCharts::HighChart.new('graph') do |f|
   				f.chart({:type=>"column", :className=>"bar active"})
 				  f.title(:text => "Sales by Customer, Last 12 Months")
+          f.legend(enabled: false)
+          f.xAxis(:categories => [])
 					f.series(
-						name: "Customers",
+						name: "12 Mo. Sales",
             colorByPoint: true,
             data: [{
                 name: Spree::Customer.find(customers[0][0]).name, #customer name
