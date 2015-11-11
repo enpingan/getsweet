@@ -1,11 +1,11 @@
-class Spree::CustomerImage < Spree::Asset
+class Spree::UserImage < Spree::Asset
   validate :no_attachment_errors
 
   has_attached_file :attachment,
                     styles: { mini: '48x48>', small: '160x160>', product: '360x360>', large: '700x700>' },
                     default_style: :product,
-                    url: '/spree/customers/:id/:style/:basename.:extension',
-                    path: ':rails_root/public/spree/customers/:id/:style/:basename.:extension',
+                    url: '/spree/users/:id/:style/:basename.:extension',
+                    path: ':rails_root/public/spree/users/:id/:style/:basename.:extension',
                     convert_options: { all: '-strip -auto-orient -colorspace sRGB' }
   validates_attachment :attachment,
     :presence => true,

@@ -114,6 +114,10 @@ Rails.application.routes.draw do
       	end
 			end
 
+			resources :users do
+				resources :user_images
+			end
+		
 		end
 
 	end

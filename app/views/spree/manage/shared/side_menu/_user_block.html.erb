@@ -1,7 +1,12 @@
 <div class="app-user-block">
   <!-- <div class="photo online"> -->
   <div class="photo">
-    <%=image_tag("spree/manage/img/user_placeholder.png")%>
+		<% if current_spree_user.images.any? %>
+			<%# SHOWING ONLY FIRST IMAGE %>
+			<%= image_tag current_spree_user.images[0].attachment.url(:small), :itemprop => "image" %>
+		<% else %>
+	    <%=image_tag("spree/manage/img/user_placeholder.png")%>
+		<% end %>
   </div>
 
   <div class="info tablet-hide">
