@@ -953,23 +953,23 @@ end
 ###############################################################################
 p1 = v5.products.create(name: "Hamburger Buns", price: 6.00, shipping_category_id: 1, available_on: available_date,
   description: "Very soft, with a thin, bubbly crust which locks in juicy burgers and sauces, and a light, regular crumb, with a mild saltiness.")
-p2 = v5.products.create(name: "Specialty Loaves", price: 3.25, shipping_category_id: 1, available_on: available_date,
+p2 = v5.products.create(name: "Specialty Loaves", price: 7.25, shipping_category_id: 1, available_on: available_date,
   description: "In addition to the many standard shapes and sizes, we offer special holiday loaves, and special events loaves (such as 6-foot sandwich bread.) If you have a special event or need bread for a special showcase or breadbasket, contact us and we’ll see how we can help you.")
-p3 = v5.products.create(name: "Raisin-Pecan", price: 45.00, shipping_category_id: 1, available_on: available_date,
+p3 = v5.products.create(name: "Raisin Pecan", price: 6.00, shipping_category_id: 1, available_on: available_date,
   description: "A regular dense and moist crumb full of raisins and pecans, slightly sweet, baked to a dark crusty brown.")
-p4 = v5.products.create(name: "Picholine Olive", price: 3.00, shipping_category_id: 1, available_on: available_date,
+p4 = v5.products.create(name: "Picholine Olive", price: 5.50, shipping_category_id: 1, available_on: available_date,
   description: "A soft, open, airy crumb, filled with picholine olives and a little bit of fresh rosemary, matched with a soft, bubbly crust with just a bit of crunch.")
-p5 = v5.products.create(name: "White French", price: 3.50, shipping_category_id: 1, available_on: available_date,
+p5 = v5.products.create(name: "White French", price: 4.50, shipping_category_id: 1, available_on: available_date,
   description: "A light white loaf made for slicing, similar to the White French Baguette in flavor, but with a denser, more regular crumb and a crust which crackles.")
-p6 = v5.products.create(name: "Honey Whole Wheat", price: 3.50, shipping_category_id: 1, available_on: available_date,
+p6 = v5.products.create(name: "Honey Whole Wheat", price: 4.50, shipping_category_id: 1, available_on: available_date,
   description: "A light whole wheat loaf made for slicing, with a dense, regular crumb ideal for sandwiches, a slight wheat flavor and a very light crust.")
 p7 = v5.products.create(name: "Somun", price: 3.50, shipping_category_id: 1, available_on: available_date,
   description: "A soft and light crumb and crust, very spongy, with a touch of olive oil.")
-p8 = v5.products.create(name: "Sourdough", price: 30.00, shipping_category_id: 1, available_on: available_date,
+p8 = v5.products.create(name: "Sourdough", price: 4.00, shipping_category_id: 1, available_on: available_date,
   description: "All white-flour sourdough bread with very thin but durable crust, baked to a rich golden brown, a light semi-regular crumb and a pleasantly sour taste and smell.")
-p9 = v5.products.create(name: "Pane Francese", price: 26, shipping_category_id: 1, available_on: available_date,
+p9 = v5.products.create(name: "Pane Francese", price: 5, shipping_category_id: 1, available_on: available_date,
   description: "Similar to ciabatta, but made with sourdough starter, a very open, moist irregular crumb, very soft, almost waxy, and a slightly thicker crust, baked to a dark-golden brown. A slightly sour and salty taste.")
-p10 = v5.products.create(name: "Kalamata Olive", price: 2.50, shipping_category_id: 1, available_on: available_date,
+p10 = v5.products.create(name: "Kalamata Olive", price: 6.50, shipping_category_id: 1, available_on: available_date,
   description: "A light, colorful crumb, speckled with kalamata olives and a floured, golden, crust. This bread smells deeply of the olives, and the subtle sourness they impart on the bread.")
 
   p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
