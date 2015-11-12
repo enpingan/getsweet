@@ -1,11 +1,11 @@
 <div class="search-area layout2">
 	<a href="<%= orders_url %>" class="cta-link">Back to all Orders</a>
-	<div class="search-block">
+	<!-- <div class="search-block">
 		<form id="search-form">
 			<input type="text" placeholder="Search by order#">
 			<input type="submit" value="Search">
 		</form>
-	</div>
+	</div> -->
 </div>
 
 <%= form_for ([:manage, @order]), html: { id: 'single-order-form' } do |order_form| %>
