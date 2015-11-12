@@ -24,7 +24,7 @@ module Spree
     def show
       @order = set_order_session
       @path = "show"
-      if @order.delivery_date > DateTime.tomorrow ||(@order.delivery_date == DateTime.tomorrow && Time.now < @order.vendor.order_cutoff_time.to_datetime)
+      if @order.delivery_date > DateTime.tomorrow.in_time_zone ||(@order.delivery_date == DateTime.tomorrow.in_time_zone && Time.current < @order.vendor.order_cutoff_time.in_time_zone)
         redirect_to edit_order_url(@order) unless @order.state == "complete"
       else
         render :show
@@ -75,7 +75,7 @@ module Spree
         elsif (params[:commit] == "Resubmit Order")
           @order.approver_id = nil
   				@order.approved_at = nil
-          @order.completed_at = Time.now
+          @order.completed_at = Time.current
           @order.user_id = current_spree_user.id
 
         elsif (params[:commit] == "Add Item" && @order.update(order_params))

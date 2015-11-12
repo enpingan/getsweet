@@ -74,9 +74,9 @@ class OrdersController < Spree::Manage::BaseController
 				flash[:success] = "Your order has been successfully update!"
 			elsif (params[:commit] == "Approve Order")
 				@order.state = "complete"
-				@order.completed_at = Time.now
+				@order.completed_at = Time.current
 				@order.approver_id = current_spree_user.id
-				@order.approved_at = Time.now
+				@order.approved_at = Time.current
 				@order.user_id = @order.customer.users.first.id unless @order.user_id
 				flash[:success] = "Order Approved!"
 			elsif (params[:commit] == "Add Item" && @order.update(order_params))
