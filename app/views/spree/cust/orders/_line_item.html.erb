@@ -1,7 +1,7 @@
 <% variant = line_item.variant %>
 
 
-<%= order_form.fields_for :line_items, line_item do |item_form| %>
+<%= order_form.fields_for @line_items, line_item do |item_form| %>
     <div class="order-item">
       <div class="cel">
         <%= link_to raw("<i class='fa fa-times'></i>"), {action: :unpopulate, order_id: @order.id, index: line_item.id},
@@ -20,6 +20,6 @@
         </div>
       </div>
       <div class="cel"><%= line_item.display_amount.to_html unless line_item.quantity.nil? %></div>
-      
+
     </div>
 <% end %>
