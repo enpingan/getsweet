@@ -4,8 +4,10 @@
 <%= order_form.fields_for :line_items, line_item do |item_form| %>
     <div class="order-item">
       <div class="cel">
+        <% if params[:action] == "edit" %>
         <%= link_to raw("<i class='fa fa-times'></i>"), {action: :unpopulate, order_id: @order.id, index: line_item.id},
           class: 'close-button', id: 'delete-item-button' %>
+          <% end %>
       </div>
       <div class="cel"><%= link_to line_item.name, vendor_product_path(@order.vendor, variant.product.id) %></div>
       <div class="cel"><%= line_item.sku %></div>
@@ -20,6 +22,6 @@
         </div>
       </div>
       <div class="cel"><%= line_item.display_amount.to_html unless line_item.quantity.nil? %></div>
-      
+
     </div>
 <% end %>
