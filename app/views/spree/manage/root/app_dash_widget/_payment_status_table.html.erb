@@ -10,7 +10,7 @@
     <tr>
       <td><%= customer.name %></td>
       <td><i class="fa fa-check"></i></td>
-      <td> <%= customer.orders.where('delivery_date <= ?', DateTime.current.to_date).order('delivery_date DESC').limit(1).first.delivery_date.to_date.to_formatted_s(:long) %> </td>
+      <td> <%= customer.orders.where('delivery_date <= ?', DateTime.current).order('delivery_date DESC').limit(1).first.delivery_date.to_date.to_formatted_s(:long) %> </td>
     </tr>
   <% end %>
 </table>
