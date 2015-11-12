@@ -24,6 +24,13 @@ module Spree
     def show
       @order = set_order_session
       @path = "show"
+
+      if params[:sort] && params[:sort] == 'name'
+  			@line_items = Spree::LineItem.where('order_id = ?', @order.id).includes(:product).order(sort_column + ' ' + sort_direction).references(:spree_products)
+  		else
+  			@line_items = Spree::LineItem.where('order_id = ?', @order.id).order(sort_column + ' ' + sort_direction)
+  		end
+
       if @order.delivery_date > DateTime.tomorrow.in_time_zone ||(@order.delivery_date == DateTime.tomorrow.in_time_zone && Time.current < @order.vendor.order_cutoff_time.in_time_zone)
         redirect_to edit_order_url(@order) unless @order.state == "complete"
       else
@@ -58,6 +65,13 @@ module Spree
     def edit
       @order = set_order_session
       @vendor = @order.vendor
+
+      if params[:sort] && params[:sort] == 'name'
+  			@line_items = Spree::LineItem.where('order_id = ?', @order.id).includes(:product).order(sort_column + ' ' + sort_direction).references(:spree_products)
+  		else
+  			@line_items = Spree::LineItem.where('order_id = ?', @order.id).order(sort_column + ' ' + sort_direction)
+  		end
+
       render :edit
     end
 
@@ -221,12 +235,20 @@ module Spree
     end
 
     def sort_column
-      if Spree::Order.column_names.include?(params[:sort])
-        params[:sort]
-      elsif params[:sort] == "spree_vendor.name"
-        params[:sort]
-      else
-        "delivery_date"
+      if params[:action] == 'index'
+        if Spree::Order.column_names.include?(params[:sort])
+          params[:sort]
+        elsif params[:sort] == "spree_vendor.name"
+          params[:sort]
+        else
+          "delivery_date"
+        end
+      elsif params[:action] == 'edit' || params[:action] == 'show'
+        if Spree::LineItem.column_names.include?(params[:sort]) || params[:sort] == 'name'
+          params[:sort]
+        else
+          'updated_at'
+        end
       end
     end
 

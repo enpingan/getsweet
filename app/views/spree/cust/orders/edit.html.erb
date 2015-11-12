@@ -28,10 +28,11 @@
 		<div class="clear"></div>
 
 		<div class="orders-list-table">
-			<div class="header">
+			<div class="tRow header">
 				<div class="cel"></div>
 				<div class="cel">
-					<a href="" class="sort-name">Item <i class="fa fa-sort"></i></a>
+					<%= sortable "name", "Item" %>
+					<!-- <a href="" class="sort-name">Item <i class="fa fa-sort"></i></a> -->
 				</div>
 				<div class="cel">SKU
 					<!-- <a href="" class="sort-name">SKU <i class="fa fa-sort"></i></a> -->
@@ -40,13 +41,15 @@
 					<!-- <a href="" class="sort-sku">Pack/Size <i class="fa fa-sort"></i></a> -->
 				</div>
 				<div class="cel">
-					<a href="" class="sort-lead_time">Price <i class="fa fa-sort"></i></a>
+					<%= sortable "price" %>
+					<!-- <a href="" class="sort-lead_time">Price <i class="fa fa-sort"></i></a> -->
 				</div>
 				<div class="cel">
-					<a href="" class="sort-pack_size">Qty <i class="fa fa-sort"></i></a>
+					<%= sortable "quantity" %>
+					<!-- <a href="" class="sort-pack_size">Qty <i class="fa fa-sort"></i></a> -->
 				</div>
-				<div class="cel">
-					<a href="" class="sort-price">Total <i class="fa fa-sort"></i></a>
+				<div class="cel">Total
+					<!-- <a href="" class="sort-price">Total <i class="fa fa-sort"></i></a> -->
 				</div>
 
 			</div>
@@ -56,7 +59,7 @@
 				<div class="order-items-el">
 				  <a href="#" class="order-items-toggle">All <i class="fa fa-chevron-down"></i></a>
 				  <div class="order-items-cont">
-				<%= render partial: 'line_item', collection: order_form.object.line_items, locals: { order_form: order_form } %>
+				<%= render partial: 'line_item', collection: @line_items, locals: { order_form: order_form } %>
 					</div>
 					<div class="order-items-count-block">
 						<div class="col1">
