@@ -64,11 +64,11 @@ u10 = Spree::User.create(email: 'pete_knickerbocker@sweetist.co', firstname: 'Pe
 u10.spree_roles << customer
 u10.save!
 
-v1 = Spree::Vendor.create(name: 'Dough Donuts', order_cutoff_time: '5PM', delivery_minimum: 10.0, payment_terms: 30)
-v2 = Spree::Vendor.create(name: 'Ceci Cela', order_cutoff_time: '6PM', delivery_minimum: 10.0, payment_terms: 30)
-v3 = Spree::Vendor.create(name: 'Canele by Celine', order_cutoff_time: '8PM', delivery_minimum: 10.0, payment_terms: 0)
-v4 = Spree::Vendor.create(name: "Chikalicious", order_cutoff_time: '9PM', delivery_minimum: 10.0, payment_terms: 15)
-v5 = Spree::Vendor.create(name: "Billy's Bakery", order_cutoff_time: '5PM', delivery_minimum: 10.0, payment_terms: 45)
+v1 = Spree::Vendor.create(name: 'Dough Donuts', order_cutoff_time: '5PM EST', delivery_minimum: 10.0, payment_terms: 30)
+v2 = Spree::Vendor.create(name: 'Ceci Cela', order_cutoff_time: '6PM EST', delivery_minimum: 10.0, payment_terms: 30)
+v3 = Spree::Vendor.create(name: 'Canele by Celine', order_cutoff_time: '8PM EST', delivery_minimum: 10.0, payment_terms: 0)
+v4 = Spree::Vendor.create(name: "Chikalicious", order_cutoff_time: '9PM EST', delivery_minimum: 10.0, payment_terms: 15)
+v5 = Spree::Vendor.create(name: "Billy's Bakery", order_cutoff_time: '5PM EST', delivery_minimum: 10.0, payment_terms: 45)
 
 c6 = Spree::Customer.create(name: "Creek Side Cafe", account_id: 47584, email: "contact_creekside@sweetist.co")
 c7 = Spree::Customer.create(name: "W Hotel", account_id: 85893, email: "contact_whotel@sweetist.co")
