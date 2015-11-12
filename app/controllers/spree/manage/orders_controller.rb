@@ -59,8 +59,11 @@ class OrdersController < Spree::Manage::BaseController
 
   def edit
 		@order = set_order_session
-		@line_items = Spree::LineItem.where('order_id = ?', @order.id).order(sort_column + ' ' + sort_direction)
-
+		if params[:sort] && params[:sort] == 'name'
+			@line_items = Spree::LineItem.where('order_id = ?', @order.id).includes(:product).order(sort_column + ' ' + sort_direction).references(:spree_products)
+		else
+			@line_items = Spree::LineItem.where('order_id = ?', @order.id).order(sort_column + ' ' + sort_direction)
+		end
 		# @line_items = @order.line_items.order(sort_column + ' ' + sort_direction).references(:spree_line_items)
 		@customer = @order.customer
 		@vendor = current_vendor
@@ -219,7 +222,7 @@ class OrdersController < Spree::Manage::BaseController
 				"delivery_date"
 			end
 		elsif params[:action] == 'edit'
-			if Spree::LineItem.column_names.include?(params[:sort])
+			if Spree::LineItem.column_names.include?(params[:sort]) || params[:sort] == 'name'
 				params[:sort]
 			else
 				'updated_at'
