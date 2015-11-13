@@ -192,6 +192,12 @@ module Spree
       redirect_to root_url unless current_customer.id == @order.customer_id
     end
 
+    def set_order_session(order = nil)
+      order ||= Spree::Order.friendly.find(params[:id])
+      session[:order_id] = order.id
+      order
+    end
+
     def associate_user(order)
       order.user_id = current_spree_user.id
       order.ship_address_id = current_spree_user.customer.ship_address_id
