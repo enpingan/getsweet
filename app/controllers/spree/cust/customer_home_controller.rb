@@ -24,6 +24,14 @@ module Spree
       current_spree_user.customer
     end
 
+    def current_order
+      Spree::Order.first
+    end
+
+    def clear_current_order
+      session[:order_id] = nil
+    end
+
   end
  end
 end

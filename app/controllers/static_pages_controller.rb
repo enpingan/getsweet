@@ -2,6 +2,7 @@ class StaticPagesController < ApplicationController
   before_action :require_not_logged_in
 
   def root
+    session[:order_id] = nil
   end
 
   private

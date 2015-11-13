@@ -9,6 +9,7 @@ module Spree
     before_action :ensure_customer, only: [:show, :edit, :update, :destroy]
 
     def index
+      clear_current_order
       @current_vendor_id = session[:vendor_id]
       @customer = current_customer
 
@@ -39,6 +40,7 @@ module Spree
     end
 
     def new
+      clear_current_order
       @order = current_customer.orders.new
       @vendors = current_customer.vendors
       if session[:vendor_id]
@@ -167,9 +169,9 @@ module Spree
     end
 
     def destroy
-      @order = Spree::Order.friendly.find(params[:id])
+      @order = set_order_session
   		if @order.destroy
-  			session[:order_id] = nil;
+        clear_current_order
   			flash[:success] = "Order ##{@order.number} has been cancelled"
   		else
   			flash[:errors] = @order.errors.full_messages
@@ -188,19 +190,6 @@ module Spree
     def ensure_customer
       @order = Spree::Order.friendly.find(params[:id])
       redirect_to root_url unless current_customer.id == @order.customer_id
-    end
-
-    def set_order_session(order = nil)
-      unless order
-        if params[:order_id]
-          order = Spree::Order.friendly.find(params[:order_id])
-        else
-          order = Spree::Order.friendly.find(params[:id])
-        end
-      end
-      session[:order_id] = order.id
-      session[:vendor_id] = order.vendor.id
-      order
     end
 
     def associate_user(order)

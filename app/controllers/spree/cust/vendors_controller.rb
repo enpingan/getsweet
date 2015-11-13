@@ -2,8 +2,9 @@ module Spree
  module Cust
   class VendorsController < Spree::Cust::CustomerHomeController
     helper_method :sort_column, :sort_direction
-    before_action :authorize_customer, only: [:show]
+    before_action :authorize_customer, only: :show
     def index
+      clear_current_order
       @vendors = Vendor.all
       render :index
     end
@@ -28,12 +29,8 @@ module Spree
 
     private
 
-    def current_order
-      if session[:order_id]
-        @current_order = Spree::Order.find(session[:order_id])
-        return nil unless @current_order.vendor.id == current_vendor.id
-      end
-      @current_order
+    def ensure_vendor
+      clear_current_order unless current_order.vendor_id == params[:id]
     end
 
     def current_vendor
