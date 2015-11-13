@@ -4,6 +4,7 @@ module Spree
 	class ProductsController < Spree::Manage::BaseController
     helper_method :sort_column, :sort_direction
     before_action :ensure_vendor, only: [:show, :edit, :update, :destroy]
+    before_action :clear_current_order, only: [:new, :create]
 
   def index
     @vendor = current_vendor
@@ -89,13 +90,13 @@ module Spree
     end
   end
 
-  def current_order
-    if session[:order_id]
-      @current_order = Spree::Order.find(session[:order_id])
-      return nil unless current_customer && @current_order.customer.id == current_customer.id
-    end
-    @current_order
-  end
+  # def current_order
+  #   if session[:order_id]
+  #     @current_order = Spree::Order.find(session[:order_id])
+  #     return nil unless current_customer && @current_order.customer.id == current_customer.id
+  #   end
+  #   @current_order
+  # end
 
   def current_customer
     if session[:customer_id]

@@ -13,5 +13,4 @@ class ApplicationController < ActionController::Base
   include Spree::Core::ControllerHelpers::Store
   helper Spree::Core::Engine.helpers
 
-
 end

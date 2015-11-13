@@ -43,21 +43,6 @@ module Spree
 
     private
 
-    def current_order
-      if session[:order_id]
-        @current_order = Spree::Order.find(session[:order_id])
-        return nil unless @current_order.vendor.id == current_vendor.id
-      end
-      @current_order
-    end
-
-    def current_vendor
-      if session[:vendor_id]
-        @current_vendor = Spree::Customer.find(session[:vendor_id])
-      end
-        @current_vendor
-    end
-
   end
  end
 end

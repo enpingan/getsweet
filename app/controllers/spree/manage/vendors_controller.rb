@@ -3,6 +3,8 @@ module Spree
 
 
 		class VendorsController < Spree::Manage::BaseController
+      before_action :clear_current_order
+
 		  def index
 		    @vendors = Spree::Vendor.all
 		    render :index
@@ -30,7 +32,7 @@ module Spree
 	      else
 	        flash[:errors] = @account.errors.full_messages
 	        render :edit
- 	    	end 
+ 	    	end
 			end
 
       protected
@@ -41,7 +43,7 @@ module Spree
             :order_cutoff_time,
 						:delivery_minimum,
 						:payment_terms)
-        end 
+        end
 
 		end
 

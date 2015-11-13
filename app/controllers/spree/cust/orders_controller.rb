@@ -9,6 +9,7 @@ module Spree
     before_action :ensure_customer, only: [:show, :edit, :update, :destroy]
 
     def index
+      clear_current_order
       @current_vendor_id = session[:vendor_id]
       @customer = current_customer
 
@@ -24,6 +25,13 @@ module Spree
     def show
       @order = set_order_session
       @path = "show"
+
+      if params[:sort] && params[:sort] == 'name'
+  			@line_items = Spree::LineItem.where('order_id = ?', @order.id).includes(:product).order(sort_column + ' ' + sort_direction).references(:spree_products)
+  		else
+  			@line_items = Spree::LineItem.where('order_id = ?', @order.id).order(sort_column + ' ' + sort_direction)
+  		end
+
       if @order.delivery_date > DateTime.tomorrow.in_time_zone ||(@order.delivery_date == DateTime.tomorrow.in_time_zone && Time.current < @order.vendor.order_cutoff_time.in_time_zone)
         redirect_to edit_order_url(@order) unless @order.state == "complete"
       else
@@ -32,6 +40,7 @@ module Spree
     end
 
     def new
+      clear_current_order
       @order = current_customer.orders.new
       @vendors = current_customer.vendors
       if session[:vendor_id]
@@ -58,6 +67,13 @@ module Spree
     def edit
       @order = set_order_session
       @vendor = @order.vendor
+
+      if params[:sort] && params[:sort] == 'name'
+  			@line_items = Spree::LineItem.where('order_id = ?', @order.id).includes(:product).order(sort_column + ' ' + sort_direction).references(:spree_products)
+  		else
+  			@line_items = Spree::LineItem.where('order_id = ?', @order.id).order(sort_column + ' ' + sort_direction)
+  		end
+
       render :edit
     end
 
@@ -153,9 +169,9 @@ module Spree
     end
 
     def destroy
-      @order = Spree::Order.friendly.find(params[:id])
+      @order = set_order_session
   		if @order.destroy
-  			session[:order_id] = nil;
+        clear_current_order
   			flash[:success] = "Order ##{@order.number} has been cancelled"
   		else
   			flash[:errors] = @order.errors.full_messages
@@ -176,18 +192,11 @@ module Spree
       redirect_to root_url unless current_customer.id == @order.customer_id
     end
 
-    def set_order_session(order = nil)
-      unless order
-        if params[:order_id]
-          order = Spree::Order.friendly.find(params[:order_id])
-        else
-          order = Spree::Order.friendly.find(params[:id])
-        end
-      end
-      session[:order_id] = order.id
-      session[:vendor_id] = order.vendor.id
-      order
-    end
+    # def set_order_session(order = nil)
+    #   order ||= Spree::Order.friendly.find(params[:id])
+    #   session[:order_id] = order.id
+    #   order
+    # end
 
     def associate_user(order)
       order.user_id = current_spree_user.id
@@ -221,12 +230,20 @@ module Spree
     end
 
     def sort_column
-      if Spree::Order.column_names.include?(params[:sort])
-        params[:sort]
-      elsif params[:sort] == "spree_vendor.name"
-        params[:sort]
-      else
-        "delivery_date"
+      if params[:action] == 'index'
+        if Spree::Order.column_names.include?(params[:sort])
+          params[:sort]
+        elsif params[:sort] == "spree_vendor.name"
+          params[:sort]
+        else
+          "delivery_date"
+        end
+      elsif params[:action] == 'edit' || params[:action] == 'show'
+        if Spree::LineItem.column_names.include?(params[:sort]) || params[:sort] == 'name'
+          params[:sort]
+        else
+          'updated_at'
+        end
       end
     end
 

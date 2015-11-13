@@ -15,5 +15,11 @@
 			 <%= link_to "", spree.logout_path, class: "icon fa fa-sign-out" %>
 		</div>
     <div class="settings-ico"><i class="fa fa-cog"></i></div>
+    <% if current_order %>
+      <a href="<%= edit_manage_order_url(current_order) %>" id="shopping-cart">
+        <i class="fa fa-shopping-cart"></i>
+        ( <%= current_order.item_count == 0 ? "Empty" : number_to_currency(current_order.total) %> )
+      </a>
+    <% end %>
   </div>
 </header>
