@@ -16,9 +16,10 @@
     <div class="contact-info">
       <% if @account %>
         <ul class="primary-contact">
-          <li><strong>Name:</strong> <%= "#{@account.name}" %></li>
+          <li><strong>Name:</strong> <%= @account.name %></li>
+          <li><strong>Email:</strong> <%= @account.email %>
           <li><strong>Order Cutoff Time:</strong> <%= @account.order_cutoff_time %></li>
-          <li><strong>Delivery Minimum:</strong> $<%= number_with_precision(@account.delivery_minimum, precision: 2) %></li>
+          <li><strong>Delivery Minimum:</strong> <%= number_to_currency(@account.delivery_minimum) %></li>
           <li><strong>Payment Terms:</strong> <%= @account.payment_terms %> Days</li>
         </ul>
       <% else %>

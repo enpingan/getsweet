@@ -13,7 +13,8 @@
 module Spree
 	#class Vendor < ActiveRecord::Base
 	class Vendor < Spree::Base
- 	 validates :name, :order_cutoff_time, :delivery_minimum, presence: true
+ 	 validates :name, :order_cutoff_time, :delivery_minimum, :email, presence: true
+	 validates :email, uniqueness: true
 
 	  has_many :users, class_name: 'Spree::User', foreign_key: :vendor_id, primary_key: :id
 	  has_many :products, class_name: 'Spree::Product', foreign_key: :vendor_id, primary_key: :id

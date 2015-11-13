@@ -40,6 +40,7 @@ module Spree
         def account_params
           params.require(:vendor).permit(
             :name,
+            :email,
             :order_cutoff_time,
 						:delivery_minimum,
 						:payment_terms)

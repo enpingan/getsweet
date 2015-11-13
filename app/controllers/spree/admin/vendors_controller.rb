@@ -39,7 +39,7 @@ module Spree
 			private
 
       def vendor_params
-        params.require(:vendor).permit(:name, :order_cutoff_time, :delivery_minimum, :payment_terms, :slug)
+        params.require(:vendor).permit(:name, :email, :order_cutoff_time, :delivery_minimum, :payment_terms, :slug)
       end
 		end
 	end
