@@ -6,12 +6,18 @@
     <!-- <a href="" id="close-button"><i class="fa fa-times"></i></a> -->
   </div>
   <div class="col2">
-    <p>
-      <!-- <label for="sku">SKU #</label> -->
-      <!-- <input type="text" id="sku" name=product[sku] value="<%#= variant.sku %>"> -->
-      <%= f.label :sku %>
-      <%= f.text_field :sku %>
-    </p>
+    <div class="leftpart">
+      <p>
+        <%= f.label :sku %>
+        <%= f.text_field :sku %>
+      </p>
+    </div>
+    <div class="rightpart">
+      <p>
+        <%= f.label :lead_time, "Lead Time (Days)" %>
+        <%= f.text_field :lead_time, placeholder: 'days' %>
+      </p>
+    </div>
   </div>
   <div class="col3">
     <div class="leftpart">
