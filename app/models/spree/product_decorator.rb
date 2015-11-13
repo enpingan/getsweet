@@ -4,4 +4,5 @@ Spree::Product.class_eval do
   accepts_nested_attributes_for :master
 
   delegate_belongs_to :master, :lead_time
+  delegate_belongs_to :master, :pack_size
 end

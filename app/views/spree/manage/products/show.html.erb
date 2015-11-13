@@ -26,7 +26,6 @@
 					<p class="desc"><b></b> Eggs</p>
 					<p class="desc"><b></b> Etca</p>
 					<div class="divider2"></div>
-					<p class="desc"><b>Lead Time:</b> None</p>
 				</div>
 				<div class="col2">
 					<div class="description">
@@ -47,7 +46,7 @@
               <b>Lead Time (Days):</b> <%= variant.lead_time %>
             </div>
 						<div class="cel">
-							<b>Pack/Size:</b> Each
+							<b>Pack/Size:</b> <%= variant.pack_size ? variant.pack_size : "Each" %>
 						</div>
 						<div class="cel">
 							<b>Price:</b> <%= number_to_currency(variant.price) %>

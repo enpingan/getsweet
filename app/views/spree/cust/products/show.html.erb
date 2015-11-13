@@ -45,7 +45,7 @@
                         <b>Lead Time (Days):</b> <%= variant.lead_time %>
                       </div>
     									<div class="cel">
-    										<b>Pack/Size:</b> Each
+    										<b>Pack/Size:</b> <%= product.pack_size ? product.pack_size : "Each" %>
     									</div>
     									<div class="cel">
     										<b>Price:</b> <%= number_to_currency(variant.price) %>

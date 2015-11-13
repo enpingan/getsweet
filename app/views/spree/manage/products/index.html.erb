@@ -74,10 +74,10 @@
             <a href="<%= url %>" class="cel"><%= product.sku %></a>
           <!-- </div> -->
           <!-- <div class="cel sort-pack_size"> -->
-            <a href="<%= url %>" class="cel sort-pack_size">Each</a>
+            <a href="<%= url %>" class="cel sort-pack_size"><%= product.pack_size ? product.pack_size : "Each" %></a>
           <!-- </div> -->
           <!-- <div class="cel sort-lead_time"> -->
-            <a href="<%= url %>" class="cel sort-lead_time">1 day</a>
+            <a href="<%= url %>" class="cel sort-lead_time"> <%= pluralize(product.lead_time, 'day') %></a>
           <!-- </div> -->
           <!-- <div class="cel sort-price"> -->
             <a href="<%= url %>" class="cel sort-price"><%= number_to_currency(product.price) %></a>
