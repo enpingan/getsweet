@@ -42,13 +42,6 @@ module Spree
 
     private
 
-    def current_vendor
-      if session[:vendor_id]
-        @current_vendor = Spree::Customer.find(session[:vendor_id])
-      end
-        @current_vendor
-    end
-
   end
  end
 end

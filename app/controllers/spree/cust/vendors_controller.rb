@@ -10,11 +10,8 @@ module Spree
     end
 
     def show
-      @vendor = Vendor.friendly.find(params[:id])
-      # @current_order = current_customer.orders.where('vendor_id = ?', @vendor.id).last
-      session[:vendor_id] = @vendor.id
+      @vendor = set_current_vendor
       @current_order = current_order
-
       @line_items = @current_order.line_items if @current_order
 
       if params[:sort] && params[:sort] == 'price'
@@ -29,23 +26,10 @@ module Spree
 
     private
 
-    # def ensure_vendor
-    #   clear_current_order unless current_order.vendor_id == params[:id]
-    # end
-
-    def current_order
-      if session[:order_id]
-        @current_order = Spree::Order.find(session[:order_id])
-        return nil unless @current_order.vendor.id == current_vendor.id
-      end
-      @current_order
-    end
-
-    def current_vendor
-      if session[:vendor_id]
-        @current_vendor = Spree::Vendor.find(session[:vendor_id])
-      end
-        @current_vendor
+    def set_current_vendor
+      @vendor = Vendor.friendly.find(params[:id])
+      session[:vendor_id] = @vendor.id
+      @vendor
     end
 
     def sort_column
