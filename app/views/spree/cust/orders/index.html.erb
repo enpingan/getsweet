@@ -87,8 +87,9 @@
                 <%= order.state %>
               </a>
               <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
-                  <% if order.delivery_date > DateTime.tomorrow.in_time_zone ||(order.delivery_date == DateTime.tomorrow.in_time_zone && Time.current < order.vendor.order_cutoff_time.in_time_zone)%>
+                  <!-- <% if order.delivery_date > DateTime.tomorrow.in_time_zone ||(order.delivery_date == DateTime.tomorrow.in_time_zone && Time.current < order.vendor.order_cutoff_time.in_time_zone)%> -->
                   	<!-- <a href="<%#= edit_order_url(order) %>">(Edit)</a> -->
+                  <% if !order.all_variants_past_cutoff? %>
                     Edit
                   <% elsif order.state != 'complete' %>
                     Past Order Cutoff
