@@ -8,6 +8,7 @@ class OrdersController < Spree::Manage::BaseController
 	before_action :ensure_vendor, only: [:show, :edit, :update, :destroy]
 
   def index
+		clear_current_order
 		@current_customer_id = session[:customer_id]
 		# session[:customer_id] = nil
 		@vendor = current_vendor

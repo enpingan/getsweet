@@ -10,4 +10,5 @@
 	setTimeout(function() {
 			$(".alert-auto-dissapear").fadeOut(1500);
 	},2000);
+	$('#shopping-cart').html("<i class='fa fa-shopping-cart'></i> ( <%= number_to_currency(current_order.total) %> )");
 <% end %>
