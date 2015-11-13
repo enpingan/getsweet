@@ -3,6 +3,7 @@ module Spree
     class RootController < Spree::Manage::BaseController
 
       #skip_before_filter :authorize_admin
+      before_action :clear_current_order
 
       def index
 				# temporarily forwarding to products#index as landing page

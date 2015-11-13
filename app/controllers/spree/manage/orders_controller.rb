@@ -29,6 +29,8 @@ class OrdersController < Spree::Manage::BaseController
 		end
 		@customers = current_vendor.customers
 		@order = current_vendor.orders.new
+		clear_current_order
+		render :new
   end
 
   def create
@@ -74,7 +76,6 @@ class OrdersController < Spree::Manage::BaseController
 	def update
 		@order = set_order_session
 
-
 		if request.patch?
 			@order.item_count = @order.line_items.sum(:quantity)
 			if (params[:commit] == Spree.t(:update))
@@ -107,7 +108,7 @@ class OrdersController < Spree::Manage::BaseController
 
   # Adds a new item to the order (creating a new order if none already exists)
   def populate
-		order = Spree::Order.find(session[:order_id])
+		order = current_order
     # order    = Spree::Order.find(params[:order]['id'].to_i)
     variant  = Spree::Variant.find(params[:index])
     quantity = params[:quantity].to_i
@@ -136,7 +137,7 @@ class OrdersController < Spree::Manage::BaseController
   end
 
 	def unpopulate
-		order = Spree::Order.friendly.find(params[:order_id])
+		order = current_order
 		line_item = Spree::LineItem.find(params[:index])
 		if line_item.destroy
 			order.item_count = order.line_items.sum(:quantity)
@@ -149,9 +150,9 @@ class OrdersController < Spree::Manage::BaseController
 	end
 
   def destroy
-		@order = Spree::Order.friendly.find(params[:id])
+		@order = set_order_session
 		if @order.destroy
-			session[:order_id] = nil;
+			clear_current_order
 			flash[:success] = "Order ##{@order.number} has been cancelled"
 		else
 			flash[:errors] = @order.errors.full_messages
@@ -174,12 +175,7 @@ class OrdersController < Spree::Manage::BaseController
 		end
   end
 
-	def set_order_session(order = nil)
-		order ||= Spree::Order.friendly.find(params[:id])
-		session[:order_id] = order.id
-		session[:customer_id] = order.customer.id
-		order
-	end
+	
 
 	def associate_user(order)
 		order.user_id = order.customer.users.first.id
@@ -235,6 +231,7 @@ class OrdersController < Spree::Manage::BaseController
 		%w[asc desc].include?(params[:direction]) ?  params[:direction] : "DESC"
 	end
 end
+
 
 
 	# /. Vendor

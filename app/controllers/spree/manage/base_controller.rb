@@ -41,6 +41,21 @@ module Spree
           end
         end
 
+        def set_order_session(order = nil)
+      		order ||= Spree::Order.friendly.find(params[:id])
+      		session[:order_id] = order.id
+      		session[:customer_id] = order.customer.id
+      		order
+      	end
+
+      	def current_order
+      		session[:order_id] ? Spree::Order.find(session[:order_id]) : nil
+      	end
+
+      	def clear_current_order
+      		session[:order_id] = nil
+      	end
+
 
 		end
 	end

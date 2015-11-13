@@ -4,8 +4,10 @@ module Spree
     class CustomersController < Spree::Manage::BaseController
 
       before_action :ensure_vendor, only: [:show, :edit, :update, :destroy]
+      before_action :clear_current_order
 
       def index
+
         @vendor = current_vendor
         @customers = @vendor.customers
       end
