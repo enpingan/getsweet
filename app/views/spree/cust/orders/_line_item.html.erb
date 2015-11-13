@@ -2,6 +2,7 @@
 
 
 <%= order_form.fields_for :line_items, line_item do |item_form| %>
+  <% url = vendor_product_url(@order.vendor, variant.product) %>
     <div class="order-item">
       <div class="cel">
         <% if params[:action] == "edit" %>
@@ -9,10 +10,10 @@
           class: 'close-button', id: 'delete-item-button' %>
           <% end %>
       </div>
-      <div class="cel"><%= link_to line_item.name, vendor_product_path(@order.vendor, variant.product.id) %></div>
-      <div class="cel"><%= line_item.sku %></div>
-      <div class="cel">Each</div>
-      <div class="cel"><%= line_item.single_money.to_html %></div>
+      <a href="<%= url %>" class="cel"><%= line_item.name %></a>
+      <a href="<%= url %>" class="cel"><%= line_item.sku %></a>
+      <a href="<%= url %>" class="cel">Each</a>
+      <a href="<%= url %>" class="cel"><%= line_item.single_money.to_html %></a>
       <div class="cel">
         <div class="qty-block">
           <div class="spin"><span class="minus"><i class="fa fa-minus"></i></span>
@@ -21,7 +22,7 @@
             <span class="plus"><i class="fa fa-plus"></i></span></div>
         </div>
       </div>
-      <div class="cel"><%= line_item.display_amount.to_html unless line_item.quantity.nil? %></div>
+      <a href="<%= url %>" class="cel"><%= line_item.display_amount.to_html unless line_item.quantity.nil? %></a>
 
     </div>
 <% end %>
