@@ -77,6 +77,7 @@ module Spree
     			params.require(:customer).permit(
 						:name,
 						:account_id,
+						:email,
 						ship_address_attributes: [ :id, :firstname, :lastname, :phone, :address1, :address2, :city, :country_id, :state_name, :zipcode, :state_id  ])
   			end
 

@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   Spree::PermittedAttributes.user_attributes << :vendor_id
   Spree::PermittedAttributes.user_attributes << :customer_id
+	Spree::PermittedAttributes.user_attributes << :firstname
+	Spree::PermittedAttributes.user_attributes << :lastname
 
 	include Spree::BaseHelper
 	include Spree::Core::ControllerHelpers
