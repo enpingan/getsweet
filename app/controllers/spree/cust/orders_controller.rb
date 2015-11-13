@@ -32,7 +32,8 @@ module Spree
   			@line_items = Spree::LineItem.where('order_id = ?', @order.id).order(sort_column + ' ' + sort_direction)
   		end
 
-      if @order.delivery_date > DateTime.tomorrow.in_time_zone ||(@order.delivery_date == DateTime.tomorrow.in_time_zone && Time.current < @order.vendor.order_cutoff_time.in_time_zone)
+      # if @order.delivery_date > DateTime.tomorrow.in_time_zone ||(@order.delivery_date == DateTime.tomorrow.in_time_zone && Time.current < @order.vendor.order_cutoff_time.in_time_zone)
+      if !@order.any_variant_past_cutoff?
         redirect_to edit_order_url(@order) unless @order.state == "complete"
       else
         render :show
