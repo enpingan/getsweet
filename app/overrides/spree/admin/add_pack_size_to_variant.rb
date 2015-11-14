@@ -3,7 +3,7 @@ Deface::Override.new(:virtual_path => 'spree/admin/variants/_form',
   :insert_after => "[data-hook='sku']",
   :text => "<div class='form-group' data-hook='pack_size'>
 	<%= f.label :pack_size %>
-	<%= f.number_field :pack_size, class: 'form-control' %>
+	<%= f.text_field :pack_size, class: 'form-control' %>
 </div>
           ")
 
