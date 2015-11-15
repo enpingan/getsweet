@@ -103,11 +103,13 @@ module Spree
           redirect_to vendor_url(@order.vendor) and return
         end
       end
+
       if @order.update(order_params)
         zero_qty_items = @order.line_items.each do |line_item|
   				line_item.destroy! if line_item.quantity == 0
   			end
         @order.update!
+        
         if params[:commit] == "Submit Order" || params[:commit] == "Resubmit Order"
           redirect_to order_success_url(@order.id)
         else

@@ -1,5 +1,6 @@
 <div class="search-area layout2">
   <a href="<%= manage_products_url %>" class="cta-link">Back to Catalog</a>
+  <a href="<%= new_order_url %>" class="new-order-button">Start New Order</a>
 </div>
 <div class="clear"></div>
 
@@ -45,7 +46,7 @@
                         <b>Lead Time (Days):</b> <%= variant.lead_time %>
                       </div>
     									<div class="cel">
-    										<b>Pack/Size:</b> <%= product.pack_size ? product.pack_size : "Each" %>
+    										<b>Pack/Size:</b> <%= variant.pack_size ? variant.pack_size : "Each" %>
     									</div>
     									<div class="cel">
     										<b>Price:</b> <%= number_to_currency(variant.price) %>
