@@ -100,8 +100,14 @@
           </div>
           <div class="cel">
             <% if @current_order %>
-              <%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit do %>
-                <%= "Add to Order" %>
+              <% if @current_order.products.include?(product) %>
+                <%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit, data: {confirm: 'This product is already in your cart. Are you sure you want to add more?'} do %>
+                  <%= "Add to Order" %>
+                <% end %>
+              <% else %>
+                <%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit do %>
+                  <%= "Add to Order" %>
+                <% end %>
               <% end %>
             <% end %>
           </div>
