@@ -109,7 +109,7 @@ module Spree
   				line_item.destroy! if line_item.quantity == 0
   			end
         @order.update!
-        
+
         if params[:commit] == "Submit Order" || params[:commit] == "Resubmit Order"
           redirect_to order_success_url(@order.id)
         else
@@ -153,7 +153,7 @@ module Spree
       else
         respond_with(order) do |format|
           format.html { redirect_to cart_path }
-          format.js { flash[:success] = "#{variant.product.name} has been added to your order"}
+          format.js { flash.now[:success] = "#{variant.product.name} has been added to your order"}
         end
       end
     end
