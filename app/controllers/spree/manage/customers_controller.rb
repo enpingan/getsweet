@@ -43,6 +43,7 @@ module Spree
                                phone: c.phone,
                                password: "#{c.firstname}_#{c.lastname}"
           )
+          user.spree_roles << Spree::Role.find_by_name('customer')
         if @customer.save && user.save
           session[:customer_id] = @customer.id
           flash[:success] = "Congratulations, a new customer!"
