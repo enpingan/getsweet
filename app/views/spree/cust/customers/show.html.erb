@@ -71,13 +71,11 @@
 
           <ul class="contact">
             <li><strong>Contact:</strong> <%= "#{user.firstname} #{user.lastname}" %></li>
-            <%# if user.user_type %>
-              <li><strong>Position:</strong> <%= user.user_type %></li>
-            <%# end %>
+            <li><strong>Position:</strong> <%= user.position %></li>
             <li><strong>Phone:</strong> <%= user.phone %></li>
             <li><strong>Email:</strong> <%= user.email %></li>
           </ul>
-            <% if user == current_spree_user %>
+            <% if user == current_spree_user || current_spree_user.is_admin %>
               <a href="<%= edit_account_user_url(user) %>" class="edit-contact-link">Edit Contact Information</a>
             <% end %>
       </div>
@@ -85,4 +83,5 @@
     <% end %>
 
   <div class="clear"></div>
+  <a href="<%= new_account_user_url %>" class="cta-link">Add New User</a>
 </div>

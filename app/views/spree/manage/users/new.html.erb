@@ -1,6 +1,6 @@
 <h1>Contact Information</h1>
 <div class="contact-form">
-  <%= form_for @user, url: account_users_url do |f| %>
+  <%= form_for @user, url: manage_account_users_url do |f| %>
     <%= render partial: "form", locals: {f: f} %>
     <div class="clear"></div>
     <div class="actions">

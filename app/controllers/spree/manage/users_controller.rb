@@ -1,19 +1,19 @@
 module Spree
-  module Cust
-    class UsersController < Spree::Cust::CustomerHomeController
+  module Manage
+    class UsersController < Spree::Manage::BaseController
 
-      before_action :authorize_customer
+      before_action :authorize_vendor
 
       def new
-        @user = current_customer.users.new
+        @user = current_vendor.users.new
         render :new
       end
 
       def create
-        @user = current_customer.users.new(user_params)
+        @user = current_vendor.users.new(user_params)
 
         if @user.save
-          redirect_to account_url
+          redirect_to manage_account_url
         else
           flash[:errors] = @user.errors.full_messages
           render :new
@@ -28,7 +28,7 @@ module Spree
       def update
         @user = Spree::User.find(params[:id])
         if @user.update(user_params)
-          redirect_to account_url
+          redirect_to manage_account_url
         else
           flash[:errors] = @user.errors.full_messages
           render :edit
@@ -38,7 +38,7 @@ module Spree
       def destroy
         @user = Spree::User.find(params[:id])
         @user.destroy!
-        redirect_to account_url
+        redirect_to manage_account_url
       end
 
       private

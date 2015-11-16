@@ -11,8 +11,8 @@
 
   <div class="info tablet-hide">
     <p class="user-name"><%= current_spree_user.firstname.capitalize %> <%= current_spree_user.lastname.capitalize %></p>
-    <% if current_spree_user.user_type %>
-      <p class="user-role"><%= current_spree_user.user_type.capitalize %></p>
+    <% if current_spree_user.position %>
+      <p class="user-role"><%= current_spree_user.position.capitalize %></p>
     <% end %>
   </div>
 

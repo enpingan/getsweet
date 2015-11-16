@@ -46,7 +46,9 @@ Rails.application.routes.draw do
  		namespace :manage do
  			#resources :vendors, only: [:index, :show] do
 
-			resource :account, controller: 'vendors', only: [:show, :edit, :update]
+			resource :account, controller: 'vendors', only: [:show, :edit, :update] do
+			  resources :users, except: [:index, :show]
+			end
 
       resources :customers do
 				resources :ship_addresses

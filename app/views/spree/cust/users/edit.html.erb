@@ -2,8 +2,9 @@
 <div class="contact-form">
   <%= form_for @user, url: account_user_url(@user) do |f| %>
     <%= render partial: "form", locals: {f: f} %>
+    <div class="clear"></div>
     <div class="actions">
-      <button class="update-contact">Update</button>
+      <%= f.submit "Update", class: "update-contact" %>
     </div>
   <% end %>
   <div class="clear"></div>

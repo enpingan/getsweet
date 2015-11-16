@@ -104,10 +104,16 @@ ul.address {
   width: 150px;
 }
 
-.app_ui-wrapper .app_ui-block .customer-edit .update-customer, .app_ui-wrapper .app_ui-block .contact-form .update-contact{
+.app_ui-wrapper .app_ui-block .customer-edit .update-customer{
   width: 220px;
   padding: 15px 0 12px 0;
   margin-top: 37px;
+}
+
+.app_ui-wrapper .app_ui-block .contact-form .update-contact{
+  width: 222px;
+  padding: 15px 0 12px 0;
+  margin-top: 30px;
 }
 
 .nav-btn:hover, .app_ui-wrapper .app_ui-block .customer-edit .update-customer:hover,
@@ -135,6 +141,10 @@ ul.address {
   padding: 5px 10px;
   margin: 0px 20px;
   width: 200px;
+}
+.app_ui-wrapper .app_ui-block .contact-form input[type="radio"]{
+  width: 20px;
+  margin-right: 5px;
 }
 
 .app_ui-wrapper .app_ui-block .customer-edit .jq-selectbox__select{
