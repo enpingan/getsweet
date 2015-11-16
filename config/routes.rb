@@ -64,6 +64,11 @@ Rails.application.routes.draw do
 
 				resources :products do
     		  resources :variants
+					resources :images do
+        		collection do
+          		post :update_positions
+        		end
+					end
     		end
 
 
