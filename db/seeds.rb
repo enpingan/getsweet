@@ -64,11 +64,11 @@ u10 = Spree::User.create(email: 'pete_knickerbocker@sweetist.co', firstname: 'Pe
 u10.spree_roles << customer
 u10.save!
 
-v1 = Spree::Vendor.create(name: 'Dough Donuts', order_cutoff_time: '5PM EST', delivery_minimum: 10.0, payment_terms: 30)
-v2 = Spree::Vendor.create(name: 'Ceci Cela', order_cutoff_time: '6PM EST', delivery_minimum: 10.0, payment_terms: 30)
-v3 = Spree::Vendor.create(name: 'Canele by Celine', order_cutoff_time: '8PM EST', delivery_minimum: 10.0, payment_terms: 0)
-v4 = Spree::Vendor.create(name: "Chikalicious", order_cutoff_time: '9PM EST', delivery_minimum: 10.0, payment_terms: 15)
-v5 = Spree::Vendor.create(name: "Pain D'Avignon", order_cutoff_time: '5PM EST', delivery_minimum: 10.0, payment_terms: 45)
+v1 = Spree::Vendor.create(name: 'Dough Donuts', email: 'orderdoughdonuts@sweetist.co', order_cutoff_time: '5PM EST', delivery_minimum: 10.0, payment_terms: 30)
+v2 = Spree::Vendor.create(name: 'Ceci Cela', email: 'ordercecicela@sweetist.co',order_cutoff_time: '6PM EST', delivery_minimum: 10.0, payment_terms: 30)
+v3 = Spree::Vendor.create(name: 'Canele by Celine', email: 'ordercanelebyceline@sweetist.co', order_cutoff_time: '8PM EST', delivery_minimum: 10.0, payment_terms: 0)
+v4 = Spree::Vendor.create(name: "Chikalicious", email: 'orderchikalicious@sweetist.co', order_cutoff_time: '9PM EST', delivery_minimum: 10.0, payment_terms: 15)
+v5 = Spree::Vendor.create(name: "Pain D'Avignon", email: 'orderpaindavignon@sweetist.co', order_cutoff_time: '5PM EST', delivery_minimum: 10.0, payment_terms: 45)
 
 c6 = Spree::Customer.create(name: "Creek Side Cafe", account_id: 47584, email: "contact_creekside@sweetist.co")
 c7 = Spree::Customer.create(name: "W Hotel", account_id: 85893, email: "contact_whotel@sweetist.co")
@@ -116,25 +116,25 @@ available_date = Time.zone.local(2013, 1, 1)
 # Vendor 1 - Dough Donuts :Products, Variants, Orders > Li
 ###############################################################################
 p1 = v1.products.create(name: "Cafe Au Lait", price: 3.00, shipping_category_id: 1, available_on: available_date,
-  description: "One of Dough's most popular flavors. A blend of fresh roasted coffee beans and pecan brown sugar tops our signature glaze.")
+  description: "One of Dough's most popular flavors. A blend of fresh roasted coffee beans and pecan brown sugar tops our signature glaze.", pack_size: "Each")
 p2 = v1.products.create(name: "Chocolate with Cocoa Nibbs", price: 3.00, shipping_category_id: 1, available_on: available_date,
-  description: "This rich delicacy celebrates classic pastries using chocolate fondant and finished with decadent hand shaven cocoa nibs.")
+  description: "This rich delicacy celebrates classic pastries using chocolate fondant and finished with decadent hand shaven cocoa nibs.", pack_size: "Each")
 p3 = v1.products.create(name: "Chocolate Salted Caramel", price: 3.00, shipping_category_id: 1, available_on: available_date,
-  description: "Belgium dark chocolate infused with French caramel and sprinkled with Mediterranean sea-salt.")
+  description: "Belgium dark chocolate infused with French caramel and sprinkled with Mediterranean sea-salt.", pack_size: "Each")
 p4 = v1.products.create(name: "Cinnamon Sugar", price: 3.00, shipping_category_id: 1, available_on: available_date,
-  description: "Using the best cinnamon Mexico has to offer, this flavor is sure to warm your taste buds.")
+  description: "Using the best cinnamon Mexico has to offer, this flavor is sure to warm your taste buds.", pack_size: "Each")
 p5 = v1.products.create(name: "Mocha Almond Crunch", price: 3.00, shipping_category_id: 1, available_on: available_date,
-  description: "")
+  description: "", pack_size: "Each")
 p6 = v1.products.create(name: "Glazed", price: 3.00, shipping_category_id: 1, available_on: available_date,
-  description: "'The Original' simply a best seller. Dough uses a signature glaze with it's perfect balance of sweetness over our oversized soft dough that make this a classic.")
+  description: "'The Original' simply a best seller. Dough uses a signature glaze with it's perfect balance of sweetness over our oversized soft dough that make this a classic.", pack_size: "Each")
 p7 = v1.products.create(name: "Dulce de Leche", price: 3.00, shipping_category_id: 1, available_on: available_date,
-  description: "Spanish for 'candy of milk', this rich and creamy luxurious glaze is topped with a delicate toasted almond crunch.")
+  description: "Spanish for 'candy of milk', this rich and creamy luxurious glaze is topped with a delicate toasted almond crunch.", pack_size: "Each")
 p8 = v1.products.create(name: "Hibiscus", price: 3.00, shipping_category_id: 1, available_on: available_date,
-  description: "A sweet and tangy glaze transforms the subtle floral flavors of imported Mexican hibiscus into our most unique creation.")
+  description: "A sweet and tangy glaze transforms the subtle floral flavors of imported Mexican hibiscus into our most unique creation.", pack_size: "Each")
 p9 = v1.products.create(name: "Lemon Poppy", price: 3.00, shipping_category_id: 1, available_on: available_date,
-  description: "A glaze of sweet and fresh lemon juice is topped with Turkish poppy seeds and light lemon zest.")
+  description: "A glaze of sweet and fresh lemon juice is topped with Turkish poppy seeds and light lemon zest.", pack_size: "Each")
 p10 = v1.products.create(name: "Filled Nutella", price: 3.50, shipping_category_id: 1, available_on: available_date,
-  description: "Delectable Nutella filled doughnut.")
+  description: "Delectable Nutella filled doughnut.", pack_size: "Each")
 
 p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
 p2.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
@@ -343,25 +343,25 @@ end
 # Vendor 2 - Ceci Cela :Products, Variants, Orders > Li
 ###############################################################################
 p1 = v2.products.create(name: "Apple Tart", price: 26.00, shipping_category_id: 1, available_on: available_date,
-  description: "")
+  description: "", pack_size: "Each")
 p2 = v2.products.create(name: "Pear Tart", price: 26.00, shipping_category_id: 1, available_on: available_date,
-  description: "")
+  description: "", pack_size: "Each")
 p3 = v2.products.create(name: "Lemon Tart", price: 26.00, shipping_category_id: 1, available_on: available_date,
-  description: "Delicious rich and refreshing lemon tart")
+  description: "Delicious rich and refreshing lemon tart", pack_size: "Each")
 p4 = v2.products.create(name: "Fruit Tart", price: 35.00, shipping_category_id: 1, available_on: available_date,
-  description: "Sugar crust covered with chocolate, pastry cream, fresh fruit")
+  description: "Sugar crust covered with chocolate, pastry cream, fresh fruit", pack_size: "Each")
 p5 = v2.products.create(name: "Paradise Cake", price: 36.00, shipping_category_id: 1, available_on: available_date,
-  description: "Mix of guava, mango, passion fruit mousse with fresh fruit on top")
+  description: "Mix of guava, mango, passion fruit mousse with fresh fruit on top", pack_size: "Each")
 p6 = v2.products.create(name: "Chocolate Cake", price: 33.00, shipping_category_id: 1, available_on: available_date,
-  description: "Layers of chocolate cake and mousse")
+  description: "Layers of chocolate cake and mousse", pack_size: "Each")
 p7 = v2.products.create(name: "Black Forest Cake", price: 36.00, shipping_category_id: 1, available_on: available_date,
-  description: "Chocolate cake with vanilla cream and brandied cherries")
+  description: "Chocolate cake with vanilla cream and brandied cherries", pack_size: "Each")
 p8 = v2.products.create(name: "Pear William Cake", price: 36.00, shipping_category_id: 1, available_on: available_date,
-  description: "Vanilla cake with sliced pears")
+  description: "Vanilla cake with sliced pears", pack_size: "Each")
 p9 = v2.products.create(name: "Strawberry Charlotte", price: 36.00, shipping_category_id: 1, available_on: available_date,
-  description: "Strawberry mousse surrounded by ladyfingers")
+  description: "Strawberry mousse surrounded by ladyfingers", pack_size: "Each")
 p10 = v2.products.create(name: "Tiramisu", price: 36.00, shipping_category_id: 1, available_on: available_date,
-  description: "Mascarpone cheese mousse, espresso sponged ladyfingers, marcalas liquor surrounded by ladyfingers")
+  description: "Mascarpone cheese mousse, espresso sponged ladyfingers, marcalas liquor surrounded by ladyfingers", pack_size: "Each")
 
   p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
   p2.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
@@ -567,15 +567,15 @@ end
 # Vendor 3 - Canele by Celine :Products, Variants, Orders > Li
 ###############################################################################
 p1 = v3.products.create(name: "Sweet Canele (Selection of 3)", price: 4.90, shipping_category_id: 1, available_on: available_date,
-  description: "A bag of 3 mini canelés. A petite pastry which has a caramelized crust which protects a moist and tender heart, like a crème brûlèe. Let the bakery know which flavors you want by leaving a note in the comment box below. Select from: Caramel, Cinnamon, Dark Chocolate, Gingerbread, Hazelnut (Contains nuts), Lemon, Lime, Mint Choco, Nougat (Contains nuts), Orange, Orange Blossom, Pink Praline (Contains nuts), Pistachio (Contains nuts), Raspberry, Rose Water, Rum, Vanilla.")
+  description: "A bag of 3 mini canelés. A petite pastry which has a caramelized crust which protects a moist and tender heart, like a crème brûlèe. Let the bakery know which flavors you want by leaving a note in the comment box below. Select from: Caramel, Cinnamon, Dark Chocolate, Gingerbread, Hazelnut (Contains nuts), Lemon, Lime, Mint Choco, Nougat (Contains nuts), Orange, Orange Blossom, Pink Praline (Contains nuts), Pistachio (Contains nuts), Raspberry, Rose Water, Rum, Vanilla.", pack_size: "Each")
 p2 = v3.products.create(name: "Savory Canele (Selection of 3)", price: 5.90, shipping_category_id: 1, available_on: available_date,
-  description: "A bag of 3 mini canelés. A petite pastry which has a caramelized crust which protects a moist and tender heart, like a crème brûlée. If you would like a selection of flavors, let the bakery know which flavors you want by leaving a note in the comment box below.")
+  description: "A bag of 3 mini canelés. A petite pastry which has a caramelized crust which protects a moist and tender heart, like a crème brûlée. If you would like a selection of flavors, let the bakery know which flavors you want by leaving a note in the comment box below.", pack_size: "Each")
 p3 = v3.products.create(name: "Mini Glass Bell Jar (With 3 Mini Caneles)", price: 15.00, shipping_category_id: 1, available_on: available_date,
-  description: "3 mini caneles in the flavor of you choice, displayed in a glass jar. Select your flavor and let the bakery know your choice in the comments box. Sweet flavors to choose from: Caramel, Dark Chocolate, Gingerbread, Lemon, Lime, Mint Choco, Orange, Orange Blossom, Pink Praline (Contains nuts), Pistachio (Contains nuts), Raspberry, Rose Water, Rum, Vanilla, (Seasonal flavors: Hazelnut (Contains nuts), Nougat (Contains nuts), Cinnamon). Savory Flavors to choose from: Black Olive, Cheese, Chorizo, Pesto, Truffle.")
+  description: "3 mini caneles in the flavor of you choice, displayed in a glass jar. Select your flavor and let the bakery know your choice in the comments box. Sweet flavors to choose from: Caramel, Dark Chocolate, Gingerbread, Lemon, Lime, Mint Choco, Orange, Orange Blossom, Pink Praline (Contains nuts), Pistachio (Contains nuts), Raspberry, Rose Water, Rum, Vanilla, (Seasonal flavors: Hazelnut (Contains nuts), Nougat (Contains nuts), Cinnamon). Savory Flavors to choose from: Black Olive, Cheese, Chorizo, Pesto, Truffle.", pack_size: "Each")
 p4 = v3.products.create(name: "Box of 9 Mini Caneles", price: 19.80, shipping_category_id: 1, available_on: available_date,
-  description: "A selection of 9 canelés of your choice, select either sweet or savory canelés. Select your flavors and let the bakery know your choice in the comments box. Sweet flavors to choose from: Caramel, Dark Chocolate, Gingerbread, Lemon, Lime, Mint Choco, Orange, Orange Blossom, Pink Praline (Contains nuts), Pistachio (Contains nuts), Raspberry, Rose Water, Rum, Vanilla, (Seasonal flavors: Hazelnut (Contains nuts), Nougat (Contains nuts), Cinnamon). Savory Flavors to choose from: Black Olive, Cheese, Chorizo, Pesto, Truffle.")
+  description: "A selection of 9 canelés of your choice, select either sweet or savory canelés. Select your flavors and let the bakery know your choice in the comments box. Sweet flavors to choose from: Caramel, Dark Chocolate, Gingerbread, Lemon, Lime, Mint Choco, Orange, Orange Blossom, Pink Praline (Contains nuts), Pistachio (Contains nuts), Raspberry, Rose Water, Rum, Vanilla, (Seasonal flavors: Hazelnut (Contains nuts), Nougat (Contains nuts), Cinnamon). Savory Flavors to choose from: Black Olive, Cheese, Chorizo, Pesto, Truffle.", pack_size: "Each")
 p5 = v3.products.create(name: "Large Canele (Selection of 6)", price: 21.00, shipping_category_id: 1, available_on: available_date,
-  description: "A selection of 6 canelés of your choice. If you would like a selection, let the bakery know your choice of flavors in the comments box.")
+  description: "A selection of 6 canelés of your choice. If you would like a selection, let the bakery know your choice of flavors in the comments box.", pack_size: "Each")
 
 
   p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
@@ -746,19 +746,19 @@ end
 # Vendor 4 - Chikalicious :Products, Variants, Orders > Li
 ###############################################################################
 p1 = v4.products.create(name: "Jackson Pollock Salted Caramel Macaroon", price: 2.50, shipping_category_id: 1, available_on: available_date,
-  description: "The coolest looking and most delicious macaron in the East Village!")
+  description: "The coolest looking and most delicious macaron in the East Village!", pack_size: "Each")
 p2 = v4.products.create(name: "Cookies", price: 4.00, shipping_category_id: 1, available_on: available_date,
-  description: "Some of the best cookies in Manhattan!")
+  description: "Some of the best cookies in Manhattan!", pack_size: "Each")
 p3 = v4.products.create(name: "Vanilla Crepe Cake", price: 59.95, shipping_category_id: 1, available_on: available_date,
-  description: "Layers of thin crepes with a vanilla mousse")
+  description: "Layers of thin crepes with a vanilla mousse", pack_size: "Each")
 p4 = v4.products.create(name: "Green tea Crepe Cake", price: 59.95, shipping_category_id: 1, available_on: available_date,
-  description: "Layers of thin crepes with a green tea mousse")
+  description: "Layers of thin crepes with a green tea mousse", pack_size: "Each")
 p5 = v4.products.create(name: "Puff Chika Creme Puff", price: 2.95, shipping_category_id: 1, available_on: available_date,
-  description: "Stunning cream puff")
+  description: "Stunning cream puff", pack_size: "Each")
 p6 = v4.products.create(name: "Cookie Eclair", price: 5.50, shipping_category_id: 1, available_on: available_date,
-  description: "An eclair, but crunchy with a delectable creamy filling")
+  description: "An eclair, but crunchy with a delectable creamy filling", pack_size: "Each")
 p7 = v4.products.create(name: "Dough'ssant", price: 5.00, shipping_category_id: 1, available_on: available_date,
-  description: "Is this the original croissant-doughnut hybrid? It is most certainly worth trying all the flavors!")
+  description: "Is this the original croissant-doughnut hybrid? It is most certainly worth trying all the flavors!", pack_size: "Each")
 
 
   p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
@@ -952,25 +952,25 @@ end
 # Vendor 5 - Pain D'Avignon :Products, Variants, Orders > Li
 ###############################################################################
 p1 = v5.products.create(name: "Hamburger Buns", price: 6.00, shipping_category_id: 1, available_on: available_date,
-  description: "Very soft, with a thin, bubbly crust which locks in juicy burgers and sauces, and a light, regular crumb, with a mild saltiness.")
+  description: "Very soft, with a thin, bubbly crust which locks in juicy burgers and sauces, and a light, regular crumb, with a mild saltiness.", pack_size: "Each")
 p2 = v5.products.create(name: "Specialty Loaves", price: 7.25, shipping_category_id: 1, available_on: available_date,
-  description: "In addition to the many standard shapes and sizes, we offer special holiday loaves, and special events loaves (such as 6-foot sandwich bread.) If you have a special event or need bread for a special showcase or breadbasket, contact us and we’ll see how we can help you.")
+  description: "In addition to the many standard shapes and sizes, we offer special holiday loaves, and special events loaves (such as 6-foot sandwich bread.) If you have a special event or need bread for a special showcase or breadbasket, contact us and we’ll see how we can help you.", pack_size: "Each")
 p3 = v5.products.create(name: "Raisin Pecan", price: 6.00, shipping_category_id: 1, available_on: available_date,
-  description: "A regular dense and moist crumb full of raisins and pecans, slightly sweet, baked to a dark crusty brown.")
+  description: "A regular dense and moist crumb full of raisins and pecans, slightly sweet, baked to a dark crusty brown.", pack_size: "Each")
 p4 = v5.products.create(name: "Picholine Olive", price: 5.50, shipping_category_id: 1, available_on: available_date,
-  description: "A soft, open, airy crumb, filled with picholine olives and a little bit of fresh rosemary, matched with a soft, bubbly crust with just a bit of crunch.")
+  description: "A soft, open, airy crumb, filled with picholine olives and a little bit of fresh rosemary, matched with a soft, bubbly crust with just a bit of crunch.", pack_size: "Each")
 p5 = v5.products.create(name: "White French", price: 4.50, shipping_category_id: 1, available_on: available_date,
-  description: "A light white loaf made for slicing, similar to the White French Baguette in flavor, but with a denser, more regular crumb and a crust which crackles.")
+  description: "A light white loaf made for slicing, similar to the White French Baguette in flavor, but with a denser, more regular crumb and a crust which crackles.", pack_size: "Each")
 p6 = v5.products.create(name: "Honey Whole Wheat", price: 4.50, shipping_category_id: 1, available_on: available_date,
-  description: "A light whole wheat loaf made for slicing, with a dense, regular crumb ideal for sandwiches, a slight wheat flavor and a very light crust.")
+  description: "A light whole wheat loaf made for slicing, with a dense, regular crumb ideal for sandwiches, a slight wheat flavor and a very light crust.", pack_size: "Each")
 p7 = v5.products.create(name: "Somun", price: 3.50, shipping_category_id: 1, available_on: available_date,
-  description: "A soft and light crumb and crust, very spongy, with a touch of olive oil.")
+  description: "A soft and light crumb and crust, very spongy, with a touch of olive oil.", pack_size: "Each")
 p8 = v5.products.create(name: "Sourdough", price: 4.00, shipping_category_id: 1, available_on: available_date,
-  description: "All white-flour sourdough bread with very thin but durable crust, baked to a rich golden brown, a light semi-regular crumb and a pleasantly sour taste and smell.")
+  description: "All white-flour sourdough bread with very thin but durable crust, baked to a rich golden brown, a light semi-regular crumb and a pleasantly sour taste and smell.", pack_size: "Each")
 p9 = v5.products.create(name: "Pane Francese", price: 5, shipping_category_id: 1, available_on: available_date,
-  description: "Similar to ciabatta, but made with sourdough starter, a very open, moist irregular crumb, very soft, almost waxy, and a slightly thicker crust, baked to a dark-golden brown. A slightly sour and salty taste.")
+  description: "Similar to ciabatta, but made with sourdough starter, a very open, moist irregular crumb, very soft, almost waxy, and a slightly thicker crust, baked to a dark-golden brown. A slightly sour and salty taste.", pack_size: "Each")
 p10 = v5.products.create(name: "Kalamata Olive", price: 6.50, shipping_category_id: 1, available_on: available_date,
-  description: "A light, colorful crumb, speckled with kalamata olives and a floured, golden, crust. This bread smells deeply of the olives, and the subtle sourness they impart on the bread.")
+  description: "A light, colorful crumb, speckled with kalamata olives and a floured, golden, crust. This bread smells deeply of the olives, and the subtle sourness they impart on the bread.", pack_size: "Each")
 
   p1.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
   p2.master.update(sku: rand(10000000...100000000), is_master: true, track_inventory: false, tax_category_id: 1)
