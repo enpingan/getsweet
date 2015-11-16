@@ -28,8 +28,8 @@
       </td>
       <td><a href="<%= vendor_product_url(product.vendor, product) %>"><%= product.name %></a></td>
       <td><%=Spree::Variant.find_by_product_id(product.id).sku %></td>
-      <td>pack/size</td>
-      <td>lead time</td>
+      <td><%= product.pack_size  %></td>
+      <td><%= pluralize(product.lead_time, 'day') %></td>
       <td><%= number_to_currency(product.price) %></td>
       <td>
         <div class="cart-item-quantity count-block" data-hook="cart_item_quantity">

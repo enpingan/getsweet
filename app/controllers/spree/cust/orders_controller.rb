@@ -32,7 +32,8 @@ module Spree
   			@line_items = Spree::LineItem.where('order_id = ?', @order.id).order(sort_column + ' ' + sort_direction)
   		end
 
-      if @order.delivery_date > DateTime.tomorrow.in_time_zone ||(@order.delivery_date == DateTime.tomorrow.in_time_zone && Time.current < @order.vendor.order_cutoff_time.in_time_zone)
+      # if @order.delivery_date > DateTime.tomorrow.in_time_zone ||(@order.delivery_date == DateTime.tomorrow.in_time_zone && Time.current < @order.vendor.order_cutoff_time.in_time_zone)
+      if !@order.any_variant_past_cutoff?
         redirect_to edit_order_url(@order) unless @order.state == "complete"
       else
         render :show
@@ -102,11 +103,13 @@ module Spree
           redirect_to vendor_url(@order.vendor) and return
         end
       end
+
       if @order.update(order_params)
         zero_qty_items = @order.line_items.each do |line_item|
   				line_item.destroy! if line_item.quantity == 0
   			end
         @order.update!
+
         if params[:commit] == "Submit Order" || params[:commit] == "Resubmit Order"
           redirect_to order_success_url(@order.id)
         else
@@ -150,7 +153,7 @@ module Spree
       else
         respond_with(order) do |format|
           format.html { redirect_to cart_path }
-          format.js { flash[:success] = "#{variant.product.name} has been added to your order"}
+          format.js { flash.now[:success] = "#{variant.product.name} has been added to your order"}
         end
       end
     end

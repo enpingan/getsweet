@@ -1,4 +1,6 @@
-<h1>Vendor Index</h1>
+<h1 class="catalog-title">My Vendors</h1>
+<a href="<%= new_order_url %>" class="new-order-button">Start New Order</a>
+<div class="clear"></div>
 
 <% @vendors.each do |vendor| %>
   <h3><a href="<%=vendor_url(vendor)%>"><%= vendor.name %></a></h3>

@@ -15,7 +15,10 @@ Rails.application.routes.draw do
 
 	 scope module: 'cust' do
 
-		resource :account, to: 'customers', only: [:show, :edit, :update]
+		resource :account, controller: 'customers', only: [:show, :edit, :update] do
+		  resources :users, except: [:index, :show]
+		end
+
 
     resources :vendors, only: [:index, :show] do
       resources :products, only: [:index, :show]
@@ -43,7 +46,9 @@ Rails.application.routes.draw do
  		namespace :manage do
  			#resources :vendors, only: [:index, :show] do
 
-			resource :account, to: 'vendors', only: [:show, :edit, :update]
+			resource :account, controller: 'vendors', only: [:show, :edit, :update] do
+			  resources :users, except: [:index, :show]
+			end
 
       resources :customers do
 				resources :ship_addresses
@@ -122,7 +127,7 @@ Rails.application.routes.draw do
 			resources :users do
 				resources :user_images
 			end
-		
+
 		end
 
 	end

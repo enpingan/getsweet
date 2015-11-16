@@ -1,0 +1,39 @@
+
+
+  <div class="field">
+    <%= f.label :firstname, 'First Name' %><br>
+    <%= f.text_field :firstname %>
+  </div>
+
+  <div class="field">
+    <%= f.label :lastname, 'Last Name' %><br>
+    <%= f.text_field :lastname %>
+  </div>
+
+  <div class="field">
+    <%= f.label :position %>
+    <%= f.text_field :position %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+
+<% if current_spree_user.is_admin %>
+  <div class="field">
+    <%= f.label :is_admin, "Admin Priviledges?" %>
+    <%= f.radio_button :is_admin, "true" %>Yes
+    <%= f.radio_button :is_admin, "false" %>No
+  </div>
+<% end %>

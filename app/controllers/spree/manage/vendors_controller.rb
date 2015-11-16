@@ -13,6 +13,7 @@ module Spree
 		  def show
  		   	#@account = Spree::Vendor.friendly.find(params[:id])
     	  @account = spree_current_user.vendor
+        @users = current_vendor.users
 				#@products = @account.products.order('name DESC')
  			end
 
@@ -40,6 +41,7 @@ module Spree
         def account_params
           params.require(:vendor).permit(
             :name,
+            :email,
             :order_cutoff_time,
 						:delivery_minimum,
 						:payment_terms)

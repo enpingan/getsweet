@@ -1,4 +1,6 @@
 Spree::User.class_eval do
+  validates :firstname, :lastname, presence: true
+
   belongs_to :vendor, class_name: 'Vendor', foreign_key: :vendor_id, primary_key: :id
   belongs_to :customer, class_name: 'Customer', foreign_key: :customer_id, primary_key: :id
 

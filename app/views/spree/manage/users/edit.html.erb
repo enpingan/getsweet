@@ -1,0 +1,11 @@
+<h1> Edit Contact Information</h1>
+<div class="contact-form">
+  <%= form_for @user, url: manage_account_user_url(@user) do |f| %>
+    <%= render partial: "form", locals: {f: f} %>
+    <div class="clear"></div>
+    <div class="actions">
+      <button class="update-contact">Update</button>
+    </div>
+  <% end %>
+  <div class="clear"></div>
+</div>

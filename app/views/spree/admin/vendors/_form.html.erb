@@ -13,14 +13,15 @@
           <%= f.label :name, Spree.t(:name) %>
           <%= f.text_field :name, :class => 'form-control' %>
         </div>
+        <div data-hook="email" class="form-group">
+          <%= f.label :email, Spree.t(:email) %>
+          <%= f.email_field :email, :class => 'form-control' %>
+        </div>
         <div data-hook="rate" class="form-group">
           <%= f.label :order_cutoff_time, "Order Cutoff Time" %>
           <%= f.text_field :order_cutoff_time, :class => 'form-control' %>
         </div>
-        <div data-hook="included" class="form-group">
-          <%= f.label :delivery_minimum, Spree.t(:delivery_minimum) %>
-          <%= f.text_field :delivery_minimum, :class => 'form-control' %>
-        </div>
+
       </div>
 
       <div class="col-md-6">
@@ -32,6 +33,10 @@
         <div data-hook="category" class="form-group">
           <%= f.label :payment_terms, "Payment Terms" %>
           <%= f.text_field :payment_terms, :class => 'form-control' %>
+        </div>
+        <div data-hook="included" class="form-group">
+          <%= f.label :delivery_minimum, Spree.t(:delivery_minimum) %>
+          <%= f.text_field :delivery_minimum, :class => 'form-control' %>
         </div>
       </div>
     </div>

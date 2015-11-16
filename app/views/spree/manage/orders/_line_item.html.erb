@@ -1,16 +1,16 @@
 <% variant = line_item.variant %>
 
-
 <%= order_form.fields_for :line_items, line_item do |item_form| %>
+  <% url = manage_product_url(variant.product) %>
     <div class="order-item">
       <div class="cel">
         <%= link_to raw("<i class='fa fa-times'></i>"), {action: :unpopulate, order_id: @order.id, index: line_item.id},
           class: 'close-button', id: 'delete-item-button' %>
       </div>
-      <div class="cel"><%= link_to line_item.name, manage_product_path(variant.product) %></div>
-      <div class="cel"><%= line_item.sku %></div>
-      <div class="cel">Each</div>
-      <div class="cel"><%= line_item.single_money.to_html %></div>
+      <a href="<%= url %>" class="cel"><%= line_item.name %></a>
+      <a href="<%= url %>" class="cel"><%= line_item.sku %></a>
+      <a href="<%= url %>" class="cel">Each</a>
+      <a href="<%= url %>" class="cel"><%= line_item.single_money.to_html %></a>
       <div class="cel">
         <div class="qty-block">
           <div class="spin"><span class="minus"><i class="fa fa-minus"></i></span>
@@ -19,7 +19,7 @@
             <span class="plus"><i class="fa fa-plus"></i></span></div>
         </div>
       </div>
-      <div class="cel"><%= line_item.display_amount.to_html unless line_item.quantity.nil? %></div>
+      <a href="<%= url %>" class="cel"><%= line_item.display_amount.to_html unless line_item.quantity.nil? %></a>
       <div class="cel out-of-stock"><input type="checkbox"></div>
     </div>
 <% end %>

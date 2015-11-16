@@ -5,6 +5,8 @@ it up until <%= @order.vendor.order_cutoff_time %> on <%= (@order.delivery_date.
 
 <section class="confirmation-nav">
   <a href="<%= orders_url %>" class="confirmation-nav-btn">Back to All Orders</a>
-  <a href="<%= edit_order_url(@order) %>" class="confirmation-nav-btn">Edit Order</a>
+  <% unless @order.all_variants_past_cutoff? %>
+    <a href="<%= edit_order_url(@order) %>" class="confirmation-nav-btn">Edit Order</a>
+  <% end %>
   <a href="<%= new_order_url %>" class="confirmation-nav-btn">Start a New Order</a>
 </section>

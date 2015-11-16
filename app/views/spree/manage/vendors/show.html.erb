@@ -1,6 +1,7 @@
 <h1 class="catalog-title"><%= @account.name %>
   <a href="<%= edit_manage_account_url %>" class="edit-link">(Edit)</a>
 </h1>
+<a href="<%= new_manage_order_url %>" class="new-order-button">Start New Order</a>
 <div class="clear"></div>
 
 <div class="manage-customer">
@@ -16,9 +17,10 @@
     <div class="contact-info">
       <% if @account %>
         <ul class="primary-contact">
-          <li><strong>Name:</strong> <%= "#{@account.name}" %></li>
+          <li><strong>Name:</strong> <%= @account.name %></li>
+          <li><strong>Email:</strong> <%= @account.email %>
           <li><strong>Order Cutoff Time:</strong> <%= @account.order_cutoff_time %></li>
-          <li><strong>Delivery Minimum:</strong> $<%= number_with_precision(@account.delivery_minimum, precision: 2) %></li>
+          <li><strong>Delivery Minimum:</strong> <%= number_to_currency(@account.delivery_minimum) %></li>
           <li><strong>Payment Terms:</strong> <%= @account.payment_terms %> Days</li>
         </ul>
       <% else %>
@@ -28,4 +30,32 @@
   </div>
 
   <div class="clear"></div>
+  <% @users.each do |user| %>
+<div class="contact-group">
+    <% if user.images.any? %>
+      <%# user.images.each do |image| %>
+        <%= image_tag user.images.first.attachment.url(:product), :class => "contact-img", alt: image.alt %>
+      <%# end %>
+    <% else %>
+      <%#= image_tag image.attachment.url(:product), :class => "contact-img", alt: image.alt %>
+      <%#= image_url("spree/manage/img/logo2.png"), :class => "contact-img", alt: image.alt  %>
+      <%= image_tag "spree/manage/img/user_placeholder.png", :class => "contact-img", alt: "contact image" %>
+    <% end %>
+
+    <div class="contact-info">
+
+        <ul class="contact">
+          <li><strong>Contact:</strong> <%= "#{user.firstname} #{user.lastname}" %></li>
+          <li><strong>Position:</strong> <%= user.position %></li>
+          <li><strong>Phone:</strong> <%= user.phone %></li>
+          <li><strong>Email:</strong> <%= user.email %></li>
+        </ul>
+          <% if user == current_spree_user || current_spree_user.is_admin %>
+            <a href="<%= edit_manage_account_user_url(user) %>" class="edit-contact-link">Edit Contact Information</a>
+          <% end %>
+    </div>
+</div>
+  <% end %>
+
+  <a href="<%= new_manage_account_user_url %>" class="cta-link">Add New User</a>
 </div>

@@ -21,6 +21,15 @@ ul, li{
   width: 47%;
   float: left;
   margin-bottom: 20px;
+  position: relative;
+}
+
+.contact-group:nth-of-type(odd){
+  float: left;
+}
+
+.contact-group:nth-of-type(even){
+  float: right;
 }
 
 .contact-group .contact-img {
@@ -57,7 +66,19 @@ ul.address {
 
 }
 
-.nav-btn, .app_ui-wrapper .app_ui-block .customer-edit .update-customer{
+.contact-info a.edit-contact-link{
+  text-decoration: underline;
+  color: #FF7E00;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.contact-info a.edit-contact-link:hover{
+  color: indigo;
+}
+
+.nav-btn, .app_ui-wrapper .app_ui-block .customer-edit .update-customer,
+.app_ui-wrapper .app_ui-block .contact-form .update-contact{
   font-family: 'p22_underground_cy_prodemi';
   border: none;
   color: #FFF;
@@ -89,18 +110,25 @@ ul.address {
   margin-top: 37px;
 }
 
-.nav-btn:hover, .app_ui-wrapper .app_ui-block .customer-edit .update-customer:hover{
+.app_ui-wrapper .app_ui-block .contact-form .update-contact{
+  width: 222px;
+  padding: 15px 0 12px 0;
+  margin-top: 30px;
+}
+
+.nav-btn:hover, .app_ui-wrapper .app_ui-block .customer-edit .update-customer:hover,
+.app_ui-wrapper .app_ui-block .contact-form .update-contact:hover{
   background: #FF9012;
 }
 
-.customer-edit {
+.customer-edit, .contact-form {
   width: 530px;
   margin: 20px auto;
   background: #fff;
   padding: 0 0 20px 0;
 }
 
-.app_ui-wrapper .app_ui-block .customer-edit label{
+.app_ui-wrapper .app_ui-block .customer-edit label, .app_ui-wrapper .app_ui-block .contact-form label{
   text-align: left;
   padding: 0;
   margin: 20px 20px 0 20px;
@@ -108,10 +136,15 @@ ul.address {
   float:left;
 }
 
-.app_ui-wrapper .app_ui-block .customer-edit input, .app_ui-wrapper .app_ui-block .customer-edit .jq-selectbox__select{
+.app_ui-wrapper .app_ui-block .customer-edit input, .app_ui-wrapper .app_ui-block .customer-edit .jq-selectbox__select,
+.app_ui-wrapper .app_ui-block .contact-form input{
   padding: 5px 10px;
   margin: 0px 20px;
   width: 200px;
+}
+.app_ui-wrapper .app_ui-block .contact-form input[type="radio"]{
+  width: 20px;
+  margin-right: 5px;
 }
 
 .app_ui-wrapper .app_ui-block .customer-edit .jq-selectbox__select{
@@ -119,7 +152,7 @@ ul.address {
 }
 
 .app_ui-wrapper .app_ui-block .customer-edit .field, .app_ui-wrapper .app_ui-block .customer-edit .form-group,
-.app_ui-wrapper .app_ui-block .customer-edit .actions{
+.app_ui-wrapper .app_ui-block .customer-edit .actions, .app_ui-wrapper .app_ui-block .contact-form .field{
   width: 265px;
   float: left;
 }
@@ -134,25 +167,26 @@ ul.address {
 
     width: 96%;
   }
-  .app_ui-wrapper .app_ui-block .customer-edit input{
+  .app_ui-wrapper .app_ui-block .customer-edit input, .app_ui-wrapper .app_ui-block .contact-form input{
     border: 1px solid #ddd;
   }
 }
 
 @media (max-width: 559px){
-  .customer-edit{
+  .customer-edit, .contact-form{
     width: 95%;
     padding-right: 20px;
   }
   .app_ui-wrapper .app_ui-block .customer-edit .field, .app_ui-wrapper .app_ui-block .customer-edit .form-group,
-  .app_ui-wrapper .app_ui-block .customer-edit .actions{
+  .app_ui-wrapper .app_ui-block .customer-edit .actions, .app_ui-wrapper .app_ui-block .contact-form .field{
     width: 92%;
   }
   .app_ui-wrapper .app_ui-block .customer-edit label, .app_ui-wrapper .app_ui-block .customer-edit input,
-  .app_ui-wrapper .app_ui-block .customer-edit .jq-selectbox__select{
+  .app_ui-wrapper .app_ui-block .customer-edit .jq-selectbox__select,
+  .app_ui-wrapper .app_ui-block .contact-form label, .app_ui-wrapper .app_ui-block .contact-form input{
     width:95%;
   }
-  .app_ui-wrapper .app_ui-block .customer-edit input{
+  .app_ui-wrapper .app_ui-block .customer-edit input, .app_ui-wrapper .app_ui-block .contact-form input{
     border: 1px solid #ddd;
   }
 }

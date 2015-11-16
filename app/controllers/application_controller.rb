@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
   Spree::PermittedAttributes.user_attributes << :customer_id
 	Spree::PermittedAttributes.user_attributes << :firstname
 	Spree::PermittedAttributes.user_attributes << :lastname
+  Spree::PermittedAttributes.variant_attributes << :pack_size
+  Spree::PermittedAttributes.variant_attributes << :lead_time
+  Spree::PermittedAttributes.product_attributes << :vendor_id
 
 	include Spree::BaseHelper
 	include Spree::Core::ControllerHelpers
