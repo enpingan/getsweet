@@ -10,7 +10,7 @@
 <div id="order-form">
 
 <% if @current_customer && @current_order%>
-  <h3> Customer: <a href="manage_customer_url(@current_customer)"><%= @current_customer.name %></a></h3>
+  <h3> Customer: <a href="<%= manage_customer_url(@current_customer) %>"><%= @current_customer.name %></a></h3>
   <h3> Delivery Date: <%= @current_order.delivery_date.to_date.to_formatted_s(:long) %></h3>
   <h3 id="current-order">Order: <a href="<%= edit_manage_order_url(@current_order) %>">#<%= @current_order.number %></a></h3>
 <% end %>
