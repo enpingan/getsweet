@@ -55,4 +55,34 @@
   </div>
 
   <div class="clear"></div>
+    <% @users.each do |user| %>
+  <div class="contact-group">
+      <% if user.images.any? %>
+        <%# user.images.each do |image| %>
+          <%= image_tag user.images.first.attachment.url(:product), :class => "contact-img", alt: image.alt %>
+        <%# end %>
+  		<% else %>
+  			<%#= image_tag image.attachment.url(:product), :class => "contact-img", alt: image.alt %>
+  			<%#= image_url("spree/manage/img/logo2.png"), :class => "contact-img", alt: image.alt  %>
+  			<%= image_tag "spree/manage/img/user_placeholder.png", :class => "contact-img", alt: "contact image" %>
+      <% end %>
+
+      <div class="contact-info">
+
+          <ul class="contact">
+            <li><strong>Contact:</strong> <%= "#{user.firstname} #{user.lastname}" %></li>
+            <%# if user.user_type %>
+              <li><strong>Position:</strong> <%= user.user_type %></li>
+            <%# end %>
+            <li><strong>Phone:</strong> <%= user.phone %></li>
+            <li><strong>Email:</strong> <%= user.email %></li>
+          </ul>
+            <% if user == current_spree_user %>
+              <a href="<%= edit_account_user_url(user) %>" class="edit-contact-link">Edit Contact Information</a>
+            <% end %>
+      </div>
+  </div>
+    <% end %>
+
+  <div class="clear"></div>
 </div>

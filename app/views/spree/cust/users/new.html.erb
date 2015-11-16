@@ -1,0 +1,10 @@
+<h1>Contact Information</h1>
+<div class="contact-form">
+  <%= form_for @user, url: account_users_url do |f| %>
+    <%= render partial: "form", locals: {f: f} %>
+    <div class="actions">
+      <button class="update-contact">Save</button>
+    </div>
+  <% end %>
+  <div class="clear"></div>
+</div>
