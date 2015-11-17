@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116201309) do
+ActiveRecord::Schema.define(version: 20151117171433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -298,6 +298,22 @@ ActiveRecord::Schema.define(version: 20151116201309) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "spree_accounts", force: :cascade do |t|
+    t.integer  "payment_terms",                        null: false
+    t.decimal  "balance",             default: 0.0,    null: false
+    t.string   "status"
+    t.decimal  "discount",            default: 0.0,    null: false
+    t.decimal  "cost_price_discount", default: 0.0,    null: false
+    t.string   "discount_type",       default: "None", null: false
+    t.integer  "customer_id"
+    t.integer  "vendor_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "spree_accounts", ["customer_id"], name: "index_spree_accounts_on_customer_id", using: :btree
+  add_index "spree_accounts", ["vendor_id"], name: "index_spree_accounts_on_vendor_id", using: :btree
 
   create_table "spree_addresses", force: :cascade do |t|
     t.string   "firstname"

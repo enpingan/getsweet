@@ -1,12 +1,14 @@
 # == Schema Information
 #
-# Table name: customers
+# Table name: spree_customers
 #
-#  id         :integer          not null, primary key
-#  name       :string           not null
-#  account_id :integer          not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string           not null
+#  account_id      :integer          not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  ship_address_id :integer
+#  email           :string
 #
 
 module Spree
@@ -25,7 +27,9 @@ module Spree
     alias_attribute :shipping_address, :ship_address
 		accepts_nested_attributes_for :ship_address
 
-		has_and_belongs_to_many :vendors, join_table: :spree_customers_vendors
+		# has_and_belongs_to_many :vendors, join_table: :spree_customers_vendors
+		has_many :accounts, class_name: 'Spree::Account', foreign_key: :customer_id, primary_key: :id
+		has_many :vendors, through: :accounts, foreign_key: :customer_id
 
 		has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Spree::CustomerImage"
 	end
