@@ -650,7 +650,7 @@ end
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id), account_id: a7.id
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id, account_id: a7.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))

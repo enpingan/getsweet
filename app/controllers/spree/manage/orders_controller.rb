@@ -42,6 +42,7 @@ class OrdersController < Spree::Manage::BaseController
 			render :new and return
 		else
 			associate_user(@order)
+			associate_account(@order)
 
 	    if @order.save!
 				set_order_session(@order)
@@ -175,13 +176,15 @@ class OrdersController < Spree::Manage::BaseController
 		end
   end
 
-	
-
 	def associate_user(order)
 		order.user_id = order.customer.users.first.id
 		order.ship_address_id = order.customer.ship_address_id
 		order.bill_address_id = order.customer.ship_address_id
 		order.created_by_id = order.user_id
+	end
+
+	def associate_account(order)
+		order.account_id = current_vendor.accounts.where('customer_id = ?', order.customer_id).limit(1).first.id
 	end
 
 	def filter_orders
