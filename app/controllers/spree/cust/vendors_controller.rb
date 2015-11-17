@@ -5,6 +5,7 @@ module Spree
     before_action :authorize_customer, only: :show
     def index
       clear_current_order
+      @customer = current_customer
       @vendors = Vendor.all
       render :index
     end

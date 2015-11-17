@@ -58,7 +58,7 @@ module Spree
       if @order.save
         set_order_session(@order)
         flash[:success] = "You've started a new order!"
-        redirect_to vendor_url(@order.vendor_id)
+        redirect_to vendor_products_url(@order.vendor)
       else
         flash[:errors] = @order.errors.full_messages
         render :new
@@ -100,7 +100,7 @@ module Spree
           zero_qty_items = @order.line_items.each do |line_item|
     				line_item.destroy! if line_item.quantity == 0
     			end
-          redirect_to vendor_url(@order.vendor) and return
+          redirect_to vendor_products_url(@order.vendor) and return
         end
       end
 

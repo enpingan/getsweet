@@ -1,103 +1,152 @@
-<h1 class="vendor-heading"> <%= @vendor.name %></h1>
-
-<input type="text" placeholder="Product name or sku"></input>
-<button class=search>Search</button>
 
 
-<h3> Product Guide</h3>
+	<div class="search-area">
+		<!-- <div class="search-block">
+			<form id="search-form">
+				<input type="text" placeholder="Search Products">
+				<input type="submit" value="Search">
+			</form>
+			<form id="filter-form">
+				<label>Filter By:</label>
+				<select name="filter_by" id="filter_by">
+					<option value="all">All</option>
+					<option value="price">Price</option>
+					<option value="name">Name</option>
+				</select>
+			</form>
+		</div> -->
+		<div class="recent-block">
+			<div class="recent-list">
+				<a href="#" id="recent_orders">Recent Orders <i class="fa fa-angle-down"></i></a>
+				<ul>
+          <% @recent_orders.each do |order| %>
+					  <li><a href="<%= order_url(order) %>"><%= order.delivery_date.to_date.to_formatted_s(:short) %> (#<%= order.number %>)</a></li>
+					<% end %>
+				</ul>
+			</div>
+			<!-- <a href="" class="browse_catalog">Browse Catalog</a> -->
+		</div>
+	</div>
+	<!-- <h1 class="tablet-center">Sweet Deals!</h1> -->
+	<h1 class="catalog-title"><%= @vendor.name %> Product Catalog</h1>
+	<a href="<%= new_order_url %>" class="new-order-button">Start New Order</a>
+	<div class="clear"></div>
 
-<table>
-  <colgroup span="7"></colgroup>
-  <tr>
-    <th></th>
-    <th>Product Name</th>
-    <th>SKU #</th>
-    <th>Pack/Size</th>
-    <th>Lead Time</th>
-    <th>Price</th>
-    <th>Quantity</th>
-  </tr>
-  <% @products.each do |product| %>
-    <tr>
-      <td>
-        <% if product.images.present? %>
-          <%= image_tag product.images.first.attachment.url(:mini) %>
-        <% else %>
-           No IMG
-        <% end %>
-      </td>
-      <td><a href="<%= vendor_product_url(product.vendor, product) %>"><%= product.name %></a></td>
-      <td><%=Spree::Variant.find_by_product_id(product.id).sku %></td>
-      <td><%= product.pack_size  %></td>
-      <td><%= pluralize(product.lead_time, 'day') %></td>
-      <td><%= number_to_currency(product.price) %></td>
-      <td>
-        <div class="cart-item-quantity count-block" data-hook="cart_item_quantity">
-          <span href="#" class="minus count-buttons">-</span>
-            <div class="count">
-              <%#= item_form.object.quantity %>
-            </div>
-            <input type="text" placeholder="QTY"></input>
-            <%#= item_form.number_field :quantity, :min => 0, :class => "line_item_quantity hide", :size => 5 %>
-            <span href="#" class="plus count-buttons">+</span>
-        </div>
-      </td>
+	<% if @current_order%>
+		<h3 id="current-order">Order: <a href="<%= order_url(@current_order) %>">#<%= @current_order.number %></a></h3>
+		<h3> Delivery Date: <%= @current_order.delivery_date.to_date.to_formatted_s(:long) %></h3>
+	<% end %>
 
-    </tr>
-  <% end %>
-  <tfoot>
-    <tr>
-      <td>
-        <div class="add-to-cart">
-          <br/>
-          <div class="input-group">
-            <span class="input-group-btn">
-              <%= button_tag :class => 'add-to-order btn btn-success', :id => 'add-to-cart-button', :type => :submit do %>
-                <%= Spree.t(:add_to_cart) %>
-              <% end %>
-            </span>
-          </div>
-      </td>
-    </tr>
-  </tfoot>
-</table>
+	<div id="order-form">
+
+		<div class="liveFilterContainer">
+		  <label>Search
+		    <input type="text" class="liveFilterInput default" placeholder="Product name or sku" />
+
+		    <a href="#" class="clearField" title="Clear Filter">x</a>
+		  </label>
+		</div>
+		<div class="noResults"><strong>Sorry.</strong> There is no match for your filter; please try again.</div>
+		<div class="order-product-list liveFilterList">
+
+			<div class="tRow header">
+				<div class="cel">
+				</div>
+				<div class="cel">
+					<%= sortable "name" %>
+					<!-- <a href="" class="sort-name">Name <i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">
+					SKU
+					<!-- <a href="" class="sort-sku">SKU <i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">
+					Pack/Size
+					<!-- <a href="" class="sort-pack_size">Pack/Size <i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">
+					Lead Time
+					<!-- <a href="" class="sort-lead_time">Lead Time <i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">
+					<%= sortable "price" %>
+					<!-- <a href="" class="sort-price">Price <i class="fa fa-sort"></i></a> -->
+				</div>
+				<% if @current_customer %>
+				<div class="cel">
+					Quantity
+          <!-- <a href="" class="sort-qty">Quantity <i class="fa fa-sort"></i></a> -->
+				</div>
+				<% end %>
+				<div class="cel">
+				</div>
+			</div>
+
+      <% @products.each do |product| %>
+				<%= form_for :order, html: {class: "tRow product-list-item"}, url: populate_orders_path(format: 'js', index: product.master.id), remote: true do |f| %>
+					<% url = vendor_product_url(@vendor, product) %>
+
+						<div class="cel">
+							<%= link_to small_image(product, itemprop: "image"), url, itemprop: 'url' %><br/>
+						</div>
+						<!-- <div class="cel"> -->
+							<a href="<%= url %>" class="cel"><%= product.name %></a>
+						<!-- </div> -->
+						<!-- <div class="cel"> -->
+							<a href="<%= url %>" class="cel"><%= product.sku %></a>
+						<!-- </div> -->
+						<!-- <div class="cel sort-pack_size"> -->
+							<a href="<%= url %>" class="cel sort-pack_size"><%= product.pack_size %></a>
+
+						<!-- </div> -->
+						<!-- <div class="cel sort-lead_time"> -->
+							<a href="<%= url %>" class="cel sort-lead_time"><%= pluralize(product.lead_time, 'day') %></a>
+						<!-- </div> -->
+						<!-- <div class="cel sort-price"> -->
+							<a href="<%= url %>" class="cel sort-price"><%= number_to_currency(product.price) %></a>
+						<!-- </div> -->
+						<div class="mobile-divider"></div>
+
+						<% if @current_order %>
+							<div class="cel">
+								<div class="qty-block">
+									<div class="spin"><span class="minus">
+										<i class="fa fa-minus"></i>
+									</span>
+									<%#= number_field_tag :quantity, 1, :class => 'title form-control', :min => 1 %>
+									<%= number_field_tag :quantity, 0, :class => 'qty_input', :min => 1 %>
+									<!-- <input value="0" placeholder="Qty" class="qty_input"/> -->
+									<span class="plus"><i class="fa fa-plus"></i></span></div>
+								</div>
+							</div>
+							<div class="cel">
+								<%#= button_tag :class => 'add-prod-to-order btn btn-success', :id => 'add-to-cart-button', :type => :submit do %>
+								<% if @current_order.products.include?(product) %>
+                  <%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit, data: {confirm: 'This product is already in your cart. Are you sure you want to add more?'} do %>
+                    <%= "Add to Order" %>
+                  <% end %>
+                <% else %>
+                  <%= button_tag :class => 'addToOrder-button', :id => 'add-to-cart-button', :type => :submit do %>
+                    <%= "Add to Order" %>
+                  <% end %>
+                <% end %>
+							</div>
+						<% end %>
+				<% end %>
+      <% end %>
+
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<div class="shadow"></div>
+	<div class="clear"></div>
 
 
-<% if nil %>
-<!-- obsolete -->
-<table>
-  <colgroup span="7"></colgroup>
-  <tr>
-    <th></th>
-    <th>Product Name</th>
-    <th>SKU #</th>
-    <th>Pack/Size</th>
-    <th>Lead Time</th>
-    <th>Price</th>
-    <th>Quantity</th>
-  </tr>
-  <% @products.each do |product| %>
-    <tr>
-      <td>
-        <% if product.images.present? %>
-          <%= image_tag product.images.first.attachment.url(:mini) %>
-        <% else %>
-           No IMG
-        <% end %>
-      </td>
-      <td><a href="<%= vendor_product_url(product.vendor_id, product.id) %>"><%= product.name %></a></td>
-      <td><%=Spree::Variant.find_by_product_id(product.id).sku %></td>
-      <td>pack/size</td>
-      <td>lead time</td>
-      <td><%= number_to_currency(product.price) %></td>
-      <td> - <input type="text" placeholder="QTY"></input> + </td>
-    </tr>
-  <% end %>
-  <tfoot>
-    <tr>
-      <td><button class="add-to-order">Add to Order</button></td>
-    </tr>
-  </tfoot>
-</table>
+	<!-- // -->
+	<!-- Scripts -->
+<%= javascript_include_tag "spree/product_search" %>
+	<!-- // -->
+<!-- // -->
 
-<% end %>
+<!-- </html> -->

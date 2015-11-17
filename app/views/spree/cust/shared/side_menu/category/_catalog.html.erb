@@ -9,7 +9,7 @@
 <div class="accordion-block">
   <ul>
     <% current_spree_user.customer.vendors.each do |vendor| %>
-      <li><a href="<%= vendor_url(vendor) %>"><%= vendor.name %></a></li>
+      <li><a href="<%= vendor_products_url(vendor) %>"><%= vendor.name %></a></li>
     <% end %>
   </ul>
 </div>

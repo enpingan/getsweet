@@ -3,5 +3,9 @@
 <div class="clear"></div>
 
 <% @vendors.each do |vendor| %>
-  <h3><a href="<%=vendor_url(vendor)%>"><%= vendor.name %></a></h3>
+  <h3><a href="<%=vendor_url(vendor)%>"><%= vendor.name %></a> -
+    <% if @customer.vendors.include?(vendor) %>
+      <a href="<%= vendor_products_url(vendor) %>">View Catalog</a>
+    <% end %>
+  </h3>
 <% end %>
