@@ -20,5 +20,7 @@ module Spree
     belongs_to :vendor, class_name: 'Spree::Vendor', foreign_key: :vendor_id, primary_key: :id
     belongs_to :customer, class_name: 'Spree::Customer', foreign_key: :customer_id, primary_key: :id
 
+    has_many :orders, class_name: 'Spree::Order', foreign_key: :account_id, primary_key: :id
+
   end
 end
