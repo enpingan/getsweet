@@ -87,11 +87,11 @@ c9.build_ship_address(firstname: u9.firstname, lastname: u9.lastname, address1: 
 c10.build_ship_address(firstname: u10.firstname, lastname: u10.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u10.phone,
   state_name: 'New York', company: c10.name, country_id: 232)
 
-c6.vendors += [v1, v2, v3, v4, v5]
-c7.vendors += [v1, v2, v3, v4, v5]
-c8.vendors += [v1, v2, v3, v4, v5]
-c9.vendors += [v1, v2, v3, v4, v5]
-c10.vendors += [v1, v2, v3, v4, v5]
+# c6.vendors += [v1, v2, v3, v4, v5]
+# c7.vendors += [v1, v2, v3, v4, v5]
+# c8.vendors += [v1, v2, v3, v4, v5]
+# c9.vendors += [v1, v2, v3, v4, v5]
+# c10.vendors += [v1, v2, v3, v4, v5]
 
 c6.save!
 c7.save!
@@ -115,6 +115,12 @@ available_date = Time.zone.local(2013, 1, 1)
 ###############################################################################
 # Vendor 1 - Dough Donuts :Products, Variants, Orders > Li
 ###############################################################################
+a6 = v1.accounts.create(payment_terms: 15, customer_id: c6.id, number: rand(1000000...10000000).to_s)
+a7 = v1.accounts.create(payment_terms: 15, customer_id: c7.id, number: rand(1000000...10000000).to_s)
+a8 = v1.accounts.create(payment_terms: 15, customer_id: c8.id, number: rand(1000000...10000000).to_s)
+a9 = v1.accounts.create(payment_terms: 15, customer_id: c9.id, number: rand(1000000...10000000).to_s)
+a10 = v1.accounts.create(payment_terms: 15, customer_id: c10.id, number: rand(1000000...10000000).to_s)
+
 p1 = v1.products.create(name: "Cafe Au Lait", price: 3.00, shipping_category_id: 1, available_on: available_date,
   description: "One of Dough's most popular flavors. A blend of fresh roasted coffee beans and pecan brown sugar tops our signature glaze.", pack_size: "Each")
 p2 = v1.products.create(name: "Chocolate with Cocoa Nibbs", price: 3.00, shipping_category_id: 1, available_on: available_date,
@@ -183,7 +189,7 @@ p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id, account_id: a6.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
@@ -216,7 +222,7 @@ end
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id, account_id: a7.id)
 
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var4.id, quantity: rand(4..100))
@@ -245,7 +251,7 @@ end
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u8.id, created_by_id: u8.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u8.id, created_by_id: u8.id, account_id: a8.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
@@ -277,7 +283,7 @@ end
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id, account_id: a9.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
@@ -309,7 +315,7 @@ end
 
 12.times do |mo|
   o1 = v1.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u10.id, created_by_id: u10.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u10.id, created_by_id: u10.id, account_id: a10.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(4..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(4..100))
@@ -342,6 +348,12 @@ end
 ###############################################################################
 # Vendor 2 - Ceci Cela :Products, Variants, Orders > Li
 ###############################################################################
+a6 = v2.accounts.create(payment_terms: 15, customer_id: c6.id, number: rand(1000000...10000000).to_s)
+a7 = v2.accounts.create(payment_terms: 15, customer_id: c7.id, number: rand(1000000...10000000).to_s)
+a8 = v2.accounts.create(payment_terms: 15, customer_id: c8.id, number: rand(1000000...10000000).to_s)
+a9 = v2.accounts.create(payment_terms: 15, customer_id: c9.id, number: rand(1000000...10000000).to_s)
+a10 = v2.accounts.create(payment_terms: 15, customer_id: c10.id, number: rand(1000000...10000000).to_s)
+
 p1 = v2.products.create(name: "Apple Tart", price: 26.00, shipping_category_id: 1, available_on: available_date,
   description: "", pack_size: "Each")
 p2 = v2.products.create(name: "Pear Tart", price: 26.00, shipping_category_id: 1, available_on: available_date,
@@ -409,7 +421,7 @@ p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id, account_id: a6.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
@@ -441,7 +453,7 @@ end
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id, account_id: a7.id)
 
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var4.id, quantity: rand(1..5))
@@ -470,7 +482,7 @@ end
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u8.id, created_by_id: u8.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u8.id, created_by_id: u8.id, account_id: a8.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
@@ -502,7 +514,7 @@ end
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id, account_id: a9.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
@@ -534,7 +546,7 @@ end
 
 12.times do |mo|
   o1 = v2.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u10.id, created_by_id: u10.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u10.id, created_by_id: u10.id, account_id: a10.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..5))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
@@ -566,6 +578,12 @@ end
 ###############################################################################
 # Vendor 3 - Canele by Celine :Products, Variants, Orders > Li
 ###############################################################################
+a6 = v3.accounts.create(payment_terms: 15, customer_id: c6.id, number: rand(1000000...10000000).to_s)
+a7 = v3.accounts.create(payment_terms: 30, customer_id: c7.id, number: rand(1000000...10000000).to_s)
+a8 = v3.accounts.create(payment_terms: 30, customer_id: c8.id, number: rand(1000000...10000000).to_s)
+a9 = v3.accounts.create(payment_terms: 30, customer_id: c9.id, number: rand(1000000...10000000).to_s)
+a10 = v3.accounts.create(payment_terms: 15, customer_id: c10.id, number: rand(1000000...10000000).to_s)
+
 p1 = v3.products.create(name: "Sweet Canele (Selection of 3)", price: 4.90, shipping_category_id: 1, available_on: available_date,
   description: "A bag of 3 mini canelés. A petite pastry which has a caramelized crust which protects a moist and tender heart, like a crème brûlèe. Let the bakery know which flavors you want by leaving a note in the comment box below. Select from: Caramel, Cinnamon, Dark Chocolate, Gingerbread, Hazelnut (Contains nuts), Lemon, Lime, Mint Choco, Nougat (Contains nuts), Orange, Orange Blossom, Pink Praline (Contains nuts), Pistachio (Contains nuts), Raspberry, Rose Water, Rum, Vanilla.", pack_size: "Each")
 p2 = v3.products.create(name: "Savory Canele (Selection of 3)", price: 5.90, shipping_category_id: 1, available_on: available_date,
@@ -604,7 +622,7 @@ p5.master.images.create!({:attachment => image(p5.name.gsub(/ /,"_").downcase)})
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u6.id, created_by_id: u6.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u6.id, created_by_id: u6.id, account_id: a6.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
@@ -632,7 +650,7 @@ end
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id), account_id: a7.id
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
@@ -660,7 +678,7 @@ end
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u8.id, created_by_id: u8.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u8.id, created_by_id: u8.id, account_id: a8.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
@@ -688,7 +706,7 @@ end
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id, account_id: a9.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..100))
@@ -716,7 +734,7 @@ end
 
 12.times do |mo|
   o1 = v3.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u10.id, created_by_id: u10.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u10.id, created_by_id: u10.id, account_id: a10.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(1..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(1..100))
@@ -745,6 +763,12 @@ end
 ###############################################################################
 # Vendor 4 - Chikalicious :Products, Variants, Orders > Li
 ###############################################################################
+a6 = v4.accounts.create(payment_terms: 30, customer_id: c6.id, number: rand(1000000...10000000).to_s)
+a7 = v4.accounts.create(payment_terms: 15, customer_id: c7.id, number: rand(1000000...10000000).to_s)
+a8 = v4.accounts.create(payment_terms: 15, customer_id: c8.id, number: rand(1000000...10000000).to_s)
+a9 = v4.accounts.create(payment_terms: 15, customer_id: c9.id, number: rand(1000000...10000000).to_s)
+a10 = v4.accounts.create(payment_terms: 15, customer_id: c10.id, number: rand(1000000...10000000).to_s)
+
 p1 = v4.products.create(name: "Jackson Pollock Salted Caramel Macaroon", price: 2.50, shipping_category_id: 1, available_on: available_date,
   description: "The coolest looking and most delicious macaron in the East Village!", pack_size: "Each")
 p2 = v4.products.create(name: "Cookies", price: 4.00, shipping_category_id: 1, available_on: available_date,
@@ -795,7 +819,7 @@ p7.master.images.create!({:attachment => image(p7.name.gsub(/ /,"_").downcase)})
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id, account_id: a6.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -826,7 +850,7 @@ end
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u7.id, created_by_id: u7.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u7.id, created_by_id: u7.id, account_id: a7.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -857,7 +881,7 @@ end
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u8.id, created_by_id: u8.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u8.id, created_by_id: u8.id, account_id: a8.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -888,7 +912,7 @@ end
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u9.id, created_by_id: u9.id, account_id: a9.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -919,7 +943,7 @@ end
 
 12.times do |mo|
   o1 = v4.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u10.id, created_by_id: u10.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u10.id, created_by_id: u10.id, account_id: a10.id)
 
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -951,6 +975,12 @@ end
 ###############################################################################
 # Vendor 5 - Pain D'Avignon :Products, Variants, Orders > Li
 ###############################################################################
+a6 = v5.accounts.create(payment_terms: 30, customer_id: c6.id, number: rand(1000000...10000000).to_s)
+a7 = v5.accounts.create(payment_terms: 15, customer_id: c7.id, number: rand(1000000...10000000).to_s)
+a8 = v5.accounts.create(payment_terms: 15, customer_id: c8.id, number: rand(1000000...10000000).to_s)
+a9 = v5.accounts.create(payment_terms: 15, customer_id: c9.id, number: rand(1000000...10000000).to_s)
+a10 = v5.accounts.create(payment_terms: 15, customer_id: c10.id, number: rand(1000000...10000000).to_s)
+
 p1 = v5.products.create(name: "Hamburger Buns", price: 6.00, shipping_category_id: 1, available_on: available_date,
   description: "Very soft, with a thin, bubbly crust which locks in juicy burgers and sauces, and a light, regular crumb, with a mild saltiness.", pack_size: "Each")
 p2 = v5.products.create(name: "Specialty Loaves", price: 7.25, shipping_category_id: 1, available_on: available_date,
@@ -1018,7 +1048,7 @@ p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c6.id, ship_address_id: c6.ship_address_id, bill_address_id: c6.ship_address_id, email: c6.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 28), user_id: u6.id, created_by_id: u6.id, account_id: a6.id)
   o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
   o1.line_items.create(variant_id: var3.id, quantity: rand(1..5))
@@ -1051,7 +1081,7 @@ end
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c7.id, ship_address_id: c7.ship_address_id, bill_address_id: c7.ship_address_id, email: c7.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u7.id, created_by_id: u7.id, account_id: a7.id)
 
     o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
     o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -1084,7 +1114,7 @@ end
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c8.id, ship_address_id: c8.ship_address_id, bill_address_id: c8.ship_address_id, email: c8.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u8.id, created_by_id: u8.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u8.id, created_by_id: u8.id, account_id: a8.id)
 
     o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
     o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -1117,7 +1147,7 @@ end
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c9.id, ship_address_id: c9.ship_address_id, bill_address_id: c9.ship_address_id, email: c9.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u9.id, created_by_id: u9.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u9.id, created_by_id: u9.id, account_id: a9.id)
 
     o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
     o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
@@ -1150,7 +1180,7 @@ end
 
 12.times do |mo|
   o1 = v5.orders.create(customer_id: c10.id, ship_address_id: c10.ship_address_id, bill_address_id: c10.ship_address_id, email: c10.email,
-    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u10.id, created_by_id: u10.id)
+    delivery_date: Time.zone.local(2015, mo + 1, 15), user_id: u10.id, created_by_id: u10.id, account_id: a10.id)
 
     o1.line_items.create(variant_id: var1.id, quantity: rand(12..100))
     o1.line_items.create(variant_id: var2.id, quantity: rand(12..100))
