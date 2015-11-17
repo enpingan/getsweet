@@ -9,16 +9,9 @@
     <%= c_form.label :email %><br />
     <%= c_form.email_field :email %>
   </div>
-  <!-- <div class="field"> -->
-    <!-- <%#= f.label :account_id %><br /> -->
-    <%#= f.number_field :account_id %>
-
-  <!-- </div> -->
-
 
   <%= c_form.fields_for :ship_address do |sa_form| %>
-
     <%= render partial: 'spree/manage/customers/address_form', locals: { f: sa_form, type: 'shipping' } %>
-
   <% end %>
+  
 <% end %>

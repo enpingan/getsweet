@@ -8,11 +8,19 @@
 <div class="manage-customer">
   <section class="customer-account-info">
     <ul>
-      <li><strong>Current Balance:</strong> <%= number_to_currency(@balance) %></li>
+      <li><strong>Current Balance:</strong> <%= number_to_currency(@account.balance) %></li>
       <li><strong>Past Due Balance:</strong> $0.00</li>
-      <!-- temporary terms -->
       <li><strong>Payment Terms:</strong> <%= @account.payment_terms %> Days</li>
-      <a href=" <%= manage_orders_url %>" class="nav-btn">Orders</a>
+      <li><strong>Discount:</strong>
+        <% if @account.discount_type.downcase == 'discount' %>
+          <%= @account.discount.to_s + '% Off List' %>
+        <% elsif @account.discount_type.downcase == 'percent_over' %>
+          <%= @account.cost_price_discount.to_s + '% Over Cost' %>
+        <% else %>
+          None
+        <% end %>
+      </li>
+      <a href="<%= manage_orders_url %>" class="nav-btn">Orders</a>
       <!-- <li><a href="">Invoices</a></li> -->
     </ul>
 
