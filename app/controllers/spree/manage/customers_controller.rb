@@ -15,6 +15,7 @@ module Spree
       def show
 				@vendor = current_vendor
         @customer = Spree::Customer.find(params[:id])
+        @users = @customer.users
         @account = @customer.accounts.where('vendor_id = ?', current_vendor.id).limit(1).first
         session[:customer_id] = @customer.id
         # stub balance for demo
