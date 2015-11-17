@@ -3,7 +3,7 @@
 </h1>
 <a href="<%= new_manage_order_url %>" class="new-order-button">Start New Order</a>
 <div class="clear"></div>
-<h3 id="account-id">Account #<%= @customer.account_id %> </h3>
+<h3 id="account-id">Account #<%= @account.number %> </h3>
 
 <div class="manage-customer">
   <section class="customer-account-info">
@@ -11,7 +11,7 @@
       <li><strong>Current Balance:</strong> <%= number_to_currency(@balance) %></li>
       <li><strong>Past Due Balance:</strong> $0.00</li>
       <!-- temporary terms -->
-      <li><strong>Payment Terms:</strong> <%= @vendor.payment_terms %> Days</li>
+      <li><strong>Payment Terms:</strong> <%= @account.payment_terms %> Days</li>
       <a href=" <%= manage_orders_url %>" class="nav-btn">Orders</a>
       <!-- <li><a href="">Invoices</a></li> -->
     </ul>

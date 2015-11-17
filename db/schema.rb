@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117195138) do
+ActiveRecord::Schema.define(version: 20151117223517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -431,15 +431,14 @@ ActiveRecord::Schema.define(version: 20151117195138) do
   end
 
   create_table "spree_customers", force: :cascade do |t|
-    t.string   "name",            null: false
-    t.integer  "account_id",      null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "name",             null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "ship_address_id"
     t.string   "email"
+    t.string   "spree_account_id"
   end
 
-  add_index "spree_customers", ["account_id"], name: "index_spree_customers_on_account_id", using: :btree
   add_index "spree_customers", ["ship_address_id"], name: "index_spree_customers_on_ship_address_id", using: :btree
 
   create_table "spree_customers_vendors", force: :cascade do |t|

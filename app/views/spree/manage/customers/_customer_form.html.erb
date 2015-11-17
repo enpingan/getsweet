@@ -1,36 +1,24 @@
-<% if @customer.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+<%= f.fields_for :customer do |c_form| %>
 
-    <ul>
-    <% @customer.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
+  <div class="field">
+    <%= c_form.label :name %><br />
+    <%= c_form.text_field :name %>
   </div>
+
+  <div class="field">
+    <%= c_form.label :email %><br />
+    <%= c_form.email_field :email %>
+  </div>
+  <!-- <div class="field"> -->
+    <!-- <%#= f.label :account_id %><br /> -->
+    <%#= f.number_field :account_id %>
+
+  <!-- </div> -->
+
+
+  <%= c_form.fields_for :ship_address do |sa_form| %>
+
+    <%= render partial: 'spree/manage/customers/address_form', locals: { f: sa_form, type: 'shipping' } %>
+
+  <% end %>
 <% end %>
-
-<div class="field">
-  <%= f.label :name %><br />
-  <%= f.text_field :name %>
-</div>
-
-<div class="field">
-  <%= f.label :account_id %><br />
-  <%= f.number_field :account_id %>
-</div>
-
-<div class="field">
-  <%= f.label :email %><br />
-  <%= f.email_field :email %>
-</div>
-
-<%= f.fields_for :ship_address do |sa_form| %>
-
-  <%= render partial: 'spree/manage/customers/address_form', locals: { f: sa_form, type: 'shipping' } %>
-
-<% end %>
-
-<div class="actions">
-  <%= f.submit class: "update-customer"%>
-</div>

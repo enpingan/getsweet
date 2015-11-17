@@ -70,11 +70,11 @@ v3 = Spree::Vendor.create(name: 'Canele by Celine', email: 'ordercanelebyceline@
 v4 = Spree::Vendor.create(name: "Chikalicious", email: 'orderchikalicious@sweetist.co', order_cutoff_time: '9PM EST', delivery_minimum: 10.0, payment_terms: 15)
 v5 = Spree::Vendor.create(name: "Pain D'Avignon", email: 'orderpaindavignon@sweetist.co', order_cutoff_time: '5PM EST', delivery_minimum: 10.0, payment_terms: 45)
 
-c6 = Spree::Customer.create(name: "Creek Side Cafe", account_id: 47584, email: "contact_creekside@sweetist.co")
-c7 = Spree::Customer.create(name: "W Hotel", account_id: 85893, email: "contact_whotel@sweetist.co")
-c8 = Spree::Customer.create(name: "French Cafe", account_id: 57203, email: "contact_frenchcafe@sweetist.co")
-c9 = Spree::Customer.create(name: "Murray's", account_id: 60593, email: "contact_murrays@sweetist.co")
-c10 = Spree::Customer.create(name: "Knickerbocker Club", account_id: 29493, email: "contact_knickerbocker@sweetist.co")
+c6 = Spree::Customer.create(name: "Creek Side Cafe", spree_account_id: '47584', email: "contact_creekside@sweetist.co")
+c7 = Spree::Customer.create(name: "W Hotel", spree_account_id: '85893', email: "contact_whotel@sweetist.co")
+c8 = Spree::Customer.create(name: "French Cafe", spree_account_id: '57203', email: "contact_frenchcafe@sweetist.co")
+c9 = Spree::Customer.create(name: "Murray's", spree_account_id: '60593', email: "contact_murrays@sweetist.co")
+c10 = Spree::Customer.create(name: "Knickerbocker Club", spree_account_id: '29493', email: "contact_knickerbocker@sweetist.co")
 
 c6.build_ship_address(firstname: u6.firstname, lastname: u6.lastname, address1: Faker::Address.street_address, city: 'New York', zipcode: '10005', phone: u6.phone,
   state_name: 'New York', company: c6.name, country_id: 232)

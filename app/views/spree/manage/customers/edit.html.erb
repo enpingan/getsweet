@@ -1,8 +1,12 @@
 <h1>Edit Customer</h1>
-  <div class="customer-edit">
-  <%= form_for @customer, url: spree.manage_customer_url(@customer) do |f| %>
-    <%= render partial: 'spree/manage/customers/customer_form', locals: { f: f } %>
-  <% end %>
 
+<div class="customer-edit">
+<%= form_for @account, url: spree.manage_customer_url(@account.customer) do |f| %>
+  <%= render partial: 'account_form', locals: {f: f} %>
+  <%= render partial: 'spree/manage/customers/customer_form', locals: { f: f } %>
+  <div class="actions">
+    <%= f.submit class: "update-customer"%>
+  </div>
+<% end %>
   <div class="clear"></div>
 </div>

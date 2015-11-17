@@ -21,6 +21,7 @@ module Spree
     belongs_to :customer, class_name: 'Spree::Customer', foreign_key: :customer_id, primary_key: :id
 
     has_many :orders, class_name: 'Spree::Order', foreign_key: :account_id, primary_key: :id
+    accepts_nested_attributes_for :customer
 
   end
 end
