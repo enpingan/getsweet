@@ -2,6 +2,8 @@ module Spree
   module Cust
     class ReceivingsController < Spree::Cust::CustomerHomeController
 
+      before_action :clear_current_order
+
       def index
         @orders = current_customer.orders.where('delivery_date >= ? AND state = ?', Time.current.to_date, 'complete').order('delivery_date ASC')
         render :index
@@ -17,8 +19,23 @@ module Spree
       end
 
       def update
+        @order = Spree::Order.friendly.find(params[:order_id])
+
+        if @order.update(receiving_params)
+          redirect_to receivings_url
+        else
+          flash[:errors] = @order.errors.full_messages
+          render :edit
+        end
       end
 
+      private
+
+      def receiving_params
+        params.require(:order).permit(
+            line_items_attributes: [:id, :confirm_received, :received_qty]
+          )
+      end
     end
   end
 end
