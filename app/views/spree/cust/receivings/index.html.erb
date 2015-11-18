@@ -1,0 +1,5 @@
+<ul>
+  <% @orders.each do |order| %>
+    <li><a href="<%= edit_order_receiving_url(order) %>"><%= order.vendor.name %> (#<%= order.number %>)</a></li>
+  <% end %>
+</ul>

@@ -31,6 +31,8 @@ Rails.application.routes.draw do
       resource :receiving, only: [:show, :edit, :update]
     end
 
+    resources :receivings, only: :index
+
     populate_redirect = redirect do |params, request|
       request.flash[:error] = Spree.t(:populate_get_error)
       request.referer || '/cart'

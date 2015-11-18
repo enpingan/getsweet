@@ -37,7 +37,11 @@ module Spree
     end
 
     def set_order_session(order = nil)
-      order ||= Spree::Order.friendly.find(params[:id])
+      if params[:order_id]
+        order ||= Spree::Order.friendly.find(params[:order_id])
+      else
+        order ||= Spree::Order.friendly.find(params[:id])
+      end
       session[:order_id] = order.id
       order
     end
