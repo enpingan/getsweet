@@ -19,6 +19,19 @@
 <div class="clear"></div>
 
 <div class="manage-customer">
+	<section class="customer-account-info">
+		<ul>
+			<li><strong>Current Balance:</strong> <%= number_to_currency(@account.balance) %></li>
+			<li><strong>Past Due Balance:</strong> $0.00</li>
+			<!-- temporary terms -->
+			<!-- <li><strong>Payment Terms:</strong> <%#= @vendor.payment_terms %> Days</li> -->
+			<li><strong>Payment Terms:</strong> 30 Days</li>
+			<a href=" <%= orders_url %>" class="nav-btn">Orders</a>
+			<!-- <li><a href="">Invoices</a></li> -->
+		</ul>
+
+	</section>
+
   <div class="contact-group">
 		<% if @vendor.images.any? %>
 			<% @vendor.images.each do |image| %>

@@ -10,9 +10,11 @@ module Spree
     end
 
     def show
+      @customer = current_customer
       @vendor = set_current_vendor
-      @recent_orders = current_customer.orders.where('vendor_id = ?', @vendor.id).order('updated_at DESC').order('delivery_date DESC').limit(5)
-
+      @account = @vendor.accounts.where('customer_id = ?', current_customer.id).limit(1).first
+      @recent_orders = @account.orders.order('delivery_date DESC').limit(5)
+      @account.balance = @account.orders.where('delivery_date > ?', 30.days.ago).sum('total')
       render :show
     end
 

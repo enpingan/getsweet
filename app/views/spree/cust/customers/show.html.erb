@@ -1,22 +1,12 @@
 <h1 class="catalog-title"><%= @customer.name %>
   <a href="<%= edit_account_url %>" class="edit-link">(Edit)</a>
+  <a href="<%= new_account_user_url %>" class="cta-link">Add New User</a>
 </h1>
 <div class="clear"></div>
 <h3 id="account-id">Account #<%= @customer.spree_account_id %> </h3>
 
 <div class="manage-customer">
-  <section class="customer-account-info">
-    <ul>
-      <li><strong>Current Balance:</strong> <%= number_to_currency(@balance) %></li>
-      <li><strong>Past Due Balance:</strong> $0.00</li>
-      <!-- temporary terms -->
-      <!-- <li><strong>Payment Terms:</strong> <%#= @vendor.payment_terms %> Days</li> -->
-      <li><strong>Payment Terms:</strong> 30 Days</li>
-      <a href=" <%= orders_url %>" class="nav-btn">Orders</a>
-      <!-- <li><a href="">Invoices</a></li> -->
-    </ul>
 
-  </section>
   <div class="contact-group">
     <% if @customer.images.any? %>
       <% @customer.images.each do |image| %>
@@ -83,5 +73,5 @@
     <% end %>
 
   <div class="clear"></div>
-  <a href="<%= new_account_user_url %>" class="cta-link">Add New User</a>
+
 </div>
