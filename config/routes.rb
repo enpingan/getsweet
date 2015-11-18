@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       post :populate, :on => :collection
       get :unpopulate, to: 'orders#unpopulate'
       get '/success', to: 'orders#success'
+      resource :receiving, only: [:show, :edit, :update]
     end
 
     populate_redirect = redirect do |params, request|
