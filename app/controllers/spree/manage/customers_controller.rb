@@ -18,8 +18,9 @@ module Spree
         @users = @customer.users
         @account = @customer.accounts.where('vendor_id = ?', current_vendor.id).limit(1).first
         session[:customer_id] = @customer.id
+        
         # stub balance for demo
-        @balance = @customer.orders.where('delivery_date > ?', 30.days.ago).sum('total')
+        @account.balance = @account.orders.where('delivery_date > ?', 30.days.ago).sum('total')
         render :show
       end
 
@@ -88,8 +89,7 @@ module Spree
       def destroy
       end
 
-			protected
-
+			private
 				def account_params
           params.require(:account).permit(
           :number, :payment_terms, :customer_id, :discount_type, :discount, :cost_price_discount, :balance,
@@ -102,16 +102,7 @@ module Spree
                   ]
               ]
           )
-
-
-    			# params.require(:customer).permit(
-					# 	:name,
-					# 	:account_id,
-					# 	:email,
-					# 	ship_address_attributes: [ :id, :firstname, :lastname, :phone, :address1, :address2, :city, :country_id, :state_name, :zipcode, :state_id  ])
-  			end
-
-			private
+		    end
 
       	def ensure_vendor
         	@customer = Spree::Customer.find(params[:id])
