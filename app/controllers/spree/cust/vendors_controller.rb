@@ -5,6 +5,7 @@ module Spree
     def index
       clear_current_order
       @customer = current_customer
+      @my_vendors = @customer.vendors.order('name ASC')
       @vendors = Vendor.all
       render :index
     end
