@@ -53,9 +53,29 @@
 					<a href="" class="order-items-toggle disable rotate">Category Name <i class="fa fa-chevron-down"></i></a>
 					<div class="order-items-cont">
 						<% category_count, category_total = 0, 0 %>
-						<% line_items = @order.line_items %>
-						<%= render partial: 'line_item', collection: line_items, locals: { f: f, category_count: category_count, category_total:category_total } %>
-
+						<% @order.line_items.each do |line_item| %>
+						<% category_count += line_item.shipped_qty %>
+						<% category_total += line_item.shipped_qty * line_item.price %>
+							<% variant = line_item.variant %>
+							<div class="order-item">
+								<div class="cel"><%= variant.product.name %></div>
+								<div class="cel">#<%= variant.sku %></div>
+								<div class="cel"><%= variant.pack_size %></div>
+								<div class="cel"><%= number_to_currency(variant.price) %></div>
+								<div class="cel"><%= line_item.quantity %></div>
+								<div class="cel"><%= line_item.shipped_qty %> </div>
+								<div class="cel"><%= number_to_currency(line_item.shipped_total) %></div>
+								<div class="cel">
+									<div class="qty-block">
+										<div class="spin">
+											<span class="minus"><i class="fa fa-minus"></i></span>
+											<input type="number" name="" value="<%= line_item.received_qty %>" placeholder="Qty" class="qty_input"/>
+											<span class="plus"><i class="fa fa-plus"></i></span></div>
+									</div>
+								</div>
+								<div class="cel"><input type="checkbox" name="" value="true"></div>
+							</div>
+						<% end %>
 					</div>
 					<div class="order-items-count-block">
 						<div class="col1">
