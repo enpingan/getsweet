@@ -20,8 +20,14 @@ module Spree
 
       def update
         @order = Spree::Order.friendly.find(params[:order_id])
-
-        if @order.update(receiving_params)
+        if params[:commit] == 'Reject Order'
+          @order.line_items.each do |line_item|
+            line_item.received_qty = 0
+            line_item.confirm_received = false
+          end
+          @order.save!
+          redirect_to receivings_url
+        elsif @order.update(receiving_params)
           redirect_to receivings_url
         else
           flash[:errors] = @order.errors.full_messages

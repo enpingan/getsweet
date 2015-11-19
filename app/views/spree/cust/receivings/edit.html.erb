@@ -6,9 +6,9 @@
 		</div>
 		<div class="col2">
 			<div class="orders-nav">
-				<a href="#" class="nav-left"><i class="fa fa-chevron-left"></i></a>
+				<!-- <a href="#" class="nav-left"><i class="fa fa-chevron-left"></i></a> -->
 				<span class="order-id">Order # <%= @order.number %></span>
-				<a href="#" class="nav-right"><i class="fa fa-chevron-right"></i></a>
+				<!-- <a href="#" class="nav-right"><i class="fa fa-chevron-right"></i></a> -->
 			</div>
 		</div>
 		<div class="col3">
@@ -19,27 +19,27 @@
 	<!-- <form action="#" id="receiving-form"> -->
 	<%= form_for @order, url: order_receiving_url(@order) do |f|%>
 		<div class="inventory-list-table">
-			<div class="header">
-				<div class="cel">
-					<a href="" class="sort-name">Item <i class="fa fa-sort"></i></a>
+			<div class="tRow header">
+				<div class="cel">Item
+					<!-- <a href="" class="sort-name">Item <i class="fa fa-sort"></i></a> -->
 				</div>
-				<div class="cel">
-					<a href="" class="sort-sku">SKU #<i class="fa fa-sort"></i></a>
+				<div class="cel">SKU #
+					<!-- <a href="" class="sort-sku">SKU #<i class="fa fa-sort"></i></a> -->
 				</div>
-				<div class="cel">
-					<a href="" class="sort-count_by">Pack/Size <i class="fa fa-sort"></i></a>
+				<div class="cel">Pack/Size
+					<!-- <a href="" class="sort-count_by">Pack/Size <i class="fa fa-sort"></i></a> -->
 				</div>
-				<div class="cel">
-					<a href="" class="sort-count">Price <i class="fa fa-sort"></i></a>
+				<div class="cel">Price
+					<!-- <a href="" class="sort-count">Price <i class="fa fa-sort"></i></a> -->
 				</div>
-				<div class="cel">
-					<a href="" class="sort-suggested_minimum">Ordered <i class="fa fa-sort"></i></a>
+				<div class="cel">Ordered
+					<!-- <a href="" class="sort-suggested_minimum">Ordered <i class="fa fa-sort"></i></a> -->
 				</div>
-				<div class="cel">
-					<a href="" class="sort-price">Shipped <i class="fa fa-sort"></i></a>
+				<div class="cel">Shipped
+					<!-- <a href="" class="sort-price">Shipped <i class="fa fa-sort"></i></a> -->
 				</div>
-				<div class="cel">
-					<a href="" class="sort-total">Total<i class="fa fa-sort"></i></a>
+				<div class="cel">Total
+					<!-- <a href="" class="sort-total">Total<i class="fa fa-sort"></i></a> -->
 				</div>
 				<div class="cel">
 					Received
@@ -50,19 +50,19 @@
 			</div>
 			<div class="order-items-block">
 				<div class="order-items-el" id="category_name_goes_here">
-					<a href="" class="order-items-toggle disable rotate">Category Name <i class="fa fa-chevron-down"></i></a>
+					<a href="" class="order-items-toggle disable rotate">Category<i class="fa fa-chevron-down"></i></a>
 					<div class="order-items-cont">
-						<% category_count, category_total = 0, 0 %>
+
 						<% line_items = @order.line_items %>
-						<%= render partial: 'line_item', collection: line_items, locals: { f: f, category_count: category_count, category_total:category_total } %>
+						<%= render partial: 'line_item', collection: line_items, locals: { f: f } %>
 
 					</div>
 					<div class="order-items-count-block">
 						<div class="col1">
-							<p class="category-count">Category Count: <span class="count-val"><%= category_count %></span></p>
+							<p class="category-count">Category Count: <span class="count-val"><%= @order.item_count %></span></p>
 						</div>
 						<div class="col2">
-							<p class="category-total">Category Total: <span class="count-val"><%= number_to_currency(category_total) %></span></p>
+							<p class="category-total">Category Total: <span class="count-val"><%= number_to_currency(@order.total) %></span></p>
 						</div>
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 				<textarea name="Notes" id="notes" placeholder="Notes"></textarea>
 			</div>
 			<div class="rightpart">
-				<a href="" class="cta-button cancel"> Reject Order</a>
+        <%= submit_tag "Reject Order", class: "cta-button cancel", data: {confirm: "Are you sure you want to reject the ENTIRE order?"} %>
 				<input type="submit" value="order received">
 			</div>
 			<div class="clear"></div>

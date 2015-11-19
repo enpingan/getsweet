@@ -1,0 +1,53 @@
+.receiving-block{
+  padding: 30px 30px 10px 30px;
+  background: #FFF;
+  -webkit-box-shadow: 0px 1px 8px #ccc;
+  -moz-box-shadow: 0px 1px 8px #ccc;
+  box-shadow: 0px 1px 8px #ccc;
+}
+
+.receiving-block .my-orders-list{
+  color: #6e665f;
+  border-collapse: collapse;
+}
+
+.receiving-block .my-orders-list .tRow{
+  display: table-row;
+}
+
+.receiving-block .my-orders-list a.tRow{
+  color: inherit;
+}
+.receiving-block .my-orders-list a.tRow:hover{
+  color: #ff7e00;
+}
+
+.receiving-block .my-orders-list .tRow:nth-child(odd) {
+  background: #FCF9F6;
+}
+
+.receiving-block .my-orders-list .tRow.header{
+  display: table-header-group;
+  border: none;
+  font-family: 'p22_underground_cy_prodemi';
+}
+.receiving-block .my-orders-list .tRow.header .cel{
+  font-size: 18px;
+}
+
+.receiving-block .my-orders-list .tRow .cel{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  padding: 15px 10px;
+  font-size: 16px;
+  color: inherit;
+  position: relative;
+}
+
+@media (max-width: 599px){
+  .receiving-block .my-orders-list .tRow .cel.status, .receiving-block .my-orders-list .tRow .cel.balance{
+    display:none;
+  }
+
+}

@@ -1,7 +1,6 @@
 <% variant = line_item.variant %>
 <%= f.fields_for :line_items, line_item do |l_form|%>
-<% category_count += line_item.shipped_qty %>
-<% category_total += line_item.shipped_qty * line_item.price%>
+
 <div class="order-item">
   <div class="cel"><%= variant.product.name %></div>
   <div class="cel">#<%= variant.sku %></div>
@@ -14,7 +13,7 @@
     <div class="qty-block">
       <div class="spin">
         <span class="minus"><i class="fa fa-minus"></i></span>
-        <%= l_form.text_field :received_qty %>
+        <%= l_form.number_field :received_qty, min: 0, class: "qty_input" %>
         <span class="plus"><i class="fa fa-plus"></i></span></div>
     </div>
   </div>

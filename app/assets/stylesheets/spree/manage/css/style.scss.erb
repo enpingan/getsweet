@@ -329,7 +329,7 @@ img{
 }
 
 .header {
-	position: relative;
+	// position: relative;
     background: #FFF;
     height: 52px;
     z-index: 30;
@@ -355,6 +355,7 @@ img{
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 6px 20px 6px 250px;
+		// z-index: 1000;
 }
 .app_ui-wrapper .header .header{
 	position: fixed;
@@ -362,6 +363,7 @@ img{
 	top: 0;
 	left: 0;
 	right: 0;
+	z-index: 1000	;
 }
 
 .header .nav-ico, .header .search-ico, .header .settings-ico, .header .exit-ico{
@@ -435,7 +437,7 @@ img{
 	overflow: hidden;
 	float: left;
 	display: block;
-	z-index: 50;
+	z-index: 1000;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -2481,12 +2483,17 @@ img{
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-.app_ui-block .receiving-page-block .cta-button {
+.app_ui-block .receiving-page-block .cta-button.cancel {
     padding: 17px 20px 13px 20px;
     font-size: 18px;
     margin-right: 15px;
     border: 3px solid #E0D9D2;
     float: none;
+		background: #fff;
+		color: #706861;
+}
+.app_ui-block .receiving-page-block .cta-button.cancel:hover{
+	background: #F3F3F3;
 }
 .receiving-page-block .receiving-header-block .orders-nav {
     font-size: 17px;
@@ -4554,7 +4561,7 @@ img{
 	.receiving-page-block .inventory-order-buttons textarea {
 	    height: 120px;
 	}
-	.app_ui-block .receiving-page-block .cta-button {
+	.app_ui-block .receiving-page-block .cta-button.cancel {
 	    margin-right: 0;
 	    margin-bottom: 10px;
 	    display: block;
