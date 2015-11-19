@@ -13,6 +13,7 @@
     <% else %>
       <%= image_tag "spree/manage/img/multi-user.png", :class => "contact-img", alt: "account image" %>
 		<% end %>
+		<%= link_to "edit image", manage_account_account_images_path %> 
 
     <div class="contact-info">
       <% if @account %>
