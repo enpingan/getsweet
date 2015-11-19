@@ -1,27 +1,22 @@
 module Spree
  module Cust
   class VendorsController < Spree::Cust::CustomerHomeController
-    helper_method :sort_column, :sort_direction
-    before_action :authorize_customer, only: :show
+
     def index
       clear_current_order
+      @customer = current_customer
+      @my_vendors = @customer.vendors.order('name ASC')
       @vendors = Vendor.all
       render :index
     end
 
     def show
+      @customer = current_customer
       @vendor = set_current_vendor
-      @current_order = current_order
-      @line_items = @current_order.line_items if @current_order
-
-      if params[:sort] && params[:sort] == 'price'
-        @products = sort_direction == 'asc' ? @vendor.products.ascend_by_master_price : @vendor.products.descend_by_master_price
-      else
-        @products = @vendor.products.order(sort_column + ' ' + sort_direction)
-      end
-
-      @recent_orders = current_customer.orders.where('vendor_id = ?', @vendor.id).order('updated_at DESC').order('delivery_date DESC').limit(5)
-
+      @account = @vendor.accounts.where('customer_id = ?', current_customer.id).limit(1).first
+      @recent_orders = @account.orders.order('delivery_date DESC').limit(5)
+      @account.balance = @account.orders.where('delivery_date > ?', 30.days.ago).sum('total')
+      render :show
     end
 
     private
@@ -30,14 +25,6 @@ module Spree
       @vendor = Vendor.friendly.find(params[:id])
       session[:vendor_id] = @vendor.id
       @vendor
-    end
-
-    def sort_column
-      (Spree::Product.column_names.include?(params[:sort]) || params[:sort] == 'price') ? params[:sort] : "name"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
     end
 
   end

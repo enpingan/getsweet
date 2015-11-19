@@ -3,16 +3,24 @@
 </h1>
 <a href="<%= new_manage_order_url %>" class="new-order-button">Start New Order</a>
 <div class="clear"></div>
-<h3 id="account-id">Account #<%= @customer.account_id %> </h3>
+<h3 id="account-id">Account #<%= @account.number %> </h3>
 
 <div class="manage-customer">
   <section class="customer-account-info">
     <ul>
-      <li><strong>Current Balance:</strong> <%= number_to_currency(@balance) %></li>
+      <li><strong>Current Balance:</strong> <%= number_to_currency(@account.balance) %></li>
       <li><strong>Past Due Balance:</strong> $0.00</li>
-      <!-- temporary terms -->
-      <li><strong>Payment Terms:</strong> <%= @vendor.payment_terms %> Days</li>
-      <a href=" <%= manage_orders_url %>" class="nav-btn">Orders</a>
+      <li><strong>Payment Terms:</strong> <%= @account.payment_terms %> Days</li>
+      <li><strong>Discount:</strong>
+        <% if @account.discount_type.downcase == 'discount' %>
+          <%= @account.discount.to_s + '% Off List' %>
+        <% elsif @account.discount_type.downcase == 'percent_over' %>
+          <%= @account.cost_price_discount.to_s + '% Over Cost' %>
+        <% else %>
+          None
+        <% end %>
+      </li>
+      <a href="<%= manage_orders_url %>" class="nav-btn">Orders</a>
       <!-- <li><a href="">Invoices</a></li> -->
     </ul>
 
@@ -47,4 +55,28 @@
   </div>
 
   <div class="clear"></div>
+  <% @users.each do |user| %>
+<div class="contact-group">
+    <% if user.images.any? %>
+      <%# user.images.each do |image| %>
+        <%= image_tag user.images.first.attachment.url(:product), :class => "contact-img", alt: image.alt %>
+      <%# end %>
+    <% else %>
+      <%#= image_tag image.attachment.url(:product), :class => "contact-img", alt: image.alt %>
+      <%#= image_url("spree/manage/img/logo2.png"), :class => "contact-img", alt: image.alt  %>
+      <%= image_tag "spree/manage/img/user_placeholder.png", :class => "contact-img", alt: "contact image" %>
+    <% end %>
+
+    <div class="contact-info">
+
+        <ul class="contact">
+          <li><strong>Contact:</strong> <%= "#{user.firstname} #{user.lastname}" %></li>
+          <li><strong>Position:</strong> <%= user.position %></li>
+          <li><strong>Phone:</strong> <%= user.phone %></li>
+          <li><strong>Email:</strong> <%= user.email %></li>
+        </ul>
+    </div>
+</div>
+  <% end %>
+
 </div>

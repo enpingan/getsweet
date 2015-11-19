@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116201309) do
+ActiveRecord::Schema.define(version: 20151117223517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -299,6 +299,23 @@ ActiveRecord::Schema.define(version: 20151116201309) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "spree_accounts", force: :cascade do |t|
+    t.integer  "payment_terms",                        null: false
+    t.decimal  "balance",             default: 0.0,    null: false
+    t.string   "status"
+    t.decimal  "discount",            default: 0.0,    null: false
+    t.decimal  "cost_price_discount", default: 0.0,    null: false
+    t.string   "discount_type",       default: "None", null: false
+    t.integer  "customer_id"
+    t.integer  "vendor_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "number"
+  end
+
+  add_index "spree_accounts", ["customer_id"], name: "index_spree_accounts_on_customer_id", using: :btree
+  add_index "spree_accounts", ["vendor_id"], name: "index_spree_accounts_on_vendor_id", using: :btree
+
   create_table "spree_addresses", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -414,15 +431,14 @@ ActiveRecord::Schema.define(version: 20151116201309) do
   end
 
   create_table "spree_customers", force: :cascade do |t|
-    t.string   "name",            null: false
-    t.integer  "account_id",      null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "name",             null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "ship_address_id"
     t.string   "email"
+    t.string   "spree_account_id"
   end
 
-  add_index "spree_customers", ["account_id"], name: "index_spree_customers_on_account_id", using: :btree
   add_index "spree_customers", ["ship_address_id"], name: "index_spree_customers_on_ship_address_id", using: :btree
 
   create_table "spree_customers_vendors", force: :cascade do |t|
@@ -573,8 +589,10 @@ ActiveRecord::Schema.define(version: 20151116201309) do
     t.integer  "customer_id"
     t.datetime "delivery_date"
     t.boolean  "is_delivery?",                                               default: true
+    t.integer  "account_id"
   end
 
+  add_index "spree_orders", ["account_id"], name: "index_spree_orders_on_account_id", using: :btree
   add_index "spree_orders", ["approver_id"], name: "index_spree_orders_on_approver_id", using: :btree
   add_index "spree_orders", ["bill_address_id"], name: "index_spree_orders_on_bill_address_id", using: :btree
   add_index "spree_orders", ["completed_at"], name: "index_spree_orders_on_completed_at", using: :btree

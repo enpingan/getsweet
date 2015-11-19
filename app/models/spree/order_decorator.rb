@@ -2,6 +2,7 @@ Spree::Order.class_eval do
   # validates :vendor_id, :customer_id, :user_id, :delivery_date, presence: true
   belongs_to :vendor, class_name: 'Vendor', foreign_key: :vendor_id, primary_key: :id
   belongs_to :customer, class_name: 'Customer', foreign_key: :customer_id, primary_key: :id
+  belongs_to :account, class_name: 'Spree::Account', foreign_key: :account_id, primary_key: :id
 
 	remove_checkout_step :address
 	remove_checkout_step :delivery

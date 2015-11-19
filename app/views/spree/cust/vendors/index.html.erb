@@ -2,6 +2,41 @@
 <a href="<%= new_order_url %>" class="new-order-button">Start New Order</a>
 <div class="clear"></div>
 
-<% @vendors.each do |vendor| %>
-  <h3><a href="<%=vendor_url(vendor)%>"><%= vendor.name %></a></h3>
-<% end %>
+<div class="vendors-block">
+  <div class="my-vendors-list">
+    <div class="tRow header">
+      <div class='cel'>
+        Vendor
+      </div>
+      <div class='cel status'>
+        Account Status
+      </div>
+      <div class='cel balance'>
+        Balance
+      </div>
+      <div class='cel'>
+
+      </div>
+    </div>
+
+    <% @my_vendors.each do |vendor| %>
+      <% account = @customer.accounts.where('vendor_id = ?', vendor.id).limit(1).first%>
+      <% account.balance = account.orders.where('delivery_date > ?', 30.days.ago).sum('total') %>
+      <div class="tRow">
+        <div class='cel'>
+          <a href="<%=vendor_url(vendor)%>"><%= vendor.name %></a>
+        </div>
+        <div class='cel status'>
+          <%#= account.status %>Up to Date
+        </div>
+        <div class='cel balance'>
+          <%= number_to_currency(account.balance) %>
+        </div>
+        <div class='cel'>
+          <a href="<%= vendor_products_url(vendor) %>">View Catalog</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>

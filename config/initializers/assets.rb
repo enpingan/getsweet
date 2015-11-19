@@ -7,6 +7,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 Rails.application.config.assets.precompile += %w( spree/scripts.js )
 Rails.application.config.assets.precompile += %w( spree/manage/all.css )
+Rails.application.config.assets.precompile += %w( spree/cust/all.css )
 Rails.application.config.assets.precompile += %w( spree/manage/all.js )
 Rails.application.config.assets.precompile += %w( spree/manage/js/chart_scripts.js )
 Rails.application.config.assets.precompile += %w( spree/manage/js/jquery.formstyler.min.js )

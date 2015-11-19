@@ -4,7 +4,7 @@ module Spree
     before_action :authorize_customer, only: [:show, :edit]
 
 		def edit
-      @customer = spree_current_user.customer
+      @customer = current_customer
 
         country_id = Address.default.country.id
         @customer.build_ship_address(country_id: country_id) if @customer.ship_address.nil?
@@ -14,13 +14,13 @@ module Spree
 		end
 
     def show
-      @customer = spree_current_user.customer
+      @customer = current_customer
       @users = @customer.users.order('firstname ASC')
-      @balance = @customer.orders.where('delivery_date > ?', 30.days.ago).sum('total')
+
     end
 
 		def update
-      @customer = spree_current_user.customer
+      @customer = current_customer
       session[:customer_id] = @customer.id
       if @customer.update(customer_params)
         flash[:success] = "Customer has been updated!"

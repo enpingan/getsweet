@@ -54,11 +54,12 @@ module Spree
       @vendors = current_customer.vendors
 
       associate_user(@order)
+      associate_account(@order)
 
       if @order.save
         set_order_session(@order)
         flash[:success] = "You've started a new order!"
-        redirect_to vendor_url(@order.vendor_id)
+        redirect_to vendor_products_url(@order.vendor)
       else
         flash[:errors] = @order.errors.full_messages
         render :new
@@ -100,7 +101,7 @@ module Spree
           zero_qty_items = @order.line_items.each do |line_item|
     				line_item.destroy! if line_item.quantity == 0
     			end
-          redirect_to vendor_url(@order.vendor) and return
+          redirect_to vendor_products_url(@order.vendor) and return
         end
       end
 
@@ -195,17 +196,15 @@ module Spree
       redirect_to root_url unless current_customer.id == @order.customer_id
     end
 
-    # def set_order_session(order = nil)
-    #   order ||= Spree::Order.friendly.find(params[:id])
-    #   session[:order_id] = order.id
-    #   order
-    # end
-
     def associate_user(order)
       order.user_id = current_spree_user.id
       order.ship_address_id = current_spree_user.customer.ship_address_id
       order.bill_address_id = current_spree_user.customer.ship_address_id
       order.created_by_id = current_spree_user.id
+    end
+
+    def associate_account(order)
+      order.account_id = current_customer.accounts.where('vendor_id = ?', order.vendor_id).limit(1).first.id
     end
 
     def filter_orders
