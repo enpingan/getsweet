@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     end
 
     resources :receivings, only: :index
+    resources :invoices, only: [:index, :show]
 
     populate_redirect = redirect do |params, request|
       request.flash[:error] = Spree.t(:populate_get_error)

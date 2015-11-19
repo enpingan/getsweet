@@ -20,7 +20,7 @@
 									<div class="cel">Invoice #
 										<!-- <a href="" class="sort-name">Invoice # <i class="fa fa-sort"></i></a> -->
 									</div>
-									<div class="cel">Customer
+									<div class="cel">Vendor
 										<!-- <a href="" class="sort-name">Customer <i class="fa fa-sort"></i></a> -->
 									</div>
 									<div class="cel">Date
@@ -35,9 +35,9 @@
 									<div class="cel"></div>
 								</div>
                 <% @invoices.each do |invoice| %>
-                  <a class="tRow" href="<%= manage_invoice_url(invoice) %>">
+                  <a class="tRow" href="<%= invoice_url(invoice) %>">
                     <div class='cel'>
-                      <%= invoice.customer.name %>
+                      <%= invoice.vendor.name %>
                     </div>
                     <div class='cel'>
                       <%= invoice.number %>
