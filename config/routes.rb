@@ -17,6 +17,11 @@ Rails.application.routes.draw do
 
 		resource :account, controller: 'customers', only: [:show, :edit, :update] do
 		  resources :users, except: [:index, :show]
+			resources :account_images, controller: 'customer_images', except: [:show] do
+       	collection do
+        		post :update_positions
+       	end
+			end
 		end
 
 
@@ -48,6 +53,11 @@ Rails.application.routes.draw do
 
 			resource :account, controller: 'vendors', only: [:show, :edit, :update] do
 			  resources :users, except: [:index, :show]
+				resources :account_images, controller: 'vendor_images', except: [:show] do
+        	collection do
+         		post :update_positions
+        	end
+				end
 			end
 
       resources :customers do

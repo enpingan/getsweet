@@ -27,6 +27,7 @@
 			<%#= image_url("spree/manage/img/logo2.png"), :class => "contact-img", alt: image.alt  %>
 			<%= image_tag "spree/manage/img/multi-user.png", :class => "contact-img", alt: "account image" %>
     <% end %>
+		<%= link_to "edit image", account_account_images_path %>
 
     <div class="contact-info">
       <% if @customer.ship_address %>

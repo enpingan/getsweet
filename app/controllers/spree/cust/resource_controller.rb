@@ -1,4 +1,4 @@
-class Spree::Manage::ResourceController < Spree::Manage::BaseController
+class Spree::Cust::ResourceController < Spree::Cust::CustomerHomeController
   include Spree::Backend::Callbacks
 
   helper_method :new_object_url, :edit_object_url, :object_url, :collection_url
@@ -204,34 +204,34 @@ class Spree::Manage::ResourceController < Spree::Manage::BaseController
 
     def new_object_url(options = {})
       if parent_data.present?
-        spree.new_polymorphic_url([:manage, parent, model_class], options)
+        spree.new_polymorphic_url([:cust, parent, model_class], options)
       else
-        spree.new_polymorphic_url([:manage, model_class], options)
+        spree.new_polymorphic_url([:cust, model_class], options)
       end
     end
 
     def edit_object_url(object, options = {})
       if parent_data.present?
-        spree.send "edit_manage_#{model_name}_#{object_name}_url", parent, object, options
+        spree.send "edit_#{model_name}_#{object_name}_url", parent, object, options
       else
-        spree.send "edit_manage_#{object_name}_url", object, options
+        spree.send "edit_#{object_name}_url", object, options
       end
     end
 
     def object_url(object = nil, options = {})
       target = object ? object : @object
       if parent_data.present?
-        spree.send "manage_#{model_name}_#{object_name}_url", parent, target, options
+        spree.send "#{model_name}_#{object_name}_url", parent, target, options
       else
-        spree.send "manage_#{object_name}_url", target, options
+        spree.send "#{object_name}_url", target, options
       end
     end
 
     def collection_url(options = {})
       if parent_data.present?
-        spree.polymorphic_url([:manage, parent, model_class], options)
+        spree.polymorphic_url([:cust, parent, model_class], options)
       else
-        spree.polymorphic_url([:manage, model_class], options)
+        spree.polymorphic_url([:cust, model_class], options)
       end
     end
 
