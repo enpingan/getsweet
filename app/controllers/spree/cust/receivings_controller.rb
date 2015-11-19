@@ -28,6 +28,10 @@ module Spree
           @order.save!
           redirect_to receivings_url
         elsif @order.update(receiving_params)
+          @order.line_items.each do |line_item|
+            line_item.received_total = line_item.received_qty * line_item.price
+          end
+          @order.save!
           redirect_to receivings_url
         else
           flash[:errors] = @order.errors.full_messages

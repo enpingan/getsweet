@@ -1,0 +1,54 @@
+
+
+<h1 class="catalog-title">Invoices</h1>
+
+<div class="clear"></div>
+
+<div class="receiving-block">
+  <div class="my-orders-list">
+    <div class="tRow header">
+      <div class='cel'>
+        Customer
+      </div>
+      <div class='cel'>
+        Invoice Number
+      </div>
+      <div class='cel balance'>
+        Item Count
+      </div>
+      <div class='cel balance'>
+        invoice Total
+      </div>
+      <div class='cel'>
+        Delivery Date
+      </div>
+      <div class='cel'>
+        Payment Status
+      </div>
+    </div>
+
+    <% @invoices.each do |invoice| %>
+      <a class="tRow" href="<%= edit_manage_invoice_shipping_url(invoice) %>">
+        <div class='cel'>
+          <%= invoice.customer.name %>
+        </div>
+        <div class='cel'>
+          <%= invoice.number %>
+        </div>
+        <div class='cel'>
+          <%= invoice.line_items.sum(:received_qty) %>
+        </div>
+        <div class='cel'>
+          <%= number_to_currency(invoice.line_items.sum(:received_total)) %>
+        </div>
+        <div class='cel'>
+          <%= invoice.delivery_date.to_date.to_formatted_s(:long) %>
+        </div>
+        <div class='cel'>
+
+        </div>
+      </a>
+    <% end %>
+  </div>
+
+</div>

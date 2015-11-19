@@ -76,6 +76,8 @@ Rails.application.routes.draw do
 
         resources :shippings, only: :index
 
+        resources :invoices
+
 				populate_redirect = redirect do |params, request|
 			  	request.flash[:error] = Spree.t(:populate_get_error)
     			request.referer || '/cart'

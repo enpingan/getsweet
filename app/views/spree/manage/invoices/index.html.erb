@@ -1,0 +1,71 @@
+<h1 class="tablet-center">Invoices</h1>
+					<div class="invoices-list-block">
+						<div class="search-block">
+							<form id="search-form">
+								<input type="text" placeholder="Search Customer or Invoices">
+								<input type="submit" value="Search">
+							</form>
+							<form id="invoices-filter-form">
+								<select name="date-form" id="date_form">
+									<option value="all">All Invoices</option>
+									<option value="price">Option 2</option>
+									<option value="name">Option 3</option>
+								</select>
+							</form>
+							<div class="clear"></div>
+						</div>
+						<form action="#" id="invoices-list-form">
+							<div class="orders-list-table">
+								<div class="tRow header">
+									<div class="cel">Invoice #
+										<!-- <a href="" class="sort-name">Invoice # <i class="fa fa-sort"></i></a> -->
+									</div>
+									<div class="cel">Customer
+										<!-- <a href="" class="sort-name">Customer <i class="fa fa-sort"></i></a> -->
+									</div>
+									<div class="cel">Date
+										<!-- <a href="" class="sort-sku">Date <i class="fa fa-sort"></i></a> -->
+									</div>
+									<div class="cel">Amount Due
+										<!-- <a href="" class="sort-pack_size">Amount Due <i class="fa fa-sort"></i></a> -->
+									</div>
+									<div class="cel">Payment Status
+										<!-- <a href="" class="sort-lead_time">Status <i class="fa fa-sort"></i></a> -->
+									</div>
+									<div class="cel"></div>
+								</div>
+                <% @invoices.each do |invoice| %>
+                  <a class="tRow" href="<%= manage_invoice_url(invoice) %>">
+                    <div class='cel'>
+                      <%= invoice.customer.name %>
+                    </div>
+                    <div class='cel'>
+                      <%= invoice.number %>
+                    </div>
+                    <div class='cel'>
+                      <%= invoice.delivery_date.to_date.to_formatted_s(:long) %>
+                    </div>
+                    <div class='cel'>
+                      <%= number_to_currency(invoice.line_items.sum(:received_total)) %>
+                    </div>
+                    <div class='cel'>
+                    </div>
+                    <div class='cel'>
+
+                    </div>
+                  </a>
+                <% end %>
+
+								<!-- <div class="tRow">
+									<div class="cel"><a href="">32453456</a></div>
+									<div class="cel">Hilton NY</div>
+									<div class="cel">8-14-2015</div>
+									<div class="cel">$1529.50</div>
+									<div class="cel">Past Due</div>
+									<div class="cel"><a href="" class="cta-button">Send Notice</a></div>
+								</div> -->
+
+							</div>
+							<div class="clear"></div>
+						</form>
+					</div>
