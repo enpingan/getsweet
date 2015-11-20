@@ -1,0 +1,22 @@
+<% variant = line_item.variant %>
+<%= f.fields_for :line_items, line_item do |l_form|%>
+
+<div class="order-item">
+  <div class="cel"><%= variant.product.name %></div>
+  <div class="cel">#<%= variant.sku %></div>
+  <div class="cel"><%= variant.pack_size %></div>
+  <div class="cel price"><%= number_to_currency(variant.price) %></div>
+  <div class="cel"><%= line_item.quantity %></div>
+  <div class="cel"><%= line_item.shipped_qty %></div>
+  <div class="cel">
+    <div class="qty-block">
+      <div class="spin">
+        <span class="minus"><i class="fa fa-minus"></i></span>
+        <%= l_form.number_field :received_qty, min: 0, class: "qty_input shipped_qty" %>
+        <span class="plus"><i class="fa fa-plus"></i></span></div>
+    </div>
+  </div>
+  <div class="cel"><%= l_form.text_field :received_total %></div>
+
+</div>
+<% end %>

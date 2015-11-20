@@ -11,14 +11,6 @@ module Spree
         @invoice = Spree::Order.friendly.find(params[:id])
         render :show
       end
-
-      def edit
-      end
-
-      def update
-      end
-
-
     end
   end
 end
