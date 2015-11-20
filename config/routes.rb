@@ -16,7 +16,13 @@ Rails.application.routes.draw do
 	 scope module: 'cust' do
 
 		resource :account, controller: 'customers', only: [:show, :edit, :update] do
-		  resources :users, except: [:index, :show]
+		  resources :users, except: [:index, :show] do
+				resources :user_images, except: [:show] do
+  	     	collection do
+    	    		post :update_positions
+      	 	end
+				end
+			end
 			resources :account_images, controller: 'customer_images', except: [:show] do
        	collection do
         		post :update_positions
@@ -52,7 +58,13 @@ Rails.application.routes.draw do
  			#resources :vendors, only: [:index, :show] do
 
 			resource :account, controller: 'vendors', only: [:show, :edit, :update] do
-			  resources :users, except: [:index, :show]
+			  resources :users, except: [:index, :show] do
+					resources :user_images, except: [:show] do
+  	     		collection do
+    	   	 		post :update_positions
+      	 		end
+					end
+				end
 				resources :account_images, controller: 'vendor_images', except: [:show] do
         	collection do
          		post :update_positions

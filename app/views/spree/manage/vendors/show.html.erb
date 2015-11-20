@@ -42,16 +42,35 @@
 
   <div class="clear"></div>
   <% @users.each do |user| %>
-<div class="contact-group">
-    <% if user.images.any? %>
-      <%# user.images.each do |image| %>
-        <%= image_tag user.images.first.attachment.url(:product), :class => "contact-img", alt: image.alt %>
-      <%# end %>
-    <% else %>
-      <%#= image_tag image.attachment.url(:product), :class => "contact-img", alt: image.alt %>
-      <%#= image_url("spree/manage/img/logo2.png"), :class => "contact-img", alt: image.alt  %>
-      <%= image_tag "spree/manage/img/user_placeholder.png", :class => "contact-img", alt: "contact image" %>
-    <% end %>
+		<div class="contact-group">
+      <% if user == spree_current_user %>
+        <%= link_to manage_account_user_user_images_path(user) do %>
+          <div class="contact-img-block">
+            <% if user.images.any? %>
+            <%# user.images.each do |image| %>
+              <%= image_tag user.images.first.attachment.url(:product), :class => "contact-img", alt: user.images.first.alt %>
+            <%# end %>
+            <% else %>
+              <%= image_tag "spree/manage/img/user_placeholder.png", :class => "contact-img", alt: "contact image" %>
+            <% end %>
+            <div class="img-block-overlay">
+              <div class="img-edit-link-div">
+                edit image
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="contact-img-block">
+          <% if user.images.any? %>
+          <%# user.images.each do |image| %>
+            <%= image_tag user.images.first.attachment.url(:product), :class => "contact-img", alt: user.images.first.alt %>
+          <%# end %>
+          <% else %>
+            <%= image_tag "spree/manage/img/user_placeholder.png", :class => "contact-img", alt: "contact image" %>
+          <% end %>
+        </div>
+      <% end %>
 
     <div class="contact-info">
 
