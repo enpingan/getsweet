@@ -76,7 +76,7 @@ Rails.application.routes.draw do
         end
 
         resources :shippings, only: :index
-
+        resources :reports, only: [:index, :show]
         resources :invoices
 
 				populate_redirect = redirect do |params, request|
