@@ -8,16 +8,22 @@
 <div class="manage-customer">
 
   <div class="contact-group">
-    <% if @customer.images.any? %>
-      <% @customer.images.each do |image| %>
-        <%= image_tag image.attachment.url(:product), :class => "contact-img", alt: image.alt %>
-      <% end %>
-		<% else %>
-			<%#= image_tag image.attachment.url(:product), :class => "contact-img", alt: image.alt %>
-			<%#= image_url("spree/manage/img/logo2.png"), :class => "contact-img", alt: image.alt  %>
-			<%= image_tag "spree/manage/img/multi-user.png", :class => "contact-img", alt: "account image" %>
-    <% end %>
-		<%= link_to "edit image", account_account_images_path %>
+		<%= link_to account_account_images_path do %>
+			<div class="contact-img-block">
+    		<% if @customer.images.any? %>
+      		<% @customer.images.each do |image| %>
+        		<%= image_tag image.attachment.url(:product), :class => "contact-img", alt: image.alt %>
+      		<% end %>
+				<% else %>
+					<%= image_tag "spree/manage/img/multi-user.png", :class => "contact-img", alt: "account image" %>
+    		<% end %>
+				<div class="img-block-overlay">
+					<div class="img-edit-link-div">
+						edit image
+					</div>
+				</div>
+			</div>
+		<% end %>
 
     <div class="contact-info">
       <% if @customer.ship_address %>
