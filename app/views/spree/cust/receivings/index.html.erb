@@ -1,0 +1,56 @@
+
+
+<h1 class="catalog-title">Incoming Deliveries</h1>
+<a href="<%= new_order_url %>" class="new-order-button">Start New Order</a>
+<div class="clear"></div>
+
+<div class="receiving-block">
+  <div class="my-orders-list">
+    <div class="tRow header">
+      <div class='cel'>
+        Vendor
+      </div>
+      <div class='cel'>
+        Order Number
+      </div>
+      <div class='cel balance'>
+        Item Count
+      </div>
+      <div class='cel balance'>
+        Order Total
+      </div>
+      <div class='cel'>
+        Delivery Date
+      </div>
+      <div class='cel'>
+        Delivery Status
+      </div>
+    </div>
+
+    <% @orders.each do |order| %>
+      <a class="tRow" href="<%= edit_order_receiving_url(order) %>">
+        <div class='cel'>
+          <%= order.vendor.name %>
+        </div>
+        <div class='cel'>
+          <%= order.number %>
+        </div>
+        <div class='cel'>
+          <%= order.item_count %>
+        </div>
+        <div class='cel'>
+          <%= number_to_currency(order.total) %>
+        </div>
+        <div class='cel'>
+          <%= order.delivery_date.to_date.to_formatted_s(:long) %>
+        </div>
+        <div class='cel'>
+          <% if order.shipments.any? %>
+            <%= order.shipments.first.state %>
+          <% end %>
+        </div>
+      </a>
+    <% end %>
+  </div>
+
+</div>

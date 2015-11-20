@@ -5,7 +5,6 @@
 
  *= require spree/cust/vendor
  *= require spree/cust/account
-
  *= require_tree .
  *= require_self
 */

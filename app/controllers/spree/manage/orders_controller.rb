@@ -77,29 +77,33 @@ class OrdersController < Spree::Manage::BaseController
 	def update
 		@order = set_order_session
 
-		if request.patch?
-			@order.item_count = @order.line_items.sum(:quantity)
-			if (params[:commit] == Spree.t(:update))
-				flash[:success] = "Your order has been successfully update!"
-			elsif (params[:commit] == "Approve Order")
-				@order.state = "complete"
-				@order.completed_at = Time.current
-				@order.approver_id = current_spree_user.id
-				@order.approved_at = Time.current
-				@order.user_id = @order.customer.users.first.id unless @order.user_id
-				flash[:success] = "Order Approved!"
-			elsif (params[:commit] == "Add Item" && @order.update(order_params))
-				@order.update!
-				redirect_to manage_products_url and return
-			end
+		@order.item_count = @order.line_items.sum(:quantity)
+		if (params[:commit] == "Approve Order")
+			approve_order(@order)
 		end
 
 		if @order.update(order_params)
 			@order.line_items.each do |line_item|
-				line_item.destroy! if line_item.quantity == 0
+				if line_item.quantity == 0
+					line_item.destroy!
+				else
+					line_item.shipped_qty = line_item.quantity
+					line_item.received_qty = line_item.shipped_qty
+					line_item.shipped_total = line_item.shipped_qty * line_item.price
+				end
 			end
 			@order.update!
-			redirect_to edit_manage_order_url(@order)
+			@order.save!
+
+			if params[:commit] == "Add Item"
+				redirect_to manage_products_url
+			elsif params[:commit] == "Approve Order"
+				flash[:success] = "Order Approved!"
+				redirect_to manage_orders_url
+			else
+				flash[:success] = "Your order has been successfully updated!"
+				redirect_to edit_manage_order_url(@order)
+			end
 		else
 			flash[:success] = nil
 			flash[:errors] = @order.errors.full_messages
@@ -185,6 +189,14 @@ class OrdersController < Spree::Manage::BaseController
 
 	def associate_account(order)
 		order.account_id = current_vendor.accounts.where('customer_id = ?', order.customer_id).limit(1).first.id
+	end
+
+	def approve_order(order)
+		order.state = "complete"
+		order.completed_at = Time.current
+		order.approver_id = current_spree_user.id
+		order.approved_at = Time.current
+		order.user_id = order.customer.users.first.id unless order.user_id
 	end
 
 	def filter_orders

@@ -39,7 +39,11 @@ Rails.application.routes.draw do
       post :populate, :on => :collection
       get :unpopulate, to: 'orders#unpopulate'
       get '/success', to: 'orders#success'
+      resource :receiving, only: [:show, :edit, :update]
     end
+
+    resources :receivings, only: :index
+    resources :invoices, only: [:index, :show]
 
     populate_redirect = redirect do |params, request|
       request.flash[:error] = Spree.t(:populate_get_error)
@@ -80,7 +84,12 @@ Rails.application.routes.draw do
 				resources :orders, :except => [:index, :new, :create, :destroy] do
 					post :populate, :on => :collection
           get :unpopulate, to: 'orders#unpopulate'
-  			end
+          resource :shipping, only: [:edit, :update]
+        end
+
+        resources :shippings, only: :index
+
+        resources :invoices
 
 				populate_redirect = redirect do |params, request|
 			  	request.flash[:error] = Spree.t(:populate_get_error)

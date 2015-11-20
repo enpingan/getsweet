@@ -68,6 +68,18 @@ $(".order-items-toggle").click(function(e){
 	e.preventDefault();
 	$(this).toggleClass('rotate').next('.order-items-cont').slideToggle(300);
 });
+
+$("#expand_all").click(function(e){
+	e.preventDefault();
+	if($(this).hasClass('toggle')){
+		$('.order-items-toggle').addClass('rotate').next('.order-items-cont').slideUp(300);
+		$(this).text('Expand all').removeClass('toggle');
+	} else {
+		$('.order-items-toggle').removeClass('rotate').next('.order-items-cont').slideDown(300);
+		$(this).text('Collapse all').addClass('toggle');
+	}
+
+});
 /* -- */
 /* Accordion -*/
 	$(function() {

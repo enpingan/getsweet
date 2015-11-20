@@ -1,0 +1,91 @@
+<h1 class="tablet-center">Invoice <%= @invoice.number %></h1>
+<div class="inventory-page-block receiving-page-block">
+	<div class="receiving-header-block">
+		<div class="col1">
+			<%= @invoice.customer.name %> <a href="" class="cta-link" id="expand_all">Expand all</a>
+		</div>
+		<div class="col2">
+			<div class="orders-nav">
+				<!-- <a href="#" class="nav-left"><i class="fa fa-chevron-left"></i></a> -->
+
+				<!-- <a href="#" class="nav-right"><i class="fa fa-chevron-right"></i></a> -->
+			</div>
+		</div>
+		<div class="col3">
+			<p>Delivery Date: <b><%= @invoice.delivery_date.to_date.to_formatted_s(:long) %></b></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<!-- <form action="#" id="receiving-form"> -->
+
+		<div class="inventory-list-table">
+			<div class="tRow header">
+				<div class="cel">Item
+					<!-- <a href="" class="sort-name">Item <i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">SKU #
+					<!-- <a href="" class="sort-sku">SKU #<i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">Pack/Size
+					<!-- <a href="" class="sort-count_by">Pack/Size <i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">Price
+					<!-- <a href="" class="sort-count">Price <i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">Ordered
+					<!-- <a href="" class="sort-suggested_minimum">Ordered <i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">Shipped
+					<!-- <a href="" class="sort-price">Shipped <i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">Received
+					<!-- <a href="" class="sort-total">Total<i class="fa fa-sort"></i></a> -->
+				</div>
+				<div class="cel">
+					Total
+				</div>
+				<div class="cel">
+
+				</div>
+			</div>
+			<div class="order-items-block">
+				<div class="order-items-el" id="category_name_goes_here">
+					<a href="" class="order-items-toggle disable rotate">Category<i class="fa fa-chevron-down"></i></a>
+					<div class="order-items-cont">
+
+						<% line_items = @invoice.line_items %>
+            <% @invoice.line_items.each do |line_item| %>
+            <% variant = line_item.variant %>
+              <div class="order-item">
+                <div class="cel"><%= variant.product.name %></div>
+                <div class="cel">#<%= variant.sku %></div>
+                <div class="cel"><%= variant.pack_size %></div>
+                <div class="cel"><%= number_to_currency(variant.price) %></div>
+                <div class="cel"><%= line_item.quantity %></div>
+                <div class="cel"><%= line_item.shipped_qty %> </div>
+                <div class="cel"><%= line_item.received_qty %></div>
+                <div class="cel"><%= number_to_currency(line_item.received_total) %></div>
+                <div class="cel">
+
+                </div>
+              </div>
+            <% end %>
+
+
+					</div>
+					<div class="order-items-count-block">
+						<div class="col1">
+							<p class="category-count">Category Count: <span class="count-val"><%= @invoice.line_items.sum(:received_qty) %></span></p>
+						</div>
+						<div class="col2">
+							<p class="category-total">Category Total: <span class="count-val"><%= number_to_currency(@invoice.line_items.sum(:received_total)) %></span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+
+
+
+</div>

@@ -10,6 +10,7 @@
   <ul>
     <li><a href="<%= new_order_url %>">Start New Order</a></li>
     <li><a href="<%= orders_url %>">All Orders</a></li>
+    <li><a href="<%= receivings_url %>">Receiving</a></li>
     <li><ul class="recent-orders-list">Recent Orders
         <% recent_orders = current_spree_user.customer.orders.order('updated_at DESC').limit(5) %>
         <% recent_orders.each do |order| %>
