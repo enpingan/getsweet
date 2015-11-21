@@ -29,6 +29,7 @@ module Spree
           redirect_to receivings_url
         elsif @order.update(receiving_params)
           @order.line_items.each do |line_item|
+            line_item.received_qty = 0 unless line_item.received_qty
             line_item.received_total = line_item.received_qty * line_item.price
           end
           @order.save!
