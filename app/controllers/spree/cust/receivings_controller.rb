@@ -44,7 +44,8 @@ module Spree
 
       def receiving_params
         params.require(:order).permit(
-            line_items_attributes: [:id, :confirm_received, :received_qty]
+            line_items_attributes: [:id, :confirm_received, :received_qty],
+            notes_attributes: [:id, :body]
           )
       end
     end

@@ -4,6 +4,7 @@ Spree::User.class_eval do
 
   belongs_to :vendor, class_name: 'Vendor', foreign_key: :vendor_id, primary_key: :id
   belongs_to :customer, class_name: 'Customer', foreign_key: :customer_id, primary_key: :id
+  has_many :notes, class_name: 'Spree::Notes', foreign_key: :user_id, primary_key: :id
 
 	has_many :images, as: :viewable, dependent: :destroy, class_name: "Spree::UserImage"
 end

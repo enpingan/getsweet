@@ -36,7 +36,8 @@ module Spree
 
       def shipping_params
         params.require(:order).permit(
-            line_items_attributes: [:id, :shipped_qty, :shipped_total]
+            line_items_attributes: [:id, :shipped_qty, :shipped_total],
+						notes_attributes: [:body, :id]
           )
       end
 

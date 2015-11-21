@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118214407) do
+ActiveRecord::Schema.define(version: 20151121010903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -518,6 +518,17 @@ ActiveRecord::Schema.define(version: 20151118214407) do
   end
 
   add_index "spree_log_entries", ["source_id", "source_type"], name: "index_spree_log_entries_on_source_id_and_source_type", using: :btree
+
+  create_table "spree_notes", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id",    null: false
+    t.integer  "order_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spree_notes", ["order_id"], name: "index_spree_notes_on_order_id", using: :btree
+  add_index "spree_notes", ["user_id"], name: "index_spree_notes_on_user_id", using: :btree
 
   create_table "spree_option_types", force: :cascade do |t|
     t.string   "name",         limit: 100

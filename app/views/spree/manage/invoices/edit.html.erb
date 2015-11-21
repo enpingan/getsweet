@@ -71,7 +71,9 @@
 		<div class="clear"></div>
     <div class="inventory-order-buttons">
 			<div class="leftpart">
-				<textarea name="Notes" id="notes" placeholder="Notes"></textarea>
+				<%= form_for @note, url: manage_invoice_notes_url, method: 'post' do |note_form|%>
+					<textarea name=note[body] id="notes" placeholder="Notes"></textarea>
+				<% end %>
 			</div>
 			<div class="rightpart">
 				<%= submit_tag "confirm" %>
