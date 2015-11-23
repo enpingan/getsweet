@@ -3,6 +3,9 @@ Spree::Order.class_eval do
   belongs_to :vendor, class_name: 'Vendor', foreign_key: :vendor_id, primary_key: :id
   belongs_to :customer, class_name: 'Customer', foreign_key: :customer_id, primary_key: :id
   belongs_to :account, class_name: 'Spree::Account', foreign_key: :account_id, primary_key: :id
+  has_many :notes, class_name: 'Spree::Note', foreign_key: :order_id, primary_key: :id
+  accepts_nested_attributes_for :notes
+  # , reject_if: proc { |attributes| attributes['body'].blank? }, allow
 
 	remove_checkout_step :address
 	remove_checkout_step :delivery
