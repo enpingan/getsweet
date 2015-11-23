@@ -76,8 +76,9 @@ Rails.application.routes.draw do
         end
 
         resources :shippings, only: :index
-        resources :reports, only: [:index, :show]
+        # resources :reports, only: [:index, :show]
         get 'reports/customers', to: 'reports#customers'
+        get 'reports/products', to: 'reports#products'
         resources :invoices do
           resources :notes, only: [:create]
         end

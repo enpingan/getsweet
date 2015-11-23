@@ -1,0 +1,16 @@
+<h1>Customer Reports</h1>
+
+<%= high_chart("area_chart", @customer_sales_overtime_chart) %>
+<br>
+
+
+<div class="chart-block">
+  <%= render 'spree/manage/root/app_dash_widget/chart_tabs' %>
+
+  <div class="chart">
+    <%= high_chart("bar", @customer_sales_bar_chart) %>
+    <%= high_chart("pie", @customer_sales_pie_chart) %>
+  </div>
+</div>
+<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+<%= javascript_include_tag "spree/manage/js/chart_scripts.js" %>

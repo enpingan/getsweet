@@ -1,0 +1,10 @@
+<h1>Product Reports</h1>
+
+<%#= high_chart("prod_area_chart", @product_sales_overtime_chart) %>
+<br>
+<%= high_chart('qty_bar_chart', @product_qtys_bar_chart) %>
+<div class="clear"></div>
+<br>
+<%= high_chart('totals_bar_chart', @product_sales_bar_chart) %>
+<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+<%= javascript_include_tag "spree/manage/js/chart_scripts.js" %>
