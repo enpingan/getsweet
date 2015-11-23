@@ -14,6 +14,14 @@ module Spree
        def show
        end
 
+       def customers
+         @reports
+         @customer = current_vendor.customers.order('name ASC').first
+         build_customer_sales_area_chart
+         build_product_sales_chart
+         render :index
+       end
+
        def build_customer_sales_area_chart
           customers = []
           customers_totals = []
@@ -116,7 +124,7 @@ module Spree
             data = []
             drill_series = []
 
-            product_qtys.each do |name, qty|
+            product_qtys.sort_by {|name, qty| qty}.reverse!.each do |name, qty|
               drill_data = []
               data << {name: name, y: qty, drilldown: name}
 
