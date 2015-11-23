@@ -64,7 +64,7 @@ module Spree
           # product_qtys = Hash.new([])
           product_qtys = Hash.new(0)
           product_totals = Hash.new {|hash, key| hash[key] = []}
-          current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", start_date, end_date).each do |order|
+          current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", start_date, end_date).order('delivery_date ASC').each do |order|
             order.line_items.each do |line_item|
               prod_name = line_item.product.name
                 product_qtys[prod_name] += line_item.quantity
