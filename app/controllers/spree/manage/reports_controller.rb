@@ -67,17 +67,51 @@ module Spree
           current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", start_date, end_date).each do |order|
             order.line_items.each do |line_item|
               prod_name = line_item.product.name
-                puts order.number.to_s + ' ' + order.customer.name
                 product_qtys[prod_name] += line_item.quantity
-                puts prod_name.to_s + ' ' + line_item.quantity.to_s + ' ' + product_qtys[prod_name].to_s
+
                 # product_qtys[name] << [line_item.quantity, order.delivery_date]
-                # product_totals[name] << [line_item.total, order.delivery_date]
+                product_totals[prod_name] << [order.delivery_date.utc.to_i*1000, line_item.total.to_i]
                 customers[order.customer.name][prod_name] += line_item.quantity
-                puts prod_name.to_s + ' ' + line_item.quantity.to_s + ' ' + customers[order.customer.name].to_s
+
 
             end
 
           end
+
+          @product_sales_overtime_chart = LazyHighCharts::HighChart.new('graph') do |f|
+            f.chart({:type => 'area', :zoomType=>'x'})
+            f.title(:text => "Sales Over Time by Product")
+            f.yAxis(title:{:text => "Total Sales (USD)"})
+              f.options[:xAxis] = { :type => 'datetime',
+               #  :lineWidth => 1,
+               #  :tickInterval => (1000 * 60 * 60 * 24 * 60),
+               #  :tickmarkPlacement => 'on',
+                :startOnTick => true,
+                :dateTimeLabelFormats => { :month => '%b \'%y' }}
+
+            product_totals.each do |name, data|
+              f.series(
+                 name: name,
+                 data: data,
+                 pointStart: Time.zone.local(2015, 1, 1).utc,
+                 # pointInterval:
+                 # pointStart: Time.at(Time.zone.local(2015, 1, 1).to_i),
+                 pointInterval: (1000 * 60 * 60 * 24 * 30)
+              )
+
+            end
+
+            f.plotOptions(series: {
+                 marker: {enabled: false},
+                  stacking: 'normal'
+               }
+            )
+
+            f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
+          end
+
+
+
           @product_sales_bar_chart = LazyHighCharts::HighChart.new('graph') do |f|
             data = []
             drill_series = []
@@ -112,24 +146,11 @@ module Spree
                   name: "Products",
                   data: data
                )
-               f.drilldown(
-                  series: drill_series
-                  # series: [{
-                  #   name: ,
-                  #   id: ,
-                  #   data: [
-                  #     []
-                  #   ]
-                  #   },{
-                  #     name: ,
-                  #     id: ,
-                  #     data: [
-                  #       []
-                  #     ]
-                  #   }]
-               )
+               f.drilldown(series: drill_series)
 
   				end
+
+
 
       end
 
