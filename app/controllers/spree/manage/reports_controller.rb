@@ -8,6 +8,11 @@ module Spree
          render :products
        end
 
+       def overview
+         build_total_sales_chart
+         render :overview
+       end
+
        def customers
          build_customer_sales_area_chart
          build_customer_bar_chart
@@ -16,8 +21,8 @@ module Spree
        end
 
        def selected_customer_data
-         start_date = Time.zone.local(2015, 1, 1)
-         end_date = Time.zone.local(2015,12,31)
+         start_date = Time.zone.local(Time.current.year, 1, 1)
+         end_date = Time.current
          customers = Hash.new(0)
          current_vendor.orders.where("delivery_date >= ? AND delivery_date < ?", start_date, end_date).each do |order|
            customers[order.customer.name] += order.total
@@ -29,12 +34,60 @@ module Spree
          data
        end
 
+       def build_total_sales_chart
+         start_date = Time.zone.local(Time.current.year, 1, 1)
+         end_date = Time.current
+         totals = Hash.new(0)
+         current_vendor.orders.where('delivery_date >= ? AND delivery_date <= ?', start_date, end_date).order('delivery_date ASC').each do |order|
+           totals[order.delivery_date] += order.total
+         end
+         data = []
+         totals.sort_by {|date, total| date}.each do |date, total|
+           data << [date.to_i*1000, total.to_i]
+         end
+
+
+          @sales_overtime_chart = LazyHighCharts::HighChart.new('graph') do |f|
+            f.chart({:type=>"area", :zoomType=>'x'})
+            f.title(:text => "Sales Over Time - Year to Date")
+            f.subtitle(text: 'Click and Drag to Zoom')
+            f.legend(enabled: false)
+            f.yAxis(title:{text: 'Total Sales (USD)'})
+            f.options[:xAxis] = { :type => 'datetime',
+             #  :lineWidth => 1,
+             title: {text: Time.current.year.to_s},
+              :tickInterval => (1000 * 60 * 60 * 24 * 365 / 12),
+             #  :tickmarkPlacement => 'on',
+              :startOnTick => true,
+              :dateTimeLabelFormats => { :month => '%b' }}
+            f.series(
+              name: "Total Sales ($)",
+              data: data,
+              pointStart: Time.zone.local(Time.current.year, 1, 1),
+              pointInterval: (1000 * 60 * 60 * 24 * 365 / 12)
+            )
+
+          f.plotOptions(series: {
+            color: 'orange',
+            fillColor:
+            	{
+                linearGradient: [0, 0, 0, 300],
+                stops: [
+                  [0,'orange' ],
+                  [1, 'white']
+                ]
+             }
+           })
+         end
+       end
+
        def build_customer_bar_chart
-         start_date = Time.zone.local(2015, 1, 1)
-         end_date = Time.zone.local(2015,12,31)
+         start_date = Time.zone.local(Time.current.year, 1, 1)
+         end_date = Time.current
          @customer_sales_bar_chart = LazyHighCharts::HighChart.new('graph') do |f|
             f.chart({:type=>"column", :className=>"bar active"})
-            f.title(:text => "Sales by Customer (#{start_date.strftime('%b \'%y')} to #{end_date.strftime('%b \'%y')})")
+            f.title(:text => "Sales by Customer")
+            f.subtitle(text: "Year to Date")
             f.yAxis(title:{:text => "Total Sales (USD)"})
             f.legend(enabled: false)
             f.xAxis(:categories => [])
@@ -47,11 +100,12 @@ module Spree
        end
 
        def build_customer_pie_chart
-         start_date = Time.zone.local(2015, 1, 1)
-         end_date = Time.zone.local(2015,12,31)
+         start_date = Time.zone.local(Time.current.year, 1, 1)
+         end_date = Time.current
  				@customer_sales_pie_chart = LazyHighCharts::HighChart.new('graph') do |f|
    				f.chart({:type=>"pie", :className=>"pie", margin: [30,30,70,30]})
- 				  f.title(:text => "Sales by Customer (#{start_date.strftime('%b \'%y')} to #{end_date.strftime('%b \'%y')})")
+ 				  f.title(:text => "Sales by Customer")
+          f.subtitle(text: "Year to Date")
  				  f.tooltip(pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>')
  					f.plotOptions(
  						pie: {
@@ -77,18 +131,21 @@ module Spree
  			end
 
        def build_customer_sales_area_chart
+         start_date = Time.zone.local(Time.current.year, 1, 1)
+         end_date = Time.current
           customers = []
           customers_totals = []
           current_vendor.customers.order('name ASC').each do |customer|
             customer_totals = []
-            customer_totals = customer.orders.select(:total, :delivery_date).where("delivery_date >= ? AND delivery_date < ? AND vendor_id = ?", Time.zone.local(2015, 1, 1), Time.zone.local(2015,12,31), current_vendor.id).order('delivery_date ASC')
+            customer_totals = customer.orders.select(:total, :delivery_date).where("delivery_date >= ? AND delivery_date < ? AND vendor_id = ?", start_date, end_date, current_vendor.id).order('delivery_date ASC')
             customer_data = customer_totals.map{|c| [c.delivery_date.utc.to_i*1000 , c.total.to_i]}
             customers << [customer.name, customer_data]
           end
 
          @customer_sales_overtime_chart = LazyHighCharts::HighChart.new('graph') do |f|
-           f.chart({:type => 'area', :zoomType=>'x'})
+           f.chart({:type => 'line', :zoomType=>'x'})
            f.title(:text => "Sales Over Time by Customer")
+           f.subtitle(text: "Year to Date")
            f.yAxis(title:{:text => "Total Sales (USD)"})
              f.options[:xAxis] = { :type => 'datetime',
               #  :lineWidth => 1,
@@ -101,7 +158,7 @@ module Spree
              f.series(
                 name: customer[0],
                 data: customer[1],
-                pointStart: Time.zone.local(2015, 1, 1).utc,
+                pointStart: Time.zone.local(Time.current.year, 1, 1),
                 # pointInterval:
                 # pointStart: Time.at(Time.zone.local(2015, 1, 1).to_i),
                 pointInterval: (1000 * 60 * 60 * 24 * 30)
@@ -110,8 +167,8 @@ module Spree
            end
 
            f.plotOptions(series: {
-                marker: {enabled: false},
-                 stacking: 'normal'
+                marker: {enabled: false}
+                #  stacking: 'normal'
               }
            )
 
@@ -120,8 +177,8 @@ module Spree
        end
 
        def build_product_sales_chart
-         start_date = Time.zone.local(2015, 1, 1)
-         end_date = Time.zone.local(2015,12,31)
+         start_date = Time.zone.local(Time.current.year, 1, 1)
+         end_date = Time.current
           customers = Hash.new {|hash, key| hash[key] = Hash.new(0)}
           # product_qtys = Hash.new([])
           product_qtys = Hash.new(0)
@@ -140,6 +197,7 @@ module Spree
           @product_sales_overtime_chart = LazyHighCharts::HighChart.new('graph') do |f|
             f.chart({:type => 'area', :zoomType=>'x'})
             f.title(:text => "Sales Over Time by Product")
+            f.subtitle(text: "Year to Date")
             f.yAxis(title:{:text => "Total Sales (USD)"})
               f.options[:xAxis] = { :type => 'datetime',
                 :startOnTick => true,
@@ -150,7 +208,7 @@ module Spree
               f.series(
                  name: name,
                  data: data,
-                 pointStart: Time.zone.local(2015, 1, 1).utc,
+                 pointStart: Time.zone.local(Time.current.year, 1, 1),
                  # pointInterval:
                  # pointStart: Time.at(Time.zone.local(2015, 1, 1).to_i),
                  pointInterval: (1000 * 60 * 60 * 24 * 30)
@@ -185,13 +243,15 @@ module Spree
                 series: {
                     borderWidth: 0,
                     dataLabels: {
+                      format: '${y}',
                         enabled: true,
                     }
                 }
             )
 
     				f.chart({:type=>"column", :className=>"bar active"})
-  				  f.title(:text => "Sales by Product (#{start_date.strftime('%b \'%y')} to #{end_date.strftime('%b \'%y')})")
+  				  f.title(:text => "Sales by Product")
+            f.subtitle(text: "Year to Date")
             f.yAxis(title:{:text => "Total Sales (USD)"})
             f.legend(enabled: false)
             f.xAxis(:categories => [])
@@ -229,7 +289,8 @@ module Spree
             )
 
     				f.chart({:type=>"column", :className=>"bar active"})
-  				  f.title(:text => "Sales by Product Quantities (#{start_date.strftime('%b \'%y')} to #{end_date.strftime('%b \'%y')})")
+  				  f.title(:text => "Sales by Product Quantities")
+            f.subtitle(text: "Year to Date")
             f.yAxis(title:{:text => "Quantity"})
             f.legend(enabled: false)
             f.xAxis(:categories => [])
@@ -241,9 +302,6 @@ module Spree
                f.drilldown(series: drill_series)
 
   				end
-
-
-
       end
 
      end

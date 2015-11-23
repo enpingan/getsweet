@@ -79,6 +79,7 @@ Rails.application.routes.draw do
         # resources :reports, only: [:index, :show]
         get 'reports/customers', to: 'reports#customers'
         get 'reports/products', to: 'reports#products'
+        get 'reports/overview', to: 'reports#overview'
         resources :invoices do
           resources :notes, only: [:create]
         end
