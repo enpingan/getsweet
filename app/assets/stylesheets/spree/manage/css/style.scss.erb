@@ -2309,10 +2309,18 @@ img{
 // .invoices-list-block  .orders-list-table .tRow:not(.header) .cel:first-child a:hover{
 //     text-decoration: none;
 // }
-.invoices-list-block  .orders-list-table a.tRow{
+.invoices-list-block  .orders-list-table .tRow{
 	color: inherit;
 }
-.invoices-list-block  .orders-list-table a.tRow:hover{
+.invoices-list-block  .orders-list-table .tRow.header:hover{
+	color: inherit;
+}
+
+a.pdf-link img {
+	display: inline-block;
+	vertical-align: middle;
+}
+.invoices-list-block  .orders-list-table .tRow:hover{
 	color: #FF7E00;
 }
 .inventory-page-block .inventory-list-table .cel {

@@ -3,7 +3,7 @@ module Spree
     class InvoicesController < Spree::Manage::BaseController
 
       def index
-        @invoices = current_vendor.orders.where('state = ?', 'complete').order('delivery_date DESC')
+        @invoices = current_vendor.orders.where('state = ? AND approved_at IS NOT NULL', 'complete').order('delivery_date DESC')
         render :index
       end
 

@@ -1,4 +1,7 @@
-<h1 class="tablet-center">Invoice <%= @invoice.number %></h1>
+<h1 class="tablet-center">Invoice <%= @invoice.number %>
+	<a href="http://harvestpublic.s3.amazonaws.com/resources/Invoice_Template.pdf" target="_blank" class="pdf-link"><%=image_tag("spree/manage/img/pdf-ico.png")%></a>
+</h1>
+
 <div class="inventory-page-block receiving-page-block">
 	<div class="receiving-header-block">
 		<div class="col1">

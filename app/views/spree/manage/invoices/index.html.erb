@@ -35,25 +35,26 @@
 									<div class="cel"></div>
 								</div>
                 <% @invoices.each do |invoice| %>
-                  <a class="tRow" href="<%= manage_invoice_url(invoice) %>">
-                    <div class='cel'>
+                  <div class="tRow">
+                    <a href="<%= manage_invoice_url(invoice) %>" class='cel'>
                       <%= invoice.customer.name %>
-                    </div>
-                    <div class='cel'>
+                    </a>
+                    <a href="<%= manage_invoice_url(invoice) %>" class='cel'>
                       <%= invoice.number %>
-                    </div>
-                    <div class='cel'>
+                    </a>
+                    <a href="<%= manage_invoice_url(invoice) %>" class='cel'>
                       <%= invoice.delivery_date.to_date.to_formatted_s(:long) %>
-                    </div>
-                    <div class='cel'>
+                    </a>
+                    <a href="<%= manage_invoice_url(invoice) %>" class='cel'>
                       <%= number_to_currency(invoice.line_items.sum(:received_total)) %>
-                    </div>
+                    </a>
+                    <a href="<%= manage_invoice_url(invoice) %>" class='cel'>
+                    </a>
                     <div class='cel'>
-                    </div>
-                    <div class='cel'>
+											<a href="http://harvestpublic.s3.amazonaws.com/resources/Invoice_Template.pdf" target="_blank"><%=image_tag("spree/manage/img/pdf-ico.png")%></a>
 
                     </div>
-                  </a>
+                  </div>
                 <% end %>
 
 								<!-- <div class="tRow">
