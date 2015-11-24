@@ -54,6 +54,7 @@ module Spree
     @vendor = current_vendor
     # Temporary allergans
     @allergans = ['Peanut', 'Tree Nuts', 'Milk', 'Egg', 'Wheat', 'Soy', 'Fish', 'Shellfish']
+
     render :edit
   end
 
@@ -64,7 +65,6 @@ module Spree
       @product.variants.create!
       render :edit and return
     end
-
 
     if @product.update(product_params)
       flash[:success] = "Product has been updated!"
