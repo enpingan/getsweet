@@ -93,7 +93,7 @@ module Spree
             f.xAxis(:categories => [])
             f.series(
               colorByPoint: true,
-              name: "Customers",
+              name: "Sales ($)",
               data: selected_customer_data
             )
           end
@@ -123,7 +123,7 @@ module Spree
  					)
 
            f.series(
- 						name: "Customers",
+ 						name: "Percent of Total Sales",
              colorByPoint: true,
              data: selected_customer_data
          	)
@@ -257,7 +257,7 @@ module Spree
             f.xAxis(:categories => [])
                f.series(
                   colorByPoint: true,
-                  name: "Products",
+                  name: "Sales ($)",
                   data: data
                )
                f.drilldown(series: drill_series)
@@ -296,7 +296,7 @@ module Spree
             f.xAxis(:categories => [])
                f.series(
                   colorByPoint: true,
-                  name: "Products",
+                  name: "Qty Sold",
                   data: data
                )
                f.drilldown(series: drill_series)
