@@ -5,7 +5,7 @@ module Spree
       before_action :clear_current_order
 
       def index
-        @orders = current_customer.orders.where('delivery_date >= ? AND state = ?', Time.current.to_date, 'complete').order('delivery_date ASC')
+        @orders = current_customer.orders.where('state = ?', 'complete').order('delivery_date ASC')
         render :index
       end
 
@@ -29,7 +29,7 @@ module Spree
           redirect_to receivings_url
         elsif @order.update(receiving_params)
           @order.line_items.each do |line_item|
-            line_item.received_qty = 0 unless line_item.received_qty
+            line_item.received_qty = 0 unless line_item.received_qty && line_item.confirm_received
             line_item.received_total = line_item.received_qty * line_item.price
           end
           @order.save!
