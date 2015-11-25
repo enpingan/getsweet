@@ -62,7 +62,7 @@ module Spree
     @product = Spree::Product.friendly.find(params[:id])
     @vendor = current_vendor
     if params[:commit] == 'Add Variant'
-      @product.variants.create!
+      @variant = @product.variants.build
       render :edit and return
     end
 

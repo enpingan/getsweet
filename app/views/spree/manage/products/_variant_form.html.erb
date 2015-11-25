@@ -32,10 +32,15 @@
     </div>
     <div class="rightpart">
       <p>
-        <%#= f.label :price %>
-        <%= f.fields_for :prices do |price_field| %>
-          <%= price_field.label :price %>
-          <%= price_field.text_field :amount %>
+        <% if @variant %>
+          <%= f.label :price %>
+          <%= f.text_field :price %>
+        <% else %>
+          <%#= f.label :price %>
+          <%= f.fields_for :prices do |price_field| %>
+            <%= price_field.label :price %>
+            <%= price_field.text_field :amount %>
+          <% end %>
         <% end %>
       </p>
     </div>
