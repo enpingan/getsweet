@@ -21,7 +21,9 @@ module Spree
 
 	  has_many :users, class_name: 'Spree::User', foreign_key: :vendor_id, primary_key: :id
 	  has_many :products, class_name: 'Spree::Product', foreign_key: :vendor_id, primary_key: :id
+		has_many :stock_locations, class_name: 'Spree::StockLocation', foreign_key: :vendor_id, primary_key: :id
 	  has_many :orders, class_name: 'Spree::Order', foreign_key: :vendor_id, primary_key: :id
+		has_many :shipments, through: :orders
 	  has_many :spree_roles, through: :users, foreign_key: :vendor_id
 	  #has_many :invoices
 	  # has_and_belongs_to_many :customers, join_table: :spree_customers_vendors

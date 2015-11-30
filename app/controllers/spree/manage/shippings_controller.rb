@@ -3,7 +3,9 @@ module Spree
     class ShippingsController < Spree::Manage::BaseController
 
       def index
-        @orders = current_vendor.orders.where('delivery_date >= ? AND state = ?', Time.current.to_date, 'complete').order('delivery_date ASC')
+				@shipments = current_vendor.shipments
+				# @orders = current_vendor.orders.('shipment IS NOT NULL')
+        # @orders = current_vendor.orders.where('delivery_date >= ? AND state = ?', Time.current.to_date, 'complete').order('delivery_date ASC')
         render :index
       end
 

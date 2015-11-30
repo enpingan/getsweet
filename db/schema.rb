@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121010903) do
+ActiveRecord::Schema.define(version: 20151125140115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1086,6 +1086,7 @@ ActiveRecord::Schema.define(version: 20151121010903) do
     t.boolean  "backorderable_default",  default: false
     t.boolean  "propagate_all_variants", default: true
     t.string   "admin_name"
+    t.integer  "vendor_id"
   end
 
   add_index "spree_stock_locations", ["active"], name: "index_spree_stock_locations_on_active", using: :btree
@@ -1093,6 +1094,7 @@ ActiveRecord::Schema.define(version: 20151121010903) do
   add_index "spree_stock_locations", ["country_id"], name: "index_spree_stock_locations_on_country_id", using: :btree
   add_index "spree_stock_locations", ["propagate_all_variants"], name: "index_spree_stock_locations_on_propagate_all_variants", using: :btree
   add_index "spree_stock_locations", ["state_id"], name: "index_spree_stock_locations_on_state_id", using: :btree
+  add_index "spree_stock_locations", ["vendor_id"], name: "index_spree_stock_locations_on_vendor_id", using: :btree
 
   create_table "spree_stock_movements", force: :cascade do |t|
     t.integer  "stock_item_id"

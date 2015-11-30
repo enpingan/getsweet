@@ -27,7 +27,8 @@
       </div>
     </div>
 
-    <% @orders.each do |order| %>
+    <% @shipments.each do |shipment| %>
+      <% order = shipment.order %>
       <a class="tRow" href="<%= edit_manage_order_shipping_url(order) %>">
         <div class='cel'>
           <%= order.customer.name %>
@@ -45,9 +46,9 @@
           <%= order.delivery_date.to_date.to_formatted_s(:long) %>
         </div>
         <div class='cel'>
-          <% if order.shipments.any? %>
-            <%= order.shipments.first.state %>
-          <% end %>
+
+            <%= shipment.state %>
+          
         </div>
       </a>
     <% end %>

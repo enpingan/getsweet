@@ -198,6 +198,10 @@ class OrdersController < Spree::Manage::BaseController
 		order.approver_id = current_spree_user.id
 		order.approved_at = Time.current
 		order.user_id = order.customer.users.first.id unless order.user_id
+		unless current_vendor.stock_locations.count > 0
+			current_vendor.stock_locations.create(name: current_vendor.name)
+		end
+		order.shipments.create(stock_location_id: current_vendor.stock_locations.first.id)
 	end
 
 	def filter_orders
