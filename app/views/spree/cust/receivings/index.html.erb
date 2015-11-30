@@ -27,27 +27,25 @@
       </div>
     </div>
 
-    <% @orders.each do |order| %>
-      <a class="tRow" href="<%= edit_order_receiving_url(order) %>">
+    <% @shipments.each do |shipment| %>
+      <a class="tRow" href="<%= edit_receiving_url(shipment) %>">
         <div class='cel'>
-          <%= order.vendor.name %>
+          <%= shipment.order.vendor.name %>
         </div>
         <div class='cel'>
-          <%= order.number %>
+          <%= shipment.order.number %>
         </div>
         <div class='cel'>
-          <%= order.item_count %>
+          <%= shipment.order.item_count %>
         </div>
         <div class='cel'>
-          <%= number_to_currency(order.total) %>
+          <%= number_to_currency(shipment.order.total) %>
         </div>
         <div class='cel'>
-          <%= order.delivery_date.to_date.to_formatted_s(:long) %>
+          <%= shipment.order.delivery_date.to_date.to_formatted_s(:long) %>
         </div>
         <div class='cel'>
-          <% if order.shipments.any? %>
-            <%= order.shipments.first.state %>
-          <% end %>
+          <%= shipment.state %>
         </div>
       </a>
     <% end %>

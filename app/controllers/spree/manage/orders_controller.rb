@@ -201,7 +201,14 @@ class OrdersController < Spree::Manage::BaseController
 		unless current_vendor.stock_locations.count > 0
 			current_vendor.stock_locations.create(name: current_vendor.name)
 		end
-		order.shipments.create(stock_location_id: current_vendor.stock_locations.first.id)
+		shipment = order.shipments.create(stock_location_id: current_vendor.stock_locations.first.id)
+		order.line_items.each do |line_item|
+			shipment.inventory_units.create(
+				order_id: order.id,
+				line_item_id: line_item.id,
+				variant_id: line_item.variant_id
+			)
+		end
 	end
 
 	def filter_orders

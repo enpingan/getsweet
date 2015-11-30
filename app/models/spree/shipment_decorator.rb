@@ -17,14 +17,14 @@ Spree::Shipment.class_eval do
     end
 
     event :ship do
-      transition from: :confirmed, to: :shipped
-    end
-    after_transition to: :shipped, do: :after_ship
+        transition from: [:ready, :canceled], to: :shipped
+      end
+      after_transition to: :shipped, do: :after_ship
 
     event :receive do
       transition from: :shipped, to: :received
     end
-    after_transition to: :sent, do: :after_sent
+    after_transition to: :received, do: :after_receive
 
     event :cancel do
       transition to: :canceled, from: [:pending, :ready]
@@ -43,7 +43,7 @@ Spree::Shipment.class_eval do
     after_transition from: :canceled, to: [:pending, :ready], do: :after_resume
     end
 
-    def after_received
+    def after_receive
       order.update!
     end
 

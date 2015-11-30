@@ -17,7 +17,7 @@
 		<div class="clear"></div>
 	</div>
 	<!-- <form action="#" id="receiving-form"> -->
-	<%= form_for @order, url: order_receiving_url(@order) do |f|%>
+	<%= form_for @order, url: receiving_url(@shipment) do |f|%>
 		<div class="inventory-list-table">
 			<div class="tRow header">
 				<div class="cel">Item
@@ -53,19 +53,20 @@
 					<a href="" class="order-items-toggle disable rotate">Category<i class="fa fa-chevron-down"></i></a>
 					<div class="order-items-cont">
 
-						<% line_items = @order.line_items %>
+						<% line_items = @shipment.line_items %>
 						<%= render partial: 'line_item', collection: line_items, locals: { f: f } %>
 
 					</div>
+          <!-- Need to associate line_items to a shipment to use the count-block below for the shipment -->
 					<div class="order-items-count-block">
-						<div class="col1">
-							<p class="category-count">Ordered Category Count: <span class="count-val"><%= @order.line_items.sum(:quantity) %></span></p>
-							<p class="category-count">Shipped Category Count: <span class="count-val"><%= @order.line_items.sum(:shipped_qty) %></span></p>
+						<!-- <div class="col1">
+							<p class="category-count">Ordered Category Count: <span class="count-val"><%#= @order.line_items.sum(:quantity) %></span></p>
+							<p class="category-count">Shipped Category Count: <span class="count-val"><%#= @order.line_items.sum(:shipped_qty) %></span></p>
 						</div>
 						<div class="col2">
-							<p class="category-total">Category Total: <span class="count-val"><%= number_to_currency(@order.total) %></span></p>
-							<p class="category-total">Category Total: <span class="count-val"><%= number_to_currency(@order.line_items.sum(:shipped_total)) %></span></p>
-						</div>
+							<p class="category-total">Category Total: <span class="count-val"><%#= number_to_currency(@order.total) %></span></p>
+							<p class="category-total">Category Total: <span class="count-val"><%#= number_to_currency(@order.line_items.sum(:shipped_total)) %></span></p>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -76,9 +77,13 @@
 				<textarea name="Notes" id="notes" placeholder="Notes"></textarea>
 			</div>
 			<div class="rightpart">
-        <%= submit_tag "Reject Order", class: "cta-button cancel", data: {confirm: "Are you sure you want to reject the ENTIRE order?"} %>
-				<input type="submit" value="order received">
-			</div>
+        <% if @shipment.state != 'received' %>
+          <%= submit_tag "Reject Order", class: "cta-button cancel", data: {confirm: "Are you sure you want to reject the ENTIRE order?"} %>
+          <input type="submit" value="order received">
+        <% else %>
+          This shipment has already been received.  For any changes, please contact <%= @order.vendor.name %>.
+        <% end %>
+      </div>
 			<div class="clear"></div>
 		</div>
 

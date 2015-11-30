@@ -33,10 +33,10 @@ Rails.application.routes.draw do
       post :populate, :on => :collection
       get :unpopulate, to: 'orders#unpopulate'
       get '/success', to: 'orders#success'
-      resource :receiving, only: [:show, :edit, :update]
+      # resource :receiving, only: [:show, :edit, :update]
     end
 
-    resources :receivings, only: :index
+    resources :receivings, only: [:index, :edit, :update]
     resources :invoices, only: [:index, :show]
 
     populate_redirect = redirect do |params, request|

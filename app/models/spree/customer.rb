@@ -28,6 +28,8 @@ module Spree
 		has_many :accounts, class_name: 'Spree::Account', foreign_key: :customer_id, primary_key: :id
 		has_many :vendors, through: :accounts, foreign_key: :customer_id
 
+		has_many :shipments, through: :orders
+
 		has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Spree::CustomerImage"
 		accepts_nested_attributes_for :ship_address
 

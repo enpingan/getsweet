@@ -5,33 +5,41 @@ module Spree
       before_action :clear_current_order
 
       def index
-        @orders = current_customer.orders.where('state = ?', 'complete').order('delivery_date ASC')
+        # @orders = current_customer.orders.where('state = ?', 'complete').order('delivery_date ASC')
+        @shipments = current_customer.shipments.where('received_at IS NULL OR received_at > ?', 1.months.ago)
         render :index
       end
 
-      def show
-      end
-
       def edit
-        @order = Spree::Order.friendly.find(params[:order_id])
+        # @order = Spree::Order.friendly.find(params[:order_id])
+        @shipment = Spree::Shipment.friendly.find(params[:id])
+        @order = @shipment.order
 
         render :edit
       end
 
       def update
-        @order = Spree::Order.friendly.find(params[:order_id])
+        # @order = Spree::Order.friendly.find(params[:order_id])
+        @shipment = Spree::Shipment.friendly.find(params[:id])
+        @order = @shipment.order
+
+        @shipment.receiver_id = current_spree_user.id
+        @shipment.received_at = Time.current
+
         if params[:commit] == 'Reject Order'
-          @order.line_items.each do |line_item|
+          @shipment.line_items.each do |line_item|
             line_item.received_qty = 0
             line_item.confirm_received = false
           end
+          @shipment.receive
           @order.save!
           redirect_to receivings_url
         elsif @order.update(receiving_params)
-          @order.line_items.each do |line_item|
+          @shipment.line_items.each do |line_item|
             line_item.received_qty = 0 unless line_item.received_qty && line_item.confirm_received
             line_item.received_total = line_item.received_qty * line_item.price
           end
+          @shipment.receive
           @order.save!
           redirect_to receivings_url
         else
