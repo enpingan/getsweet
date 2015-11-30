@@ -1,7 +1,8 @@
 Spree::Shipment.class_eval do
 
-  scope :sent, -> { with_state('sent') }
-  scope :confirmed, -> { with_state('confirmed') }
+  belongs_to :receiver, class_name: "Spree::User", foreign_key: :receiver_id, primary_key: :id
+
+  scope :received, -> { with_state('received') }
 
   state_machine initial: :pending, use_transactions: false do
       event :ready do
