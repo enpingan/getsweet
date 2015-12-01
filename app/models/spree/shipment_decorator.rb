@@ -19,7 +19,7 @@ Spree::Shipment.class_eval do
     event :ship do
         transition from: [:ready, :canceled], to: :shipped
       end
-      after_transition to: :shipped, do: :after_ship
+      # after_transition to: :shipped, do: :after_ship
 
     event :receive do
       transition from: :shipped, to: :received

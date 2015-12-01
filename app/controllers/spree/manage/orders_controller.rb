@@ -87,9 +87,9 @@ class OrdersController < Spree::Manage::BaseController
 				if line_item.quantity == 0
 					line_item.destroy!
 				else
-					line_item.shipped_qty = line_item.quantity
-					line_item.received_qty = line_item.shipped_qty
-					line_item.shipped_total = line_item.shipped_qty * line_item.price
+					# line_item.shipped_qty = line_item.quantity
+					# # line_item.received_qty = line_item.shipped_qty
+					# line_item.shipped_total = line_item.shipped_qty * line_item.price
 				end
 			end
 			@order.update!

@@ -17,7 +17,7 @@
 		<div class="clear"></div>
 	</div>
 	<!-- <form action="#" id="receiving-form"> -->
-	<%= form_for @order, url: manage_order_shipping_url(@order) do |f|%>
+	<%= form_for @order, url: manage_shipping_url(@shipment) do |f|%>
 		<div class="inventory-list-table">
 			<div class="tRow header">
 				<div class="cel">Item
@@ -47,18 +47,18 @@
 					<a href="" class="order-items-toggle disable rotate">Category<i class="fa fa-chevron-down"></i></a>
 					<div class="order-items-cont">
 
-						<% line_items = @order.line_items %>
+						<% line_items = @shipment.line_items %>
 						<%= render partial: 'line_item', collection: line_items, locals: { f: f } %>
 
 					</div>
 					<div class="order-items-count-block">
-						<div class="col1">
-							<p class="category-count">Ordered Category Count: <span class="count-val"><%= @order.line_items.sum(:quantity) %></span></p>
-							<p class="category-count">Shipped Category Count: <span class="count-val"><%= @order.line_items.sum(:shipped_qty) %></span></p>
+						<!-- <div class="col1">
+							<p class="category-count">Ordered Category Count: <span class="count-val"><%#= @order.line_items.sum(:quantity) %></span></p>
+							<p class="category-count">Shipped Category Count: <span class="count-val"><%#= @order.line_items.sum(:shipped_qty) %></span></p>
 						</div>
 						<div class="col2">
-							<p class="category-total">Category Total: <span class="count-val"><%= number_to_currency(@order.line_items.sum(:shipped_total)) %></span></p>
-						</div>
+							<p class="category-total">Category Total: <span class="count-val"><%#= number_to_currency(@order.line_items.sum(:shipped_total)) %></span></p>
+						</div> -->
 					</div>
 				</div>
 			</div>

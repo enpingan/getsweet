@@ -11,7 +11,11 @@
     <div class="qty-block">
       <div class="spin">
         <span class="minus"><i class="fa fa-minus"></i></span>
-        <%= l_form.number_field :shipped_qty, min: 0, class: "qty_input shipped_qty" %>
+        <% if line_item.shipped_qty.nil? %>
+          <%= l_form.number_field :shipped_qty, min: 0, class: "qty_input", value: line_item.quantity %>
+        <% else %>
+          <%= l_form.number_field :shipped_qty, min: 0, class: "qty_input" %>
+        <% end %>
         <span class="plus"><i class="fa fa-plus"></i></span></div>
     </div>
   </div>

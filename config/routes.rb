@@ -72,10 +72,10 @@ Rails.application.routes.draw do
 				resources :orders, :except => [:index, :new, :create, :destroy] do
 					post :populate, :on => :collection
           get :unpopulate, to: 'orders#unpopulate'
-          resource :shipping, only: [:edit, :update]
+          # resource :shipping, only: [:edit, :update]
         end
 
-        resources :shippings, only: :index
+        resources :shippings, only: [:index, :edit, :update]
         # resources :reports, only: [:index, :show]
         get 'reports/customers', to: 'reports#customers'
         get 'reports/products', to: 'reports#products'

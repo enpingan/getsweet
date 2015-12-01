@@ -10,21 +10,32 @@ module Spree
       end
 
       def edit
-        @order = Spree::Order.friendly.find(params[:order_id])
+        # @order = Spree::Order.friendly.find(params[:order_id])
+				@shipment = Spree::Shipment.friendly.find(params[:id])
+				@order = @shipment.order
 
         render :edit
       end
 
       def update
-        @order = Spree::Order.friendly.find(params[:order_id])
+        # @order = Spree::Order.friendly.find(params[:order_id])
+				@shipment = Spree::Shipment.friendly.find(params[:id])
+				@order = @shipment.order
+				if params[:commit] = 'confirm'
+					@shipment.state = 'ready' if @shipment.state == "pending"
+					if @shipment.state == "ready"
+						@shipment.ship
+					end
+				end
+
         if @order.update(shipping_params)
           @order.line_items.each do |line_item|
-            line_item.received_qty = line_item.shipped_qty
+            # line_item.received_qty = line_item.shipped_qty
             line_item.shipped_total = line_item.shipped_qty * line_item.price
           end
           @order.save!
 
-          flash[:success] = "Shipping quantities have been updated"
+          # flash[:success] = "Shipping quantities have been updated"
           redirect_to manage_shippings_url if params[:commit] == "confirm"
         else
           flash[:errors] = @order.errors.full_messages

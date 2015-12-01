@@ -29,7 +29,7 @@
 
     <% @shipments.each do |shipment| %>
       <% order = shipment.order %>
-      <a class="tRow" href="<%= edit_manage_order_shipping_url(order) %>">
+      <a class="tRow" href="<%= edit_manage_shipping_url(shipment) %>">
         <div class='cel'>
           <%= order.customer.name %>
         </div>
@@ -48,7 +48,7 @@
         <div class='cel'>
 
             <%= shipment.state %>
-          
+
         </div>
       </a>
     <% end %>
