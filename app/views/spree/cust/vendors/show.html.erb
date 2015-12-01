@@ -61,7 +61,7 @@
 <div class="contact-group">
     <% if user.images.any? %>
       <%# user.images.each do |image| %>
-        <%= image_tag user.images.first.attachment.url(:product), :class => "contact-img", alt: image.alt %>
+        <%= image_tag user.images.first.attachment.url(:product), :class => "contact-img", alt: user.images.first.alt %>
       <%# end %>
     <% else %>
       <%#= image_tag image.attachment.url(:product), :class => "contact-img", alt: image.alt %>

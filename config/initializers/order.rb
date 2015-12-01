@@ -56,9 +56,6 @@ module Spree
         end
 
         def set_current_order
-					puts "---=== DEBUG ===---"
-					puts "set current order and not merging!!!"
-
 					current_order
 =begin
           if try_spree_current_user && current_order

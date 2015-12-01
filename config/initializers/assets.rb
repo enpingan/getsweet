@@ -20,7 +20,11 @@ Rails.application.config.assets.precompile += %w( spree/product_search.js )
 Rails.application.config.assets.precompile += %w( fonts.css )
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
 
-
+Rails.application.config.assets.precompile += %w( logo/spree_50.png )
+Rails.application.config.assets.precompile += %w( noimage/small.png )
+Rails.application.config.assets.precompile += %w( noimage/mini.png )
+Rails.application.config.assets.precompile += %w( noimage/product.png )
+Rails.application.config.assets.precompile += %w( noimage/large.png )
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
