@@ -80,11 +80,12 @@ Rails.application.routes.draw do
 				resources :ship_addresses
 			end
 
-    		resources :orders
+    		resources :orders do
+          patch :approve, on: :collection, to: 'orders#approve_orders'
+        end
 				resources :orders, :except => [:index, :new, :create, :destroy] do
 					post :populate, :on => :collection
           get :unpopulate, to: 'orders#unpopulate'
-          # resource :shipping, only: [:edit, :update]
         end
 
         resources :shippings, only: [:index, :edit, :update]

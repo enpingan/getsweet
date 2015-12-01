@@ -34,6 +34,7 @@ module Spree
 
 		has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: "Spree::VendorImage"
 
+		accepts_nested_attributes_for :orders
 
 	  extend FriendlyId
 			friendly_id :name, use: [:slugged, :finders]

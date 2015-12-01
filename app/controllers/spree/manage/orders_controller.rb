@@ -23,6 +23,24 @@ class OrdersController < Spree::Manage::BaseController
     render :index
   end
 
+	def approve_orders
+		@vendor = current_vendor
+		@orders = current_vendor.orders
+
+		if @vendor.update(approve_params)
+			approved_count = 0
+			@orders.each do |order|
+				if order.approved && order.approved_at.nil?
+					approve_order(order)
+					approved_count += 1
+				end
+			end
+			flash[:success] = "#{approved_count} new orders approved!"
+		end
+
+		redirect_to manage_orders_url
+	end
+
   def new
 		if session[:customer_id]
 			@current_customer_id = session[:customer_id]
@@ -173,6 +191,12 @@ class OrdersController < Spree::Manage::BaseController
 			notes_attributes: [:body, :id])
   end
 
+	def approve_params
+		params.require(:vendor).permit(:id,
+			orders_attributes: [:approved, :id]
+		)
+	end
+
 	def ensure_vendor
     @order = Spree::Order.friendly.find(params[:id])
     unless current_vendor.id == @order.vendor_id
@@ -209,6 +233,7 @@ class OrdersController < Spree::Manage::BaseController
 				variant_id: line_item.variant_id
 			)
 		end
+		order.save!
 	end
 
 	def filter_orders

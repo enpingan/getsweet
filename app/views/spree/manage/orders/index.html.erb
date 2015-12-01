@@ -47,7 +47,8 @@
 
       <div class="clear"></div>
     </div>
-    <form action="#" id="orders-list-form">
+    <!-- <form action="#" id="orders-list-form"> -->
+    <%= form_for @vendor, html: {id: "orders-list-form"}, url: approve_manage_orders_url do |f|%>
       <div class="orders-list-table">
         <div class="tRow header">
           <div class="cel">
@@ -82,6 +83,7 @@
           <div class="cel"></div>
         </div>
         <% if @orders %>
+
           <% @orders.each do |order| %>
             <div class="tRow orders-list-order">
               <a href="<%= edit_manage_order_url(order) %>" class="orders-list-order-link cel">
@@ -103,7 +105,16 @@
               <a href="<%= edit_manage_order_url(order) %>" class="orders-list-order-link cel">
                 <%= order.state %>
               </a>
-              <div class="cel approve"><input type="checkbox"></div>
+              <div class="cel approve">
+                <% if order.approved %>
+                  Approved
+                <% else %>
+                  <%= f.fields_for :orders, order do |order_form|%>
+                    <%= order_form.check_box 'approved' %>
+                  <% end %>
+                <% end %>
+                <!-- <input type="checkbox"> -->
+              </div>
               <div class="cel"></div>
             </div>
           <% end %>
@@ -114,12 +125,15 @@
             <div class="cel"></div>
             <div class="cel"></div>
             <div class="cel"><input type="checkbox" id="select-all"> All</div>
-            <div class="cel"><input type="submit" value="confirm"></div>
+            <div class="cel">
+              <!-- <input type="submit" value="confirm"></div> -->
+              <%= submit_tag "confirm" %>
           </div>
         <% end %>
       </div>
       <div class="clear"></div>
-    </form>
+    <!-- </form> -->
+    <% end %>
   </div>
 
 <script>
