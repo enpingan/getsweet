@@ -113,7 +113,7 @@
             <div class="cel"></div>
             <div class="cel"></div>
             <div class="cel"></div>
-            <div class="cel"><input type="checkbox"> All</div>
+            <div class="cel"><input type="checkbox" id="select-all"> All</div>
             <div class="cel"><input type="submit" value="confirm"></div>
           </div>
         <% end %>
@@ -121,3 +121,18 @@
       <div class="clear"></div>
     </form>
   </div>
+
+<script>
+  $('#select-all').click(function(event) {
+    if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;
+        });
+    }else{
+      $(':checkbox').each(function() {
+          this.checked = false;
+      });
+    }
+  });
+</script>
