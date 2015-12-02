@@ -174,11 +174,19 @@ class OrdersController < Spree::Manage::BaseController
 
   def destroy
 		@order = set_order_session
-		if @order.destroy
-			clear_current_order
-			flash[:success] = "Order ##{@order.number} has been cancelled"
+		if @order.state == 'complete'
+			@order.state = 'canceled'
+			@order.canceled_at = Time.current
+			@order.canceler_id = current_spree_user.id
+			@order.save!
+			# send email to vendor
 		else
-			flash[:errors] = @order.errors.full_messages
+			if @order.destroy
+				clear_current_order
+				flash[:success] = "Order ##{@order.number} has been canceled"
+			else
+				flash[:errors] = @order.errors.full_messages
+			end
 		end
 		redirect_to manage_orders_url
   end
