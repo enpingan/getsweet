@@ -93,9 +93,7 @@ Rails.application.routes.draw do
         get 'reports/customers', to: 'reports#customers'
         get 'reports/products', to: 'reports#products'
         get 'reports/overview', to: 'reports#overview'
-        resources :invoices do
-          resources :notes, only: [:create]
-        end
+        resources :invoices, only: [:index, :edit, :update, :show] 
 
 				populate_redirect = redirect do |params, request|
 			  	request.flash[:error] = Spree.t(:populate_get_error)

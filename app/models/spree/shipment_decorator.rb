@@ -36,7 +36,7 @@ Spree::Shipment.class_eval do
         shipment.determine_state(shipment.order) == 'ready'
       }
       transition from: :canceled, to: :pending, if: lambda { |shipment|
-        shipment.determine_state(shipment.order) == 'ready'
+        shipment.determine_state(shipment.order) == 'pending'
       }
       transition from: :canceled, to: :pending
     end
@@ -58,8 +58,9 @@ Spree::Shipment.class_eval do
       return 'canceled' if order.canceled?
       return 'pending' unless order.can_ship?
       return 'pending' if inventory_units.any? &:backordered?
+      return 'ready' if state == 'ready'
       return 'shipped' if state == 'shipped'
       return 'received' if state == 'received'
-      order.paid? ? 'ready' : 'pending'
+      # order.paid? ? 'ready' : 'pending'
     end
   end

@@ -1,6 +1,7 @@
 module Spree
 	module Manage
     class InvoicesController < Spree::Manage::BaseController
+			before_action :ensure_vendor, only: [:show, :edit, :update]
 
       def index
         @invoices = current_vendor.orders.where('state = ? AND approved_at IS NOT NULL', 'complete').order('delivery_date DESC')
@@ -41,6 +42,13 @@ module Spree
         )
       end
 
+			def ensure_vendor
+		    @order = Spree::Order.friendly.find(params[:id])
+		    unless current_vendor.id == @order.vendor_id
+					flash[:error] = "You don't have permission to view the requested page"
+					redirect_to root_url
+				end
+		  end
 
     end
   end
