@@ -17,3 +17,12 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  $('.master-checkbox').click(function(event) {
+      $('.master-checkbox').each(function() {
+          this.checked = false;
+      });
+      this.checked = true;
+  });
+</script>

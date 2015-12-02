@@ -79,7 +79,7 @@
 		<div class="single-order-buttons">
 			<%= submit_tag Spree.t(:update), class: 'cta-button notify', id: 'update-button' %>
 			<%= link_to 'Cancel Order',  { action: :destroy, id: @order.id },
-			method: :delete, data: { confirm: 'Are you sure? This order will be completely deleted!' },
+			method: :delete, data: { confirm: 'Are you sure you want to cancel this order?' },
 			class: 'cta-button cancel'%>
 
 			<% if @order.state == "complete" %>

@@ -4,7 +4,7 @@
     <%= render partial: 'form' %>
 
       <%= prod_form.fields_for :master do |f| %>
-        <%= render partial: 'variant_form', locals: {f:f} %>
+        <%= render partial: 'master_variant_form', locals: {f:f} %>
       <% end %>
 
       <%= prod_form.fields_for :variants do |f|%>
@@ -21,3 +21,12 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  $('.master-checkbox').click(function(event) {
+      $('.master-checkbox').each(function() {
+          this.checked = false;
+      });
+      this.checked = true;
+  });
+</script>

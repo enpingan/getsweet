@@ -88,9 +88,7 @@
                 <%= order.state %>
               </a>
               <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
-                  <% if !order.all_variants_past_cutoff? %>
-                    Edit
-                  <% elsif order.state != 'complete' %>
+                  <% if order.state != 'complete' && order.all_variants_past_cutoff? %>
                     Past Order Cutoff
                   <% end %>
               </a>
