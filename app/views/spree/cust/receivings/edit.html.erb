@@ -79,11 +79,11 @@
 			<div class="rightpart">
         <% if @shipment.state != 'received' %>
           <%= submit_tag "Reject Order", class: "cta-button cancel", data: {confirm: "Are you sure you want to reject the ENTIRE order?"} %>
-					<% if @shipment.line_items.any?{|line_item| line_item.confirm_received == false} %>
-						<%= submit_tag "Order Received", data: {confirm: "You have items that are not marked as received. Are you sure you want to continue?"} %>
-					<% else %>
+					<%# if @shipment.line_items.any?{|line_item| line_item.confirm_received == false} %>
+						<%#= submit_tag "Order Received", data: {confirm: "You have items that are not marked as received. Are you sure you want to continue?"} %>
+					<%# else %>
 						<input type="submit" value="order received">
-					<% end %>
+					<%# end %>
         <% else %>
           This shipment has already been received.  For any changes, please contact <%= @order.vendor.name %>.
         <% end %>

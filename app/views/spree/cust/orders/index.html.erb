@@ -60,39 +60,45 @@
             <!-- <a href="" class="sort-lead_time">Status <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-
+            Shippment
           </div>
           <div class="cel"></div>
         </div>
 
         <% if @orders %>
           <% @orders.each do |order| %>
+            <%# url = order.shipments.any? ? receiving_url(order.shipments.first) : order_url(order) %>
+            <% url = order.shipments.any? ? (order.shipments.any?{|s| s.state == 'received'} ? invoice_url(order) : order.shipments.any?{|s| s.state == 'shipped'} ? edit_receiving_url(order.shipments.first) : order_url(order)) : order_url(order) %>
             <div class="tRow orders-list-order">
-              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+              <a href="<%= url %>" class="orders-list-order-link cel">
                 <%= order.vendor.name %>
               </a>
               <div class="cel mobile"><a href="<%= order_url(order) %>" class="cta-button">View</a></div>
-              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+              <a href="<%= url %>" class="orders-list-order-link cel">
                 <%= order.number %>
               </a>
-              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+              <a href="<%= url %>" class="orders-list-order-link cel">
                 <%= order.delivery_date.to_date.to_formatted_s(:long) %>
               </a>
-              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+              <a href="<%= url %>" class="orders-list-order-link cel">
                 <%= order.item_count %>
               </a>
-              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+              <a href="<%= url %>" class="orders-list-order-link cel">
                 <%= number_to_currency(order.total) %>
               </a>
-              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+              <a href="<%= url %>" class="orders-list-order-link cel">
                 <%= order.state %>
               </a>
-              <a href="<%= order_url(order) %>" class="orders-list-order-link cel">
+              <a href="<%= url %>" class="orders-list-order-link cel">
                   <% if order.state != 'complete' && order.all_variants_past_cutoff? %>
                     Past Order Cutoff
+                  <% elsif order.shipments.length > 0 %>
+                    <%= order.shipments.first.state %>
+                  <% elsif order.state == 'complete' %>
+                    Vendor Approval Req'd
                   <% end %>
               </a>
-              <a href="<%= order_url(order) %>" class="orders-list-order-link cel"></a>
+              <a href="<%= url %>" class="orders-list-order-link cel"></a>
             </div>
           <% end %>
           <div class="tRow footer">

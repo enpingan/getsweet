@@ -233,6 +233,7 @@ class OrdersController < Spree::Manage::BaseController
 				variant_id: line_item.variant_id
 			)
 		end
+		shipment.shipping_rates.create(shipping_method_id: 1)
 		order.save!
 	end
 
