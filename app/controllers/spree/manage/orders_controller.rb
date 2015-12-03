@@ -10,7 +10,8 @@ class OrdersController < Spree::Manage::BaseController
   def index
 		clear_current_order
 		@current_customer_id = session[:customer_id]
-		# session[:customer_id] = nil
+		@start_date = session[:orders_start_date]
+		@end_date = session[:orders_end_date]
 		@vendor = current_vendor
 
 		@orders = filter_orders
@@ -264,8 +265,18 @@ class OrdersController < Spree::Manage::BaseController
 			@orders = @vendor.orders
 		end
 
-		unless (params[:date].blank?)
-			@orders = @orders.where('delivery_date = ?', params[:date])
+		# unless (params[:start_date].blank? || params[:end_date].blank?) && (session[:orders_start_date].blank? && session[:orders_end_date].blank?)
+		# 	session[:orders_start_date], session[:orders_end_date] = params[:start_date], params[:end_date]
+		# 	@orders = @orders.where('delivery_date BETWEEN ? AND ?', params[:start_date], params[:end_date])
+		# end
+
+		if !(params[:start_date].blank? && params[:end_date].blank?)
+			session[:orders_start_date], session[:orders_end_date] = params[:start_date], params[:end_date]
+			@orders = @orders.where('delivery_date BETWEEN ? AND ?', params[:start_date], params[:end_date])
+		elsif (params[:start_date] && params[:start_date].empty? && params[:end_date] && params[:end_date].empty?)
+			session[:orders_start_date], session[:orders_end_date] = nil, nil
+		elsif !(session[:orders_start_date].blank? && session[:orders_end_date].blank?)
+			@orders = @orders.where('delivery_date BETWEEN ? AND ?', session[:orders_start_date], session[:orders_end_date])
 		end
 		@orders
 	end

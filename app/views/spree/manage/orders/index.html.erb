@@ -15,7 +15,12 @@
           <option value="all">All</option>
           <%= options_for_select (@vendor.customers.collect(&:name)) %>
         <% end %>
-        <input type="date" name=date>
+        <label>Start Date
+          <input type="date" name=start_date value="<%= @start_date %>">
+        </label>
+        <label>End Date
+          <input type="date" name=end_date value="<%= @end_date %>">
+        </label>
         <input type="submit" value="Filter">
       </form>
 
