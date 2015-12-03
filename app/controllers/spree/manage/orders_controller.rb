@@ -264,7 +264,7 @@ class OrdersController < Spree::Manage::BaseController
 			@orders = @vendor.orders
 		end
 
-		unless (params[:date].nil? || params[:date].empty?)
+		unless (params[:date].blank?)
 			@orders = @orders.where('delivery_date = ?', params[:date])
 		end
 		@orders

@@ -1,29 +1,56 @@
 <h1 class="tablet-center">Invoices</h1>
 					<div class="invoices-list-block">
-						<!-- <div class="search-block">
-							<form id="search-form">
-								<input type="text" placeholder="Search Customer or Invoices">
-								<input type="submit" value="Search">
-							</form>
-							<form id="invoices-filter-form">
-								<select name="date-form" id="date_form">
-									<option value="all">All Invoices</option>
-									<option value="price">Option 2</option>
-									<option value="name">Option 3</option>
-								</select>
-							</form>
-							<div class="clear"></div>
-						</div> -->
+						<div class="search-block">
+
+				      <form id="filter-form">
+				        <%= select(:customer, :name) do%>
+				          <% if @current_customer_id %>
+				            <option value="<%= @current_customer_id %>"><%= Spree::Customer.find(@current_customer_id).name %></option>
+				          <% end %>
+				          <option value="all">All</option>
+				          <%= options_for_select (@vendor.customers.collect(&:name)) %>
+				        <% end %>
+								<label>Start Date
+					        <input type="date" name=start_date value="<%= @start_date %>">
+								</label>
+								<label>End Date
+									<input type="date" name=end_date value="<%= @end_date %>">
+								</label>
+				        <input type="submit" value="Filter">
+				      </form>
+
+							<% if nil %>
+							<!-- in progress code for activating search -->
+								<%= search_form_for [:manage, @search] do |f| %>
+									<div class="form-group">
+					        	<%= label_tag :q_number_cont, Spree.t(:order_number, :number => '') %>
+					          <%= f.text_field :number_cont, class: 'form-control js-quick-search-target' %>
+					        </div>
+									<%= button Spree.t(:filter_results), 'search' %>
+								<% end %>
+
+					      <!--<form id="search-form">
+					        <label>Search:</label>
+					        <input type="text" placeholder="Search Order #">
+					        <input type="submit" value="Search">
+					      </form>-->
+							<% end %>
+				      <div class="clear"></div>
+				    </div>
+
 						<form action="#" id="invoices-list-form">
 							<div class="orders-list-table">
 								<div class="tRow header">
-									<div class="cel">Invoice #
+									<div class="cel">
+										<%= sortable "spree_customer.name", "Customer" %>
 										<!-- <a href="" class="sort-name">Invoice # <i class="fa fa-sort"></i></a> -->
 									</div>
-									<div class="cel">Customer
+									<div class="cel">
+										<%= sortable 'number', 'Invoice #' %>
 										<!-- <a href="" class="sort-name">Customer <i class="fa fa-sort"></i></a> -->
 									</div>
-									<div class="cel">Date
+									<div class="cel">
+										<%= sortable 'delivery_date', "Date" %>
 										<!-- <a href="" class="sort-sku">Date <i class="fa fa-sort"></i></a> -->
 									</div>
 									<div class="cel">Amount Due
@@ -46,7 +73,11 @@
                       <%= invoice.delivery_date.to_date.to_formatted_s(:long) %>
                     </a>
                     <a href="<%= manage_invoice_url(invoice) %>" class='cel'>
-                      <%= number_to_currency(invoice.line_items.sum(:received_total)) %>
+											<% if invoice.shipments.any? {|shipment| shipment.state == 'received'} %>
+                      	<%= number_to_currency(invoice.line_items.sum(:received_total)) %>
+											<% else %>
+												Order not yet received
+											<% end %>
                     </a>
                     <a href="<%= manage_invoice_url(invoice) %>" class='cel'>
                     </a>
