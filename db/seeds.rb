@@ -15,7 +15,39 @@ Alchemy::Seeder.seed!
 vendor = Spree::Role.create(name: 'vendor')
 customer = Spree::Role.create(name: 'customer')
 
+sc1 = Spree::ShippingCategory.create(name: "Standard")
+sc2 = Spree::ShippingCategory.create(name: "Over Size")
+
+tc = Spree::TaxCategory.create(name: "Food", is_default: false)
 pm = Spree::PaymentMethod.create(type: "Spree::PaymentMethod::Check", name: "Check", description: "", active: true, display_on: "", preferences: {})
+
+pickup_calc = Spree::Calculator.create(
+	type: "Spree::Calculator::Shipping::FlatRate",
+	calculable_type: "Spree::ShippingMethod",
+	preferences: {amount: 0, :currency=>"USD"}
+)
+
+ship_calc = Spree::Calculator.create(
+	type: "Spree::Calculator::Shipping::FlatRate",
+	calculable_type: "Spree::ShippingMethod",
+	preferences: {amount: 7.00, :currency=>"USD"}
+)
+
+sm = Spree::ShippingMethod.new(name: "Pick Up", admin_name: 'pick_up', display_on: 'Both', tax_category_id: tc.id)
+sm2 = Spree::ShippingMethod.new(name: "Delivery", admin_name: 'delivery', display_on: 'Both', tax_category_id: tc.id)
+
+sm.calculator = pickup_calc
+sm2.calculator = ship_calc
+
+sm.shipping_categories = Spree::ShippingCategory.all
+sm2.shipping_categories = Spree::ShippingCategory.all
+
+sm.zones = Spree::Zone.all
+sm2.zones = Spree::Zone.all
+
+sm.save!
+sm2.save!
+
 
 def image(name, type="jpeg")
 	curr_dir = "#{File.expand_path File.dirname(__FILE__)}"
@@ -27,6 +59,58 @@ def image(name, type="jpeg")
 	else
   	File.open(path)
 	end
+end
+
+def submit(order)
+	order.state = "complete"
+	order.completed_at = order.delivery_date - 1.days
+	order.save!
+end
+
+def approve(order)
+	order.approver_id = order.vendor.users.first.id
+	order.approved_at = order.delivery_date - 1.days
+	order.approved = true
+	shipment = order.shipments.create(stock_location_id: order.vendor.stock_locations.last.id)
+	order.line_items.each do |line_item|
+		shipment.inventory_units.create(
+			order_id: order.id,
+			line_item_id: line_item.id,
+			variant_id: line_item.variant_id
+		)
+	end
+	shipment.shipping_rates.create(shipping_method_id: Spree::ShippingMethod.first.id)
+	shipment.state = 'ready'
+	order.shipment_state = 'ready'
+	order.save!
+end
+
+def ship(order)
+	shipment = order.shipments.first
+	shipment.state = 'shipped'
+	shipment.shipped_at = order.delivery_date
+	shipment.save!
+	order.line_items.each do |line_item|
+		line_item.shipped_qty = line_item.quantity
+		line_item.shipped_total = line_item.shipped_qty * line_item.price
+	end
+	order.shipment_state = 'shipped'
+	order.save!
+end
+
+def receive(order)
+	shipment = order.shipments.first
+	shipment.state = 'received'
+	shipment.receiver_id = order.user_id
+	shipment.received_at = order.delivery_date
+	shipment.save!
+	order.line_items.each do |line_item|
+		line_item.received_qty = line_item.shipped_qty
+		line_item.received_total = line_item.received_qty * line_item.price
+		line_item.confirm_received = true
+	end
+	order.shipment_state = 'received'
+	order.save!
 end
 
 ##############################################################################
@@ -99,16 +183,12 @@ c8.save!
 c9.save!
 c10.save!
 
-Spree::ShippingCategory.create(name: "Standard")
-Spree::ShippingCategory.create(name: "Over Size")
 
-Spree::TaxCategory.create(name: "Food", is_default: false)
-
-sl1 = Spree::StockLocation.create(name: v1.name, backorderable_default: true)
-sl2 = Spree::StockLocation.create(name: v2.name, backorderable_default: true)
-sl3 = Spree::StockLocation.create(name: v3.name, backorderable_default: true)
-sl4 = Spree::StockLocation.create(name: v4.name, backorderable_default: true)
-sl5 = Spree::StockLocation.create(name: v5.name, backorderable_default: true)
+sl1 = v1.stock_locations.create(name: v1.name, backorderable_default: true)
+sl2 = v2.stock_locations.create(name: v2.name, backorderable_default: true)
+sl3 = v3.stock_locations.create(name: v3.name, backorderable_default: true)
+sl4 = v4.stock_locations.create(name: v4.name, backorderable_default: true)
+sl5 = v5.stock_locations.create(name: v5.name, backorderable_default: true)
 
 available_date = Time.zone.local(2013, 1, 1)
 
@@ -216,7 +296,13 @@ p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -245,7 +331,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -277,7 +369,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -309,7 +407,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -341,7 +445,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -447,7 +557,13 @@ p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -476,7 +592,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -508,7 +630,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -540,7 +668,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -572,7 +706,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 ###############################################################################
@@ -644,7 +784,13 @@ p5.master.images.create!({:attachment => image(p5.name.gsub(/ /,"_").downcase)})
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -672,7 +818,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -700,7 +852,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -727,7 +885,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 
 end
@@ -756,7 +920,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -844,7 +1014,13 @@ p7.master.images.create!({:attachment => image(p7.name.gsub(/ /,"_").downcase)})
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -875,7 +1051,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -906,7 +1088,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -937,7 +1125,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -968,7 +1162,13 @@ end
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -1074,7 +1274,13 @@ p10.master.images.create!({:attachment => image(p10.name.gsub(/ /,"_").downcase)
     o1.state = "complete"
     o1.completed_at = o1.delivery_date
   end
+	submit(o1)
 
+	if o1.delivery_date < Time.current
+		approve(o1)
+		ship(o1)
+		receive(o1)
+	end
   o1.save
 end
 
@@ -1108,7 +1314,13 @@ end
       o1.state = "complete"
       o1.completed_at = o1.delivery_date
     end
+		submit(o1)
 
+		if o1.delivery_date < Time.current
+			approve(o1)
+			ship(o1)
+			receive(o1)
+		end
     o1.save
 end
 
@@ -1141,7 +1353,13 @@ end
       o1.state = "complete"
       o1.completed_at = o1.delivery_date
     end
+		submit(o1)
 
+		if o1.delivery_date < Time.current
+			approve(o1)
+			ship(o1)
+			receive(o1)
+		end
     o1.save
 end
 
@@ -1174,7 +1392,13 @@ end
       o1.state = "complete"
       o1.completed_at = o1.delivery_date
     end
+		submit(o1)
 
+		if o1.delivery_date < Time.current
+			approve(o1)
+			ship(o1)
+			receive(o1)
+		end
     o1.save
 end
 
@@ -1207,6 +1431,13 @@ end
       o1.state = "complete"
       o1.completed_at = o1.delivery_date
     end
+		submit(o1)
+
+		if o1.delivery_date < Time.current
+			approve(o1)
+			ship(o1)
+			receive(o1)
+		end
 
     o1.save
 end

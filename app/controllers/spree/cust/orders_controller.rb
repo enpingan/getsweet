@@ -93,6 +93,7 @@ module Spree
         elsif (params[:commit] == "Resubmit Order")
           @order.approver_id = nil
   				@order.approved_at = nil
+          @order.approved = false
           @order.completed_at = Time.current
           @order.user_id = current_spree_user.id
 
