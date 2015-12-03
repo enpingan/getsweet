@@ -3,11 +3,14 @@
 
 <div class="product-size-block">
   <div class="col1">
-    <%= f.label "Master?" %>
-    <%= f.check_box :is_master, class: "master-checkbox" %>
+
     <!-- <a href="" id="close-button"><i class="fa fa-times"></i></a> -->
+      <%= link_to raw("<i class='fa fa-times'></i>"), {action: :destroy_variant, product_id: @product.id, variant_id: f.object.id},
+        class: 'close-button', id: 'delete-item-button', data: {confirm: 'Delete this variant?'} %>
   </div>
   <div class="col2">
+    <%= f.label "Master?" %>
+    <%= f.check_box :is_master, class: "master-checkbox" %>
     <div class="leftpart">
       <p>
         <%= f.label :sku %>

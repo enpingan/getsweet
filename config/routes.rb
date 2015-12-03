@@ -93,7 +93,7 @@ Rails.application.routes.draw do
         get 'reports/customers', to: 'reports#customers'
         get 'reports/products', to: 'reports#products'
         get 'reports/overview', to: 'reports#overview'
-        resources :invoices, only: [:index, :edit, :update, :show] 
+        resources :invoices, only: [:index, :edit, :update, :show]
 
 				populate_redirect = redirect do |params, request|
 			  	request.flash[:error] = Spree.t(:populate_get_error)
@@ -109,6 +109,7 @@ Rails.application.routes.draw do
           		post :update_positions
         		end
 					end
+          get :destroy_variant, to: 'products#destroy_variant'
     		end
 
 

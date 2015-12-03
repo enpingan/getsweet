@@ -53,6 +53,7 @@ module Spree
       end
 
       def destroy
+        
       end
 
       protected

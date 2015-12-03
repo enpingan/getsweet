@@ -51,6 +51,7 @@ module Spree
 
   def edit
     @product = Spree::Product.friendly.find(params[:id])
+    @variants = @product.variants
     @vendor = current_vendor
     # Temporary allergans
     @allergans = ['Peanut', 'Tree Nuts', 'Milk', 'Egg', 'Wheat', 'Soy', 'Fish', 'Shellfish']
@@ -73,6 +74,17 @@ module Spree
       flash[:errors] = @product.errors.full_messages
       render :edit
     end
+  end
+
+  def destroy_variant
+    @variant = Spree::Variant.find(params[:variant_id])
+    unless @variant.is_master
+      @variant.destroy!
+    else
+      flash.now[:error] = "You cannot delete the master variant."
+      render :edit
+    end
+    redirect_to edit_manage_product_url(params[:product_id])
   end
 
   protected
