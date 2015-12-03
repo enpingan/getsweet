@@ -11,12 +11,12 @@ module Spree
 
 				clear_current_order
 				@current_customer_id = session[:customer_id]
-				@start_date = session[:invoice_start_date]
-				@end_date = session[:invoice_end_date]
 
 				@vendor = current_vendor
 
 				@invoices = filter_invoices
+				@start_date = session[:invoice_start_date]
+				@end_date = session[:invoice_end_date]
 				if params[:sort] && params[:sort] == 'spree_customer.name'
 					@invoices = @invoices.includes(:customer).order('name '+ sort_direction).references(:spree_customers)
 				else
@@ -85,9 +85,17 @@ module Spree
 					@invoices = @invoices.where('customer_id = ?', @current_customer_id)
 				end
 
-				unless (params[:start_date].blank? || params[:end_date].blank?)
+				# unless (params[:start_date].blank? || params[:end_date].blank?)
+				# 	session[:invoice_start_date], session[:invoice_end_date] = params[:start_date], params[:end_date]
+				# 	@invoices = @invoices.where('delivery_date BETWEEN ? AND ?', params[:start_date], params[:end_date])
+				# end
+				if !(params[:start_date].blank? && params[:end_date].blank?)
 					session[:invoice_start_date], session[:invoice_end_date] = params[:start_date], params[:end_date]
 					@invoices = @invoices.where('delivery_date BETWEEN ? AND ?', params[:start_date], params[:end_date])
+				elsif (params[:start_date] && params[:start_date].empty? && params[:end_date] && params[:end_date].empty?)
+					session[:invoice_start_date], session[:invoice_end_date] = nil, nil
+				elsif !(session[:invoice_start_date].blank? && session[:invoice_end_date].blank?)
+					@invoices = @invoices.where('delivery_date BETWEEN ? AND ?', session[:invoice_start_date], session[:invoice_end_date])
 				end
 				@invoices
 			end

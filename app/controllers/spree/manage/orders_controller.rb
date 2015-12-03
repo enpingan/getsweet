@@ -10,11 +10,11 @@ class OrdersController < Spree::Manage::BaseController
   def index
 		clear_current_order
 		@current_customer_id = session[:customer_id]
-		@start_date = session[:orders_start_date]
-		@end_date = session[:orders_end_date]
 		@vendor = current_vendor
 
 		@orders = filter_orders
+		@start_date = session[:orders_start_date]
+		@end_date = session[:orders_end_date]
 		if params[:sort] && params[:sort] == 'spree_customer.name'
 			@orders = @orders.includes(:customer).order('name '+ sort_direction).references(:spree_customers)
 		else
@@ -264,11 +264,6 @@ class OrdersController < Spree::Manage::BaseController
 		else
 			@orders = @vendor.orders
 		end
-
-		# unless (params[:start_date].blank? || params[:end_date].blank?) && (session[:orders_start_date].blank? && session[:orders_end_date].blank?)
-		# 	session[:orders_start_date], session[:orders_end_date] = params[:start_date], params[:end_date]
-		# 	@orders = @orders.where('delivery_date BETWEEN ? AND ?', params[:start_date], params[:end_date])
-		# end
 
 		if !(params[:start_date].blank? && params[:end_date].blank?)
 			session[:orders_start_date], session[:orders_end_date] = params[:start_date], params[:end_date]
