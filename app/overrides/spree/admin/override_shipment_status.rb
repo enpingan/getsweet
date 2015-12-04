@@ -4,7 +4,7 @@ Deface::Override.new(:virtual_path => 'spree/admin/shared/_order_summary',
   :text => "<td id='shipment_state'>
               <% shipment_label = @order.shipment_state == 'received' ? 'shipped' : @order.shipment_state %>
               <span class='state label label-<%= shipment_label %>'>
-                <%= @order.shipment_state %>
+               <%= @order.shipment_state ? Spree.t(@order.shipment_state) : 'None'%>
               </span>
             </td>"
   )
