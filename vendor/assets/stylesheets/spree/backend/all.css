@@ -8,3 +8,10 @@
  *= require_self
  *= require_tree .
 */
+
+.label-{
+  background: #444;
+}
+.label-received{
+  background-color: #7DB942;
+}

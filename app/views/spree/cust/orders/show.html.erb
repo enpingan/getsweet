@@ -21,7 +21,7 @@
 					<% if @order.shipment_state == 'received' %>
 						<a href="<%= invoice_url(@order) %>">(View Invoice)</a>
 					<% elsif @order.shipment_state == 'shipped' %>
-						<a href="<%= receiving_url(@order.shipments.first) %>">(View Shipment)</a>
+						<a href="<%= edit_receiving_url(@order.shipments.first) %>">(View Shipment)</a>
 
 					<%# unless @order.delivery_date < DateTime.tomorrow.in_time_zone ||(@order.delivery_date == DateTime.tomorrow.in_time_zone && Time.current > @order.vendor.order_cutoff_time.in_time_zone)%>
 					<% elsif !@order.all_variants_past_cutoff? %>
