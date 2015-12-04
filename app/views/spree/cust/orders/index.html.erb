@@ -67,8 +67,8 @@
 
         <% if @orders %>
           <% @orders.each do |order| %>
-            <%# url = order.shipments.any? ? receiving_url(order.shipments.first) : order_url(order) %>
-            <% url = order.shipments.any? ? (order.shipments.any?{|s| s.state == 'received'} ? invoice_url(order) : order.shipments.any?{|s| s.state == 'shipped'} ? edit_receiving_url(order.shipments.first) : order_url(order)) : order_url(order) %>
+            <% url = order_url(order) %>
+            <%# url = order.shipments.any? ? (order.shipments.any?{|s| s.state == 'received'} ? invoice_url(order) : order.shipments.any?{|s| s.state == 'shipped'} ? edit_receiving_url(order.shipments.first) : order_url(order)) : order_url(order) %>
             <div class="tRow orders-list-order">
               <a href="<%= url %>" class="orders-list-order-link cel">
                 <%= order.vendor.name %>
