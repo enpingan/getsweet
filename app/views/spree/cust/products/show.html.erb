@@ -35,7 +35,7 @@
 						</div>
 						<div id="order-form">
 							<div class="order-product-list">
-                <% @product.variants_including_master.each do |variant| %>
+                <% @variants_including_master.each do |variant| %>
                   <%= form_for :order, html: {class: "tRow"}, url: populate_orders_path(format: 'js', index: variant.id), remote: true do |f| %>
 
     								<!-- <div class="tRow"> -->

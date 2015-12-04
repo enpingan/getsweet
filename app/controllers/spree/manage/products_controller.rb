@@ -45,6 +45,7 @@ module Spree
     @current_customer = current_customer
     @current_order = current_order
     @product = Spree::Product.friendly.find(params[:id])
+    @variants_including_master = [@product.master] + @product.variants
 
     render :show
   end

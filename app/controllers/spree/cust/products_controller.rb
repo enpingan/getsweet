@@ -23,6 +23,7 @@ module Spree
 
     def show
       @product = Spree::Product.friendly.find(params[:id])
+      @variants_including_master = [@product.master] + @product.variants
       @vendor = set_current_vendor
       ensure_vendor_order_match
       @current_order = current_order
