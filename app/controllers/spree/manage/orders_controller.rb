@@ -243,8 +243,9 @@ class OrdersController < Spree::Manage::BaseController
 				variant_id: line_item.variant_id
 			)
 		end
-		shipment.shipping_rates.create(shipping_method_id: 1)
+		shipment.shipping_rates.create(shipping_method_id: Spree::ShippingMethod.first.id)
 		shipment.state = 'ready'
+		order.shipment_state = 'ready'
 		order.save!
 	end
 
