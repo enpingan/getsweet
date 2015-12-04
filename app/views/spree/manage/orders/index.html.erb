@@ -8,20 +8,21 @@
     <div class="search-block">
 
       <form id="filter-form">
-        <%= select(:customer, :name) do%>
-          <% if @current_customer_id %>
-            <option value="<%= @current_customer_id %>"><%= Spree::Customer.find(@current_customer_id).name %></option>
+
+        <select name='status'>
+          <% statuses = %w{shipment-received shipment-shipped shipment-ready order-complete order-cart order-approved order-action\ required }.sort %>
+
+          <option value='any'>Any Status</option>
+          <% statuses.each do |status| %>
+            <% if status == @status %>
+              <option value='<%= status %>' selected><%= status.capitalize %></option>
+            <% else %>
+              <option value='<%= status %>'><%= status.capitalize %></option>
+            <% end %>
           <% end %>
-          <option value="all">All</option>
-          <%= options_for_select (@vendor.customers.collect(&:name)) %>
-        <% end %>
-        <label>Start Date
-          <input type="date" name=start_date value="<%= @start_date %>">
-        </label>
-        <label>End Date
-          <input type="date" name=end_date value="<%= @end_date %>">
-        </label>
-        <input type="submit" value="Filter">
+        </select>
+
+        <%= render 'spree/manage/shared/order_filters' %>
       </form>
 
 

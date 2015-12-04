@@ -6,17 +6,16 @@ module Spree
 			before_action :ensure_vendor, only: [:show, :edit, :update]
 
       def index
-        # @invoices = current_vendor.orders.where('state = ? AND approved_at IS NOT NULL', 'complete').order('delivery_date DESC')
-
-
-				clear_current_order
-				@current_customer_id = session[:customer_id]
+    		clear_current_order
 
 				@vendor = current_vendor
+				@customers = @vendor.customers.order('name ASC')
 
 				@invoices = filter_invoices
-				@start_date = session[:invoice_start_date]
-				@end_date = session[:invoice_end_date]
+				@current_customer_id = session[:customer_id]
+				@start_date = session[:invoices_start_date]
+				@end_date = session[:invoices_end_date]
+
 				if params[:sort] && params[:sort] == 'spree_customer.name'
 					@invoices = @invoices.includes(:customer).order('name '+ sort_direction).references(:spree_customers)
 				else
@@ -72,30 +71,26 @@ module Spree
 
 				@current_customer_id = session[:customer_id]
 
-				if (params[:customer] && @vendor.customers.collect(&:name).include?(params[:customer][:name]))
-					@current_customer_id = Spree::Customer.find_by_name(params[:customer][:name]).id
-					session[:customer_id] = @current_customer_id
-			  elsif (params[:customer] && params[:customer][:name] == 'all')
+				if (params[:customer] && params[:customer][:id] == 'all')
 					session[:customer_id] = nil
 					@current_customer_id = nil
+				elsif (params[:customer] && @vendor.customers.collect(&:id).include?(params[:customer][:id].to_i))
+					@current_customer_id = params[:customer][:id]
+					session[:customer_id] = @current_customer_id
 				end
 
-				@invoices = current_vendor.orders.where('state = ? AND approved_at IS NOT NULL', 'complete').order('delivery_date DESC')
-			  if @current_customer_id
+				@invoices = current_vendor.orders.where('shipment_state = ?', 'received')
+				if @current_customer_id
 					@invoices = @invoices.where('customer_id = ?', @current_customer_id)
 				end
 
-				# unless (params[:start_date].blank? || params[:end_date].blank?)
-				# 	session[:invoice_start_date], session[:invoice_end_date] = params[:start_date], params[:end_date]
-				# 	@invoices = @invoices.where('delivery_date BETWEEN ? AND ?', params[:start_date], params[:end_date])
-				# end
 				if !(params[:start_date].blank? && params[:end_date].blank?)
-					session[:invoice_start_date], session[:invoice_end_date] = params[:start_date], params[:end_date]
+					session[:invoices_start_date], session[:invoices_end_date] = params[:start_date], params[:end_date]
 					@invoices = @invoices.where('delivery_date BETWEEN ? AND ?', params[:start_date], params[:end_date])
 				elsif (params[:start_date] && params[:start_date].empty? && params[:end_date] && params[:end_date].empty?)
-					session[:invoice_start_date], session[:invoice_end_date] = nil, nil
-				elsif !(session[:invoice_start_date].blank? && session[:invoice_end_date].blank?)
-					@invoices = @invoices.where('delivery_date BETWEEN ? AND ?', session[:invoice_start_date], session[:invoice_end_date])
+					session[:invoices_start_date], session[:invoices_end_date] = nil, nil
+				elsif !(session[:invoices_start_date].blank? && session[:invoices_end_date].blank?)
+					@invoices = @invoices.where('delivery_date BETWEEN ? AND ?', session[:invoices_start_date], session[:invoices_end_date])
 				end
 				@invoices
 			end

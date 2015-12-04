@@ -3,20 +3,7 @@
 						<div class="search-block">
 
 				      <form id="filter-form">
-				        <%= select(:customer, :name) do%>
-				          <% if @current_customer_id %>
-				            <option value="<%= @current_customer_id %>"><%= Spree::Customer.find(@current_customer_id).name %></option>
-				          <% end %>
-				          <option value="all">All</option>
-				          <%= options_for_select (@vendor.customers.collect(&:name)) %>
-				        <% end %>
-								<label>Start Date
-					        <input type="date" name=start_date value="<%= @start_date %>">
-								</label>
-								<label>End Date
-									<input type="date" name=end_date value="<%= @end_date %>">
-								</label>
-				        <input type="submit" value="Filter">
+								<%= render 'spree/manage/shared/order_filters' %>
 				      </form>
 
 							<% if nil %>

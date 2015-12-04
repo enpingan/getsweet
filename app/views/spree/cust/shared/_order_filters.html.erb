@@ -1,0 +1,17 @@
+<select name='vendor[id]'>
+  <option value="all">All</option>
+  <% @vendors.each do |vendor| %>
+    <% if vendor.id == @current_vendor_id.to_i %>
+      <option value='<%= vendor.id %>' selected><%= vendor.name %></option>
+    <% else %>
+      <option value='<%= vendor.id %>'><%= vendor.name %></option>
+    <% end %>
+  <% end %>
+</select>
+<label>Start Date
+  <input type="date" name=start_date value="<%= @start_date %>">
+</label>
+<label>End Date
+  <input type="date" name=end_date value="<%= @end_date %>">
+</label>
+<input type="submit" value="Filter">

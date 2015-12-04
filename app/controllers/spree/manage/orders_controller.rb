@@ -9,10 +9,12 @@ class OrdersController < Spree::Manage::BaseController
 
   def index
 		clear_current_order
-		@current_customer_id = session[:customer_id]
 		@vendor = current_vendor
-
+		@customers = @vendor.customers.order('name ASC')
 		@orders = filter_orders
+
+		@current_customer_id = session[:customer_id]
+		@status = session[:orders_filter_status]
 		@start_date = session[:orders_start_date]
 		@end_date = session[:orders_end_date]
 		if params[:sort] && params[:sort] == 'spree_customer.name'
@@ -253,12 +255,12 @@ class OrdersController < Spree::Manage::BaseController
 
 		@current_customer_id = session[:customer_id]
 
-		if (params[:customer] && @vendor.customers.collect(&:name).include?(params[:customer][:name]))
-			@current_customer_id = Spree::Customer.find_by_name(params[:customer][:name]).id
-			session[:customer_id] = @current_customer_id
-	  elsif (params[:customer] && params[:customer][:name] == 'all')
+	  if (params[:customer] && params[:customer][:id] == 'all')
 			session[:customer_id] = nil
 			@current_customer_id = nil
+		elsif (params[:customer] && @vendor.customers.collect(&:id).include?(params[:customer][:id].to_i))
+			@current_customer_id = params[:customer][:id]
+			session[:customer_id] = @current_customer_id
 		end
 
 	  if @current_customer_id
@@ -275,6 +277,24 @@ class OrdersController < Spree::Manage::BaseController
 		elsif !(session[:orders_start_date].blank? && session[:orders_end_date].blank?)
 			@orders = @orders.where('delivery_date BETWEEN ? AND ?', session[:orders_start_date], session[:orders_end_date])
 		end
+
+		if params[:status]
+			status = params[:status].split('-')
+			session[:orders_filter_status] = params[:status]
+			status_type, status_name = status.first, status.last
+			if status_type == 'order' && status_name == 'approved'
+				@orders = @orders.where('approved = ?', true)
+			elsif status_type == 'order' && status_name == 'action required'
+					@orders = @orders.where('approved = ?', false)
+			elsif status_type == 'order'
+				@orders = @orders.where('state = ?', status_name)
+			elsif status_type == 'shipment'
+				@orders = @orders.where('shipment_state = ?', status_name)
+			end
+		else
+			session[:orders_filter_status] = nil
+		end
+
 		@orders
 	end
 
