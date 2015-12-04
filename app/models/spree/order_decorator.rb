@@ -1,5 +1,4 @@
 Spree::Order.class_eval do
-  SHIPMENT_STATES = %w(backorder canceled partial pending ready shipped received).freeze
   # validates :vendor_id, :customer_id, :user_id, :delivery_date, presence: true
   belongs_to :vendor, class_name: 'Vendor', foreign_key: :vendor_id, primary_key: :id
   belongs_to :customer, class_name: 'Customer', foreign_key: :customer_id, primary_key: :id
