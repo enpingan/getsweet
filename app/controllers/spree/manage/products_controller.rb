@@ -28,9 +28,12 @@ module Spree
   end
 
   def create
+    # fail
     @vendor = current_vendor
     @product = current_vendor.products.new(product_params)
-    @product.shipping_category_id ||= 1 #default value required to create new product
+    @product.master.tax_category_id = @product.tax_category_id
+    # @product.shipping_category_id ||= 1 #default value required to create new product
+    @product.taxons << Spree::Taxon.find(params[:product][:taxon]) if params[:product][:taxon]
     if @product.save
       flash[:success] = "New product added!"
       redirect_to manage_products_url
@@ -54,8 +57,10 @@ module Spree
     @product = Spree::Product.friendly.find(params[:id])
     @variants = @product.variants
     @vendor = current_vendor
-    # Temporary allergans
-    @allergans = ['Peanut', 'Tree Nuts', 'Milk', 'Egg', 'Wheat', 'Soy', 'Fish', 'Shellfish']
+    # Temporary allergens
+
+
+    @allergens = ['Peanut', 'Tree Nuts', 'Milk', 'Egg', 'Wheat', 'Soy', 'Fish', 'Shellfish']
 
     render :edit
   end
@@ -68,6 +73,10 @@ module Spree
       render :edit and return
     end
 
+    if params[:product][:taxon]
+      taxon = Spree::Taxon.find(params[:product][:taxon])
+      @product.taxons << taxon if !@product.taxons.include?(taxon)
+    end
     if @product.update(product_params)
       flash[:success] = "Product has been updated!"
       redirect_to manage_product_url(@product)
@@ -91,8 +100,11 @@ module Spree
   protected
 
   def product_params
-    params.require(:product).permit(:name, :description, master_attributes: [:sku, :price, :pack_size, :lead_time, :id, :is_master, prices_attributes: [:id, :amount]],
-      variants_attributes: [:sku, :price, :lead_time, :pack_size, :id, :is_master, prices_attributes: [:id, :amount]])
+    params.require(:product).permit(:name, :description, :available_on, :shipping_category_id, :tax_category_id,
+      master_attributes: [:sku, :price, :pack_size, :lead_time, :id, :is_master,
+        :cost_price, :cost_currency, :weight, :width, :height, :depth, :tax_category_id, prices_attributes: [:id, :amount]],
+      variants_attributes: [:sku, :price, :pack_size, :lead_time, :id, :is_master,
+        :cost_price, :cost_currency, :weight, :width, :height, :depth, :tax_category_id, prices_attributes: [:id, :amount]])
   end
 
   def ensure_vendor

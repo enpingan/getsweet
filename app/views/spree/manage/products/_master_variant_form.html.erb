@@ -2,60 +2,40 @@
 
 
 <div class="product-size-block">
-  <div class="col1">
-    <%= f.label "Master?" %>
-    <%= f.check_box :is_master, class: "master-checkbox" %>
-    <!-- <a href="" id="close-button"><i class="fa fa-times"></i></a> -->
-  </div>
+  <!-- <div class="col1"></div>
+  <div class="col2"></div>
+  <div class="col3"></div> -->
 
-  <div class="col2">
-    <div class="leftpart">
-      <p>
-        <%= f.label :sku %>
-        <%= f.text_field :sku %>
-      </p>
-    </div>
-    <div class="rightpart">
-      <p>
-        <%= f.label :lead_time, "Lead Time (Days)" %>
-        <%= f.text_field :lead_time, placeholder: 'days' %>
-      </p>
-    </div>
-  </div>
-  <div class="col3">
-    <div class="leftpart">
-      <p>
-        <%= f.label :pack_size %>
-        <%= f.text_field :pack_size %>
-      </p>
-    </div>
-    <div class="rightpart">
-      <p>
-        <%= f.label :price %>
-        <%= f.text_field :price %>
-      </p>
-    </div>
-    <!-- <div class="datepicker-block">
-      <div class="leftpart">
-        <p><input type="checkbox" id="promotional"><label for="promotional">Promotional</label></p>
-      </div>
-      <div class="rightpart">
-        <p><label for="promo_price">Promo Price:</label> <input type="text" id="promo_price" value=""></p>
-      </div>
-      <div class="leftpart">
-        <p class="datepicker-cont"><label for="date_start">Start:</label>
-          <input type="text" class="datepicker" id="date_start" value="">
-          <%#= image_tag("spree/manage/img/datepicker-ico.jpg", class: "date-icon") %>
-        </p>
-      </div>
-      <div class="rightpart">
-        <p class="datepicker-cont">
-          <label for="date_end">End:</label>
-          <input type="text" class="datepicker" id="date_end" value="">
-          <%#= image_tag("spree/manage/img/datepicker-ico.jpg", class: "date-icon") %>
-        </p>
-      </div>
-    </div> -->
-  </div>
+  <%= f.label :sku %>
+  <%= f.text_field :sku %>
+
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+
+  <%= f.label :lead_time, "Lead Time (Days)" %>
+  <%= f.text_field :lead_time, placeholder: 'days' %>
+
+  <%= f.label 'Pack/Size' %>
+  <%= f.text_field :pack_size %>
+
+  <%= f.label :cost_price %>
+  <%= f.text_field :cost_price %>
+
+  <%= f.label :cost_currency %>
+  <%= f.text_field :cost_currency, value: 'USD' %>
+
+  <%= f.label :weight %>
+  <%= f.text_field :weight %>
+
+  <%= f.label :width %>
+  <%= f.text_field :width %>
+
+  <%= f.label :height %>
+  <%= f.text_field :height %>
+
+  <%= f.label :depth %>
+  <%= f.text_field :depth %>
+
+
   <div class="clear"></div>
 </div>

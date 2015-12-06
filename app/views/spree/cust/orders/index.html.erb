@@ -96,8 +96,8 @@
               <a href="<%= url %>" class="orders-list-order-link cel">
                   <% if order.state != 'complete' && order.all_variants_past_cutoff? %>
                     Past Order Cutoff
-                  <% elsif order.shipments.length > 0 %>
-                    <%= order.shipments.first.state %>
+                  <% elsif order.shipment_state %>
+                    <%= order.shipment_state %>
                   <% elsif order.state == 'complete' %>
                     Vendor Approval Req'd
                   <% end %>
