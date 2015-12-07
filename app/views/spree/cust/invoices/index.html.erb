@@ -1,29 +1,27 @@
 <h1 class="tablet-center">Invoices</h1>
 					<div class="invoices-list-block">
-						<!-- <div class="search-block">
-							<form id="search-form">
-								<input type="text" placeholder="Search Customer or Invoices">
-								<input type="submit" value="Search">
-							</form>
-							<form id="invoices-filter-form">
-								<select name="date-form" id="date_form">
-									<option value="all">All Invoices</option>
-									<option value="price">Option 2</option>
-									<option value="name">Option 3</option>
-								</select>
-							</form>
-							<div class="clear"></div>
-						</div> -->
+						<div class="search-block">
+
+				      <form id="filter-form">
+								<%= render 'spree/cust/shared/order_filters' %>
+				      </form>
+
+				      <div class="clear"></div>
+				    </div>
+
 						<form action="#" id="invoices-list-form">
 							<div class="orders-list-table">
 								<div class="tRow header">
-									<div class="cel">Invoice #
+									<div class="cel">
+										<%= sortable "spree_vendor.name", "Vendor" %>
 										<!-- <a href="" class="sort-name">Invoice # <i class="fa fa-sort"></i></a> -->
 									</div>
-									<div class="cel">Vendor
+									<div class="cel">
+										<%= sortable 'number', 'Invoice #' %>
 										<!-- <a href="" class="sort-name">Customer <i class="fa fa-sort"></i></a> -->
 									</div>
-									<div class="cel">Date
+									<div class="cel">
+										<%= sortable 'delivery_date', "Date" %>
 										<!-- <a href="" class="sort-sku">Date <i class="fa fa-sort"></i></a> -->
 									</div>
 									<div class="cel">Amount Due

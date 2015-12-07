@@ -34,6 +34,9 @@ module Spree
           @shipment.receive
           @order.save!
           redirect_to receivings_url
+        elsif params[:order][:line_items_attributes].none? {|li, attrs| attrs[:confirm_received] == '1'} #checks that at least one item has been received
+          flash.now[:error] = "You must mark the items that you received!"
+          render :edit
         elsif @order.update(receiving_params)
           @order.line_items.each do |line_item|
             line_item.received_qty = 0 unless line_item.received_qty && line_item.confirm_received

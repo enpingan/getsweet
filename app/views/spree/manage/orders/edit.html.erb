@@ -16,7 +16,14 @@
 			</div>
 			<div class="orders-nav">
 				<!-- <a href="#" class="nav-left"><i class="fa fa-chevron-left"></i></a> -->
-				<span class="order-id">Order #<%= @order.number %></span>
+				<span class="order-id">
+					Order #<%= @order.number %>
+					<% if @order.shipment_state == 'received' %>
+						<a href="<%= manage_invoice_url(@order) %>">(View Invoice)</a>
+					<% elsif @order.shipment_state == 'ready' %>
+						<a href="<%= edit_manage_shipping_url(@order.shipments.first) %>">(View Shipment)</a>
+					<% end %>
+				</span>
 				<!-- <a href="#" class="nav-right"><i class="fa fa-chevron-right"></i></a> -->
 			</div>
 			<div id="date-form">

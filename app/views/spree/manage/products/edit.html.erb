@@ -1,7 +1,7 @@
 <div class="product-edit-block">
 
   <%= form_for @product, url: manage_product_url(@product), html: {id: "product-edit-form"} do |prod_form|%>
-    <%= render partial: 'form' %>
+    <%= render partial: 'form', locals: {prod_form: prod_form} %>
 
       <%= prod_form.fields_for :master do |f| %>
         <%= render partial: 'master_variant_form', locals: {f:f} %>

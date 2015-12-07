@@ -10,10 +10,15 @@ module Spree
 
     def index
       clear_current_order
-      @current_vendor_id = session[:vendor_id]
       @customer = current_customer
+      @vendors = @customer.vendors.order('name ASC')
 
       @orders = filter_orders
+      @current_vendor_id = session[:vendor_id]
+      @start_date = session[:orders_start_date]
+      @end_date = session[:orders_end_date]
+      @status = session[:orders_filter_status]
+
       if params[:sort] && params[:sort] == 'spree_vendor.name'
         @orders = @orders.includes(:vendor).order('name '+ sort_direction).references(:spree_vendors)
       else
@@ -93,6 +98,7 @@ module Spree
         elsif (params[:commit] == "Resubmit Order")
           @order.approver_id = nil
   				@order.approved_at = nil
+          @order.approved = false
           @order.completed_at = Time.current
           @order.user_id = current_spree_user.id
 
@@ -220,12 +226,12 @@ module Spree
 
       @current_vendor_id = session[:vendor_id]
 
-      if (params[:vendor] && @customer.vendors.collect(&:name).include?(params[:vendor][:name]))
-  			@current_vendor_id = Spree::Vendor.find_by_name(params[:vendor][:name]).id
-  			session[:vendor_id] = @current_vendor_id
-      elsif (params[:vendor] && params[:vendor][:name] == 'all')
+      if (params[:vendor] && params[:vendor][:id] == 'all')
         session[:vendor_id] = nil
         @current_vendor_id = nil
+      elsif (params[:vendor] && @customer.vendors.collect(&:id).include?(params[:vendor][:id].to_i))
+  			@current_vendor_id = params[:vendor][:id]
+  			session[:vendor_id] = @current_vendor_id
   	  end
 
       if @current_vendor_id
@@ -234,9 +240,33 @@ module Spree
   			@orders = @customer.orders
   		end
 
-      unless (params[:date].nil? || params[:date].empty?)
-  			@orders = @orders.where('delivery_date = ?', params[:date])
+      if !(params[:start_date].blank? && params[:end_date].blank?)
+        session[:orders_start_date], session[:orders_end_date] = params[:start_date], params[:end_date]
+        @orders = @orders.where('delivery_date BETWEEN ? AND ?', params[:start_date], params[:end_date])
+      elsif (params[:start_date] && params[:start_date].empty? && params[:end_date] && params[:end_date].empty?)
+        session[:orders_start_date], session[:orders_end_date] = nil, nil
+      elsif !(session[:orders_start_date].blank? && session[:orders_end_date].blank?)
+        @orders = @orders.where('delivery_date BETWEEN ? AND ?', session[:orders_start_date], session[:orders_end_date])
+      end
+
+      if params[:status]
+  			status = params[:status].split('-')
+  			session[:orders_filter_status] = params[:status]
+  			status_type, status_name = status.first, status.last
+  			if status_type == 'order' && status_name == 'approved'
+  				@orders = @orders.where('approved = ?', true)
+  			elsif status_type == 'order' && status_name == 'approval required'
+  					@orders = @orders.where('approved = ?', false)
+  			elsif status_type == 'order'
+  				@orders = @orders.where('state = ?', status_name)
+  			elsif status_type == 'shipment'
+  				@orders = @orders.where('shipment_state = ?', status_name)
+  			end
+  		else
+  			session[:orders_filter_status] = nil
   		end
+
+
       @orders
     end
 

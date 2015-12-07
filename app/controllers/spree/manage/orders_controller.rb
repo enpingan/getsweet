@@ -9,11 +9,14 @@ class OrdersController < Spree::Manage::BaseController
 
   def index
 		clear_current_order
-		@current_customer_id = session[:customer_id]
-		# session[:customer_id] = nil
 		@vendor = current_vendor
-
+		@customers = @vendor.customers.order('name ASC')
 		@orders = filter_orders
+
+		@current_customer_id = session[:customer_id]
+		@status = session[:orders_filter_status]
+		@start_date = session[:orders_start_date]
+		@end_date = session[:orders_end_date]
 		if params[:sort] && params[:sort] == 'spree_customer.name'
 			@orders = @orders.includes(:customer).order('name '+ sort_direction).references(:spree_customers)
 		else
@@ -229,6 +232,7 @@ class OrdersController < Spree::Manage::BaseController
 		order.completed_at = Time.current
 		order.approver_id = current_spree_user.id
 		order.approved_at = Time.current
+		order.approved = true
 		order.user_id = order.customer.users.first.id unless order.user_id
 		unless current_vendor.stock_locations.count > 0
 			current_vendor.stock_locations.create(name: current_vendor.name)
@@ -241,8 +245,9 @@ class OrdersController < Spree::Manage::BaseController
 				variant_id: line_item.variant_id
 			)
 		end
-		shipment.shipping_rates.create(shipping_method_id: 1)
+		shipment.shipping_rates.create(shipping_method_id: Spree::ShippingMethod.first.id)
 		shipment.state = 'ready'
+		order.shipment_state = 'ready'
 		order.save!
 	end
 
@@ -250,12 +255,12 @@ class OrdersController < Spree::Manage::BaseController
 
 		@current_customer_id = session[:customer_id]
 
-		if (params[:customer] && @vendor.customers.collect(&:name).include?(params[:customer][:name]))
-			@current_customer_id = Spree::Customer.find_by_name(params[:customer][:name]).id
-			session[:customer_id] = @current_customer_id
-	  elsif (params[:customer] && params[:customer][:name] == 'all')
+	  if (params[:customer] && params[:customer][:id] == 'all')
 			session[:customer_id] = nil
 			@current_customer_id = nil
+		elsif (params[:customer] && @vendor.customers.collect(&:id).include?(params[:customer][:id].to_i))
+			@current_customer_id = params[:customer][:id]
+			session[:customer_id] = @current_customer_id
 		end
 
 	  if @current_customer_id
@@ -264,9 +269,32 @@ class OrdersController < Spree::Manage::BaseController
 			@orders = @vendor.orders
 		end
 
-		unless (params[:date].nil? || params[:date].empty?)
-			@orders = @orders.where('delivery_date = ?', params[:date])
+		if !(params[:start_date].blank? && params[:end_date].blank?)
+			session[:orders_start_date], session[:orders_end_date] = params[:start_date], params[:end_date]
+			@orders = @orders.where('delivery_date BETWEEN ? AND ?', params[:start_date], params[:end_date])
+		elsif (params[:start_date] && params[:start_date].empty? && params[:end_date] && params[:end_date].empty?)
+			session[:orders_start_date], session[:orders_end_date] = nil, nil
+		elsif !(session[:orders_start_date].blank? && session[:orders_end_date].blank?)
+			@orders = @orders.where('delivery_date BETWEEN ? AND ?', session[:orders_start_date], session[:orders_end_date])
 		end
+
+		if params[:status]
+			status = params[:status].split('-')
+			session[:orders_filter_status] = params[:status]
+			status_type, status_name = status.first, status.last
+			if status_type == 'order' && status_name == 'approved'
+				@orders = @orders.where('approved = ?', true)
+			elsif status_type == 'order' && status_name == 'action required'
+					@orders = @orders.where('approved = ?', false)
+			elsif status_type == 'order'
+				@orders = @orders.where('state = ?', status_name)
+			elsif status_type == 'shipment'
+				@orders = @orders.where('shipment_state = ?', status_name)
+			end
+		else
+			session[:orders_filter_status] = nil
+		end
+
 		@orders
 	end
 

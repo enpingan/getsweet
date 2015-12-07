@@ -44,6 +44,14 @@
   color: inherit;
   position: relative;
 }
+.inventory-order-buttons label.checkbox-label{
+  float: right;
+  padding: 20px 0;
+  font-size: 16px;
+}
+.inventory-order-buttons input#receive-all{
+  vertical-align: baseline;
+}
 
 @media (max-width: 599px){
   .receiving-block .my-orders-list .tRow .cel.status, .receiving-block .my-orders-list .tRow .cel.balance{

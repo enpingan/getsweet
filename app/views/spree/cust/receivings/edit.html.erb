@@ -73,6 +73,10 @@
 		</div>
 		<div class="clear"></div>
 		<div class="inventory-order-buttons">
+			<label class="checkbox-label">Receive All
+				<input type="checkbox" id="receive-all">
+			</label>
+			<div class="clear"></div>
 			<div class="leftpart">
 				<textarea name="Notes" id="notes" placeholder="Notes"></textarea>
 			</div>
@@ -82,6 +86,7 @@
 					<%# if @shipment.line_items.any?{|line_item| line_item.confirm_received == false} %>
 						<%#= submit_tag "Order Received", data: {confirm: "You have items that are not marked as received. Are you sure you want to continue?"} %>
 					<%# else %>
+
 						<input type="submit" value="order received">
 					<%# end %>
         <% else %>
@@ -93,3 +98,18 @@
 
 	<% end %>
 </div>
+
+<script>
+  $('#receive-all').click(function(event) {
+    if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;
+        });
+    }else{
+      $(':checkbox').each(function() {
+          this.checked = false;
+      });
+    }
+  });
+</script>

@@ -19,7 +19,7 @@
 							<div class="row">
 								<div class="col1">
 									<%= render :partial => 'image' %>
-									<p class="desc"><b>Allergans:</b> Gluten</p>
+									<p class="desc"><b>Allergens:</b> Gluten</p>
 									<p class="desc"><b></b> Eggs</p>
 									<p class="desc"><b></b> Etca</p>
 									<div class="divider2"></div>
@@ -35,7 +35,7 @@
 						</div>
 						<div id="order-form">
 							<div class="order-product-list">
-                <% @product.variants_including_master.each do |variant| %>
+                <% @variants_including_master.each do |variant| %>
                   <%= form_for :order, html: {class: "tRow"}, url: populate_orders_path(format: 'js', index: variant.id), remote: true do |f| %>
 
     								<!-- <div class="tRow"> -->

@@ -8,15 +8,19 @@
 
     <div class="search-block">
       <form id="filter-form">
-        <%= select(:vendor, :name) do%>
-        <% if @current_vendor_id %>
-          <option value="<%= @current_vendor_id %>"><%= Spree::Vendor.find(@current_vendor_id).name %></option>
-        <% end %>
-          <option value="all">All</option>
-          <%= options_for_select (@customer.vendors.collect(&:name)) %>
-        <% end %>
-        <input type="date" name=date>
-        <input type="submit" value="Filter">
+        <select name='status'>
+          <% statuses = %w{shipment-received shipment-shipped shipment-ready order-complete order-cart order-approved order-approval\ required }.sort %>
+
+          <option value='any'>Any Status</option>
+          <% statuses.each do |status| %>
+            <% if status == @status %>
+              <option value='<%= status %>' selected><%= status.capitalize %></option>
+            <% else %>
+              <option value='<%= status %>'><%= status.capitalize %></option>
+            <% end %>
+          <% end %>
+        </select>
+        <%= render 'spree/cust/shared/order_filters' %>
       </form>
 
       <%# if nil %>
@@ -60,15 +64,15 @@
             <!-- <a href="" class="sort-lead_time">Status <i class="fa fa-sort"></i></a> -->
           </div>
           <div class="cel">
-            Shippment
+            Shipment
           </div>
           <div class="cel"></div>
         </div>
 
         <% if @orders %>
           <% @orders.each do |order| %>
-            <%# url = order.shipments.any? ? receiving_url(order.shipments.first) : order_url(order) %>
-            <% url = order.shipments.any? ? (order.shipments.any?{|s| s.state == 'received'} ? invoice_url(order) : order.shipments.any?{|s| s.state == 'shipped'} ? edit_receiving_url(order.shipments.first) : order_url(order)) : order_url(order) %>
+            <% url = order_url(order) %>
+            <%# url = order.shipments.any? ? (order.shipments.any?{|s| s.state == 'received'} ? invoice_url(order) : order.shipments.any?{|s| s.state == 'shipped'} ? edit_receiving_url(order.shipments.first) : order_url(order)) : order_url(order) %>
             <div class="tRow orders-list-order">
               <a href="<%= url %>" class="orders-list-order-link cel">
                 <%= order.vendor.name %>
@@ -92,8 +96,8 @@
               <a href="<%= url %>" class="orders-list-order-link cel">
                   <% if order.state != 'complete' && order.all_variants_past_cutoff? %>
                     Past Order Cutoff
-                  <% elsif order.shipments.length > 0 %>
-                    <%= order.shipments.first.state %>
+                  <% elsif order.shipment_state %>
+                    <%= order.shipment_state %>
                   <% elsif order.state == 'complete' %>
                     Vendor Approval Req'd
                   <% end %>

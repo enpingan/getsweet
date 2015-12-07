@@ -24,7 +24,7 @@
 					<%= render :partial => 'image' %>
 					<%= link_to "edit", manage_product_images_url(@product) %>
 
-					<p class="desc"><b>Allergans:</b> Gluten</p>
+					<p class="desc"><b>Allergens:</b> Gluten</p>
 					<p class="desc"><b></b> Eggs</p>
 					<p class="desc"><b></b> Etca</p>
 					<div class="divider2"></div>
@@ -39,7 +39,7 @@
 		</div>
 		<div id="order-form">
 			<div class="order-product-list">
-        <% @product.variants_including_master.each do |variant| %>
+        <% @variants_including_master.each do |variant| %>
           <%= form_for :order, html: {class: "tRow"}, url: populate_manage_orders_path(format: 'js', index: variant.id), remote: true do |f| %>
 						<div class="cel">
 							<b>SKU #</b> <%= variant.sku %>

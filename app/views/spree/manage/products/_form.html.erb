@@ -1,5 +1,14 @@
-<p><label for="prod_name">Product Name:</label>
-   <input type="text" id="prod_name" name=product[name] value="<%= @product.name %>"></p>
+<!-- <ul>Prod Form Reqs
+
+
+  <li>category</li>
+  <li>allergens</li>
+</ul> -->
+
+  <%= prod_form.label :name, 'Product Name' %>
+  <%= prod_form.text_field :name %>
+<!-- <p><label for="prod_name">Product Name:</label> -->
+   <!-- <input type="text" id="prod_name" name=product[name] value="<%= @product.name %>"></p> -->
 <!-- <p><label for="prod_name">Mfg: </label> -->
    <!-- <input type="text" id="mfg" value="<%#= @vendor.name %>"></p> -->
    <p>Mfg: <%= @vendor.name %></p>
@@ -9,10 +18,10 @@
     <p class="aligncenter"><a href="#" class="upload-img-button">Upload new image</a></p>
     <div class="divider2"></div>
     <div class="checkbox-block">
-      <!-- <p><b>Allergans:</b> -->
-      <%# @allergans.each do |allergan| %>
-      <!-- allergans still need to be linked up to model -->
-        <!-- <p><b></b><label><input type="checkbox"><%#= allergan %></label></p> -->
+      <!-- <p><b>Allergens:</b> -->
+      <%# @allergens.each do |allergen| %>
+      <!-- allergens still need to be linked up to model -->
+        <!-- <p><b></b><label><input type="checkbox"><%#= allergen %></label></p> -->
       <%# end %>
     </div>
     <div class="checkbox-block">
@@ -29,10 +38,52 @@
   </div>
   <div class="col2">
     <div class="relative description-wrap">
-      <label>Product Description
-        <textarea class="description" name="product[description]"> <%= @product.description %></textarea>
+      <label for='product_description'>Product Description
+        <textarea class="description" name="product[description]" id='product_description'> <%= @product.description %></textarea>
         <!-- <p class="checkbox-block"><label>V<input type="checkbox" id="v"></label><label>VG<input type="checkbox" id="vg"></label><label>GF<input type="checkbox" id="gf"></label></p> -->
       </label>
     </div>
+  </div>
+
+  <div>
+    <%= prod_form.label :available_on %>
+    <%= prod_form.date_field :available_on %>
+    <br>
+
+    <label for='product_taxon'>Product Category</label>
+    <select name=product[taxon] id='product_taxon'>
+      <option value=''></option>
+      <% Spree::Taxon.where('parent_id = ?', Spree::Taxon.select('id').where('name = ?', 'Product Categories').limit(1).first[:id]).order('name ASC').each do |taxon| %>
+        <% if @product.taxons.any? && @product.taxons.first.id == taxon.id %>
+          <option value='<%= taxon.id %>' selected><%= taxon.name %></option>
+        <% else %>
+          <option value='<%= taxon.id %>'><%= taxon.name %></option>
+        <% end %>
+      <% end %>
+    </select><br>
+
+    <label for='product_shipping_category_id'>Shipping Category</label>
+    <select name=product[shipping_category_id]>
+      <option value=''></option>
+      <% Spree::ShippingCategory.all.each do |category| %>
+        <% if @product.shipping_category_id == category.id %>
+          <option value='<%= category.id %>' selected><%= category.name %></option>
+        <% else %>
+          <option value='<%= category.id %>'><%= category.name %></option>
+        <% end %>
+      <% end %>
+    </select><br>
+
+    <label for='product_tax_category_id'>Tax Category</label>
+    <select name=product[tax_category_id]>
+      <option value=''></option>
+      <% Spree::TaxCategory.all.each do |category| %>
+        <% if @product.tax_category_id == category.id %>
+          <option value='<%= category.id %>' selected><%= category.name %></option>
+        <% else %>
+          <option value='<%= category.id %>'><%= category.name %></option>
+        <% end %>
+      <% end %>
+    </select>
   </div>
 </div>
