@@ -34,4 +34,47 @@ Spree::Order.class_eval do
       # ((Time.current.to_date + line_item.variant.lead_time.day) > self.delivery_date) || (Time.current > self.vendor.order_cutoff_time.in_time_zone && ((Time.current.to_date + line_item.variant.lead_time.day) == self.delivery_date))
     end
   end
+
+  ### OVERRIDE OF BASE SPREE finalize! CALL ###
+  # Finalizes an in progress order after checkout is complete.
+  # Called after transition to complete state
+  def finalize!
+    # lock all adjustments (coupon promotions, etc.)
+    all_adjustments.each{|a| a.close}
+
+    # update payment and shipment(s) states, and save
+    #updater.update_payment_state
+    shipments.each do |shipment|
+      shipment.update!(self)
+      shipment.finalize!
+    end
+
+    updater.update_shipment_state
+    save!
+    updater.run_hooks
+
+    touch :completed_at
+
+    deliver_internal_order_confirmation
+    deliver_vendor_confirmation unless confirmation_delivered?
+    deliver_order_confirmation_email unless confirmation_delivered?
+
+    consider_risk
+  end
+
+  def send_cancel_email
+    Spree::OrderMailer.cancel_email(self.id).deliver
+    Spree::OrderMailer.internal_cancellation_notice(self.id).deliver
+  end
+
+  def deliver_vendor_confirmation
+    Spree::VendorMailer.confirm_email(self.id).deliver
+  end
+
+  def deliver_internal_order_confirmation
+    if true # later add a boolean value for whether store wants to be informed
+      Spree::OrderMailer.internal_confirmation(self.id).deliver
+    end
+  end
+
 end

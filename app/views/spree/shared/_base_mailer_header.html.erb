@@ -1,0 +1,37 @@
+<table class="row header">
+  <tr>
+    <td class="center" align="center">
+      <center>
+
+        <table class="container">
+          <tr>
+            <td class="wrapper last">
+
+              <table class="twelve columns">
+                <tr>
+                  <td class="seven sub-columns">
+                    <%#=  link_to image_tag("logo.png"), root_path %>
+										<a href="http://sweetist.co"><img alt="Logo" src="https://s3.amazonaws.com/sweetist-assets/production/assets/logo-4e9a2fc711b02d765f37a2c85c3cb14c.png" align="left"></a>
+                  </td>
+                  <td class="five sub-columns last header-right" style="text-align:left; vertical-align:middle;">
+                    <span class="template-label">
+											<%= "Order Number: #{@order.number}" %>
+											<br>
+											<%= "Order Date: #{@order.completed_at.strftime('%m/%d/%Y')}" %>
+											<br>
+											<%= "Order Time: #{@order.completed_at.strftime('%l:%M%p')}" %>
+											<%#= Spree::Store.current.name %>
+										</span>
+                  </td>
+                  <td class="expander"></td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+
+      </center>
+    </td>
+  </tr>
+</table>

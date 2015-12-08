@@ -1,0 +1,105 @@
+<table>
+  <tr>
+    <td>
+      <p class="lede">
+        Sweetist Team,<br>
+        NEW ORDER FOR <%= "#{@order.user.firstname.upcase} #{@order.user.lastname.upcase}" %>!
+      </p>
+
+      <p>
+
+        <!-- Fulfillment Summary -->
+      <table>
+        <tr>
+          <td><strong><%= Spree.t('order_mailer.confirm_email.order_summary') %></strong></td>
+        </tr>
+        <tr>
+          <td>Order
+            from <%= "#{@order.vendor.name}" %></td>
+        </tr>
+        <tr>
+          <td>Customer:<br>
+            <%= "#{@order.user.firstname} #{@order.user.lastname}" %><br>
+            <%= @order.user.email %><br>
+          </td>
+        </tr>
+        <% if @order.special_instructions.presence %>
+          <tr>
+            <td>Delivery instructions:
+              <%= @order.special_instructions %></td>
+          </tr>
+        <% end %>
+      </table>
+
+      <!-- Order Items Summary -->
+      <table>
+        <tr>
+          <td colspan=4><strong>Order Details</strong></td>
+        </tr>
+        <tr>
+          <th class="order-table item-name">Item Name</th>
+          <th class="order-table price">Price</th>
+          <th class="order-table qty">Qty</th>
+          <th class="order-table subtotal">Subtotal</th>
+        </tr>
+        <% @order.line_items.each do |item| %>
+          <tr>
+            <td>
+              <%= raw(item.variant.product.name) %>
+              <%= raw(item.variant.options_text) -%>
+            <td class="center"><%= item.display_amount %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td class="right" colspan=3>
+            <%= Spree.t('order_mailer.confirm_email.subtotal') %>
+          </td>
+          <td class="center">
+            <%= @order.display_item_total %>
+          </td>
+        </tr>
+        <% if @order.line_item_adjustments.exists? %>
+          <% if @order.all_adjustments.promotion.eligible.exists? %>
+            <% @order.all_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
+              <% next if (adjustments.first.source_type == 'Spree::PromotionAction') and (adjustments.first.adjustable_type == 'Spree::Order') %> <!-- skip if promotion to avoid showing promotions twice -->
+              <tr>
+                <td class="right" colspan=3><%= Spree.t(:promotion) %> <%= label %>:</td>
+                <td class="center"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% @order.shipments.group_by { |s| s.selected_shipping_rate.try(:name) }.each do |name, shipments| %>
+          <tr>
+            <td class="right" colspan=3>Fulfillment via <%= shipments.first.shipping_method.name %>:</td>
+            <td class="center"><%= Spree::Money.new(shipments.sum(&:discounted_cost), currency: @order.currency) %></td>
+          </tr>
+        <% end %>
+        <% if @order.all_adjustments.eligible.tax.exists? %>
+          <% @order.all_adjustments.eligible.tax.group_by(&:label).each do |label, adjustments| %>
+            <tr>
+              <td class="right" colspan=3><%= Spree.t(:tax) %> <%= label %>:</td>
+              <td class="center"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        <% @order.adjustments.eligible.each do |adjustment| %>
+          <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+          <tr>
+            <td class="right" colspan=3><%= adjustment.label %>:</td>
+            <td class="center"><%= adjustment.display_amount %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td class="right" colspan=3>
+            <strong><%= Spree.t('order_mailer.confirm_email.total') %></strong>
+          </td>
+          <td class="center">
+            <strong><%= @order.total %></strong>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td class="expander"></td>
+  </tr>
+</table>

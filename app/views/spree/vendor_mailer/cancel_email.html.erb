@@ -1,0 +1,57 @@
+<table>
+  <tr>
+    <td>
+      <p class="lede">
+				Hi <%= @order.vendor.name %>,<br>
+      </p>
+      <p>
+				We are sorry to inform you that <%= "#{@order.user.firstname} #{@order.user.lastname} has canceled their order." %><br>
+				Order <%= @order.number %> was scheduled for <% @order.delivery_date.strftime("%m/%d/%Y") %>.<br>
+				<br>
+				Please call our operations team at <a href="tel: +1 (646) 979-9255">(646) 979-9255</a> if you have any questions.
+				<br><br>
+				Regards,<br>
+				The Sweetist Team.
+      </p>
+      <p>
+        <strong><%= Spree.t('order_mailer.cancel_email.order_summary_canceled') %></strong>
+      </p>
+      <table>
+        <% @order.line_items.each do |item| %>
+          <tr>
+            <td>
+              <%= raw(item.variant.product.name) %>
+              <%= raw(item.variant.options_text) -%>
+            </td>
+            <td>(<%=item.quantity%>) @ <%= item.single_money %> = <%= item.display_amount %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td></td>
+          <td><%= Spree.t('order_mailer.cancel_email.subtotal') %></td>
+          <td><%= @order.display_item_total %></td>
+        </tr>
+        <% @order.shipments.group_by { |s| s.selected_shipping_rate.try(:name) }.each do |name, shipments| %>
+          <tr>
+          <td></td>
+            <td><%= Spree.t(:shipping) %> <%= name %>:</td>
+            <td><%= Spree::Money.new(shipments.sum(&:discounted_cost), currency: @order.currency) %></td>
+          </tr>
+        <% end %>
+        <% @order.adjustments.eligible.each do |adjustment| %>
+          <tr>
+            <td></td>
+            <td><%= raw(adjustment.label) %></td>
+            <td><%= adjustment.display_amount %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td></td>
+          <td><%= Spree.t('order_mailer.cancel_email.total') %></td>
+          <td><%= @order.display_total %></td>
+        </tr>
+      </table>
+    </td>
+    <td class="expander"></td>
+  </tr>
+</table>

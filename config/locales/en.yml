@@ -21,3 +21,26 @@
 
 en:
   hello: "Hello world"
+  spree:
+    delivery: Fulfillment
+    order_mailer:
+      confirm_email:
+        subject: "Your order from"
+      internal_confirm:
+        subject: "NEW ORDER"
+      internal_cancel:
+        subject: "Canceled order"
+      cancel_email:
+        subject1: "Your order from"
+        subject2: "has been canceled"
+        instructions: "We are sorry to hear you've canceled your order. Please hold on to the information below for your records."
+        order_summary_canceled: "Order Summary:"
+    vendor_mailer:
+      confirm_email:
+        subject: "New Order"
+      cancel_email:
+        subject: "Cancellation of order"
+    shipment_mailer:
+      shipped_email:
+        out_for_delivery: "Your order is out for delivery now. Please stay near your phone in case your courier needs to contact you."
+        thanks: "Thanks for ordering with Sweetist!"

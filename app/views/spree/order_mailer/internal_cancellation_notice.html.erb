@@ -1,0 +1,49 @@
+<table>
+  <tr>
+    <td>
+      <p class="lede">
+        <%#= Spree.t('order_mailer.cancel_email.dear_customer') %>
+				Sweetist Team,<br>
+      </p>
+      <p>
+				<%= "#{@order.user.firstname} #{@order.user.lastname} has attempted to cancel her/his order from #{@order.vendor.name}." %><br>
+				<br>
+				<strong>Please either call the vendor to confirm the cancellation or call the customer to discuss their request.<br></strong>
+				<br>
+				Customer phone: <%= @order.bill_address.phone %>
+      </p>
+      <p>
+        <strong><%= Spree.t('order_mailer.cancel_email.order_summary_canceled') %></strong>
+      </p>
+      <table>
+        <% @order.line_items.each do |item| %>
+          <tr>
+            <td>
+              <%= raw(item.variant.product.name) %>
+              <%= raw(item.variant.options_text) -%>
+            </td>
+            <td>(<%=item.quantity%>) @ <%= item.single_money %> = <%= item.display_amount %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td></td>
+          <td><%= Spree.t('order_mailer.cancel_email.subtotal') %></td>
+          <td><%= @order.display_item_total %></td>
+        </tr>
+        <% @order.adjustments.eligible.each do |adjustment| %>
+          <tr>
+            <td></td>
+            <td><%= raw(adjustment.label) %></td>
+            <td><%= adjustment.display_amount %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td></td>
+          <td><%= Spree.t('order_mailer.cancel_email.total') %></td>
+          <td><%= @order.total %></td>
+        </tr>
+      </table>
+    </td>
+    <td class="expander"></td>
+  </tr>
+</table>

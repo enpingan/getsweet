@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <td>
+      <p class="lede">
+        Dear <%= @order.user.firstname %>,
+      </p>
+
+      <p>
+        Your order has been delivered! If you have any questions please contact help@sweetist.co.
+      </p>
+
+      <p>
+        <%= Spree.t('shipment_mailer.shipped_email.thanks') %>
+      </p>
+    </td>
+    <td class="expander"></td>
+  </tr>
+</table>
