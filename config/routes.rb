@@ -80,39 +80,49 @@ Rails.application.routes.draw do
 				resources :ship_addresses
 			end
 
-    		resources :orders do
-          patch :approve, on: :collection, to: 'orders#approve_orders'
+  		resources :orders do
+        patch :approve, on: :collection, to: 'orders#approve_orders'
+      end
+			resources :orders, :except => [:index, :new, :create, :destroy] do
+				post :populate, :on => :collection
+        get :unpopulate, to: 'orders#unpopulate'
+      end
+
+      resources :shippings, only: [:index, :edit, :update]
+      # resources :reports, only: [:index, :show]
+      get 'reports/customers', to: 'reports#customers'
+      get 'reports/products', to: 'reports#products'
+      get 'reports/overview', to: 'reports#overview'
+      resources :invoices, only: [:index, :edit, :update, :show]
+
+			populate_redirect = redirect do |params, request|
+		  	request.flash[:error] = Spree.t(:populate_get_error)
+  			request.referer || '/cart'
+			end
+
+			get '/orders/populate', :to => populate_redirect
+
+			resources :products do
+  		  resources :variants
+				resources :images do
+      		collection do
+        		post :update_positions
+      		end
+				end
+        get :destroy_variant, to: 'products#destroy_variant'
+  		end
+
+      scope :configuration do
+        resources :integrations do
+          collection do
+            get :authenticate
+            get :oauth_callback
+            get :disconnect
+            get :push_info
+            get :pull_info
+          end
         end
-				resources :orders, :except => [:index, :new, :create, :destroy] do
-					post :populate, :on => :collection
-          get :unpopulate, to: 'orders#unpopulate'
-        end
-
-        resources :shippings, only: [:index, :edit, :update]
-        # resources :reports, only: [:index, :show]
-        get 'reports/customers', to: 'reports#customers'
-        get 'reports/products', to: 'reports#products'
-        get 'reports/overview', to: 'reports#overview'
-        resources :invoices, only: [:index, :edit, :update, :show]
-
-				populate_redirect = redirect do |params, request|
-			  	request.flash[:error] = Spree.t(:populate_get_error)
-    			request.referer || '/cart'
-  			end
-
-  			get '/orders/populate', :to => populate_redirect
-
-				resources :products do
-    		  resources :variants
-					resources :images do
-        		collection do
-          		post :update_positions
-        		end
-					end
-          get :destroy_variant, to: 'products#destroy_variant'
-    		end
-
-
+      end
   		#end
 
 			# get '/', to: 'root#index'#, as: :admin

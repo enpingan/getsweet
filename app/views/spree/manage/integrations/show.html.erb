@@ -1,0 +1,82 @@
+
+<div class="div-roundbox div-box">
+  <br/>
+  <h3 class="catalog-title">
+    <%= link_to 'Integration', manage_integrations_url %> > <%= @item.item_name %>
+  </h3>
+  <br/>
+</div>
+<div class="div-roundbox div-box">
+  <div class="col-md-1">
+    <%=image_tag('spree/manage/img/qb-ico.png')%>
+  </div>
+  <div class="col-md-8">
+    <h4>
+      <%= @item.item_name %>
+    </h4>
+    <h5>
+      Added by <%= current_spree_user.firstname %> on <%= @item.created_at.strftime('%b %e, %Y')%>
+    </h5>
+  </div>
+  <div class="col-md-3">
+    <%= link_to @item.consumer_key.nil? ? 'Not connected' : 'Connected', '', :class=>@item.consumer_key.nil? ? 'new-integration-button item-integration-button' : 'new-integration-button item-integration-button connected-integration-button' %>
+  </div>
+</div>
+
+<hr/>
+
+<% if @item.consumer_key.nil? %>
+  <div class="div-roundbox div-box">
+    <p>
+      A connection to Quickbooks Online will allow you to seamlessly send order, product, and customer data to Quickbooks.
+      <br/>
+      Please start by clicking on the "Connect to Quickbooks" button below
+    </p>
+  </div>
+
+  <% unless session[:token] %>
+    <!-- <ipp:connectToIntuit></ipp:connectToIntuit> -->
+    <a href="<%= authenticate_manage_integrations_url %>">
+      <%= image_tag "spree/manage/img/C2QB_green.png", 
+          onmouseover: "this.src='"+asset_url('spree/manage/img/C2QB_green_hover.png')+"'", 
+          onmouseout: "this.src='"+asset_url('spree/manage/img/C2QB_green.png')+"'", 
+          onclick: "intuit.ipp.anywhere.controller.onConnectToIntuitClicked();",
+          width: '240' %>
+    </a>
+    
+  <% end %>
+<% else %>
+  <div class="div-roundbox div-box">
+    <div class="col-md-9">
+      <br/>
+      <h1>
+        DATA EXPORT TO QUICKBOOKS
+      </h1>
+      <br/>
+      <div class="field">
+        <%= check_box_tag "Send order data to Quickbooks", nil %>
+        <%= label_tag "Send order data to Quickbooks", nil %>
+      </div>
+      <div class="field">
+        <%= check_box_tag "Send product data to Quickbooks", nil %>
+        <%= label_tag "Send product data to Quickbooks", nil %>
+      </div>
+      <div class="field">
+        <%= check_box_tag "Send customer profile data to Quickbooks", nil %>
+        <%= label_tag "Send customer profile data to Quickbooks", nil %>
+      </div>
+      <div class="field">
+        <%= check_box_tag "Pull customer payment data from Quickbooks", nil %>
+        <%= label_tag "Pull customer payment data from Quickbooks", nil %>
+      </div>
+      <br/>
+      <div class="field">
+        <%= link_to 'Push / Pull', push_info_manage_integrations_url, :class=>'new-integration-button connected-integration-button' %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <%= link_to 'Disconnect', disconnect_manage_integrations_url, data: { confirm: 'Are you sure you want to disconnect?'}, :class=>'new-integration-button item-integration-button' %>
+    </div>
+  </div>
+<% end %>
+

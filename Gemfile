@@ -65,3 +65,6 @@ gem 'alchemy_spree', github: 'magiclabs/alchemy_spree', branch: 'spree-3.0'
 
 gem 'figaro' # for saving environment variables
 gem 'lazy_high_charts'
+
+gem 'quickbooks-ruby'
+gem 'oauth-plugin'
